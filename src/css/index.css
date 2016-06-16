@@ -1,0 +1,164 @@
+@import 'inspire-tree.css';
+@import 'fixme.css';
+@import 'tabs.css';
+@import 'tooltip.css';
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url('../fonts/MaterialIcons-Regular.woff2') format('woff2'),
+       url('../fonts/MaterialIcons-Regular.woff') format('woff');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+
+html {
+  height: 100%;
+}
+
+body.osk-mode {
+  height: calc(100% - 500px);
+  min-height: 51%;
+}
+
+.content {
+    min-height: calc(100% - 62px);
+    height: calc(100% - 62px);
+    width: 100%;
+    padding-top: 61px!important;
+    clear: none;
+}
+
+.editor.ace_editor {
+    height: 100%;
+    font-size: 1rem;
+}
+
+.aside {
+    padding: 0;
+    width: 210px;
+    float: left;
+    position: relative;
+    height: 100%;
+    border-right: solid 1px #ccc;
+}
+
+.tabs__welcome-note-wrapper {
+    height: 100%;
+    background: #202020;
+    color: #dedede;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 50px;
+    position: relative;
+    top: -100%;
+    z-index: 1;
+    overflow: auto;
+}
+
+.tabs__welcome-note {
+    margin: auto;
+    max-width: 500px;
+}
+
+.tabs__welcome-note__list {
+    list-style-type: circle;
+    text-align: left;
+}
+
+.tabs__welcome-note__olist {
+    text-align: left;
+    color: #747278;
+}
+
+.tabs__welcome-note__list li {
+    color: #747278;
+}
+
+[data-role="content"] .tabs__welcome-note__header,
+[data-role="content"] .tabs__welcome-note__header-p,
+[data-role="content"] .tabs__welcome-note__header3 {
+    color: #dedede;
+}
+
+.tabs__welcome-note__header3 {
+    margin-top: 1rem;
+}
+
+.aside__header {
+    position: relative;
+    color: #747278;
+}
+
+.aside__header__reload {
+    position: absolute;
+    height: 100%;
+    width: 2.5rem;
+    top: 0;
+    right: 0;
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+.aside__header__reload:active {
+    background: #ccc;
+}
+
+.tabs__welcome-note__state {
+    color: #747278;
+    text-align: left;
+}
+
+.tabs__welcome-note__state p {
+    color: inherit;
+}
+
+.tabs__welcome-note__state a {
+    color: inherit;
+}
+
+.tab-footer {
+  font-size: 0.9rem;
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.3rem;
+  background: #ededed;
+  line-height: 1.3rem;
+  box-sizing: border-box;
+}
+
+.tabs__welcome-note__list,
+.tabs__welcome-note__olist {
+  font-size: 0.9rem;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <title>SeaBass IDE v0.1.0</title>
+    <!-- <script src="http://192.168.0.104:8080/target/target-script-min.js#anonymous"></script> -->
+
+    <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <!-- Ubuntu UI javascript imports - Ambiance theme -->
+    <script src="ambiance/js/fast-buttons.js"></script>
+    <script src="ambiance/js/core.js"></script>
+    <script src="ambiance/js/buttons.js"></script>
+    <script src="ambiance/js/dialogs.js"></script>
+    <script src="ambiance/js/page.js"></script>
+    <script src="ambiance/js/pagestacks.js"></script>
+    <script src="ambiance/js/tabs.js"></script>
+    <script src="ambiance/js/tab.js"></script>
+
+    <script src="beautify/beautify.js"></script>
+    <script src="beautify/beautify-css.js"></script>
+    <script src="beautify/beautify-html.js"></script>
+
+    <script src="cordova.js"></script>
+    <script src="js/require.js"></script>
+    <script src="js/require-config.js"></script>
+    <script>
+        document.addEventListener('deviceready', function() {
+            require(['app/index'], function(App) {
+                (new App()).initialize();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div data-role="mainview">
+        <header data-role="header" class="header">
+            <ul data-role="tabs">
+                <li data-role="tabitem" data-page="main">
+                    SeaBass IDE
+                </li>
+                <!-- <li data-role="tabitem" data-page="page2">
+                    Settings
+                </li> -->
+            </ul>
+        </header>
+
+        <div data-role="content" class="content">
+            <div data-role="tab" id="main">
+                <div class="aside">
+                    <section data-role="list">
+                        <header class="aside__header">
+                            <button class="app-action aside__header__reload tooltip tooltip-bottom" data-action="tree-reload">
+                                <i class="material-icons">cached</i>
+                                <span class="tooltip__text">Reload tree</span>
+                            </button>
+                            Files
+                        </header>
+                        <div class="tree"></div>
+                    </section>
+                </div>
+                <div class="main-window">
+                    <ul class="tabs" id="editor-tabs"></ul>
+
+                    <div class="tabs__welcome-note-wrapper">
+                        <section class="tabs__welcome-note">
+                            <h2 class="tabs__welcome-note__header">
+                              SeaBass text editor greets you!
+                            </h2>
+                            <p class="tabs__welcome-note__header-p">SeaBass is a very basic IDE for BQ M10 Ubuntu Edition tablet.</p>
+                            <h3 class="tabs__welcome-note__header3">How to start</h3>
+                            <ol class="tabs__welcome-note__olist">
+                                <li>
+                                    Put your project files into <code>~/.local/share/me.r5m.seabass/persistent</code>
+                                </li>
+                                <li>
+                                    Click "Reload tree" button
+                                </li>
+                                <li>
+                                    Select file in the Files tree on the left
+                                </li>
+                            </ol>
+                            <h3 class="tabs__welcome-note__header3">Features</h3>
+                            <ul class="tabs__welcome-note__list">
+                                <li>
+                                    Autosave on typing
+                                </li>
+                                <li>
+                                    Zentabs: up to five open tabs at the same time. When sixth tab is opened, the eldest one is closed
+                                </li>
+                                <li>
+                                    Syntax highlighting for the following file formats:
+                                    <br/><code>.html, .js, .json, .css, .ejs, .jsx, .php</code>
+                                </li>
+                                <li>
+                                    Code formatter for the following file formats:
+                                    <br/><code>.html, .js, .json, .css</code>
+                                </li>
+                            </ul>
+
+                            <h3 class="tabs__welcome-note__header3">Release notes</h3>
+                            <div class="tabs__welcome-note__state">
+                                <p>
+                                    SeaBass v0.1.0 is an early Beta-release, so expect broken features an so on...
+                                </p>
+                                <p>
+                                    Bug reports are very appreciated. If you have any suggestions or something doesn't work as expected, feel free to open issue on project's page on github:
+                                    (https://github.com/milikhin/seabass) or send email to
+                                    <a href="mailto:mikhael@milikhin.name">mikhael@milikhin.name</a>
+                                </p>
+                            </div>
+                            <h3 class="tabs__welcome-note__header3">Known issues</h3>
+                            <div class="tabs__welcome-note__state">
+                                <p>
+                                    Basic file operations (create/delete/copy/rename) are not yet implemeted.
+                                </p>
+                                <p>
+                                    Hidden files are... hm, well... hidden, so there is no way to open such files in this release.
+                                </p>
+                            </div>
+                            <h3 class="tabs__welcome-note__header3">Acknowledgements</h3>
+                            <div class="tabs__welcome-note__state">
+                                <p>
+                                    Thanks to:
+                                </p>
+                                <ul class="tabs__welcome-note__list tabs__welcome-note__list-acknowledge">
+                                    <li>
+                                        Apache Cordova project for the awesome framework
+                                    </li>
+                                    <li>
+                                        Cloud9 and others for Ace editor
+                                    </li>
+                                    <li>
+                                        Google for material icons set
+                                    </li>
+                                    <li>
+                                        Erick Wallace for CSS Tabs (https://codepen.io/wallaceerick/pen/ojtal)
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+            <div data-role="tab" id="page2">
+            </div>
+        </div>
+    </div>
+    <!-- mainview -->
+</body>
+
+</html>

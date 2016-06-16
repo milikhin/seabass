@@ -1,0 +1,101 @@
+/*
+ * Copyright (C) 2013 Adnane Belmadiaf <daker@ubuntu.com>
+ * License granted by Canonical Limited
+ *
+ * This file is part of ubuntu-html5-ui-toolkit.
+ *
+ * This package is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 3 of the
+ * License, or
+ * (at your option) any later version.
+
+ * This package is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
+ */
+
+/* ----------------------------------
+ * Sliders
+ * ---------------------------------- */
+
+input[type=range] {
+    @include box_sizing (border-box);
+    -webkit-appearance: none;
+    background: linear-gradient(to right, rgba(175, 175, 175, 0.30) 0%, rgba(175, 175, 175, 0.30) 100%);
+    background-position: center;
+    background-size: 99% 4px;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    width: auto;
+    height: $range-slider-height + 20;
+    border-radius: $range-slider-border-radius;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    &::-webkit-slider-thumb {
+        @include box_shadow (inset 0 1px 0 rgba(0, 0, 0, 0.2));
+        @include box_sizing (border-box);
+        -webkit-appearance: none;
+        background-color: #fff;
+        pointer-events: none;
+        border-radius: 3px;
+        width: $range-slider-width;
+        height: $range-slider-height;
+        position: relative;
+    }
+
+    &::-webkit-slider-thumb:before {
+        /* what creates the colorful line on the left side of the slider */
+        position: absolute;
+        top: ($range-slider-height / 2) - ($range-track-height / 2);
+        left: -2000px;
+        width: 2000px;
+        height: $range-track-height;
+        background: $ubuntu_orange;
+        content: ' ';
+    }
+
+    &::-moz-range-track {
+        @include box_sizing (border-box);
+        background: -moz-linear-gradient(to right, rgba(175, 175, 175, 0.30) 0%, rgba(175, 175, 175, 0.30) 100%);
+        background-position: center;
+        background-size: 99% 4px;
+        background-repeat: no-repeat;
+        width: auto;
+        height: $range-slider-height + 20;
+        border: 0;
+        border-radius: $range-slider-border-radius;
+        overflow: hidden;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    &::-moz-range-thumb {
+        @include box_shadow (inset 0 1px 0 rgba(0, 0, 0, 0.2));
+        @include box_sizing (border-box);
+        background: #fff;
+        pointer-events: none;
+        border: 0;
+        border-radius: 3px;
+        width: $range-slider-width;
+        height: $range-slider-height;
+        position: relative;
+    }
+
+    /*&::-moz-range-thumb:before {
+        position: absolute;
+        top: ($range-slider-height / 2) - ($range-track-height / 2);
+        left: -2000px;
+        width: 2000px;
+        height: $range-track-height;
+        background: $ubuntu_orange;
+        content: ' ';
+    }*/
+}

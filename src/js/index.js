@@ -1,0 +1,285 @@
+define([
+	'ace/ace',
+	'./file-controller/manager',
+	'./tab-controller/index',
+	'co',
+	'inspire'
+], function (ace, FileManager, TabController, co, InspireTree) {
+	"use strict";
+
+	function Application() {
+		this.editorElemId = "editor";
+	}
+
+	Application.prototype.initialize = function () {
+		var self = this;
+		this.fileManager = new FileManager();
+
+		self.onDeviceReady();
+		document.body.addEventListener('fsready', function () {
+			self.receivedEvent('fsready');
+		});
+
+		document.body.addEventListener('tree-node-click', function (evt) {
+			self.receivedEvent('tree-node-click', evt);
+		});
+
+		document.body.addEventListener('file-save', function (evt) {
+			self.receivedEvent('file-save', evt);
+		});
+
+		document.body.addEventListener('editor-state-changed', function (evt) {
+			self.receivedEvent('editor-state-changed', evt);
+		});
+	};
+
+	Application.prototype.onDeviceReady = function () {
+		console.log('device ready');
+		this.receivedEvent('deviceready');
+
+		var mypage = this.UI.page("main");
+
+		var headerElem = document.querySelector('.header [data-role="tabtitle"]');
+		headerElem.innerHTML += `
+			<div class="header__tab__button-pane">
+				<!--<button
+					data-action="editor-save"
+					class="app-action header__tab__button-pane__button tooltip tooltip-bottom">
+					<i class="material-icons">save</i>
+					<span class="tooltip__text">Save<br/><code>Ctrl + S</code></span>
+				</button>-->
+				<button
+					data-action="window-osk"
+					class="app-action header__tab__button-pane__button header__tab__button-pane__button-osk tooltip tooltip-bottom">
+					<i class="material-icons">keyboard</i>
+					<span class="tooltip__text">Toggle OSK mode</span>
+				</button>
+				<button
+					data-action="editor-beautify"
+					class="app-action header__tab__button-pane__button header__tab__button-pane__button-beautify tooltip tooltip-bottom"
+					disabled>
+					<i class="material-icons">spellcheck</i>
+					<span class="tooltip__text">Beautify<br/><code>Ctrl + Alt + B</code></span>
+				</button>
+				<button
+					data-action="editor-redo"
+					class="app-action header__tab__button-pane__button header__tab__button-pane__button-redo tooltip tooltip-bottom"
+					disabled>
+					<i class="material-icons">redo</i>
+					<span class="tooltip__text">Redo<br/><code>Ctrl + Y</code></span>
+				</button>
+				<button
+					data-action="editor-undo"
+					class="app-action header__tab__button-pane__button header__tab__button-pane__button-undo tooltip tooltip-bottom"
+					disabled>
+					<i class="material-icons">undo</i>
+					<span class="tooltip__text">Undo<br/><code>Ctrl + Z</code></span>
+				</button>
+			</div>`;
+
+		function KeyPress(e) {
+			var evtobj = window.event ? event : e;
+			if(evtobj.ctrlKey) {
+				switch(String.fromCharCode(event.keyCode).toLowerCase()) {
+				case 'z':
+					{
+						TabController.undo(TabController.getCurrent());
+						break;
+					}
+				case 'y':
+					{
+						TabController.redo(TabController.getCurrent());
+						break;
+					}
+				case 's':
+					{
+						TabController.save(TabController.getCurrent());
+						break;
+					}
+				}
+				if(evtobj.altKey) {
+					switch(String.fromCharCode(event.keyCode).toLowerCase()) {
+					case 'b':
+						{
+							TabController.beautify(TabController.getCurrent());
+						}
+					}
+				}
+			}
+		}
+
+		document.onkeydown = KeyPress;
+		var self = this;
+
+		document.body.addEventListener('click', function (evt) {
+			console.log('target', evt.target);
+			var target = evt.target.closest('.app-action');
+			if(!target || target.disabled) {
+				return false;
+			}
+
+			var action = target.dataset.action;
+			console.log('you clicked on ', action);
+			console.log('current tab is', TabController.getCurrent());
+
+			switch(action) {
+			case 'window-osk':
+				{
+					document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
+					document.body.dispatchEvent(new CustomEvent('body-resize'));
+					break;
+				}
+			case 'editor-save':
+				{
+					TabController.save(TabController.getCurrent());
+					break;
+				}
+			case 'editor-beautify':
+				{
+					TabController.beautify(TabController.getCurrent());
+					break;
+				}
+			case 'editor-undo':
+				{
+					TabController.undo(TabController.getCurrent());
+					break;
+				}
+			case 'editor-redo':
+				{
+					TabController.redo(TabController.getCurrent());
+					break;
+				}
+			case 'tab-close':
+				{
+					TabController.close(TabController.getByElem(target));
+					break;
+				}
+			case 'tree-reload':
+				{
+					console.log(self.tree);
+					self.tree.reload();
+					break;
+				}
+			}
+			// this.receivedEvent(action, target);
+		});
+	};
+
+	Application.prototype.receivedEvent = function (id, evt) {
+		var self = this;
+		switch(id) {
+		case 'deviceready':
+			{
+				this.UI = new UbuntuUI();
+				this.UI.init();
+				break;
+			}
+		case 'fsready':
+			{
+				this.renderTree();
+				break;
+			}
+		case 'editor-state-changed':
+			{
+				var undoElem = document.querySelector('.header__tab__button-pane__button-undo');
+				var redoElem = document.querySelector('.header__tab__button-pane__button-redo');
+				var beautifyElem = document.querySelector('.header__tab__button-pane__button-beautify');
+
+				console.log('UR Elems', undoElem, redoElem);
+				console.log('EVT', evt.detail);
+				if(undoElem) {
+					undoElem.disabled = !evt.detail.hasUndo;
+				}
+				if(redoElem) {
+					redoElem.disabled = !evt.detail.hasRedo;
+				}
+				if(beautifyElem) {
+					beautifyElem.disabled = !evt.detail.hasBeautify;
+				}
+
+				break;
+			}
+		case 'tree-node-click':
+			{
+				var fileEntry = evt.detail.node.entry;
+				if(fileEntry.isDirectory) {
+					evt.detail.node.toggleCollapse();
+					break;
+				}
+
+				co(function* () {
+					var content = yield self.fileManager.getFileContent(fileEntry);
+					var tab = TabController.get(evt.detail.node.id, fileEntry, content);
+					tab.panelElem.querySelector('.tab-state').checked = true;
+				}).catch(function (err) {
+					console.error(err);
+				});
+				break;
+			}
+
+		case 'file-save':
+			{
+				co(function* () {
+					var fileContent = yield self.fileManager.writeFile(evt.detail.fileEntry, evt.detail.value);
+
+					console.log('file read', fileContent);
+				}).catch(function (err) {
+					console.error(err);
+				});
+
+			}
+
+		}
+
+
+	};
+
+	Application.prototype.renderTree = function () {
+		this.tree = new InspireTree({
+			'target': '.tree',
+			'data': this._getTreeData.bind(this),
+			'selection': {
+				'allow': function () {
+					return false;
+				}
+			}
+		});
+
+
+		this.tree.on('node.click', function (event, node) {
+			// node clicked!
+			console.log('NODE: ', node);
+			var evt = new CustomEvent('tree-node-click', {
+				bubbles: true,
+				cancelable: true,
+				detail: {
+					node: node
+				}
+			});
+
+			document.body.dispatchEvent(evt);
+		});
+	};
+
+	Application.prototype._getTreeData = function (node) {
+		console.log('NODE', node);
+		var self = this;
+		return new Promise(function (resolve, reject) {
+			self.fileManager.getFiles(node ? node.entry : null).then(function (data) {
+				var d = data.sort(function (a, b) {
+					if(a.children && !b.children) {
+						return -1;
+					}
+
+					if(!a.children && b.children) {
+						return 1;
+					}
+					return(a.text < b.text ? -1 : (a.text > b.text ? 1 : 0));
+				});
+				resolve(d);
+			}, reject); // Array, callback, or promise
+		});
+	};
+
+	return Application;
+});

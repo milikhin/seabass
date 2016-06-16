@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>popovers.js - Ubuntu HTML5 API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png">Ubuntu HTML5 API: popovers.js</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: HTML-14.04-dev~bzr202</em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../modules/UbuntuUI.html">UbuntuUI</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/UbuntuUI.html">UbuntuUI</a></li>
+                            <li><a href="../classes/UbuntuUI.Button.html">UbuntuUI.Button</a></li>
+                            <li><a href="../classes/UbuntuUI.Dialog.html">UbuntuUI.Dialog</a></li>
+                            <li><a href="../classes/UbuntuUI.Header.html">UbuntuUI.Header</a></li>
+                            <li><a href="../classes/UbuntuUI.List.html">UbuntuUI.List</a></li>
+                            <li><a href="../classes/UbuntuUI.OptionSelector.html">UbuntuUI.OptionSelector</a></li>
+                            <li><a href="../classes/UbuntuUI.Page.html">UbuntuUI.Page</a></li>
+                            <li><a href="../classes/UbuntuUI.Pagestack.html">UbuntuUI.Pagestack</a></li>
+                            <li><a href="../classes/UbuntuUI.Popover.html">UbuntuUI.Popover</a></li>
+                            <li><a href="../classes/UbuntuUI.Progress.html">UbuntuUI.Progress</a></li>
+                            <li><a href="../classes/UbuntuUI.Shape.html">UbuntuUI.Shape</a></li>
+                            <li><a href="../classes/UbuntuUI.Tab.html">UbuntuUI.Tab</a></li>
+                            <li><a href="../classes/UbuntuUI.Tabs.html">UbuntuUI.Tabs</a></li>
+                            <li><a href="../classes/UbuntuUI.Toolbar.html">UbuntuUI.Toolbar</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>buttons.js/<ul></ul></li><li>core.js/<ul></ul></li><li>dialogs.js/<ul></ul></li><li>fast-buttons.js/<ul></ul></li><li>header.js/<ul></ul></li><li>list.js/<ul></ul></li><li>option-selector.js/<ul></ul></li><li>page.js/<ul></ul></li><li>pagestacks.js/<ul></ul></li><li>popovers.js/<ul></ul></li><li>progress.js/<ul></ul></li><li>shape.js/<ul></ul></li><li>tab.js/<ul></ul></li><li>tabs.js/<ul></ul></li><li>toolbars.js/<ul></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>popovers.js</h4>
+
+<pre class="code prettyprint linenums">
+/*
+ * Copyright (C) 2013 Adnane Belmadiaf &lt;daker@ubuntu.com&gt;
+ * License granted by Canonical Limited
+ *
+ * This file is part of ubuntu-html5-ui-toolkit.
+ *
+ * This package is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 3 of the
+ * License, or
+ * (at your option) any later version.
+
+ * This package is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, see
+ * &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+/**
+ * A Popover is a div containng markup that can pop up and disappear. (Unlike a Dialog, Popovers are not full screen.)
+
+A Popoves often contain a List whose items are connected to useful JavaScript functions.
+
+
+######Popover Position
+The Popover&#x27;s position is set relative to a specified base element with the &lt;em&gt;data-gravity=&quot;LETTER&quot;&lt;/em&gt; attribute. LETTER values:
+
+ - &#x27;n&#x27;: the base element is above the Popover
+ - &#x27;s&#x27;: the base element is below the Popover
+ - &#x27;e&#x27;: the base element is to the east of (to the right of) the Popover (in right-to-left locales)
+ - &#x27;w&#x27;: the base element is to the west of (to the left of) the Popover (in right-to-left locale)
+
+ * @class Popover
+ * @constructor
+ * @namespace UbuntuUI
+ * @param {String} elem - The element to which the Popover&#x27;s position is relative
+ * @param {ID} id - The id attribute of the Popover in HTML
+ * @example
+
+      &lt;p id=&quot;popoverBase&quot;&gt;Text&lt;/p&gt;
+      &lt;div class=&quot;popover active&quot; data-gravity=&quot;n&quot; id=&quot;popover&quot;&gt;
+        &lt;ul class=&quot;list&quot;&gt;
+          &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Item1&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Item2&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+
+      Javascript:
+      var popBase = document.getElementById(&quot;popoverBase&quot;);
+      var popover = UI.popover(popBase, &quot;popover&quot;);
+ */
+
+var Popover = function (elem, id) {
+    this.id = id;
+    this.popover = document.getElementById(id);
+    this.elem = elem;
+    this.parent = elem.parentNode.parentNode.parentNode.parentNode;
+    this.is_parent_footer = (this.parent.nodeName.toLowerCase() === &quot;footer&quot;);
+};
+
+Popover.prototype = {
+    /** 
+     * Display a Popover
+     * @method show
+     */
+    show: function () {
+        if (this.popover === null) {
+            console.error(&#x27;The popover with the ID #&#x27; + this.id + &#x27; doesn\&#x27;t exist&#x27;);
+            return;
+        }
+        var de = document.documentElement,
+            w = (de&amp;&amp;de.clientWidth) || document.body.clientWidth,
+            ot = 0,
+            ol = 0,
+            gravity = &quot;s&quot;,
+            pos_top = 0,
+            pos_left = 0,
+            pos_right = 0;
+
+        this.popover.classList.add(&#x27;active&#x27;);
+        popoverWidth = this.popover.offsetWidth;
+        popoverHeight = this.popover.offsetHeight;
+
+        gravity = this.popover.getAttribute(&quot;data-gravity&quot;);
+
+        if (this.is_parent_footer) {
+            ot = this.parent.offsetTop;
+            ol = this.elem.offsetLeft;
+        }
+        else {
+            ot = this.elem.offsetTop;
+            ol = this.elem.offsetLeft;
+        }
+
+        switch (gravity) {
+            case &#x27;n&#x27;:
+                pos_top = this.elem.offsetTop + this.elem.offsetHeight + 10;
+                pos_left = this.elem.offsetLeft + this.elem.offsetWidth / 2 - popoverWidth / 2;
+                break;
+            case &#x27;s&#x27;:
+                if (this.is_parent_footer) {
+                    pos_top = ot - popoverHeight - 90;
+                    pos_left = ol + this.elem.offsetWidth / 2 - popoverWidth / 2;
+                    if (pos_left &lt; 0)
+                        pos_left = 5;
+                    else {
+                        if (pos_left + popoverWidth &gt; w) {
+                            pos_left = -1;
+                            pos_right = 5;
+                        }
+                    }
+
+                }
+                else {
+                    pos_top = ot - popoverHeight - 10;
+                    pos_left = ol + this.elem.offsetWidth / 2 - popoverWidth / 2;
+                }
+                break;
+            case &#x27;e&#x27;:
+                pos_top = this.elem.offsetTop + this.elem.offsetHeight / 2 - popoverHeight / 2;
+                pos_left = this.elem.offsetLeft - popoverWidth - 10;
+                break;
+            case &#x27;w&#x27;:
+                pos_top = this.elem.offsetTop + this.elem.offsetHeight / 2 - popoverHeight / 2;
+                pos_left = this.elem.offsetLeft + this.elem.offsetWidth + 10;
+                break;
+        }
+
+        this.popover.style.top = pos_top + &#x27;px&#x27;;
+        if (pos_left === -1) {
+            this.popover.style.left = &#x27;auto&#x27;;
+            this.popover.style.right = pos_right+ &#x27;px&#x27;;
+        }
+        else
+            this.popover.style.left = pos_left+ &#x27;px&#x27;;
+
+        return this.popover;
+    },
+    /**
+     * Hide a Popover
+     * @method hide
+     */
+    hide: function () {
+        this.popover.classList.remove(&#x27;active&#x27;);
+        this.popover.style.top = &#x27;0px&#x27;;
+        this.popover.style.left = &#x27;0px&#x27;;
+        return this.popover;
+    },
+    /**
+     * Toggle show/hide status of a Popover
+     * @method toggle
+     */
+    toggle: function () {
+        if (this.popover === null) {
+            console.error(&#x27;The popover with the ID #&#x27; + this.id + &#x27; doesn\&#x27;t exist&#x27;);
+            return;
+        }
+        var de = document.documentElement,
+            w = (de&amp;&amp;de.clientWidth) || document.body.clientWidth,
+            ot = 0,
+            ol = 0,
+            gravity = &quot;s&quot;,
+            pos_top = 0,
+            pos_left = 0,
+            pos_right = 0;
+
+        this.popover.classList.toggle(&#x27;active&#x27;);
+        popoverWidth = this.popover.offsetWidth;
+        popoverHeight = this.popover.offsetHeight;
+
+        gravity = this.popover.getAttribute(&quot;data-gravity&quot;);
+
+        if (this.is_parent_footer) {
+            ot = this.parent.offsetTop;
+            ol = this.elem.offsetLeft;
+        }
+        else {
+            ot = this.elem.offsetTop;
+            ol = this.elem.offsetLeft;
+        }
+
+        switch (gravity) {
+            case &#x27;n&#x27;:
+                pos_top = ot + this.elem.offsetHeight + 10;
+                pos_left = ol + this.elem.offsetWidth / 2 - popoverWidth / 2;
+                break;
+            case &#x27;s&#x27;:
+                if (this.is_parent_footer) {
+                    pos_top = ot - popoverHeight - 90;
+                    pos_left = ol + this.elem.offsetWidth / 2 - popoverWidth / 2;
+                    if (pos_left &lt; 0)
+                        pos_left = 5;
+                    else {
+                        if (pos_left + popoverWidth &gt; w) {
+                            pos_left = -1;
+                            pos_right = 5;
+                        }
+                    }
+
+                }
+                else {
+                    pos_top = ot - popoverHeight - 10;
+                    pos_left = ol + this.elem.offsetWidth / 2 - popoverWidth / 2;
+                }
+                break;
+            case &#x27;e&#x27;:
+                pos_top = ot + this.elem.offsetHeight / 2 - popoverHeight / 2;
+                pos_left = ol - popoverWidth - 10;
+                break;
+            case &#x27;w&#x27;:
+                pos_top = ot + this.elem.offsetHeight / 2 - popoverHeight / 2;
+                pos_left = ol + this.elem.offsetWidth + 10;
+                break;
+        }
+
+        this.popover.style.top = pos_top + &#x27;px&#x27;;
+        if (pos_left === -1) {
+            this.popover.style.left = &#x27;auto&#x27;;
+            this.popover.style.right = pos_right+ &#x27;px&#x27;;
+        }
+        else
+            this.popover.style.left = pos_left+ &#x27;px&#x27;;
+
+        return this.popover;
+    },
+    /**
+     * Returns the DOM element associated with the id this widget is bind to.
+     * @method element
+     * @example
+        var mypopover = UI.popover(&quot;popoverid&quot;).element();
+     */
+    element: function () {
+        return this.popover;
+    }
+};
+
+</pre>
+
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

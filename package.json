@@ -1,0 +1,17 @@
+{
+  "name": "seabass",
+  "version": "0.1.0",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "milikhin",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
+    "merge-stream": "^1.0.0",
+    "requirejs": "^2.2.0"
+  }
+}

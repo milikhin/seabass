@@ -1,0 +1,111 @@
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    position: absolute;
+}
+
+body,
+[data-role="mainview"] {
+    height: 100%;
+}
+
+.inspire-tree .title {
+  overflow-x: auto;
+  display: inline-block;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.inspire-tree li > .title-wrap {
+  display: inline-block;
+  overflow: auto;
+  min-width: 100%;
+}
+
+.inspire-tree {
+  overflow: auto;
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  width: 210px;
+  left: 0;
+}
+
+.inspire-tree > ol {
+  overflow: auto;
+  display: inline-block;
+  min-width: 100%;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.inspire-tree .wholerow {
+  transform: translateY(-115%);
+}
+
+.inspire-tree .title-wrap:hover + .wholerow {
+  background-color: #ddd;
+}
+
+[data-role="list"] > header + ul li {
+    padding: 0;
+}
+
+[data-role="header"]::after {
+    height: 0;
+}
+
+.header__tab__button-pane {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+.header__tab__button-pane__button {
+    float: right;
+    width: 40px;
+    line-height: 60px;
+    height: 63px;
+    border: none;
+    background: none;
+    font-size: large;
+}
+
+.header__tab__button-pane__button .material-icons {
+    line-height: inherit;
+}
+
+.header__tab__button-pane__button:active {
+    background: #ccc;
+}
+
+.header__tab__button-pane__button:disabled {
+    color: #ccc;
+    background: none;
+}
+
+
+/* full with for tab header */
+
+[data-role="back-btn"]:disabled + [data-role="tabtitle"],
+[data-role="back-btn"] + [data-role="tabtitle"],
+[data-role="tabs-btn"] + [data-role="tabtitle"],
+[data-role="tabs"] + [data-role="tabtitle"] {
+    width: auto;
+    float: none;
+}
+
+
+[data-role="back-btn"]:disabled {
+  display: none;
+}

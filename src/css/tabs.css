@@ -1,0 +1,114 @@
+.main-window {
+    margin-left: 211px;
+    width: calc(100% - 211px);
+    height: 100%;
+    position: relative;
+}
+
+.tabs {
+    height: 100%;
+    float: none;
+    list-style: none;
+    position: relative;
+    margin: 0;
+    text-align: left;
+    z-index: -1;
+}
+
+.tabs li {
+    float: left;
+    display: block;
+    width: 20%;
+}
+
+.tabs li::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    height: 1.8rem;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #eee;
+    z-index: 1;
+}
+
+.tabs input[type="radio"] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.tabs label {
+    display: block;
+    padding: 0 2rem 0 1rem;
+    border-radius: 4px 4px 0 0;
+    border-width: 2px 2px 0 2px;
+    /*font-size: 1rem;*/
+    /*line-height: 1rem;*/
+    font-size: 0.9rem;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    font-weight: normal;
+    background: #202020;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.tab-label__label {
+    padding: 0;
+}
+
+.tab-label__close {
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2rem;
+    height: 1.8rem;
+    text-align: center;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+.tabs label:hover {
+    background: #2F3129;
+}
+
+.tabs .tab-content {
+    z-index: 2;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    font-size: 1em;
+    padding: 0;
+    position: absolute;
+    top: 1.8rem;
+    margin-top: 0;
+    bottom: 1.3rem;
+    left: 0;
+    background: #2F3129;
+}
+
+.tabs .tab-state:checked + label {
+    top: 0;
+    background: #272822;
+    border-bottom: solid 2px #09c;
+    color: #dedede;
+}
+
+.tabs .tab-state:checked ~ .tab-content {
+    display: block;
+}
