@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="me.r5m.seabass" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="seabass.mikhael" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>SeaBass IDE</name>
     <description>
         Simple touch-friendly text editor for BQ M10 tablet
     </description>
-    <author email="mikhael@milikhin.name" href="https://github.com/milikhin/">
+    <author email="mikhael@milikhin.name" href="https://github.com/milikhin">
         Mikhael Milikhin
     </author>
     <content src="index.html" />

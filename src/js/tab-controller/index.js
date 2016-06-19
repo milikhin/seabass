@@ -120,18 +120,11 @@ define(['co', 'md5',
 		};
 
 		tab.onResize = function () {
-			console.log('resize');
 			tab.editor.resize(true);
-			console.log('resized');
-		}
+		};
 		document.body.addEventListener('body-resize', tab.onResize);
 		tab.editor.setTheme(theme);
 		tab.editor.setValue(fileContent, 1);
-
-		// reset undo manager & buttons
-		setTimeout(function() {
-			this._resetUndoManager(tab);
-		}, 500);
 
 		// enable syntax highlighting
 		this._setEditorMode(fileEntry, tab, fileName);
@@ -153,6 +146,11 @@ define(['co', 'md5',
 				}, 100);
 			};
 		});
+
+		// reset undo manager & buttons
+		setTimeout(function() {
+			self._resetUndoManager(tab);
+		}, 100);
 
 		return tab;
 	};
@@ -250,7 +248,7 @@ define(['co', 'md5',
 
 	TabController.prototype.tpl = function (options) {
 		var fnameHash = md5(options.url);
-		var rootDir = 'me.r5m.seabass/persistent/';
+		var rootDir = 'seabass.mikhael/persistent/';
 		var shortenedUrl = options.url.slice(options.url.indexOf(rootDir) + rootDir.length, options.url.length);
 		return `<input class="tab-state" type="radio" title="tab-${fnameHash}" name="tabs-state" id="tab-${fnameHash}" checked />
 			<label
