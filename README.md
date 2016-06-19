@@ -11,6 +11,8 @@ SeaBass IDE for Ubuntu Touch
    * OSK height (OSK height is different on Tablet/Phone)
 * Implement create/rename/delete file operations
 * Add ability to open hidden files
+* Think about tests
+* Think about amd64/x86
 
 # Setup environment
 1. Add ubuntu platform.  
