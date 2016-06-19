@@ -1,6 +1,17 @@
 # SeaBass IDE
 SeaBass IDE for Ubuntu Touch
 
+# TODO
+* Write docs
+* Add support for more languages (for all supported in Ace)
+* Add phone layout
+* Add Settings page:  
+   * Font size
+   * Editor theme
+   * OSK height (OSK height is different on Tablet/Phone)
+* Implement create/rename/delete file operations
+* Add ability to open hidden files
+
 # Setup environment
 1. Add ubuntu platform.  
    ``` 
