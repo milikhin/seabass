@@ -4,9 +4,7 @@ define(['./index', 'co'], function (FileController, co) {
 
 		co(function* () {
 			// initialize fs access;
-			console.log('1');
 			self.fsController = new FileController();
-			console.log('2');
 			yield self.fsController.waitForInit();
 
 			document.body.dispatchEvent(new CustomEvent('fsready', {

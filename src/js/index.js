@@ -156,7 +156,6 @@ define([
 				}
 			case 'tree-reload':
 				{
-					console.log(self.tree);
 					self.tree.reload();
 					break;
 				}
@@ -185,8 +184,6 @@ define([
 				var redoElem = document.querySelector('.header__tab__button-pane__button-redo');
 				var beautifyElem = document.querySelector('.header__tab__button-pane__button-beautify');
 
-				console.log('UR Elems', undoElem, redoElem);
-				console.log('EVT', evt.detail);
 				if(undoElem) {
 					undoElem.disabled = !evt.detail.hasUndo;
 				}
@@ -222,7 +219,6 @@ define([
 				co(function* () {
 					var fileContent = yield self.fileManager.writeFile(evt.detail.fileEntry, evt.detail.value);
 
-					console.log('file read', fileContent);
 				}).catch(function (err) {
 					console.error(err);
 				});
@@ -248,7 +244,6 @@ define([
 
 		this.tree.on('node.click', function (event, node) {
 			// node clicked!
-			console.log('NODE: ', node);
 			var evt = new CustomEvent('tree-node-click', {
 				bubbles: true,
 				cancelable: true,
@@ -262,7 +257,6 @@ define([
 	};
 
 	Application.prototype._getTreeData = function (node) {
-		console.log('NODE', node);
 		var self = this;
 		return new Promise(function (resolve, reject) {
 			self.fileManager.getFiles(node ? node.entry : null).then(function (data) {
