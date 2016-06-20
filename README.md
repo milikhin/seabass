@@ -2,8 +2,14 @@
 SeaBass IDE for Ubuntu Touch
 
 # TODO
-* Write docs
+## v0.1.1
 * Add support for more languages (for all supported in Ace)
+
+## v0.1.2
+* Add workaround for opening hidden files
+ 
+## Futher improvements
+* Write docs
 * Add phone layout
 * Add Settings page:  
    * Font size
