@@ -19,6 +19,7 @@ SeaBass IDE for Ubuntu Touch
 * Add ability to open hidden files
 * Think about tests
 * Think about amd64/x86
+* Think about other operating systems
 * Add "About" page and move acknowledgements there
 
 # Setup environment
