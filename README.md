@@ -3,7 +3,7 @@ SeaBass IDE for Ubuntu Touch
 
 # TODO
 ## v0.1.1
-* Add support for more languages (for all supported in Ace)
+* Add support for more languages
 
 ## v0.1.2
 * Add workaround for opening hidden files
