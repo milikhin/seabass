@@ -1,0 +1,20 @@
+{
+    "js": "javascript",
+    "json": "json",
+    "css": "css",
+    "less": "less",
+    "sass": "sass",
+    "scss": "scss",
+    "styl": "stylus",
+
+    "html": "html",
+    "php": "php",
+    "ejs": "ejs",
+    "jsx": "jsx",
+
+    "c": "c_cpp",
+    "cpp": "c_cpp",
+    "go": "golang",
+    "py": "python",
+    "java": "java"
+}

@@ -25,6 +25,7 @@
     "requirejs": "^2.2.0",
     "js-md5": "^2.3.0",
     "js-beautify": "^1.6.3",
-    "inspire-tree": "^1.8.0"
+    "inspire-tree": "^1.8.0",
+    "requirejs-plugins": "^1.0.3"
   }
 }

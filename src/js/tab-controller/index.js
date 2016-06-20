@@ -1,19 +1,33 @@
-define(['co', 'md5',
-	'ace/ace', 'ace/theme/monokai',
-	'ace/mode/javascript',
+define([
+	'json!./languages.json',
+	'co',
+	'md5',
+	'ace/ace',
+	'ace/theme/monokai',
+
 	'ace/worker/worker',
 
-	'ace/mode/css',
-	'ace/mode/php',
-	'ace/mode/html',
-	'ace/mode/c_cpp',
-	'ace/mode/python',
-	'ace/mode/plain_text',
-
+	'ace/mode/javascript',
 	'ace/mode/json',
+	'ace/mode/css',
+	'ace/mode/html',
+	'ace/mode/php',
+	'ace/mode/ejs',
 	'ace/mode/jsx',
-	'ace/mode/ejs'
-], function (co, md5, ace, theme, mode) {
+	'ace/mode/less',
+	'ace/mode/sass',
+	'ace/mode/scss',
+	'ace/mode/stylus',
+
+	'ace/mode/c_cpp',
+	'ace/mode/golang',
+	'ace/mode/python',
+	'ace/mode/java',
+
+	'ace/mode/plain_text'
+
+
+], function (languages, co, md5, ace, theme) {
 	function TabController() {
 		this.tabs = [];
 		this.rootElem = document.querySelector('.tabs');
@@ -148,7 +162,7 @@ define(['co', 'md5',
 		});
 
 		// reset undo manager & buttons
-		setTimeout(function() {
+		setTimeout(function () {
 			self._resetUndoManager(tab);
 		}, 100);
 
@@ -218,6 +232,11 @@ define(['co', 'md5',
 
 		document.body.removeEventListener('body-resize', tabToClose.onResize);
 		var tabContainer = tabToClose.panelElem.parentElement.removeChild(tabToClose.panelElem);
+
+		// destroy tab's Ace instance
+		tabToClose.editor.destroy();
+		tabToClose.editor.container.remove();
+
 		this.tabs.splice(this.tabs.indexOf(tabToClose), 1);
 
 		var newCurrentTab = this.getEarliestModified();
@@ -274,76 +293,17 @@ define(['co', 'md5',
 	};
 
 	TabController.prototype._setEditorMode = function (fileEntry, tab, fileName) {
-		fileEntry.file(function (data) {
-			// get mime type
-			var mime = data.type;
-			console.log('file data', data);
-			switch(mime) {
-			case 'application/javascript':
-				{
-					tab.editor.getSession().setMode('ace/mode/javascript');
-					break;
-				}
-			case 'text/css':
-				{
-					tab.editor.getSession().setMode('ace/mode/css');
-					break;
-				}
-			case 'text/html':
-				{
-					tab.editor.getSession().setMode('ace/mode/html');
-					break;
-				}
-			case 'application/x-php':
-				{
-					tab.editor.getSession().setMode('ace/mode/php');
-					break;
-				}
-			case 'text/x-csrc':
-			case 'text/x-c++src':
-				{
-					tab.editor.getSession().setMode('ace/mode/c_cpp');
-					break;
-				}
-			case 'text/x-python':
-				{
-					tab.editor.getSession().setMode('ace/mode/python');
-					break;
-				}
-			case 'application/json':
-				{
-					tab.editor.getSession().setMode('ace/mode/json');
-					break;
-				}
+		// get mime type
+		console.log('languages', languages);
+		var ext = fileName.slice(fileName.lastIndexOf('.') + 1, fileName.length);
+		// tab.editor.getSession().setMode('ace/mode/plain_text');
 
-			default:
-				{
-					var ext = fileName.slice(fileName.lastIndexOf('.') + 1, fileName.length);
-
-					switch(ext) {
-					case 'ejs':
-						{
-							tab.editor.getSession().setMode('ace/mode/ejs');
-							break;
-						}
-					case 'jsx':
-						{
-							tab.editor.getSession().setMode('ace/mode/jsx');
-							break;
-						}
-
-					default:
-						{
-							tab.editor.getSession().setMode('ace/mode/plain_text');
-						}
-					}
-
-
-				}
-
+		for(var i in languages) {
+			if(ext == i) {
+				console.log('language is', languages[i]);
+				tab.editor.getSession().setMode('ace/mode/' + languages[i]);
 			}
-			console.log(mime);
-		});
+		}
 	};
 
 	return new TabController();
