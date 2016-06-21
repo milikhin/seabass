@@ -3,14 +3,18 @@ SeaBass IDE for Ubuntu Touch
 
 # TODO
 ## v0.1.1
-* Add support for more languages
+* Syntax highlighter: Refactor highlighter configuration
+* Syntax highlighter: Add support for more languages
 
 ## v0.1.2
-* Add workaround for opening hidden files
- 
+* Add demo project
+
+## v0.2
+* Add phone layout
+
 ## Futher improvements
 * Write docs
-* Add phone layout
+* Add workaround for opening hidden files
 * Add Settings page:  
    * Font size
    * Editor theme
@@ -21,6 +25,8 @@ SeaBass IDE for Ubuntu Touch
 * Think about amd64/x86
 * Think about other operating systems
 * Add "About" page and move acknowledgements there
+* Optionalize autosave
+
 
 # Setup environment
 1. Add ubuntu platform.  
