@@ -6,14 +6,12 @@ SeaBass IDE for Ubuntu Touch
 * Syntax highlighter: Refactor highlighter configuration
 * Syntax highlighter: Add support for more languages
 
-## v0.1.2
-* Add demo project
-
 ## v0.2
 * Add phone layout
 
 ## Futher improvements
 * Write docs
+* Add demo project
 * Add workaround for opening hidden files
 * Add Settings page:  
    * Font size
