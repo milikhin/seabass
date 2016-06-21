@@ -1,5 +1,6 @@
 {
     "js": "javascript",
+    "ts": "typescript",
     "json": "json",
     "css": "css",
     "less": "less",
@@ -8,13 +9,17 @@
     "styl": "stylus",
 
     "html": "html",
+    "svg": "svg",
     "php": "php",
     "ejs": "ejs",
     "jsx": "jsx",
+    "rb": "ruby",
 
     "c": "c_cpp",
     "cpp": "c_cpp",
     "go": "golang",
     "py": "python",
-    "java": "java"
+    "java": "java",
+
+    "sh": "sh"
 }
