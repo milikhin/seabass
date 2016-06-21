@@ -2,7 +2,7 @@
 SeaBass IDE for Ubuntu Touch
 
 # TODO
-## v0.1.1
+## v0.1
 * Syntax highlighter: Refactor highlighter configuration
 * Syntax highlighter: Add support for more languages
 
