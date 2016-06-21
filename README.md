@@ -3,14 +3,16 @@ SeaBass IDE for Ubuntu Touch
 
 # TODO
 ## v0.1.1
-* Add support for more languages
+* Syntax highlighter: Refactor highlighter configuration
+* Syntax highlighter: Add support for more languages
 
-## v0.1.2
-* Add workaround for opening hidden files
- 
+## v0.2
+* Add phone layout
+
 ## Futher improvements
 * Write docs
-* Add phone layout
+* Add demo project
+* Add workaround for opening hidden files
 * Add Settings page:  
    * Font size
    * Editor theme
@@ -21,6 +23,8 @@ SeaBass IDE for Ubuntu Touch
 * Think about amd64/x86
 * Think about other operating systems
 * Add "About" page and move acknowledgements there
+* Optionalize autosave
+
 
 # Setup environment
 1. Add ubuntu platform.  
@@ -31,12 +35,17 @@ cordova add platform ubuntu
    ```
 cordova plugin add cordova-plugin-file
    ```
-3. Compile project
+3. Build & Install
    * Ubuntu Desktop  
       ```
-      cordova build ubuntu   
+      (cordova build ubuntu; cd /path/to/seabass/platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.1.1_amd64.deb )   
       ```
    * BQ M10  
+      * Build & Run: 
       ```
       cordova run --device
+      ```  
+      * Build:
       ```
+      cordova build --device
+      ```  
