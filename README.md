@@ -27,6 +27,7 @@ SeaBass IDE for Ubuntu Touch
 
 
 # Setup environment
+## Requirements: 
 1. Add ubuntu platform.  
    ``` 
 cordova add platform ubuntu  
@@ -35,7 +36,9 @@ cordova add platform ubuntu
    ```
 cordova plugin add cordova-plugin-file
    ```
-3. Build & Install
+3. Install NPM, Bower, gulp
+4. Run ```npm install; cd src; bower install; cd ../; gulp```
+5. Build & Install
    * Ubuntu Desktop  
       ```
       (cordova build ubuntu; cd /path/to/seabass/platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.1.1_amd64.deb )   
