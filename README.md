@@ -10,7 +10,7 @@ SeaBass IDE for Ubuntu Touch
 * Add phone layout
 
 ## Futher improvements
-* Write docs
+* Write docs & my vision of the project
 * Handle fs errors such as: opened file was moved/deleted so doesn'e exist anymore
 * Add demo project
 * Add workaround for opening hidden files
