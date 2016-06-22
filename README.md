@@ -3,7 +3,7 @@ SeaBass IDE for Ubuntu Touch
 
 # TODO
 ## v0.1
-* Syntax highlighter: Refactor highlighter configuration
+* **done** Syntax highlighter: Refactor highlighter configuration
 * Syntax highlighter: Add support for more languages
 
 ## v0.2
@@ -11,6 +11,7 @@ SeaBass IDE for Ubuntu Touch
 
 ## Futher improvements
 * Write docs
+* Handle fs errors such as: opened file was moved/deleted so doesn'e exist anymore
 * Add demo project
 * Add workaround for opening hidden files
 * Add Settings page:  
