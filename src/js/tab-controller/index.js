@@ -259,6 +259,7 @@ define([
 		var newCurrentTab = this.getLastModified();
 		if(newCurrentTab) {
 			newCurrentTab.panelElem.querySelector('.tab-state').checked = true;
+			newCurrentTab.onEditorChange();
 		} else {
 			document.getElementById('editor-tabs').style.zIndex = -1;
 			document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
