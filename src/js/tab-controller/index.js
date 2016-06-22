@@ -27,6 +27,7 @@ define([
 	'ace/mode/golang',
 	'ace/mode/python',
 	'ace/mode/java',
+	'ace/mode/swift',
 
 	'ace/mode/sh',
 	'ace/mode/plain_text'

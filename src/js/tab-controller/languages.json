@@ -20,6 +20,7 @@
     "go": "golang",
     "py": "python",
     "java": "java",
+    "swift": "swift",
 
     "sh": "sh"
 }
