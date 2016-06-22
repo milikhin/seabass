@@ -33,13 +33,12 @@ define([
 		});
 	};
 
-	Application.prototype.onDeviceReady = function () {
-		console.log('device ready');
-		this.receivedEvent('deviceready');
-
-		var mypage = this.UI.page("main");
-
+	Application.prototype._addEditorButtons = function () {
 		var headerElem = document.querySelector('.header [data-role="tabtitle"]');
+		if(headerElem.querySelector('.header__tab__button-pane')) {
+			return;
+		}
+
 		headerElem.innerHTML += `
 			<div class="header__tab__button-pane">
 				<!--<button
@@ -76,6 +75,19 @@ define([
 					<span class="tooltip__text">Undo<br/><code>Ctrl + Z</code></span>
 				</button>
 			</div>`;
+	}
+
+	Application.prototype.onDeviceReady = function () {
+		var self = this;
+		this.receivedEvent('deviceready');
+
+		var editorPageUI = this.UI.page("main");
+		editorPageUI.onactivated(function (evt) {
+			self._addEditorButtons();
+		});
+
+		this._addEditorButtons();
+
 
 		function KeyPress(e) {
 			var evtobj = window.event ? event : e;
@@ -112,7 +124,24 @@ define([
 		var self = this;
 
 		document.body.addEventListener('click', function (evt) {
-			console.log('target', evt.target);
+			console.log('target', evt.target, evt.target.dataset);
+
+			// Workaround to catch page change event & add editor buttons to Header when page changed;
+			if(evt.target.dataset && evt.target.dataset.role == "tabitem" && evt.target.dataset.page == "main") {
+				var headerInterval = setInterval(function () {
+					var headerElem = document.querySelector('.header [data-role="tabtitle"]');
+					// wait while header is updated, add buttons & set their states;
+					if(~headerElem.innerHTML.toLowerCase().indexOf('seabass')) {
+						self._addEditorButtons();
+						var currentTab = TabController.getCurrent();
+						if(currentTab) {
+							currentTab.onEditorChange();
+						}
+						clearInterval(headerInterval);
+					}
+				}, 100);
+			}
+
 			var target = evt.target.closest('.app-action');
 			if(!target || target.disabled) {
 				return false;

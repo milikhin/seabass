@@ -65,6 +65,17 @@ define([
 		return oldestTab;
 	};
 
+	TabController.prototype.getLastModified = function () {
+		var lastTab;
+		this.tabs.forEach(function (tabDescription) {
+			if(!lastTab || lastTab.lastModified < tabDescription.lastModified) {
+				lastTab = tabDescription;
+			}
+		});
+
+		return lastTab;
+	};
+
 	// Get tab corresponded to a file
 	TabController.prototype.getTabByFileEntry = function (fileEntry) {
 		var tab;
@@ -245,7 +256,7 @@ define([
 
 		this.tabs.splice(this.tabs.indexOf(tabToClose), 1);
 
-		var newCurrentTab = this.getEarliestModified();
+		var newCurrentTab = this.getLastModified();
 		if(newCurrentTab) {
 			newCurrentTab.panelElem.querySelector('.tab-state').checked = true;
 		} else {
