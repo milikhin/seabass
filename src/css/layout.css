@@ -29,7 +29,6 @@ body.osk-mode {
     border-right: solid 1px #ccc;
 }
 
-
 .tabs__welcome-note-wrapper {
     height: 100%;
     background: #202020;
@@ -38,9 +37,12 @@ body.osk-mode {
     box-sizing: border-box;
     padding: 50px;
     position: relative;
-    top: -100%;
     z-index: 1;
     overflow: auto;
+}
+
+#main .tabs__welcome-note-wrapper {
+    top: -100%;
 }
 
 .tabs__welcome-note {
@@ -106,19 +108,19 @@ body.osk-mode {
 }
 
 .tab-footer {
-  font-size: 0.9rem;
-  padding: 0 10px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1.3rem;
-  background: #ededed;
-  line-height: 1.3rem;
-  box-sizing: border-box;
+    font-size: 0.9rem;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.3rem;
+    background: #ededed;
+    line-height: 1.3rem;
+    box-sizing: border-box;
 }
 
 .tabs__welcome-note__list,
 .tabs__welcome-note__olist {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }

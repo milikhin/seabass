@@ -106,6 +106,6 @@ body,
 }
 
 
-[data-role="back-btn"]:disabled {
-  display: none;
+[data-role="tabs-btn"] {
+  z-index: 20;
 }
