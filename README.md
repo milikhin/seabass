@@ -4,6 +4,7 @@ SeaBass IDE for Ubuntu Touch
 # TODO
 ## v0.1
 * **done** Syntax highlighter: Refactor highlighter configuration
+* **done** Add "About" page and move acknowledgements there
 * Syntax highlighter: Add support for more languages
 
 ## v0.2
@@ -23,7 +24,6 @@ SeaBass IDE for Ubuntu Touch
 * Think about tests
 * Think about amd64/x86
 * Think about other operating systems
-* Add "About" page and move acknowledgements there
 * Optionalize autosave
 
 
