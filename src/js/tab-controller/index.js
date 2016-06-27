@@ -7,6 +7,7 @@ define([
 
 	'ace/worker/worker',
 
+	// Language-specific modes
 	'ace/mode/javascript',
 	'ace/mode/typescript',
 	'ace/mode/json',
@@ -53,18 +54,19 @@ define([
 		return currentTab;
 	};
 
-	// Get the eldest tab (to close it for example)
+	// Get the eldest tab (to close it, for example)
 	TabController.prototype.getEarliestModified = function () {
-		var oldestTab;
+		var eldestTab;
 		this.tabs.forEach(function (tabDescription) {
-			if(!oldestTab || oldestTab.lastModified > tabDescription.lastModified) {
-				oldestTab = tabDescription;
+			if(!eldestTab || eldestTab.lastModified > tabDescription.lastModified) {
+				eldestTab = tabDescription;
 			}
 		});
 
-		return oldestTab;
+		return eldestTab;
 	};
 
+	// Get last modified tab
 	TabController.prototype.getLastModified = function () {
 		var lastTab;
 		this.tabs.forEach(function (tabDescription) {
@@ -93,23 +95,13 @@ define([
 		return tab;
 	};
 
-	// Get tab (or create new if it doesn't exist)
-	TabController.prototype.get = function (fileName, fileEntry, fileContent) {
+	// Get Zentabs limit
+	TabController.prototype._getMaxTabsNumber = function () {
+		return document.body.clientWidth > 600 ? 5 : 3;
+	};
+
+	TabController.prototype._create = function (fileName, fileEntry, fileContent) {
 		var self = this;
-
-		// check if file is already opened
-		var tab = this.getTabByFileEntry(fileEntry);
-		if(tab) {
-			return tab;
-		}
-
-		document.getElementById('editor-tabs').style.zIndex = 10;
-
-		// if maximum amount of tabs is exceeded, close the earliest one
-		var oldestTab = this.getEarliestModified();
-		if(this.tabs.length >= 5) {
-			this.close(oldestTab);
-		}
 
 		// Create new tabs template;
 		var tabElem = document.createElement('li');
@@ -122,7 +114,7 @@ define([
 
 		// Create editor
 		var editorElemId = tabElem.querySelector('.editor').id;
-		tab = {
+		var tab = {
 			panelElem: tabElem,
 			id: md5(fileName),
 			fileName: fileName,
@@ -131,29 +123,24 @@ define([
 			lastModified: null
 		};
 
+		// register editor onchange handler
 		tab.onEditorChange = function () {
 			setTimeout(function () {
-				var um = tab.editor.getSession().getUndoManager();
-				var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
-				console.log(ext, ~['js', 'html', 'css', 'json'].indexOf(ext).toString());
-				tab.lastModified = Date.now();
-				// console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
-				document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
-					bubbles: true,
-					cancelable: true,
-					detail: {
-						hasUndo: um.hasUndo(),
-						hasRedo: um.hasRedo(),
-						hasBeautify: ~['js', 'html', 'css', 'json'].indexOf(ext)
-					}
-				}));
-			}, 500);
+				self._updateButtons(tab);
+			}, 100);
 		};
+		tab.editor.on('change', function (evt) {
+			self.save(tab); // autosave
+			tab.onEditorChange(evt); // button enabling/disabling
+		});
 
+		// register osk-toggle-toggle handler
 		tab.onResize = function () {
 			tab.editor.resize(true);
 		};
 		document.body.addEventListener('body-resize', tab.onResize);
+
+		// set value & theme
 		tab.editor.setTheme(theme);
 		tab.editor.setValue(fileContent, 1);
 
@@ -162,16 +149,13 @@ define([
 
 		// save created tab
 		this.tabs.push(tab);
-
-		// Add onchange handlers
-		tab.editor.on('change', function (evt) {
-			self.save(tab); // autosave
-			tab.onEditorChange(evt); // button enabling/disabling
-		});
+		this._activate(tab);
 
 		this.tabs.forEach(function (tabDescription) {
 			tabDescription.panelElem.querySelector('.tab-state').onchange = function () {
+				self._activate(tabDescription);
 				tabDescription.onEditorChange();
+
 				setTimeout(function () {
 					tabDescription.editor.focus();
 				}, 100);
@@ -184,6 +168,54 @@ define([
 		}, 100);
 
 		return tab;
+	};
+
+	TabController.prototype._updateButtons = function (tab) {
+		var um = tab.editor.getSession().getUndoManager();
+		var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
+		console.log(ext, ~['js', 'html', 'css', 'json'].indexOf(ext).toString());
+		tab.lastModified = Date.now();
+		// console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
+		document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
+			bubbles: true,
+			cancelable: true,
+			detail: {
+				hasUndo: um.hasUndo(),
+				hasRedo: um.hasRedo(),
+				hasBeautify: ~['js', 'html', 'css', 'json'].indexOf(ext)
+			}
+		}));
+	};
+
+	TabController.prototype._activate = function (tab) {
+		try {
+			this.tabs.forEach(function (tabDescription) {
+				tabDescription.panelElem.closest('li').classList.remove('tab-active');
+			});
+			tab.panelElem.closest('li').classList.add('tab-active');
+		} catch(err) {
+			console.error(err);
+		}
+	};
+
+	// Get tab (or create new if it doesn't exist)
+	TabController.prototype.get = function (fileName, fileEntry, fileContent) {
+		// check if file is already opened
+		var tab = this.getTabByFileEntry(fileEntry);
+		if(tab) {
+			return tab;
+		}
+
+		document.getElementById('editor-tabs').style.zIndex = 10;
+
+		// if maximum amount of tabs is exceeded, close the earliest one
+		var eldestTab = this.getEarliestModified();
+		if(this.tabs.length >= this._getMaxTabsNumber()) {
+			this.close(eldestTab);
+		}
+
+		return this._create(fileName, fileEntry, fileContent);
+
 	};
 
 	TabController.prototype.save = function (tab) {
@@ -248,7 +280,7 @@ define([
 		}
 
 		document.body.removeEventListener('body-resize', tabToClose.onResize);
-		var tabContainer = tabToClose.panelElem.parentElement.removeChild(tabToClose.panelElem);
+		tabToClose.panelElem.parentElement.removeChild(tabToClose.panelElem);
 
 		// destroy tab's Ace instance
 		tabToClose.editor.destroy();
@@ -260,6 +292,7 @@ define([
 		if(newCurrentTab) {
 			newCurrentTab.panelElem.querySelector('.tab-state').checked = true;
 			newCurrentTab.onEditorChange();
+			this._activate(newCurrentTab);
 		} else {
 			document.getElementById('editor-tabs').style.zIndex = -1;
 			document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
@@ -311,8 +344,7 @@ define([
 	};
 
 	TabController.prototype._setEditorMode = function (fileEntry, tab, fileName) {
-		// get mime type
-		console.log('languages', languages);
+		// get file extension
 		var ext = fileName.slice(fileName.lastIndexOf('.') + 1, fileName.length);
 		// tab.editor.getSession().setMode('ace/mode/plain_text');
 
