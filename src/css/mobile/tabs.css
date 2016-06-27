@@ -1,0 +1,7 @@
+.tabs li {
+  width: 25%;
+}
+
+.tabs li.tab-active {
+  width: 50%;
+}
