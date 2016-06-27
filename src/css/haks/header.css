@@ -1,3 +1,7 @@
+.header {
+    z-index: 100;
+}
+
 .header__tab__button-pane {
     position: absolute;
     right: 10px;
