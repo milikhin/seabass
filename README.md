@@ -10,15 +10,18 @@ SeaBass IDE for Ubuntu Touch
 ## v0.2
 * Add phone layout
 
+## v0.3
+* Add Settings page:  
+   * Font size
+   * Editor theme
+   * OSK height (OSK height is different on Tablet/Phone) 
+   * i18n
+
 ## Futher improvements
 * Write docs & my vision of the project
 * Handle fs errors such as: opened file was moved/deleted so doesn'e exist anymore
 * Add demo project
 * Add workaround for opening hidden files
-* Add Settings page:  
-   * Font size
-   * Editor theme
-   * OSK height (OSK height is different on Tablet/Phone)
 * Implement create/rename/delete file operations
 * Add ability to open hidden files
 * Think about tests
