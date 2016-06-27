@@ -48,6 +48,12 @@ define([
 					<span class="tooltip__text">Save<br/><code>Ctrl + S</code></span>
 				</button>-->
 				<button
+					data-action="file-tree-toggle"
+					class="app-action header__tab__button-pane__button header__tab__button-pane__button-osk tooltip tooltip-bottom mobile-only">
+					<i class="material-icons">list</i>
+					<span class="tooltip__text">Toggle file tree</span>
+				</button>
+				<button
 					data-action="window-osk"
 					class="app-action header__tab__button-pane__button header__tab__button-pane__button-osk tooltip tooltip-bottom">
 					<i class="material-icons">keyboard</i>
@@ -75,7 +81,7 @@ define([
 					<span class="tooltip__text">Undo<br/><code>Ctrl + Z</code></span>
 				</button>
 			</div>`;
-	}
+	};
 
 	Application.prototype.onDeviceReady = function () {
 		var self = this;
@@ -121,7 +127,6 @@ define([
 		}
 
 		document.onkeydown = KeyPress;
-		var self = this;
 
 		document.body.addEventListener('click', function (evt) {
 			console.log('target', evt.target, evt.target.dataset);
@@ -131,7 +136,8 @@ define([
 				var headerInterval = setInterval(function () {
 					var headerElem = document.querySelector('.header [data-role="tabtitle"]');
 					// wait while header is updated, add buttons & set their states;
-					if(~headerElem.innerHTML.toLowerCase().indexOf('seabass')) {
+					console.log('innerHTML', headerElem.innerHTML.toLowerCase());
+					if(~headerElem.innerHTML.toLowerCase().indexOf('editor')) {
 						self._addEditorButtons();
 						var currentTab = TabController.getCurrent();
 						if(currentTab) {
@@ -152,6 +158,11 @@ define([
 			console.log('current tab is', TabController.getCurrent());
 
 			switch(action) {
+			case 'file-tree-toggle':
+				{
+					location.hash = !~location.hash.indexOf('file-tree') ? 'file-tree' : '';
+					break;
+				}
 			case 'window-osk':
 				{
 					document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
@@ -237,6 +248,9 @@ define([
 					var content = yield self.fileManager.getFileContent(fileEntry);
 					var tab = TabController.get(evt.detail.node.id, fileEntry, content);
 					tab.panelElem.querySelector('.tab-state').checked = true;
+
+					// close tree
+					location.hash = "";
 				}).catch(function (err) {
 					console.error(err);
 				});
