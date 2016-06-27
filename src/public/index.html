@@ -44,7 +44,7 @@
         <header data-role="header" class="header">
             <ul data-role="tabs">
                 <li data-role="tabitem" data-page="main">
-                    SeaBass IDE
+                    Editor
                 </li>
                 <li data-role="tabitem" data-page="about">
                     About
@@ -57,10 +57,16 @@
                 <div class="aside" id="file-tree">
                     <section data-role="list">
                         <header class="aside__header">
-                            <button class="app-action aside__header__reload tooltip tooltip-bottom" data-action="tree-reload">
-                                <i class="material-icons">cached</i>
-                                <span class="tooltip__text">Reload tree</span>
-                            </button>
+                            <div class="aside__header__buttons">
+                                <button class="app-action aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-reload">
+                                    <i class="material-icons">cached</i>
+                                    <span class="tooltip__text">Reload tree</span>
+                                </button>
+                                <button class="app-action aside__header__buttons__button tooltip tooltip-bottom mobile-only" data-action="file-tree-toggle">
+                                    <i class="material-icons">close</i>
+                                    <span class="tooltip__text">Hide tree</span>
+                                </button>
+                            </div>
                             Files
                         </header>
                         <div class="tree"></div>
@@ -88,7 +94,6 @@
                                 <li>
                                     Select file in the Files tree on the left
                                 </li>
-                                <a href="#file-tree">show tree!</a>
                             </ol>
                             <h3 class="tabs__welcome-note__header3">Notes</h3>
                             <div class="tabs__welcome-note__state">
