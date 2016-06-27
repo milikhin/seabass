@@ -1,0 +1,38 @@
+.inspire-tree .title {
+  overflow-x: auto;
+  display: inline-block;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.inspire-tree li > .title-wrap {
+  display: inline-block;
+  overflow: auto;
+  min-width: 100%;
+}
+
+.inspire-tree {
+  overflow: auto;
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  width: 250px;
+  left: 0;
+}
+
+.inspire-tree > ol {
+  overflow: auto;
+  display: inline-block;
+  min-width: 100%;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.inspire-tree .wholerow {
+  transform: translateY(-115%);
+}
+
+.inspire-tree .title-wrap:hover + .wholerow {
+  background-color: #ddd;
+}

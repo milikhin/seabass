@@ -2,16 +2,12 @@
     overflow: visible;
 }
 
-
 /* Tooltip container */
-
 .tooltip {
     position: relative;
 }
 
-
 /* Tooltip text */
-
 .tooltip__text {
     visibility: hidden;
     background-color: #202020;
@@ -29,7 +25,6 @@
 
 
 /* Show the tooltip text when you mouse over the tooltip container */
-
 .tooltip:hover .tooltip__text {
     visibility: visible;
 }

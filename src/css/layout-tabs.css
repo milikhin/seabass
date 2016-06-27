@@ -1,0 +1,61 @@
+.tabs__welcome-note-wrapper {
+    height: 100%;
+    background: #202020;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 50px;
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+}
+
+[data-role="content"] .tabs__welcome-note__header,
+[data-role="content"] .tabs__welcome-note__header-p,
+[data-role="content"] .tabs__welcome-note__header3,
+.tabs__welcome-note-wrapper {
+    color: #dedede;
+}
+
+.tabs__welcome-note {
+    margin: auto;
+    max-width: 500px;
+}
+
+.tabs__welcome-note__header3 {
+    margin-top: 1rem;
+}
+
+.tabs__welcome-note__list {
+    list-style-type: circle;
+}
+
+.tabs__welcome-note__list,
+.tabs__welcome-note__olist,
+.tabs__welcome-note__state {
+    text-align: left;
+}
+
+.tabs__welcome-note__list li,
+.tabs__welcome-note__state,
+.tabs__welcome-note__olist {
+    color: #747278;
+    font-size: 0.9rem;
+}
+
+.tabs__welcome-note__state p,
+.tabs__welcome-note__state a {
+    color: inherit;
+}
+
+.tab-footer {
+    font-size: 0.9rem;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.3rem;
+    background: #ededed;
+    line-height: 1.3rem;
+    box-sizing: border-box;
+}

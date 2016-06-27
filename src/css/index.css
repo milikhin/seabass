@@ -1,10 +1,21 @@
+/* lib */
 @import 'inspire-tree.css';
 @import 'tabs.css';
 @import 'tooltip.css';
 
-@import 'fixme.css';
-@import 'layout.css';
+/* haks for external components */
+@import 'haks/index.css';
 
+/* app layout */
+@import 'layout.css';
+@import 'layout-aside.css';
+@import 'layout-tabs.css';
+@import 'editor.css';
+
+/* phone layout */
+@import 'mobile/index.css';
+
+/* icons */
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

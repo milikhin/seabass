@@ -1,0 +1,19 @@
+.aside__header {
+    position: relative;
+    color: #747278;
+}
+
+.aside__header__reload {
+    position: absolute;
+    height: 100%;
+    width: 2.5rem;
+    top: 0;
+    right: 0;
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+.aside__header__reload:active {
+    background: #ccc;
+}

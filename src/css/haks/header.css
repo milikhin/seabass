@@ -1,0 +1,47 @@
+.header__tab__button-pane {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+.header__tab__button-pane__button {
+    float: right;
+    width: 40px;
+    line-height: 60px;
+    height: 63px;
+    border: none;
+    background: none;
+    font-size: large;
+}
+
+.header__tab__button-pane__button .material-icons {
+    line-height: inherit;
+}
+
+.header__tab__button-pane__button:active {
+    background: #ccc;
+}
+
+.header__tab__button-pane__button:disabled {
+    color: #ccc;
+    background: none;
+}
+
+
+/* full with for tab header */
+
+[data-role="back-btn"]:disabled + [data-role="tabtitle"],
+[data-role="back-btn"] + [data-role="tabtitle"],
+[data-role="tabs-btn"] + [data-role="tabtitle"],
+[data-role="tabs"] + [data-role="tabtitle"] {
+    width: auto;
+    float: none;
+}
+
+[data-role="header"]::after {
+    height: 0;
+}
+
+[data-role="tabs-btn"] {
+    z-index: 20;
+}
