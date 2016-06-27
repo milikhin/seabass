@@ -5,7 +5,7 @@ SeaBass IDE for Ubuntu Touch
 ## v0.1
 * **done** Syntax highlighter: Refactor highlighter configuration
 * **done** Add "About" page and move acknowledgements there
-* Syntax highlighter: Add support for more languages
+* **done** Syntax highlighter: Add support for more languages
 
 ## v0.2
 * Add phone layout
