@@ -11,11 +11,14 @@ SeaBass IDE for Ubuntu Touch
 * Add phone layout
 
 ## v0.3
+* i18n
+
+## v0.4
 * Add Settings page:  
    * Font size
    * Editor theme
    * OSK height (OSK height is different on Tablet/Phone) 
-   * i18n
+   
 
 ## Futher improvements
 * Write docs & my vision of the project
