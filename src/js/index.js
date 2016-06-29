@@ -119,7 +119,7 @@ define([
 					switch(String.fromCharCode(event.keyCode).toLowerCase()) {
 					case 'b':
 						{
-							TabController.beautify(TabController.getCurrent());
+							TabController.getCurrent().beautfy();
 						}
 					}
 				}
@@ -247,7 +247,7 @@ define([
 				co(function* () {
 					var content = yield self.fileManager.getFileContent(fileEntry);
 					var tab = TabController.get(evt.detail.node.id, fileEntry, content);
-					tab.panelElem.querySelector('.tab-state').checked = true;
+					tab.activate();
 
 					// close tree
 					location.hash = "";

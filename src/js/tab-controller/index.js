@@ -1,52 +1,50 @@
+/*
+	TabController
+
+	Public methods:
+	- beautify(tab: tab's description): formats tab's editor content if possible
+	- close(tab: tab's description): closes given tab, selects new active tab based on "getLastModified" alghorythm
+	- get(fileName: String, fileEntry: Cordova File's entry, fileContent: String (NOT USED)): returns new or existed tab for given fileName & fileEntry
+	- getCurrent(): returns current tab's dscription
+	- getEarliestModified(): returns tab's description for the tab, that hasn't change for longest time among the opened tabs
+	- getLastModified: returns tab's description of last modified tab
+	- getTabByFileEntry(fileEntry: Cordova File's entry): returns tab correspondent to given fileEntry
+	- getByElem(elem: HTMLElement): returns tab's description for a tab, that contains given elem
+	- save(tab: tab's description): fires "file-save" event on documents with fileName & entry as event details
+
+	Private methods:
+	- _getMaxTabsNumber(): returns maximum amount of simultaniously opened tabs
+	- _create(fileName: String, fileEntry: Cordova File's entry, fileContent: String (NOT USED)): returns new tab for the given fileName & fileEntry, editor is empty
+	- _updateButtons(tab: tab's description): sets "disabled" property of header buttons based on givent tab properties
+	- _activate(tab: tab's description): adds "tab-active" class to a given tab's <li>, removes class from other tabs' <li> elems
+	- _resetUndoManager(tab: tab's description): reset Ace's UndoManager state for a
+*/
 define([
-	'json!./languages.json',
+	'./tab',
 	'co',
-	'md5',
-	'ace/ace',
-	'ace/theme/monokai',
-
-	'ace/worker/worker',
-
-	// Language-specific modes
-	'ace/mode/javascript',
-	'ace/mode/typescript',
-	'ace/mode/json',
-	'ace/mode/css',
-	'ace/mode/less',
-	'ace/mode/sass',
-	'ace/mode/scss',
-	'ace/mode/stylus',
-
-	'ace/mode/html',
-	'ace/mode/svg',
-	'ace/mode/php',
-	'ace/mode/ejs',
-	'ace/mode/jsx',
-	'ace/mode/ruby',
-
-	'ace/mode/c_cpp',
-	'ace/mode/golang',
-	'ace/mode/python',
-	'ace/mode/java',
-	'ace/mode/swift',
-
-	'ace/mode/sh',
-	'ace/mode/plain_text'
-
-
-], function (languages, co, md5, ace, theme) {
+	'md5'
+], function (Tab, co, md5, ace, theme) {
 	function TabController() {
+		var self = this;
 		this.tabs = [];
 		this.rootElem = document.querySelector('.tabs');
 		// this.tabsElem = this.rootElem.querySelector('.tabs');
+
+		document.body.addEventListener('tab-activate', function (evt) {
+			self.tabs.forEach(function (tabDescription) {
+				tabDescription.rootElem.closest('li').classList.remove('tab-active');
+			});
+
+			evt.detail.tab.rootElem.closest('li').classList.add('tab-active');
+		});
 	}
 
 	// Get active tab
 	TabController.prototype.getCurrent = function () {
-		var checkedPanelElem = document.querySelector('.tabs .tab-state:checked ~ .tab-content');
+		var checkedrootElem = document.querySelector('.tabs .tab-state:checked ~ .tab-content');
 		var currentTab;
 		this.tabs.forEach(function (tab) {
-			if(tab.panelElem == checkedPanelElem.closest('li')) {
+			if(tab.rootElem == checkedrootElem.closest('li')) {
 				currentTab = tab;
 			}
 		}, this);
@@ -102,66 +100,22 @@ define([
 
 	TabController.prototype._create = function (fileName, fileEntry, fileContent) {
 		var self = this;
-
-		// Create new tabs template;
-		var tabElem = document.createElement('li');
-		tabElem.innerHTML = this.tpl({
+		var tab = new Tab({
 			fileName: fileName,
-			content: fileContent,
-			url: fileEntry.nativeURL
-		});
-		this.rootElem.appendChild(tabElem);
-
-		// Create editor
-		var editorElemId = tabElem.querySelector('.editor').id;
-		var tab = {
-			panelElem: tabElem,
-			id: md5(fileName),
-			fileName: fileName,
-			editor: ace.edit(editorElemId),
 			fileEntry: fileEntry,
-			lastModified: null
-		};
-
-		// register editor onchange handler
-		tab.onEditorChange = function () {
-			setTimeout(function () {
-				self._updateButtons(tab);
-			}, 100);
-		};
-		tab.editor.on('change', function (evt) {
-			self.save(tab); // autosave
-			tab.onEditorChange(evt); // button enabling/disabling
+			fileContent: fileContent,
+			parentElem: this.rootElem,
+			onEditorChange: function () {
+				setTimeout(function () {
+					self._updateButtons(tab);
+				}, 100);
+			}
 		});
-
-		// register osk-toggle-toggle handler
-		tab.onResize = function () {
-			tab.editor.resize(true);
-		};
-		document.body.addEventListener('body-resize', tab.onResize);
-
-		// set value & theme
-		tab.editor.setTheme(theme);
-		tab.editor.setValue(fileContent, 1);
-
-		// enable syntax highlighting
-		this._setEditorMode(fileEntry, tab, fileName);
 
 		// save created tab
 		this.tabs.push(tab);
 		this._activate(tab);
-
-		this.tabs.forEach(function (tabDescription) {
-			tabDescription.panelElem.querySelector('.tab-state').onchange = function () {
-				self._activate(tabDescription);
-				tabDescription.onEditorChange();
-
-				setTimeout(function () {
-					tabDescription.editor.focus();
-				}, 100);
-			};
-		});
-
+		console.log('activated successfully');
 		// reset undo manager & buttons
 		setTimeout(function () {
 			self._resetUndoManager(tab);
@@ -188,14 +142,7 @@ define([
 	};
 
 	TabController.prototype._activate = function (tab) {
-		try {
-			this.tabs.forEach(function (tabDescription) {
-				tabDescription.panelElem.closest('li').classList.remove('tab-active');
-			});
-			tab.panelElem.closest('li').classList.add('tab-active');
-		} catch(err) {
-			console.error(err);
-		}
+		tab.activate();
 	};
 
 	// Get tab (or create new if it doesn't exist)
@@ -218,55 +165,14 @@ define([
 
 	};
 
-	TabController.prototype.save = function (tab) {
-		var evt = new CustomEvent('file-save', {
-			bubbles: true,
-			cancelable: true,
-			detail: {
-				fileEntry: tab.fileEntry,
-				value: tab.editor.getValue()
-			}
-		});
 
-		document.body.dispatchEvent(evt);
-	};
 
-	TabController.prototype.beautify = function (tab) {
-		var content = tab.editor.getValue();
-		var beautyContent;
-		var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
-		console.log(ext);
-		switch(ext) {
-		case 'json':
-		case 'js':
-			{
-				beautyContent = window.js_beautify(content);
-				break;
-			}
-		case 'css':
-			{
-				beautyContent = window.css_beautify(content);
-				break;
-			}
-		case 'html':
-			{
-				beautyContent = window.html_beautify(content);
-				break;
-			}
-		default:
-			{
-				beautyContent = content;
-			}
 
-		}
-		tab.editor.setValue(beautyContent);
-
-	};
 
 	TabController.prototype.getByElem = function (elem) {
 		var tab;
-		this.tabs.forEach(function (tabDescription, index) {
-			if(elem.closest('.tabs li') == tabDescription.panelElem) {
+		this.tabs.forEach(function (tabDescription) {
+			if(elem.closest('.tabs li') == tabDescription.rootElem) {
 				tab = tabDescription;
 			}
 		});
@@ -280,7 +186,7 @@ define([
 		}
 
 		document.body.removeEventListener('body-resize', tabToClose.onResize);
-		tabToClose.panelElem.parentElement.removeChild(tabToClose.panelElem);
+		tabToClose.rootElem.parentElement.removeChild(tabToClose.rootElem);
 
 		// destroy tab's Ace instance
 		tabToClose.editor.destroy();
@@ -290,7 +196,7 @@ define([
 
 		var newCurrentTab = this.getLastModified();
 		if(newCurrentTab) {
-			newCurrentTab.panelElem.querySelector('.tab-state').checked = true;
+			newCurrentTab.rootElem.querySelector('.tab-state').checked = true;
 			newCurrentTab.onEditorChange();
 			this._activate(newCurrentTab);
 		} else {
@@ -316,44 +222,14 @@ define([
 		tab.editor.redo();
 	};
 
-	TabController.prototype.tpl = function (options) {
-		var fnameHash = md5(options.url);
-		var rootDir = 'seabass.mikhael/persistent/';
-		var shortenedUrl = options.url.slice(options.url.indexOf(rootDir) + rootDir.length, options.url.length);
-		return `<input class="tab-state" type="radio" title="tab-${fnameHash}" name="tabs-state" id="tab-${fnameHash}" checked />
-			<label
-				class="tab-label"
-				for="tab-${fnameHash}"
-				id="tab-label-${fnameHash}"
-				title="${options.fileName}">
-				<button class="tab-label__close app-action" data-action="tab-close">x</button>
-				<span class="tab-label__label">${options.fileName}</span>
-			</label>
-			<div class="tab-content" id="tab-content-${fnameHash}" >
-					<div id="editor-${fnameHash}" class="editor"></div>
-			</div>
-			<div class="tab-footer" id="tab-footer-${fnameHash}" >
-					<span class="tab-footer__file-name">${shortenedUrl}</span>
-			</div>`;
-	};
+
 
 	TabController.prototype._resetUndoManager = function (tab) {
+		console.log('resetting UM');
 		var um = tab.editor.getSession().getUndoManager();
 		um.reset();
 		tab.onEditorChange();
-	};
-
-	TabController.prototype._setEditorMode = function (fileEntry, tab, fileName) {
-		// get file extension
-		var ext = fileName.slice(fileName.lastIndexOf('.') + 1, fileName.length);
-		// tab.editor.getSession().setMode('ace/mode/plain_text');
-
-		for(var i in languages) {
-			if(ext == i) {
-				console.log('language is', languages[i]);
-				tab.editor.getSession().setMode('ace/mode/' + languages[i]);
-			}
-		}
+		console.log('UM reseted');
 	};
 
 	return new TabController();
