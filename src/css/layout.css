@@ -17,15 +17,25 @@ body,
 }
 
 body.osk-mode {
-    height: calc(100% - 500px);
-    min-height: 51%;
+    height: calc(100vh - 500px);
+    min-height: 51vh;
+}
+
+body.osk-mode::after {
+  content: "Space reserved for OSK";
+  display: block;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  text-align: center;
+  margin: auto;
+  margin-top: 25vh;
 }
 
 .content {
-    min-height: calc(100% - 62px);
-    height: calc(100% - 62px);
+    min-height: calc(100% - 52px);
+    height: calc(100% - 52px);
     width: 100%;
-    padding-top: 61px!important;
+    padding-top: 51px!important;
     clear: none;
 }
 

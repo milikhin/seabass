@@ -2,6 +2,34 @@
     z-index: 100;
 }
 
+[data-role="tabtitle"],
+[data-role="back-btn"],
+[data-role="tabs-btn"],
+.header {
+    height: 50px;
+}
+
+[data-role="tabtitle"],
+[data-role="back-btn"],
+[data-role="tabs-btn"] {
+    line-height: 50px;
+}
+
+[data-role="content"] {
+    border-top-width: 0;
+}
+
+[data-role="header"]:after {
+  content: "";
+  border-top: 0.25px solid #afafaf;
+  height: 0;
+  top: 50px;
+}
+
+[data-role="tabs"] {
+  top: 51px;
+}
+
 .header__tab__button-pane {
     position: absolute;
     right: 10px;
@@ -10,12 +38,13 @@
 
 .header__tab__button-pane__button {
     float: right;
-    width: 40px;
-    line-height: 60px;
-    height: 63px;
+    width: 35px;
+    line-height: 50px;
+    height: 50px;
     border: none;
     background: none;
     font-size: large;
+    padding: 0;
 }
 
 .header__tab__button-pane__button .material-icons {
