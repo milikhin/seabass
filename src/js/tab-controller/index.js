@@ -98,6 +98,15 @@ define([
 		return document.body.clientWidth > 600 ? 5 : 3;
 	};
 
+	TabController.prototype.converge = function () {
+		while(this.tabs.length > this._getMaxTabsNumber()) {
+			var tabToClose = this.getEarliestModified()
+			if(tabToClose) {
+				this.close(tabToClose);
+			}
+		}
+	};
+
 	TabController.prototype._create = function (fileName, fileEntry, fileContent) {
 		var self = this;
 		var tab = new Tab({
@@ -213,16 +222,6 @@ define([
 		}
 
 	};
-
-	TabController.prototype.undo = function (tab) {
-		tab.editor.undo();
-	};
-
-	TabController.prototype.redo = function (tab) {
-		tab.editor.redo();
-	};
-
-
 
 	TabController.prototype._resetUndoManager = function (tab) {
 		console.log('resetting UM');
