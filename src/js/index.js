@@ -31,6 +31,11 @@ define([
 		document.body.addEventListener('editor-state-changed', function (evt) {
 			self.receivedEvent('editor-state-changed', evt);
 		});
+
+		window.addEventListener('resize', function() {
+			console.log('handling resize event');
+			TabController.converge();
+		});
 	};
 
 	Application.prototype._addEditorButtons = function () {
@@ -51,7 +56,7 @@ define([
 					data-action="file-tree-toggle"
 					class="app-action header__tab__button-pane__button header__tab__button-pane__button-osk tooltip tooltip-bottom mobile-only">
 					<i class="material-icons">list</i>
-					<span class="tooltip__text">Toggle file tree</span>
+					<span class="tooltip__text">Toggle file tree<br/><code>Ctrl + O</code></span>
 				</button>
 				<button
 					data-action="window-osk"
@@ -97,29 +102,37 @@ define([
 
 		function KeyPress(e) {
 			var evtobj = window.event ? event : e;
+			console.log(evtobj.ctrlKey, evtobj.altKey, String.fromCharCode(event.keyCode).toLowerCase());
+
 			if(evtobj.ctrlKey) {
 				switch(String.fromCharCode(event.keyCode).toLowerCase()) {
 				case 'z':
 					{
-						TabController.undo(TabController.getCurrent());
+						TabController.getCurrent().undo();
 						break;
 					}
 				case 'y':
 					{
-						TabController.redo(TabController.getCurrent());
+						TabController.getCurrent().redo();
 						break;
 					}
 				case 's':
 					{
-						TabController.save(TabController.getCurrent());
+						TabController.getCurrent().save();
+						break;
+					}
+				case 'o':
+					{
+						self.toggleFileTree();
 						break;
 					}
 				}
+
 				if(evtobj.altKey) {
 					switch(String.fromCharCode(event.keyCode).toLowerCase()) {
 					case 'b':
 						{
-							TabController.getCurrent().beautfy();
+							TabController.getCurrent().beautify();
 						}
 					}
 				}
@@ -160,33 +173,32 @@ define([
 			switch(action) {
 			case 'file-tree-toggle':
 				{
-					location.hash = !~location.hash.indexOf('file-tree') ? 'file-tree' : '';
+					self.toggleFileTree();
 					break;
 				}
 			case 'window-osk':
 				{
-					document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
-					document.body.dispatchEvent(new CustomEvent('body-resize'));
+					self.toggleOSK();
 					break;
 				}
 			case 'editor-save':
 				{
-					TabController.save(TabController.getCurrent());
+					TabController.getCurrent().save();
 					break;
 				}
 			case 'editor-beautify':
 				{
-					TabController.beautify(TabController.getCurrent());
+					TabController.getCurrent().beautify();
 					break;
 				}
 			case 'editor-undo':
 				{
-					TabController.undo(TabController.getCurrent());
+					TabController.getCurrent().undo();
 					break;
 				}
 			case 'editor-redo':
 				{
-					TabController.redo(TabController.getCurrent());
+					TabController.getCurrent().redo();
 					break;
 				}
 			case 'tab-close':
@@ -202,6 +214,17 @@ define([
 			}
 			// this.receivedEvent(action, target);
 		});
+	};
+
+	Application.prototype.toggleFileTree = function () {
+		if(document.body.clientWidth < 600) {
+			location.hash = !~location.hash.indexOf('file-tree') ? 'file-tree' : '';
+		}
+	};
+
+	Application.prototype.toggleOSK = function () {
+		document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
+		document.body.dispatchEvent(new CustomEvent('body-resize'));
 	};
 
 	Application.prototype.receivedEvent = function (id, evt) {
