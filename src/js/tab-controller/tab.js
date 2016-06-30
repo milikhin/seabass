@@ -67,6 +67,14 @@ define([
 		console.log('complete Tab init');
 	}
 
+	Tab.prototype.undo = function () {
+		this.editor.undo();
+	};
+
+	Tab.prototype.redo = function () {
+		this.editor.redo();
+	};
+
 	Tab.prototype.activate = function () {
 		this.rootElem.querySelector('.tab-state').checked = true;
 
