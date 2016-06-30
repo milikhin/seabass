@@ -8,7 +8,8 @@ SeaBass IDE for Ubuntu Touch
 - [x] Syntax highlighter: Add support for more languages
 
 ## v0.2
-* Add phone layout
+* Add support for sidestage mode
+* Add more supported devices
 
 ## v0.3
 * i18n
