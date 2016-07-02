@@ -22,13 +22,20 @@
     line-height: 1.3em;
     font-size: 0.9rem;
     z-index: 50;
+    opacity: 1;
+
+
+    transition-property: opacity;
+    transition-duration: 0.25s;
 }
 
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltip__text {
+    transition-delay: 1.5s;
     visibility: visible;
-}
+    opacity: 0;
+  }
 
 .tooltip-bottom .tooltip__text {
     top: 100%;
