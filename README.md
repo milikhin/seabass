@@ -38,7 +38,7 @@ SeaBass IDE for Ubuntu Touch
 ## Requirements: 
 1. Add ubuntu platform.  
    ``` 
-cordova add platform ubuntu  
+cordova add platform ubuntu@4.3.4 
    ```
 2. Add Files plugin  
    ```
@@ -49,14 +49,14 @@ cordova plugin add cordova-plugin-file
 5. Build & Install
    * Ubuntu Desktop  
       ```
-      (cordova build ubuntu; cd /path/to/seabass/platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.1.1_amd64.deb )   
+      (cordova build ubuntu; cd /path/to/seabass/platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.0_amd64.deb )   
       ```
    * BQ M10  
       * Build & Run: 
       ```
-      cordova run --device
+      cordova run --device --debug
       ```  
-      * Build:
+      * Build for production:
       ```
       cordova build --device
       ```  
