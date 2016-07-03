@@ -1,33 +1,40 @@
-define(['./index', 'co'], function (FileController, co) {
-	function FileManager() {
-		var self = this;
+define(['./index', 'co'], function(FileController, co) {
+    function FileManager() {
+        var self = this;
 
-		co(function* () {
-			// initialize fs access;
-			self.fsController = new FileController();
-			yield self.fsController.waitForInit();
+        co(function*() {
+            // initialize fs access;
+            self.fsController = new FileController();
+            yield self.fsController.waitForInit();
 
-			document.body.dispatchEvent(new CustomEvent('fsready', {
-        bubbles: true
-      }));
-		}).catch(function (err) {
-			console.error(err);
-		});
+            document.body.dispatchEvent(new CustomEvent('fsready', {
+                bubbles: true
+            }));
+        }).catch(function(err) {
+            console.error(err);
+        });
 
-	}
+    }
 
 
-	FileManager.prototype.getFiles = function (dirEntry) {
-		return this.fsController.getFiles(dirEntry);
-	};
+    FileManager.prototype.getFiles = function(dirEntry) {
+        return this.fsController.getFiles(dirEntry);
+    };
 
-  FileManager.prototype.getFileContent = function(fileEntry) {
-    return this.fsController.readFile(fileEntry);
-  };
+    FileManager.prototype.getFileContent = function(fileEntry) {
+        return this.fsController.readFile(fileEntry);
+    };
 
-  FileManager.prototype.writeFile = function (fileEntry, data) {
-    return this.fsController.writeFile(fileEntry, data);
-  };
+    FileManager.prototype.writeFile = function(fileEntry, data) {
+        return this.fsController.writeFile(fileEntry, data);
+    };
 
-	return FileManager;
+    FileManager.prototype.test = function() {
+        return this.fsController.getDirectory({
+            path: '../',
+            create: false
+        });
+    };
+
+    return FileManager;
 });
