@@ -245,10 +245,9 @@ define([
                 }
             case 'fsready':
                 {
-                    this._navEnabled = localStorage.getItem('navEnabled');
+                    this._navEnabled = localStorage.getItem('navEnabled') === 'true';
                     document.getElementById('file-tree-navigation').checked = this._navEnabled;
                     document.getElementById('file-tree-navigation').onchange = function() {
-                        console.log('c', this.checked);
                         self._navEnabled = this.checked;
                         localStorage.setItem('navEnabled', self._navEnabled);
                         self.tree.reload();
@@ -291,7 +290,7 @@ define([
 
                     co(function*() {
                         var content = yield self.fileManager.getFileContent(fileEntry);
-                        var tab = TabController.get(evt.detail.node.id, fileEntry, content);
+                        var tab = TabController.get(evt.detail.node.text, fileEntry, content);
                         tab.activate();
 
                         // close tree

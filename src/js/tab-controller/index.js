@@ -85,7 +85,7 @@ define([
 		}
 
 		this.tabs.forEach(function (tabDescription) {
-			if(tabDescription.fileEntry == fileEntry) {
+			if(tabDescription.fileEntry.nativeURL == fileEntry.nativeURL) {
 				tab = tabDescription;
 			}
 		}, this);
@@ -100,7 +100,7 @@ define([
 
 	TabController.prototype.converge = function () {
 		while(this.tabs.length > this._getMaxTabsNumber()) {
-			var tabToClose = this.getEarliestModified()
+			var tabToClose = this.getEarliestModified();
 			if(tabToClose) {
 				this.close(tabToClose);
 			}

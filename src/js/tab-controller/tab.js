@@ -40,11 +40,11 @@ define([
 			throw new Error("fileName & fileEntry required");
 		}
 
-		this.id = md5(options.fileName);
+		this.id = md5(options.fileEntry.nativeURL);
 		this.fileName = options.fileName;
 		this.fileEntry = options.fileEntry;
 		this.lastModified = null;
-		this.rootDir = 'seabass.mikhael/persistent/';
+		this.rootDir = 'file://localhost';
 
 		this.onEditorChange = options.onEditorChange || function () {};
 

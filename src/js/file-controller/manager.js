@@ -36,6 +36,10 @@ define(['./index', 'co'], function(FileController, co) {
         });
     };
 
+    FileManager.prototype.getRoot = function() {
+      return this.fsController.rootEntry;
+    };
+
     FileManager.prototype.setRoot = function(rootEntry) {
         localStorage.setItem('rootURL', rootEntry.nativeURL);
         this.fsController.rootEntry = rootEntry;

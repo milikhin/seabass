@@ -1,3 +1,7 @@
+.tabs {
+  overflow: hidden;
+}
+
 .tabs__welcome-note-wrapper {
     height: 100%;
     background: #202020;
@@ -52,10 +56,11 @@
     padding: 0 10px;
     position: absolute;
     bottom: 0;
-    left: 0;
+    min-width: 100%;
     right: 0;
     height: 1.3rem;
     background: #ededed;
     line-height: 1.3rem;
     box-sizing: border-box;
+    white-space: nowrap;
 }

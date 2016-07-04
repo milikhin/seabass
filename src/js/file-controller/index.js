@@ -123,16 +123,14 @@ define(['co', 'md5'], function(co, md5) {
                 }
             }
             var directoryReader = dirEntry.createReader();
-            console.log('reader created');
             yield new Promise(function(resolve, reject) {
                 directoryReader.readEntries(function(entries) {
-                    console.log('el', entries.length);
                     for (var i = 0; i < entries.length; i++) {
                         var entry = entries[i];
                         console.log(entries[i]);
                         var fileDescription = {
                             'text': entry.name,
-                            'id': entry.name,
+                            'id': md5(entry.nativeURL),
                             'entry': entry,
                             'itree': {
                                 state: {
@@ -148,9 +146,6 @@ define(['co', 'md5'], function(co, md5) {
                 });
             });
 
-
-
-            console.log(fileStructure);
             return fileStructure;
         });
 
