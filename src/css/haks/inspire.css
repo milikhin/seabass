@@ -36,3 +36,8 @@
 .inspire-tree .title-wrap:hover + .wholerow {
   background-color: #ddd;
 }
+
+[data-uid="__up"] .icon-caret,
+[data-uid^="__self"] .icon-caret {
+  display: none;
+}
