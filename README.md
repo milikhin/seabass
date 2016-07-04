@@ -40,18 +40,15 @@ SeaBass IDE for Ubuntu Touch
 * NPM
 * Gulp (``` npm i -g gulp ```)
 * Bower (``` npm i -g bower ```)
-* For an unconfined version  
-   * patch to cordova's ``` generateApparmorProfile ``` (in *platforms/ubuntu/cordova/lib/manifest.js*) function:  
-      replace
-
-      ```
-      var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
-      ```  
-      with
+* Patch to cordova's ``` generateApparmorProfile ``` (in *platforms/ubuntu/cordova/lib/manifest.js*) function (for unconfined version only). Replace  
+  ```
+  var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
+  ```  
+   with
       
-      ```
-      var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
-      ```
+  ```
+  var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
+  ```
 
 ## Building
 1. Add ubuntu platform.  
