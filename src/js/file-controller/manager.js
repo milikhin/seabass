@@ -17,8 +17,8 @@ define(['./index', 'co'], function(FileController, co) {
     }
 
 
-    FileManager.prototype.getFiles = function(dirEntry) {
-        return this.fsController.getFiles(dirEntry);
+    FileManager.prototype.getFiles = function(dirEntry, navEnabled) {
+        return this.fsController.getFiles(dirEntry, navEnabled);
     };
 
     FileManager.prototype.getFileContent = function(fileEntry) {
@@ -35,6 +35,16 @@ define(['./index', 'co'], function(FileController, co) {
             create: false
         });
     };
+
+    FileManager.prototype.setRoot = function(rootEntry) {
+        localStorage.setItem('rootURL', rootEntry.nativeURL);
+        this.fsController.rootEntry = rootEntry;
+    };
+    FileManager.prototype.unsetRoot = function() {
+        localStorage.setItem('rootURL', this.fsController.fs.root.nativeURL);
+        this.fsController.rootEntry = this.fsController.fs.root;
+    };
+
 
     return FileManager;
 });

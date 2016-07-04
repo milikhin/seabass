@@ -1,17 +1,25 @@
-define(['co'], function(co) {
+define(['co', 'md5'], function(co, md5) {
     function FileController(options) {
         var self = this;
         this.fsInitPromise = co(function*() {
             yield self._init();
-            self.rootEntry = (options && options.root) ? yield self.getDirectory({
-                'root': self.fs.root,
-                'path': options.root,
-                'create': true
-            }) : self.fs.root;
+            var savedRootUrl = localStorage.getItem('rootURL');
+            if (savedRootUrl) {
+                self.rootEntry = yield new Promise(function(resolve, reject) {
+                    window.resolveLocalFileSystemURL(savedRootUrl, function(dirEntry) {
+                        resolve(dirEntry);
+                    }, function(err) {
+                        console.error(err);
+                        localStorage.setItem('rootURL', self.fs.root.nativeURL);
+                        resolve(self.fs.root);
+                    });
+                });
+            }
         }).catch(function(err) {
             console.error(err);
         });
     }
+
 
     /** API
      *
@@ -72,54 +80,73 @@ define(['co'], function(co) {
         });
     };
 
-    FileController.prototype.getFiles = function(dirEntry) {
+    FileController.prototype.getFiles = function(dirEntry, navEnabled) {
         dirEntry = dirEntry || this.rootEntry;
-				console.log('DE', dirEntry);
+        console.log('DE', dirEntry);
         var fileStructure = [];
         var self = this;
 
         return co(function*() {
-            try {
-                var parentDirectory = yield self.getDirectory({
-                    path: '../',
-                    create: false
-                });
-                fileStructure.push({
-                    'text': '..',
-                    'id': '__up',
-                    'entry': parentDirectory,
-                    'itree': {
-                        state: {
-                            selectable: false
-                        }
-                    },
-										'children': parentDirectory.isDirectory > 0
-                });
-            } catch (err) {
-                console.error('unable to get parentDirectory', err);
+            if (navEnabled) {
+                if (self.rootEntry == dirEntry) {
+                    try {
+                        var parentDirectory = yield self.getDirectory({
+                            path: '../',
+                            create: false
+                        });
+                        fileStructure.push({
+                            'text': '..',
+                            'id': '__up',
+                            'entry': parentDirectory,
+                            'itree': {
+                                state: {
+                                    selectable: false
+                                }
+                            },
+                            'children': parentDirectory.isDirectory > 0
+                        });
+                    } catch (err) {
+                        console.error('unable to get parentDirectory', err);
+                    }
+                } else {
+                    fileStructure.push({
+                        'text': '.',
+                        'id': '__self-' + md5(dirEntry.nativeURL),
+                        'entry': dirEntry,
+                        'itree': {
+                            state: {
+                                selectable: false
+                            }
+                        },
+                        'children': dirEntry.isDirectory > 0
+                    });
+                }
             }
-
             var directoryReader = dirEntry.createReader();
-						console.log('reader created');
-            var entries = yield directoryReader.readEntries();
-						console.log('el', entries.length);
-            for (var i = 0; i < entries.length; i++) {
-                var entry = entries[i];
-                console.log(entries[i]);
-                var fileDescription = {
-                    'text': entry.name,
-                    'id': entry.name,
-                    'entry': entry,
-                    'itree': {
-                        state: {
-                            selectable: false
-                        }
-                    },
-                    'children': entry.isDirectory > 0
-                };
+            console.log('reader created');
+            yield new Promise(function(resolve, reject) {
+                directoryReader.readEntries(function(entries) {
+                    console.log('el', entries.length);
+                    for (var i = 0; i < entries.length; i++) {
+                        var entry = entries[i];
+                        console.log(entries[i]);
+                        var fileDescription = {
+                            'text': entry.name,
+                            'id': entry.name,
+                            'entry': entry,
+                            'itree': {
+                                state: {
+                                    selectable: false
+                                }
+                            },
+                            'children': entry.isDirectory > 0
+                        };
 
-                fileStructure.push(fileDescription);
-            }
+                        fileStructure.push(fileDescription);
+                    }
+                    resolve();
+                });
+            });
 
 
 

@@ -36,6 +36,7 @@ define([
             console.log('handling resize event');
             TabController.converge();
         });
+
     };
 
     Application.prototype._addEditorButtons = function() {
@@ -211,6 +212,12 @@ define([
                         self.tree.reload();
                         break;
                     }
+                case 'tree-unset-root':
+                    {
+                        self.fileManager.unsetRoot();
+                        self.tree.reload();
+                        break;
+                    }
             }
             // this.receivedEvent(action, target);
         });
@@ -238,14 +245,15 @@ define([
                 }
             case 'fsready':
                 {
+                    this._navEnabled = localStorage.getItem('navEnabled');
+                    document.getElementById('file-tree-navigation').checked = this._navEnabled;
+                    document.getElementById('file-tree-navigation').onchange = function() {
+                        console.log('c', this.checked);
+                        self._navEnabled = this.checked;
+                        localStorage.setItem('navEnabled', self._navEnabled);
+                        self.tree.reload();
+                    };
                     this.renderTree();
-                    // unconfined
-
-                    this.fileManager.test().then(function(data) {
-                        console.log('!!', data);
-                    }, function(err) {
-                        console.log('err', err);
-                    });
                     break;
                 }
             case 'editor-state-changed':
@@ -269,10 +277,12 @@ define([
             case 'tree-node-click':
                 {
                     id = evt.detail.node.id;
-                    if (id == "__up") {
-                        this._rootDir =  evt.detail.node.entry;
+                    if (id == "__up" || id.indexOf("__self") == 0) {
+                        self.fileManager.setRoot(evt.detail.node.entry);
                         this.tree.reload();
+                        break;
                     }
+
                     var fileEntry = evt.detail.node.entry;
                     if (fileEntry.isDirectory) {
                         evt.detail.node.toggleCollapse();
@@ -337,7 +347,7 @@ define([
     Application.prototype._getTreeData = function(node) {
         var self = this;
         return new Promise(function(resolve, reject) {
-            self.fileManager.getFiles(node ? node.entry : (self._rootDir || null)).then(function(data) {
+            self.fileManager.getFiles(node ? node.entry : null, self._navEnabled).then(function(data) {
                 var d = data.sort(function(a, b) {
                     if (a.children && !b.children) {
                         return -1;
