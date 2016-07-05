@@ -36,6 +36,14 @@ define(['./index', 'co'], function(FileController, co) {
         });
     };
 
+    FileManager.prototype.getRootURL = function() {
+      var url = this.getRoot().nativeURL;
+      var rootUrl = 'file://localhost';
+      var shortenedUrl = url.slice(url.indexOf(rootUrl) + rootUrl.length, url.length);
+
+      return shortenedUrl;
+    };
+
     FileManager.prototype.getRoot = function() {
       return this.fsController.rootEntry;
     };

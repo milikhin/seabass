@@ -108,18 +108,6 @@ define(['co', 'md5'], function(co, md5) {
                     } catch (err) {
                         console.error('unable to get parentDirectory', err);
                     }
-                } else {
-                    fileStructure.push({
-                        'text': '.',
-                        'id': '__self-' + md5(dirEntry.nativeURL),
-                        'entry': dirEntry,
-                        'itree': {
-                            state: {
-                                selectable: false
-                            }
-                        },
-                        'children': dirEntry.isDirectory > 0
-                    });
                 }
             }
             var directoryReader = dirEntry.createReader();

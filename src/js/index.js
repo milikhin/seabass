@@ -209,13 +209,13 @@ define([
                     }
                 case 'tree-reload':
                     {
-                        self.tree.reload();
+                        self.reloadTree();
                         break;
                     }
                 case 'tree-unset-root':
                     {
                         self.fileManager.unsetRoot();
-                        self.tree.reload();
+                        self.reloadTree();
                         break;
                     }
             }
@@ -234,6 +234,16 @@ define([
         document.body.dispatchEvent(new CustomEvent('body-resize'));
     };
 
+    Application.prototype.reloadTree = function() {
+      this.tree.reload();
+      this._updateTreeHeader();
+    };
+
+    Application.prototype._updateTreeHeader = function() {
+      var rootUrl = this.fileManager.getRootURL();
+      document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl;
+    };
+
     Application.prototype.receivedEvent = function(id, evt) {
         var self = this;
         switch (id) {
@@ -250,7 +260,7 @@ define([
                     document.getElementById('file-tree-navigation').onchange = function() {
                         self._navEnabled = this.checked;
                         localStorage.setItem('navEnabled', self._navEnabled);
-                        self.tree.reload();
+                        self.reloadTree();
                     };
                     this.renderTree();
                     break;
@@ -276,9 +286,9 @@ define([
             case 'tree-node-click':
                 {
                     id = evt.detail.node.id;
-                    if (id == "__up" || id.indexOf("__self") == 0) {
+                    if (self._navEnabled) {
                         self.fileManager.setRoot(evt.detail.node.entry);
-                        this.tree.reload();
+                        this.reloadTree();
                         break;
                     }
 
@@ -327,7 +337,7 @@ define([
                 }
             }
         });
-
+        this._updateTreeHeader();
 
         this.tree.on('node.click', function(event, node) {
             // node clicked!
