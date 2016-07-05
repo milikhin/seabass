@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <title>SeaBass IDE v0.2.2</title>
+    <title>SeaBass IDE v0.2.3</title>
     <!--<script src="http://192.168.0.104:8080/target/target-script-min.js#anonymous"></script>-->
 
     <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
@@ -74,7 +74,10 @@
                                     <span class="tooltip__text">Hide tree</span>
                                 </button>
                             </div>
-                            Files
+                            <a class="tooltip tooltip-bottom-right aside__header__path" href="#" onclick="return false">
+                              Files
+                              <span class="tooltip__text" id="aside__header__path__tooltip"></span>
+                            </a>
                         </header>
                         <div class="tree"></div>
                     </section>
@@ -118,10 +121,10 @@
                                 </p>
                                 <br/>
                                 <p>
-                                    <b>Note:</b> Device restart is usually required when switching from standard to unconfined version and back.
+                                    <b>Note:</b> Uninstallation of previously installed version is required when switching from standard to unconfined version and back.
                                 </p>
                                 <p>
-                                    Complete feature list, usage notes for Unconfined version &amp; release notes are available on About page.
+                                    Complete feature list, usage &amp; release notes are available on About page.
                                 </p>
                             </div>
                         </section>
@@ -133,7 +136,7 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                          SeaBass IDE v0.2.2
+                          SeaBass IDE v0.2.3
                         </h2>
                         <p class="tabs__welcome-note__header-p">SeaBass is a text (code) editor for BQ M10 Ubuntu Edition tablet. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
@@ -212,15 +215,8 @@
                                 Since v0.2.2 it is possible to change project's root directory while the File Tree is in "Navigation" mode (can be activated on the Settings page).
                             </p>
                             <p>
-                                After switching to "Navigation" mode two additional entries in the File Tree are available:
-                                <ul class="tabs__welcome-note__list">
-                                    <li>
-                                        ".." - sets project's root to current directory's parent;
-                                    </li>
-                                    <li>
-                                        "." - sets project's root to selected directory.
-                                    </li>
-                                </ul>
+                                After switching to "Navigation" mode File Tree will acts as file browser with support for navigating up and down the file tree.
+                                App will also restore last opened directory after restart.
                             </p>
                             <p>
                                 If something goes wrong - there is a "Home" button for resetting Project's root in the File Tree.
