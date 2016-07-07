@@ -286,13 +286,14 @@ define([
             case 'tree-node-click':
                 {
                     id = evt.detail.node.id;
-                    if (self._navEnabled) {
-                        self.fileManager.setRoot(evt.detail.node.entry);
+                    var fileEntry = evt.detail.node.entry;
+                    
+                    if (self._navEnabled && fileEntry.isDirectory) {
+                        this.fileManager.setRoot(evt.detail.node.entry);
                         this.reloadTree();
                         break;
                     }
 
-                    var fileEntry = evt.detail.node.entry;
                     if (fileEntry.isDirectory) {
                         evt.detail.node.toggleCollapse();
                         break;

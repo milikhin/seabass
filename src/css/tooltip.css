@@ -12,6 +12,7 @@
 
 .tooltip__text {
     visibility: hidden;
+    
     background-color: #202020;
     color: #dedede;
     text-align: center;
@@ -25,14 +26,17 @@
     font-size: 0.9rem;
     z-index: 50;
     opacity: 1;
-    transition-property: opacity;
-    transition-duration: 0.25s;
+
+    transition: opacity 0.25s ease;
+    /*transition-property: opacity;*/
+    /*transition-duration: 0.25s;*/
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 
 .tooltip:hover .tooltip__text {
-    transition-delay: 1.5s;
+    transition: opacity 0.25s ease 1.5s, z-index 0.1s ease 1.75s;
+    z-index: -1;
     visibility: visible;
     opacity: 0;
 }
