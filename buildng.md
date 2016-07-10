@@ -1,7 +1,7 @@
 ## Requirements
 * Ubuntu 16.04
 
-## 1 Install dependencies 
+## 1 Setup Cordova
 Just as in [Official guide](http://cordova.apache.org/docs/en/dev/guide/platforms/ubuntu/index.html)
 
 ### 1.1 Node/NPM
@@ -35,3 +35,48 @@ Gulp and Bower (used to build/minify sources):
 ```
 npm i -g gulp bower
 ```
+
+All the following commands are executed from project root, so:
+
+```
+cd path/to/seabass
+```
+
+### 2.2 Create *www* directory
+*www* directory is required for using cordova cli.
+
+```
+mkdir www
+```
+
+### 2.3 Install required Cordova's platforms/plugins
+```
+cordova platform add ubuntu@4.3.4 
+cordova plugin add cordova-plugin-file 
+```
+
+### 2.4 Install project depenencies
+```
+npm install; cd src; bower install;
+```
+
+### 2.5 Build sources
+```
+gulp
+```
+
+## Compile
+Now we are ready to create click package.
+But, if we want to build **unconfined** version, one last patch is required to use *unconfined template*.
+
+Apparmor will be generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (`generateApparmorProfile` function)
+
+```
+var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
+```
+
+with
+```
+var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
+```
+
