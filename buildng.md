@@ -65,7 +65,7 @@ npm install; cd src; bower install;
 gulp
 ```
 
-## Compile
+## 3 Create .click package
 Now we are ready to create click package.
 But, if we want to build **unconfined** version, one last patch is required (we need to set `template` to `unconfined` in apparmor.json).
 
