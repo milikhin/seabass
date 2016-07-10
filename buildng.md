@@ -67,9 +67,9 @@ gulp
 
 ## Compile
 Now we are ready to create click package.
-But, if we want to build **unconfined** version, one last patch is required to use *unconfined template*.
+But, if we want to build **unconfined** version, one last patch is required (we need to set `template` to `unconfined` in apparmor.json).
 
-Apparmor will be generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (`generateApparmorProfile` function)
+Apparmor is generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (`generateApparmorProfile` function)
 
 ```
 var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
