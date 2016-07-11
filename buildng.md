@@ -65,7 +65,7 @@ cordova plugin add cordova-plugin-file
 
 ### 2.5 Install project depenencies
 ```
-npm install; cd src; bower install;
+(npm install; cd src; bower install;)
 ```
 
 ### 2.6 Build sources
