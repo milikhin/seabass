@@ -37,8 +37,8 @@
   background-color: #ddd;
 }
 
-[data-uid="__up"] .icon-caret,
-[data-uid^="__self"] .icon-caret {
+[data-uid="__up"] .icon-expand,
+[data-uid^="__self"] .icon-expand {
   display: none;
 }
 
