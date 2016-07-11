@@ -29,7 +29,10 @@ sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pk
 ```
 
 ## 2 Preparing sources
-### 2.1 Install app dependencies
+### 2.1 Get sources
+Download latest realease ([0.2.3](https://github.com/milikhin/seabass/archive/v0.2.3.tar.gz))
+
+### 2.2 Install app dependencies
 Gulp and Bower (used to build/minify sources):
 
 ```
@@ -42,25 +45,25 @@ All the following commands are executed from project root, so:
 cd path/to/seabass
 ```
 
-### 2.2 Create *www* directory
+### 2.3 Create *www* directory
 *www* directory is required for using cordova cli.
 
 ```
 mkdir www
 ```
 
-### 2.3 Install required Cordova's platforms/plugins
+### 2.4 Install required Cordova's platforms/plugins
 ```
 cordova platform add ubuntu@4.3.4 
 cordova plugin add cordova-plugin-file 
 ```
 
-### 2.4 Install project depenencies
+### 2.5 Install project depenencies
 ```
 npm install; cd src; bower install;
 ```
 
-### 2.5 Build sources
+### 2.6 Build sources
 ```
 gulp
 ```
@@ -69,6 +72,7 @@ gulp
 Now we are ready to create click package.
 But, if we want to build **unconfined** version, one last patch is required (we need to set `template` to `unconfined` in apparmor.json).
 
+### 3.1 Patch for an unconfined version
 Apparmor is generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (`generateApparmorProfile` function)
 
 ```
@@ -78,5 +82,10 @@ var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
 with
 ```
 var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
+```
+
+### 3.2 Buildng
+```
+cordova build --device
 ```
 
