@@ -4,9 +4,9 @@
 ## 1 Setup Cordova
 Just as in [Official guide](http://cordova.apache.org/docs/en/dev/guide/platforms/ubuntu/index.html)
 
-### 1.1 Node/NPM
+### 1.1 Node/NPM/Git
 ```
-sudo apt-get install nodejs npm
+sudo apt-get install nodejs npm git
 ```
 
 ### 1.2 Cordova CLI
@@ -70,6 +70,8 @@ npm install; cd src; bower install;
 
 ### 2.6 Build sources
 ```
+# this is a daemon process that watches for changes in code and rebuilds sources automatically
+# you can continue when the message "default task is finished" shown
 gulp
 ```
 
