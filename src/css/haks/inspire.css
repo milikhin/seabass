@@ -41,3 +41,7 @@
 [data-uid^="__self"] .icon-caret {
   display: none;
 }
+
+.inspire-tree li .leaf:last-child {
+    background-color: #efefef;
+}
