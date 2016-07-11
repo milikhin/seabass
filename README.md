@@ -10,6 +10,7 @@ SeaBass IDE for Ubuntu Touch
 ## v0.2
 - [x] Add support for sidestage mode
 - [ ] Add more supported devices
+- [x] Write build instructions
 
 ## v0.3
 * i18n
