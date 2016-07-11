@@ -63,6 +63,9 @@ cordova platform add ubuntu@4.3.4
 cordova plugin add cordova-plugin-file 
 ```
 
+Note: there will be a error `Error: icon does not exist:` -- that's ok, we'll add icon later
+
+
 ### 2.5 Install project depenencies
 ```
 (npm install; cd src; bower install;)
