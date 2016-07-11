@@ -64,7 +64,7 @@ cordova plugin add cordova-plugin-file
 5. Build & Install
    * Ubuntu Desktop  
       ```
-      (cordova build ubuntu; cd /path/to/seabass/platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.0_amd64.deb )   
+      (cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.4_amd64.deb )   
       ```
    * BQ M10  
       * Build & Run: 
