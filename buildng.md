@@ -96,3 +96,8 @@ var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"templa
 cordova build --device
 ```
 
+## 4 That's all
+Built package is available here:
+```
+find -name *.click
+```
