@@ -38,7 +38,7 @@ tar -xf v0.2.3.tar.gz
 ```
 
 ### 2.2 Install app dependencies
-Gulp and Bower (used to build/minify sources):
+Gulp and Bower (used to build/minify sources and manage dependencies):
 
 ```
 npm i -g gulp bower
