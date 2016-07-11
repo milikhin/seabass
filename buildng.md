@@ -71,7 +71,7 @@ npm install; cd src; bower install;
 ### 2.6 Build sources
 ```
 # this is a daemon process that watches for changes in code and rebuilds sources automatically
-# you can continue when the message "default task is finished" shown
+# you can continue when the message "Finished 'default' after <N> μs" shown
 gulp
 ```
 
