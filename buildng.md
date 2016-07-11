@@ -80,7 +80,7 @@ Now we are ready to create click package.
 But, if we want to build **unconfined** version, one last patch is required (we need to set `template` to `unconfined` in apparmor.json).
 
 ### 3.1 Patch for an unconfined version
-Apparmor is generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (`generateApparmorProfile` function)
+Apparmor is generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (1st line of `generateApparmorProfile` function)
 
 ```
 var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
