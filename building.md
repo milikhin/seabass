@@ -94,7 +94,7 @@ with
 var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
 ```
 
-### 3.2 Buildng
+### 3.2 Building
 ```
 cordova build --device
 ```
@@ -103,4 +103,9 @@ cordova build --device
 Built package is available here:
 ```
 find -name *.click
+```
+
+## How to create deb package
+```
+(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.4_amd64.deb )   
 ```
