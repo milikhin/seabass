@@ -1,3 +1,21 @@
 label input[type="checkbox"][data-type="switch"]+span.toggle {
     margin-top: -0.75rem;
 }
+
+.settings__container__slider-wrapper {
+    width: 50%!important;
+    max-width: 400px;
+    text-align: right;
+}
+
+input[type=range] {
+    height: auto;
+    width: calc(100% - 100px);
+    position: relative;
+    top: 3px;
+}
+
+.settings__container__slider-wrapper__from,
+.settings__container__slider-wrapper__to {
+    position: relative;
+}

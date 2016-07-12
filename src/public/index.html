@@ -264,7 +264,7 @@
             <div data-role="tab" id="settings">
                 <div class="settings-wrapper">
                     <section class="settings__container">
-                        <div data-role="list" id="testlist">
+                        <div data-role="list">
                             <header>File Tree</header>
                             <ul>
                                 <li>
@@ -277,7 +277,31 @@
                                         </span>
                                     </label>
                                 </li>
+                                <li>
+                                    <p>Width</p>
+                                    <label class="settings__container__slider-wrapper">
+                                        <span class="settings__container__slider-wrapper__from">150</span>
+                                          <input id="file-tree-width" type="range" value="251" max="400" min="150">
+                                        <span class="settings__container__slider-wrapper__to">400</span>
+                                    </label>
+                                </li>
                             </ul>
+
+                            <!-- <header>Editor</header>
+                            <ul>
+                                <li>
+                                    <p></p>
+                                    <label>
+                                        <input type="checkbox" id="file-tree-navigation" data-type="switch">
+                                        <span class="toggle">
+                                          <span class="toggle-handle"></span>
+                                        <span class="toggle-bg"></span>
+                                        </span>
+                                    </label>
+                                </li>
+                            </ul> -->
+
+
                         </div>
                     </section>
                 </div>
