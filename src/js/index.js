@@ -240,7 +240,7 @@ define([
 
 	Application.prototype._updateTreeHeader = function () {
 		var rootUrl = this.fileManager.getRootURL();
-		document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl;
+		document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl.split('/').join('<wbr/>/');
 	};
 
 	Application.prototype.receivedEvent = function (id, evt) {

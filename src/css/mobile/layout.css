@@ -1,7 +1,17 @@
-.main-window {
-    margin-left: 0!important; /* overwrite settings.js */
-    width: 100%!important; /* overwrite settings.js */
+/* overwrite settings.js */
+
+.aside,
+.inspire-tree {
+    width: 250px!important;
 }
+
+.main-window {
+    margin-left: 0!important;
+    width: 100%!important;
+}
+
+
+/* */
 
 #main {
     position: relative;
@@ -19,7 +29,6 @@
     -o-transition: left 0.15s ease-in;
     transition: left 0.15s ease-in;
     z-index: 50;
-    width: 251px!important; /* overwrite settings.js */
 }
 
 .aside:target {
