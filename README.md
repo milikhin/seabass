@@ -9,20 +9,18 @@ SeaBass IDE for Ubuntu Touch
 
 ### v0.2
 - [x] Add support for sidestage mode
-- [ ] Add more supported devices
+- [ ] Add Settings page for supporting more devices:  
+   * - [x] File tree width
+   * - [ ] Font size
+   * - [ ] OSK height (OSK height is different on Tablet/Phone) 
 - [x] Write build instructions
 
 ### v0.3
 * i18n
 
-### v0.4
-* Add Settings page:  
-   * Font size
-   * Editor theme
-   * OSK height (OSK height is different on Tablet/Phone) 
-   
-
 ### Futher improvements
+* Beautifier: support more languages
+* Editor: ability to select theme
 * Write docs & my vision of the project
 * Handle fs errors such as: opened file was moved/deleted so doesn'e exist anymore
 * Add demo project
