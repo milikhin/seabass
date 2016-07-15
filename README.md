@@ -31,7 +31,7 @@ SeaBass IDE for Ubuntu Touch
 * Think about amd64/x86
 * Think about other operating systems
 * Optionalize autosave
-
+* Add git/node integration
 
 ## Building from sources
 
