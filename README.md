@@ -18,13 +18,13 @@ SeaBass IDE for Ubuntu Touch
 
 ### v0.3. Broaden the user base
 * i18n
+* Beautifier: support more languages
 * Think about other operating systems
 * Add ability to open hidden files
 * Handle FS errors such as:  
    * opened file was moved/deleted so doesn't exist anymore
 
 ### Futher improvements
-* Beautifier: support more languages
 * Editor: ability to select theme
 * Write docs & my vision of the project
 * Add demo project
