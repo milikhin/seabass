@@ -1,6 +1,7 @@
 @media (max-width: 600px) {
     @import 'layout.css';
     @import 'tabs.css';
+    @import 'settings.css';
 }
 
 @media (min-width: 600px) {

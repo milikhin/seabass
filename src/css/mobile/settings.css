@@ -1,0 +1,9 @@
+input[type=range] {
+    width: 100%;
+    position: relative;
+}
+
+.settings__container__slider-wrapper__from,
+.settings__container__slider-wrapper__to {
+    display: none;
+}

@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <title>SeaBass IDE v0.2.3</title>
+    <title>SeaBass IDE v0.2.5</title>
     <!--<script src="http://192.168.0.104:8080/target/target-script-min.js#anonymous"></script>-->
 
     <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
@@ -136,7 +136,7 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                          SeaBass IDE v0.2.3
+                          SeaBass IDE v0.2.5
                         </h2>
                         <p class="tabs__welcome-note__header-p">SeaBass is a text (code) editor for BQ M10 Ubuntu Edition tablet. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
@@ -278,7 +278,7 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <p>Width</p>
+                                    <p>Width [<span id="file-tree-width-state"></span>]</p>
                                     <label class="settings__container__slider-wrapper">
                                         <span class="settings__container__slider-wrapper__from">150</span>
                                           <input id="file-tree-width" type="range" value="251" max="400" min="150">
@@ -287,19 +287,27 @@
                                 </li>
                             </ul>
 
-                            <!-- <header>Editor</header>
+                            <header>Editor</header>
                             <ul>
                                 <li>
-                                    <p></p>
+                                    <p>Custom font size</p>
                                     <label>
-                                        <input type="checkbox" id="file-tree-navigation" data-type="switch">
+                                        <input type="checkbox" id="editor-custom-font-size" data-type="switch">
                                         <span class="toggle">
                                           <span class="toggle-handle"></span>
                                         <span class="toggle-bg"></span>
                                         </span>
                                     </label>
                                 </li>
-                            </ul> -->
+                                <li>
+                                    <p>Fons size [<span id="editor-font-size-state"></span>px]</p>
+                                    <label class="settings__container__slider-wrapper">
+                                        <span class="settings__container__slider-wrapper__from">8</span>
+                                          <input id="editor-font-size" type="range" value="12" max="20" min="8" disabled>
+                                        <span class="settings__container__slider-wrapper__to">20</span>
+                                    </label>
+                                </li>
+                            </ul>
 
 
                         </div>

@@ -252,25 +252,11 @@ define([
 				this.UI.init();
 
 				SettingsController.init();
-				document.getElementById('file-tree-width').value = SettingsController.get('treeWidth');
-
 				break;
 			}
 		case 'fsready':
 			{
-				document.getElementById('file-tree-navigation').checked = SettingsController.get('navEnabled');
-				document.getElementById('file-tree-navigation').onchange = function () {
-					SettingsController.set('navEnabled', this.checked);
-					self.reloadTree();
-				};
-
-				document.getElementById('file-tree-width').oninput = function () {
-					console.log(this.valueAsNumber);
-					SettingsController.set('treeWidth', this.valueAsNumber);
-				};
-
 				this.renderTree();
-
 				break;
 			}
 		case 'editor-state-changed':
