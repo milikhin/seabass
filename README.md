@@ -22,7 +22,7 @@ SeaBass IDE for Ubuntu Touch
 * Beautifier: support more languages
 * Editor: ability to select theme
 * Write docs & my vision of the project
-* Handle fs errors such as: opened file was moved/deleted so doesn't exist anymore
+* Handle FS errors such as: opened file was moved/deleted so doesn't exist anymore
 * Add demo project
 * Add workaround for opening hidden files
 * Implement create/rename/delete file operations
