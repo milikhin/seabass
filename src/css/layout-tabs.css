@@ -29,7 +29,8 @@
     margin-top: 1rem;
 }
 
-.tabs__welcome-note__list {
+.tabs__welcome-note__list,
+.tabs__welcome-note__state {
     list-style-type: circle;
 }
 

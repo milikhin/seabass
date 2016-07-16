@@ -91,7 +91,7 @@
                               SeaBass IDE greets you!
                             </h2>
                             <p class="tabs__welcome-note__header-p">
-                                SeaBass is a text (code) editor for BQ M10 Ubuntu Edition tablet.
+                                SeaBass is a text (code) editor for Ubuntu Touch.
                             </p>
                             <h3 class="tabs__welcome-note__header3">How to start</h3>
                             <ol class="tabs__welcome-note__olist">
@@ -114,8 +114,7 @@
                                             Standard version from Ubuntu Store (File System access is limited to Seabass's own directory)
                                         </li>
                                         <li>
-                                            Unconfined version with unrestricted access to user's Home directory.
-                                            Pre-release is available for download on <code>http://milikhin.github.io</code>.
+                                            Unconfined version with unrestricted access to user's Home directory. Pre-release is available for download on <code>http://milikhin.github.io</code>.
                                         </li>
                                     </ol>
                                 </p>
@@ -126,6 +125,10 @@
                                 <p>
                                     Complete feature list, usage &amp; release notes are available on About page.
                                 </p>
+                            </div>
+                            <h3 class="tabs__welcome-note__header3">Supported devices</h3>
+                            <div class="tabs__welcome-note__state">
+                                Phone layout is currently WIP, so only BQ M10 is fully supported in current release
                             </div>
                         </section>
                     </div>
@@ -138,7 +141,7 @@
                         <h2 class="tabs__welcome-note__header">
                           SeaBass IDE v0.2.5
                         </h2>
-                        <p class="tabs__welcome-note__header-p">SeaBass is a text (code) editor for BQ M10 Ubuntu Edition tablet. </p>
+                        <p class="tabs__welcome-note__header-p">SeaBass is a text (code) editor for Ubuntu Touch. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
                         <ul class="tabs__welcome-note__list">
                             <li>
@@ -169,17 +172,17 @@
                         </div>
 
                         <h3 class="tabs__welcome-note__header3">Known issues</h3>
-                        <div class="tabs__welcome-note__state">
-                            <p>
-                                Phone layout is not yet implemented, so only BQ M10 is supported.
-                            </p>
-                            <p>
+                        <ul class="tabs__welcome-note__state">
+                            <li>
+                                Phone layout is currently WIP, so only BQ M10 is fully supported.
+                            </li>
+                            <li>
                                 Basic file operations (create/delete/copy/rename) are not yet implemeted.
-                            </p>
-                            <p>
+                            </li>
+                            <li>
                                 Hidden files are... hm, well... hidden, so there is no way to open such files in this release.
-                            </p>
-                        </div>
+                            </li>
+                        </ul>
 
                         <!-- <h3 class="tabs__welcome-note__header3">SeaBass:: What's to be expected</h3>
                         <ul class="tabs__welcome-note__list">
@@ -215,8 +218,7 @@
                                 Since v0.2.2 it is possible to change project's root directory while the File Tree is in "Navigation" mode (can be activated on the Settings page).
                             </p>
                             <p>
-                                After switching to "Navigation" mode File Tree will acts as file browser with support for navigating up and down the file tree.
-                                App will also restore last opened directory after restart.
+                                After switching to "Navigation" mode File Tree will acts as file browser with support for navigating up and down the file tree. App will also restore last opened directory after restart.
                             </p>
                             <p>
                                 If something goes wrong - there is a "Home" button for resetting Project's root in the File Tree.
@@ -278,10 +280,10 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <p>Width [<span id="file-tree-width-state"></span>]</p>
+                                    <p>Width [<span id="file-tree-width-state"></span>px]</p>
                                     <label class="settings__container__slider-wrapper">
                                         <span class="settings__container__slider-wrapper__from">150</span>
-                                          <input id="file-tree-width" type="range" value="251" max="400" min="150">
+                                        <input id="file-tree-width" type="range" value="251" max="400" min="150">
                                         <span class="settings__container__slider-wrapper__to">400</span>
                                     </label>
                                 </li>
@@ -300,11 +302,11 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <p>Fons size [<span id="editor-font-size-state"></span>px]</p>
+                                    <p id="editor-font-size-state-wrapper">Fons size [<span id="editor-font-size-state"></span>px]</p>
                                     <label class="settings__container__slider-wrapper">
                                         <span class="settings__container__slider-wrapper__from">8</span>
-                                          <input id="editor-font-size" type="range" value="12" max="20" min="8" disabled>
-                                        <span class="settings__container__slider-wrapper__to">20</span>
+                                        <input id="editor-font-size" type="range" value="12" max="24" min="8" disabled>
+                                        <span class="settings__container__slider-wrapper__to">24</span>
                                     </label>
                                 </li>
                             </ul>

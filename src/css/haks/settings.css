@@ -19,3 +19,8 @@ input[type=range] {
 .settings__container__slider-wrapper__to {
     position: relative;
 }
+
+[data-role="list"] ul li p.disabled,
+[data-role="list"] ul li p.disabled ~ .settings__container__slider-wrapper {
+  color: #ccc;
+}
