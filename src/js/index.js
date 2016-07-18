@@ -252,6 +252,11 @@ define([
 				this.UI.init();
 
 				SettingsController.init();
+				document.getElementById('file-tree-navigation').addEventListener('change', function () {
+					setTimeout(function() {
+						self.tree.reload();
+					}, 100);
+				});
 				break;
 			}
 		case 'fsready':

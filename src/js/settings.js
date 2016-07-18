@@ -20,6 +20,14 @@ define([], function () {
 			{
 				return localStorage.getItem(key) === "true";
 			}
+		case 'treeWidth':
+			{
+				return localStorage.getItem(key) || 251;
+			}
+		case 'fontSize':
+			{
+				return localStorage.getItem(key) || 12;
+			}
 		default:
 			{
 				return localStorage.getItem(key);
