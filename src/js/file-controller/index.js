@@ -3,6 +3,8 @@ define(['co', 'md5'], function(co, md5) {
         var self = this;
         this.fsInitPromise = co(function*() {
             yield self._init();
+            self.rootEntry = self.fs.root;
+            
             var savedRootUrl = localStorage.getItem('rootURL');
             if (savedRootUrl) {
                 self.rootEntry = yield new Promise(function(resolve, reject) {
