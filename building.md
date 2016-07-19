@@ -1,12 +1,13 @@
 ## Requirements
 * Ubuntu 16.04
+* Git
 
 ## 1 Setup Cordova
 Just as in [Official guide](http://cordova.apache.org/docs/en/dev/guide/platforms/ubuntu/index.html)
 
 ### 1.1 Node/NPM/Git
 ```
-sudo apt-get install nodejs npm git
+sudo apt-get install nodejs npm
 ```
 
 ### 1.2 Cordova CLI
