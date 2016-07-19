@@ -1,12 +1,13 @@
 ## Requirements
 * Ubuntu 16.04
+* Git (```sudo apt install git```)
 
 ## 1 Setup Cordova
 Just as in [Official guide](http://cordova.apache.org/docs/en/dev/guide/platforms/ubuntu/index.html)
 
 ### 1.1 Node/NPM/Git
 ```
-sudo apt-get install nodejs npm git
+sudo apt-get install nodejs npm
 ```
 
 ### 1.2 Cordova CLI
@@ -21,6 +22,7 @@ sudo apt-get install cordova-cli
 sudo apt-add-repository ppa:ubuntu-sdk-team/ppa
 sudo apt-get update
 sudo apt-get install click-dev phablet-tools ubuntu-sdk-api-15.04
+sudo click chroot -a armhf -f ubuntu-sdk-15.04 create
 ```
 
 ### 1.4 Add build dependencies for Cordova 
@@ -51,7 +53,7 @@ cd path/to/seabass
 ```
 
 ### 2.3 Create *www* directory
-*www* directory is required for using cordova cli.
+*www* directory is required by cordova cli.
 
 ```
 mkdir www
@@ -105,7 +107,9 @@ Built package is available here:
 find -name *.click
 ```
 
-## How to create deb package
+## Bonus.
+How to create/install deb package
+
 ```
 (cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.4_amd64.deb )   
 ```

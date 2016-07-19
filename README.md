@@ -21,10 +21,8 @@ SeaBass IDE for Ubuntu Touch
 * Beautifier: support more languages
 * Think about other operating systems
 * Add ability to open hidden files
-* Handle FS errors such as:  
-   * opened file was moved/deleted so doesn't exist anymore
 
-### Futher improvements
+### Futher improvements/ideas
 * Editor: ability to select theme
 * Write docs & my vision of the project
 * Add demo project
@@ -34,6 +32,9 @@ SeaBass IDE for Ubuntu Touch
 * Think about amd64/x86
 * Optionalize autosave
 * Add git/node integration
+* Handle FS errors such as:  
+   * opened file was moved/deleted so doesn't exist anymore
+* Find/replace feature
 
 ## Building from sources
 
