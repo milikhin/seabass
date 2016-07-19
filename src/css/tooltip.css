@@ -2,17 +2,18 @@
     overflow: visible;
 }
 
+
 /* Tooltip container */
 
 .tooltip {
     position: relative;
 }
 
+
 /* Tooltip text */
 
 .tooltip__text {
     visibility: hidden;
-    
     background-color: #202020;
     color: #dedede;
     text-align: center;
@@ -26,11 +27,11 @@
     font-size: 0.9rem;
     z-index: 50;
     opacity: 1;
-
     transition: opacity 0.25s ease;
     /*transition-property: opacity;*/
     /*transition-duration: 0.25s;*/
 }
+
 
 /* Show the tooltip text when you mouse over the tooltip container */
 
@@ -40,11 +41,14 @@
     visibility: visible;
     opacity: 0;
 }
+
 .tooltip-bottom .tooltip__text {
     top: 100%;
     right: 0;
 }
+
 .tooltip-bottom-right .tooltip__text {
     top: 100%;
     left: 0;
+    text-align: left;
 }
