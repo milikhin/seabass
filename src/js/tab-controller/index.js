@@ -163,7 +163,7 @@ define([
 		}
 
 		document.getElementById('editor-tabs').style.zIndex = 10;
-
+		document.getElementById('welcome-note').style.visibility = "hidden";
 		// if maximum amount of tabs is exceeded, close the earliest one
 		var eldestTab = this.getEarliestModified();
 		if(this.tabs.length >= this._getMaxTabsNumber()) {
@@ -210,6 +210,7 @@ define([
 			this._activate(newCurrentTab);
 		} else {
 			document.getElementById('editor-tabs').style.zIndex = -1;
+			document.getElementById('welcome-note').style.visibility = "visible";
 			document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
 				bubbles: true,
 				cancelable: true,

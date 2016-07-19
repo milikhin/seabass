@@ -19,6 +19,7 @@ body,
 body.osk-mode {
     height: calc(100vh - 500px);
     min-height: 51vh;
+    border-bottom: solid 1px #c9c9c9;
 }
 
 body.osk-mode::after {
