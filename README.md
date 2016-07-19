@@ -35,6 +35,7 @@ SeaBass IDE for Ubuntu Touch
 * Handle FS errors such as:  
    * opened file was moved/deleted so doesn't exist anymore
 * Find/replace feature
+
 ## Building from sources
 
 See [Build instructions](building.md)
