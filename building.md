@@ -52,7 +52,7 @@ cd path/to/seabass
 ```
 
 ### 2.3 Create *www* directory
-*www* directory is required for using cordova cli.
+*www* directory is required by cordova cli.
 
 ```
 mkdir www
