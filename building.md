@@ -107,7 +107,9 @@ Built package is available here:
 find -name *.click
 ```
 
-## Bonus. How to create/install deb package
+## Bonus.
+How to create/install deb package
+
 ```
 (cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.4_amd64.deb )   
 ```
