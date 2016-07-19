@@ -64,4 +64,5 @@
     line-height: 1.3rem;
     box-sizing: border-box;
     white-space: nowrap;
+    border-left: solid 1px #c9c9c9;
 }

@@ -52,7 +52,7 @@ body.osk-mode::after {
     float: left;
     position: relative;
     height: 100%;
-    border-right: solid 1px #ccc;
+    /* border-right: solid 1px #ccc; */
 }
 
 #main .tabs__welcome-note-wrapper {

@@ -98,7 +98,7 @@
 .tabs .tab-state:checked + label {
     top: 0;
     background: #272822;
-    border-left: solid 2px #09c;
+    border-left: solid 3px #09c;
     color: #dedede;
 }
 
