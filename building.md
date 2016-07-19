@@ -1,6 +1,6 @@
 ## Requirements
 * Ubuntu 16.04
-* Git
+* Git (```sudo apt install git```)
 
 ## 1 Setup Cordova
 Just as in [Official guide](http://cordova.apache.org/docs/en/dev/guide/platforms/ubuntu/index.html)
