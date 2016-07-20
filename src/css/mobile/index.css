@@ -1,4 +1,5 @@
 @media (max-width: 600px) {
+    /* will be inlined on build step */
     @import 'layout.css';
     @import 'tabs.css';
     @import 'settings.css';
@@ -9,3 +10,4 @@
         display: none!important;
     }
 }
+

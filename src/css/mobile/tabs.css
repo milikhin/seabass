@@ -1,7 +1,9 @@
 .tabs li {
-  width: 33.3%;
+  min-width: 0;
+  flex-grow: 1;
 }
 
 .tabs li.tab-active {
-  width: 33.3%;
+  /*width: 33.3%;*/
 }
+
