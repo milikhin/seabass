@@ -47,16 +47,16 @@
     /*line-height: 1rem;*/
     font-size: 0.9rem;
     line-height: 1.8rem;
-    height: 1.8rem;
+    height: calc(1.8rem - 2px);
     font-weight: normal;
     background: #202020;
     cursor: pointer;
     position: relative;
     top: 2px;
-    -moz-transition: top 0.2s ease-in-out;
-    -o-transition: top 0.2s ease-in-out;
-    -webkit-transition: top 0.2s ease-in-out;
-    transition: top 0.2s ease-in-out;
+    /*-moz-transition: top 0.2s ease-in-out, height 0.2s ease-in-out;*/
+    /*-o-transition: top 0.2s ease-in-out, height 0.2s ease-in-out;*/
+    /*-webkit-transition: top 0.2s ease-in-out, height 0.2s ease-in-out;*/
+    /*transition: top 0.2s ease-in-out, height 0.2s ease-in-out;*/
     width: 100%;
     box-sizing: border-box;
     overflow: hidden;
@@ -115,6 +115,8 @@
     border-left: solid 3px #069;
     color: #dedede;
     padding-left: 7px;
+    
+    height: 1.8rem;
 }
 
 .tabs .tab-state:checked~ .tab-content,
