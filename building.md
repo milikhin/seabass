@@ -32,11 +32,11 @@ sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pk
 
 ## 2 Preparing sources
 ### 2.1 Get sources
-Download latest realease ([0.2.4](https://github.com/milikhin/seabass/archive/v0.2.4.tar.gz)):
+Download latest realease ([0.2.7](https://github.com/milikhin/seabass/archive/v0.2.7.tar.gz)):
 
 ```
-wget https://github.com/milikhin/seabass/archive/v0.2.4.tar.gz
-tar -xf v0.2.4.tar.gz
+wget https://github.com/milikhin/seabass/archive/v0.2.7.tar.gz
+tar -xf v0.2.7.tar.gz
 ```
 
 ### 2.2 Install app dependencies
@@ -111,5 +111,5 @@ find -name *.click
 How to create/install deb package
 
 ```
-(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.4_amd64.deb )   
+(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.7_amd64.deb )   
 ```
