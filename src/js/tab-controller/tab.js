@@ -16,7 +16,9 @@ define([
 	'ace/mode/sass',
 	'ace/mode/scss',
 	'ace/mode/stylus',
-
+	'ace/mode/markdown',
+	
+    'ace/mode/xml',
 	'ace/mode/html',
 	'ace/mode/svg',
 	'ace/mode/php',
@@ -31,6 +33,7 @@ define([
 	'ace/mode/swift',
 
 	'ace/mode/sh',
+	'ace/mode/yaml',
 	'ace/mode/plain_text'
 ], function (md5, languages, ace, theme) {
 

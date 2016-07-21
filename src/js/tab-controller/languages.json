@@ -7,7 +7,9 @@
     "sass": "sass",
     "scss": "scss",
     "styl": "stylus",
+    "md": "markdown",
 
+    "xml": "xml",
     "html": "html",
     "svg": "svg",
     "php": "php",
@@ -22,5 +24,7 @@
     "java": "java",
     "swift": "swift",
 
-    "sh": "sh"
+    "sh": "sh",
+    "yaml": "yaml"
+
 }
