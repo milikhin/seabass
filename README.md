@@ -1,5 +1,5 @@
-# SeaBass IDE
-SeaBass IDE for Ubuntu Touch
+# Seabass code editor
+Seabass code editor for Ubuntu Touch
 
 ## TODO
 ### v0.1. Initial minimal working release
