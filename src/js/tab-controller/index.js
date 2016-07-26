@@ -20,217 +20,278 @@
 	- _resetUndoManager(tab: tab's description): reset Ace's UndoManager state for a
 */
 define([
-	'./tab',
-	'co',
-	'md5'
-], function (Tab, co, md5, ace, theme) {
-	function TabController() {
-		var self = this;
-		this.tabs = [];
-		this.rootElem = document.querySelector('.tabs');
-		// this.tabsElem = this.rootElem.querySelector('.tabs');
+    './tab',
+    'co',
+    'md5'
+], function(Tab, co, md5) {
+    function TabController() {
+        var self = this;
+        this.tabs = [];
+        this.rootElem = document.querySelector('.tabs');
+        // this.tabsElem = this.rootElem.querySelector('.tabs');
 
-		document.body.addEventListener('tab-activate', function (evt) {
-			self.tabs.forEach(function (tabDescription) {
-				tabDescription.rootElem.closest('li').classList.remove('tab-active');
-			});
+        document.body.addEventListener('tab-activate', function(evt) {
+            self.tabs.forEach(function(tabDescription) {
+                tabDescription.rootElem.closest('li').classList.remove('tab-active');
+            });
 
-			evt.detail.tab.rootElem.closest('li').classList.add('tab-active');
-		});
-	}
+            evt.detail.tab.rootElem.closest('li').classList.add('tab-active');
+        });
+    }
 
-	// Get active tab
-	TabController.prototype.getCurrent = function () {
-		var checkedrootElem = document.querySelector('.tabs .tab-state:checked ~ .tab-content');
-		var currentTab;
-		this.tabs.forEach(function (tab) {
-			if(tab.rootElem == checkedrootElem.closest('li')) {
-				currentTab = tab;
-			}
-		}, this);
+    // Get active tab
+    TabController.prototype.getCurrent = function() {
+        var checkedrootElem = document.querySelector('.tabs .tab-state:checked ~ .tab-content');
+        var currentTab;
+        this.tabs.forEach(function(tab) {
+            if (tab.rootElem == checkedrootElem.closest('li')) {
+                currentTab = tab;
+            }
+        }, this);
 
-		return currentTab;
-	};
+        return currentTab;
+    };
 
-	// Get the eldest tab (to close it, for example)
-	TabController.prototype.getEarliestModified = function () {
-		var eldestTab;
-		this.tabs.forEach(function (tabDescription) {
-			if(!eldestTab || eldestTab.lastModified > tabDescription.lastModified) {
-				eldestTab = tabDescription;
-			}
-		});
+    // Get the eldest tab (to close it, for example)
+    TabController.prototype.getEarliestModified = function() {
+        var eldestTab;
+        this.tabs.forEach(function(tabDescription) {
+            if (!eldestTab || eldestTab.lastModified > tabDescription.lastModified) {
+                eldestTab = tabDescription;
+            }
+        });
 
-		return eldestTab;
-	};
+        return eldestTab;
+    };
 
-	// Get last modified tab
-	TabController.prototype.getLastModified = function () {
-		var lastTab;
-		this.tabs.forEach(function (tabDescription) {
-			if(!lastTab || lastTab.lastModified < tabDescription.lastModified) {
-				lastTab = tabDescription;
-			}
-		});
+    // Get last modified tab
+    TabController.prototype.getLastModified = function() {
+        var lastTab;
+        this.tabs.forEach(function(tabDescription) {
+            if (!lastTab || lastTab.lastModified < tabDescription.lastModified) {
+                lastTab = tabDescription;
+            }
+        });
 
-		return lastTab;
-	};
+        return lastTab;
+    };
 
-	// Get tab corresponded to a file
-	TabController.prototype.getTabByFileEntry = function (fileEntry) {
-		var tab;
+    // Get tab corresponded to a file
+    TabController.prototype.getTabByFileEntry = function(fileEntry) {
+        var tab;
 
-		if(!fileEntry) {
-			throw new Error("file entry argument is not specified");
-		}
+        if (!fileEntry) {
+            throw new Error("file entry argument is not specified");
+        }
 
-		this.tabs.forEach(function (tabDescription) {
-			if(tabDescription.fileEntry.nativeURL == fileEntry.nativeURL) {
-				tab = tabDescription;
-			}
-		}, this);
+        this.tabs.forEach(function(tabDescription) {
+            if (tabDescription.fileEntry.nativeURL == fileEntry.nativeURL) {
+                tab = tabDescription;
+            }
+        }, this);
 
-		return tab;
-	};
+        return tab;
+    };
 
-	// Get Zentabs limit
-	TabController.prototype._getMaxTabsNumber = function () {
-		return document.body.clientWidth > 600 ? 5 : 3;
-	};
+    // Get Zentabs limit
+    TabController.prototype._getMaxTabsNumber = function() {
+        return document.body.clientWidth > 600 ? 5 : 3;
+    };
 
-	TabController.prototype.converge = function () {
-		while(this.tabs.length > this._getMaxTabsNumber()) {
-			var tabToClose = this.getEarliestModified();
-			if(tabToClose) {
-				this.close(tabToClose);
-			}
-		}
-	};
+    TabController.prototype.converge = function() {
+        while (this.tabs.length > this._getMaxTabsNumber()) {
+            var tabToClose = this.getEarliestModified();
+            if (tabToClose) {
+                this.close(tabToClose);
+            }
+        }
+    };
 
-	TabController.prototype._create = function (fileName, fileEntry, fileContent) {
-		var self = this;
-		var tab = new Tab({
-			fileName: fileName,
-			fileEntry: fileEntry,
-			fileContent: fileContent,
-			parentElem: this.rootElem,
-			onEditorChange: function () {
-				setTimeout(function () {
-					self._updateButtons(tab);
-				}, 100);
-			}
-		});
+    TabController.prototype._updateTabNames = function() {
+        this.tabs.forEach(function(tab) {
+            var similarFileNameTabs = [];
+            var tabHash = md5(tab.fileEntry.nativeURL);
+            var tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
+            var fileName = tab.fileName;
+            tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${fileName}`;
 
-		// save created tab
-		this.tabs.push(tab);
-		this._activate(tab);
-		console.log('activated successfully');
-		// reset undo manager & buttons
-		setTimeout(function () {
-			self._resetUndoManager(tab);
-		}, 100);
+            this.tabs.forEach(function(tabInstance) {
+                console.log(tab.fileEntry.nativeURL, tabInstance.fileEntry.nativeURL);
 
-		return tab;
-	};
+                if (tabInstance.fileName == tab.fileName) {
+                    similarFileNameTabs.push(tabInstance);
+                }
 
-	TabController.prototype._updateButtons = function (tab) {
-		var um = tab.editor.getSession().getUndoManager();
-		var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
-		console.log(ext, ~['js', 'html', 'css', 'json'].indexOf(ext).toString());
-		tab.lastModified = Date.now();
-		// console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
-		document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
-			bubbles: true,
-			cancelable: true,
-			detail: {
-				hasUndo: um.hasUndo(),
-				hasRedo: um.hasRedo(),
-				hasBeautify: ~['js', 'html', 'css', 'json'].indexOf(ext)
-			}
-		}));
-	};
+                var similarTill = Number.MAX_VALUE;
+                for (var j = 0; j < this.tabs.length; j++) {
+                    var tabUrl = this.tabs[j].fileEntry.nativeURL.split('/');
 
-	TabController.prototype._activate = function (tab) {
-		tab.activate();
-	};
+                    for (var k = 1; k < this.tabs.length; k++) {
+                        var thisUrl = this.tabs[k].fileEntry.nativeURL.split('/');
+                        if (j == k) {
+                            continue;
+                        }
 
-	// Get tab (or create new if it doesn't exist)
-	TabController.prototype.get = function (fileName, fileEntry, fileContent) {
-		// check if file is already opened
-		var tab = this.getTabByFileEntry(fileEntry);
-		if(tab) {
-			return tab;
-		}
+                        var i = 0;
+                        while ((i < tabUrl.length - 2) && (i < thisUrl.length - 2) && (tabUrl[i] == thisUrl[i])) {
+                            i++;
+                        }
 
-		document.getElementById('editor-tabs').style.zIndex = 10;
-		document.getElementById('welcome-note').style.visibility = "hidden";
-		// if maximum amount of tabs is exceeded, close the earliest one
-		var eldestTab = this.getEarliestModified();
-		if(this.tabs.length >= this._getMaxTabsNumber()) {
-			this.close(eldestTab);
-		}
+                        if (similarTill > i) {
+                            similarTill = i;
+                        }
+                    }
+                }
 
-		return this._create(fileName, fileEntry, fileContent);
+                console.log('similarTill', similarTill);
 
-	};
+                if (similarFileNameTabs.length > 1) {
+                    similarFileNameTabs.forEach(function(tabInstance) {
+                        var tabUrl = tabInstance.fileEntry.nativeURL.split('/');
+                        var fileName = tabInstance.fileName;
+                        var differentName = tabUrl.splice(0, similarTill);
+                        var tabDifferentName = tabUrl.join('/').slice(0, -fileName.length);
+                        var tabHash = md5(tabInstance.fileEntry.nativeURL);
+                        var tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
+                        tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${fileName} - ${tabDifferentName}`;
+                    });
+                }
+
+            }, this);
+        }, this);
 
 
 
 
+    };
 
-	TabController.prototype.getByElem = function (elem) {
-		var tab;
-		this.tabs.forEach(function (tabDescription) {
-			if(elem.closest('.tabs li') == tabDescription.rootElem) {
-				tab = tabDescription;
-			}
-		});
+    TabController.prototype._create = function(fileName, fileEntry, fileContent) {
+        var self = this;
 
-		return tab;
-	};
+        var tab = new Tab({
+            fileName: fileName,
+            fileEntry: fileEntry,
+            fileContent: fileContent,
+            parentElem: this.rootElem,
+            onEditorChange: function() {
+                setTimeout(function() {
+                    self._updateButtons(tab);
+                }, 100);
+            }
+        });
+        // save created tab
+        this.tabs.push(tab);
+        this._updateTabNames();
+        this._activate(tab);
+        console.log('activated successfully');
+        // reset undo manager & buttons
+        setTimeout(function() {
+            self._resetUndoManager(tab);
+            
+        }, 100);
 
-	TabController.prototype.close = function (tabToClose) {
-		if(!tabToClose) {
-			throw new Error('Tab to close not found!');
-		}
+        return tab;
+    };
 
-		document.body.removeEventListener('body-resize', tabToClose.onResize);
-		tabToClose.rootElem.parentElement.removeChild(tabToClose.rootElem);
+    TabController.prototype._updateButtons = function(tab) {
+        var um = tab.editor.getSession().getUndoManager();
+        var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
+        console.log(ext, ~['js', 'html', 'css', 'json'].indexOf(ext).toString());
+        tab.lastModified = Date.now();
+        // console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
+        document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
+            bubbles: true,
+            cancelable: true,
+            detail: {
+                hasUndo: um.hasUndo(),
+                hasRedo: um.hasRedo(),
+                hasBeautify: ~['js', 'html', 'css', 'json'].indexOf(ext)
+            }
+        }));
+    };
 
-		// destroy tab's Ace instance
-		tabToClose.editor.destroy();
-		tabToClose.editor.container.remove();
+    TabController.prototype._activate = function(tab) {
+        tab.activate();
+    };
 
-		this.tabs.splice(this.tabs.indexOf(tabToClose), 1);
+    // Get tab (or create new if it doesn't exist)
+    TabController.prototype.get = function(fileName, fileEntry, fileContent) {
+        // check if file is already opened
+        var tab = this.getTabByFileEntry(fileEntry);
+        if (tab) {
+            return tab;
+        }
 
-		var newCurrentTab = this.getLastModified();
-		if(newCurrentTab) {
-			newCurrentTab.rootElem.querySelector('.tab-state').checked = true;
-			newCurrentTab.onEditorChange();
-			this._activate(newCurrentTab);
-		} else {
-			document.getElementById('editor-tabs').style.zIndex = -1;
-			document.getElementById('welcome-note').style.visibility = "visible";
-			document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
-				bubbles: true,
-				cancelable: true,
-				detail: {
-					hasUndo: false,
-					hasRedo: false,
-					hasBeautify: false
-				}
-			}));
-		}
+        document.getElementById('editor-tabs').style.zIndex = 10;
+        document.getElementById('welcome-note').style.visibility = "hidden";
+        // if maximum amount of tabs is exceeded, close the earliest one
+        var eldestTab = this.getEarliestModified();
+        if (this.tabs.length >= this._getMaxTabsNumber()) {
+            this.close(eldestTab);
+        }
 
-	};
+        return this._create(fileName, fileEntry, fileContent);
 
-	TabController.prototype._resetUndoManager = function (tab) {
-		console.log('resetting UM');
-		var um = tab.editor.getSession().getUndoManager();
-		um.reset();
-		tab.onEditorChange();
-		console.log('UM reseted');
-	};
+    };
 
-	return new TabController();
+
+
+
+
+    TabController.prototype.getByElem = function(elem) {
+        var tab;
+        this.tabs.forEach(function(tabDescription) {
+            if (elem.closest('.tabs li') == tabDescription.rootElem) {
+                tab = tabDescription;
+            }
+        });
+
+        return tab;
+    };
+
+    TabController.prototype.close = function(tabToClose) {
+        if (!tabToClose) {
+            throw new Error('Tab to close not found!');
+        }
+
+        document.body.removeEventListener('body-resize', tabToClose.onResize);
+        tabToClose.rootElem.parentElement.removeChild(tabToClose.rootElem);
+
+        // destroy tab's Ace instance
+        tabToClose.editor.destroy();
+        tabToClose.editor.container.remove();
+
+        this.tabs.splice(this.tabs.indexOf(tabToClose), 1);
+
+        var newCurrentTab = this.getLastModified();
+        if (newCurrentTab) {
+            newCurrentTab.rootElem.querySelector('.tab-state').checked = true;
+            newCurrentTab.onEditorChange();
+            this._activate(newCurrentTab);
+            this._updateTabNames();
+        } else {
+            document.getElementById('editor-tabs').style.zIndex = -1;
+            document.getElementById('welcome-note').style.visibility = "visible";
+            document.body.dispatchEvent(new CustomEvent('editor-state-changed', {
+                bubbles: true,
+                cancelable: true,
+                detail: {
+                    hasUndo: false,
+                    hasRedo: false,
+                    hasBeautify: false
+                }
+            }));
+        }
+
+    };
+
+    TabController.prototype._resetUndoManager = function(tab) {
+        console.log('resetting UM');
+        var um = tab.editor.getSession().getUndoManager();
+        um.reset();
+        tab.onEditorChange();
+        console.log('UM reseted');
+    };
+
+    return new TabController();
 });
