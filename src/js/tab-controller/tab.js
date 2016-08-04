@@ -17,8 +17,9 @@ define([
 	'ace/mode/scss',
 	'ace/mode/stylus',
 	'ace/mode/markdown',
-	
-    'ace/mode/xml',
+
+	'ace/mode/latex',
+	'ace/mode/xml',
 	'ace/mode/html',
 	'ace/mode/svg',
 	'ace/mode/php',
@@ -39,7 +40,7 @@ define([
 
 	function Tab(options) {
 		var self = this;
-		if(!(options.fileName && options.fileEntry)) {
+		if (!(options.fileName && options.fileEntry)) {
 			throw new Error("fileName & fileEntry required");
 		}
 
@@ -123,8 +124,8 @@ define([
 		var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
 		// tab.editor.getSession().setMode('ace/mode/plain_text');
 
-		for(var i in languages) {
-			if(ext == i) {
+		for (var i in languages) {
+			if (ext == i) {
 				console.log('language is', languages[i]);
 				this.editor.getSession().setMode('ace/mode/' + languages[i]);
 			}
@@ -171,7 +172,7 @@ define([
 		var content = this.editor.getValue();
 		var beautyContent;
 		var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
-		switch(ext) {
+		switch (ext) {
 		case 'json':
 		case 'js':
 			{

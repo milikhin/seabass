@@ -133,7 +133,7 @@ define([
                         }
 
                         var i = 0;
-                        while ((i < tabUrl.length - 2) && (i < thisUrl.length - 2) && (tabUrl[i] == thisUrl[i])) {
+                        while ((i < tabUrl.length - 1) && (i < thisUrl.length - 1) && (tabUrl[i] == thisUrl[i])) {
                             i++;
                         }
 
@@ -150,7 +150,7 @@ define([
                         var tabUrl = tabInstance.fileEntry.nativeURL.split('/');
                         var fileName = tabInstance.fileName;
                         var differentName = tabUrl.splice(0, similarTill);
-                        var tabDifferentName = tabUrl.join('/').slice(0, -fileName.length);
+                        var tabDifferentName = differentName.join('/').slice(0, -fileName.length);
                         var tabHash = md5(tabInstance.fileEntry.nativeURL);
                         var tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
                         tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${fileName} - ${tabDifferentName}`;
@@ -187,7 +187,7 @@ define([
         // reset undo manager & buttons
         setTimeout(function() {
             self._resetUndoManager(tab);
-            
+
         }, 100);
 
         return tab;
