@@ -69,6 +69,11 @@
     padding: 0;
 }
 
+.tab-label__label__additional {
+    font-size: 0.85em;
+    font-style: italic;
+}
+
 .tab-label__close {
     position: absolute;
     right: 0;
@@ -94,6 +99,7 @@
 .tabs .tab-footer {
     display: none;
 }
+
 .tabs .tab-content {
     z-index: 2;
     display: none;
@@ -115,7 +121,6 @@
     border-left: solid 3px #069;
     color: #dedede;
     padding-left: 7px;
-    
     height: 1.8rem;
 }
 
