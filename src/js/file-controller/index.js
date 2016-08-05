@@ -4,7 +4,7 @@ define(['co', 'md5'], function(co, md5) {
         this.fsInitPromise = co(function*() {
             yield self._init();
             self.rootEntry = self.fs.root;
-            
+
             var savedRootUrl = localStorage.getItem('rootURL');
             if (savedRootUrl) {
                 self.rootEntry = yield new Promise(function(resolve, reject) {
@@ -57,7 +57,6 @@ define(['co', 'md5'], function(co, md5) {
                 var reader = new FileReader();
 
                 reader.onloadend = function() {
-                    console.log("Successful file read: " + this.result);
                     resolve(this.result);
                 };
 
@@ -84,7 +83,6 @@ define(['co', 'md5'], function(co, md5) {
 
     FileController.prototype.getFiles = function(dirEntry, navEnabled) {
         dirEntry = dirEntry || this.rootEntry;
-        console.log('DE', dirEntry);
         var fileStructure = [];
         var self = this;
 
@@ -117,7 +115,6 @@ define(['co', 'md5'], function(co, md5) {
                 directoryReader.readEntries(function(entries) {
                     for (var i = 0; i < entries.length; i++) {
                         var entry = entries[i];
-                        console.log(entries[i]);
                         var fileDescription = {
                             'text': entry.name,
                             'id': md5(entry.nativeURL),
@@ -155,7 +152,6 @@ define(['co', 'md5'], function(co, md5) {
             try {
                 self.fs = yield self._getFs();
                 console.log('file system open: ' + self.fs.name);
-
             } catch (err) {
                 console.error(err);
             }
