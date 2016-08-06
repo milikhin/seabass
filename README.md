@@ -34,6 +34,7 @@ Seabass code editor for Ubuntu Touch
 * Think about amd64/x86
 * Optionalize autosave
 * Add git/node integration
+* Think about Dropbox/Google Drive integration
 * Handle FS errors such as:  
    * opened file was moved/deleted so doesn't exist anymore
 * Find/replace feature
