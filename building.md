@@ -92,7 +92,7 @@ var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
 
 with
 ```
-var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
+var policy = { policy_groups: ['networking', 'audio'], policy_version: 1, "write_path": ["@{HOME}/"], "read_path": ["@{HOME}/"] };
 ```
 
 ### 3.2 Building
