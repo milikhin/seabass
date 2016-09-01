@@ -12,9 +12,11 @@ var jsBuild = require('./dev-tools/tasks/js-build');
 var jsCopy = require('./dev-tools/tasks/js-copy');
 
 var copyOnly = require('./dev-tools/tasks/copy-only');
+var jsPre = require('./dev-tools/tasks/js-prebuild');
 
 /* Compile JS/CSS, copy them to /dist directory */
-gulp.task('js-build', jsBuild);
+gulp.task('js-prebuild', jsPre);
+gulp.task('js-build', ['js-prebuild'], jsBuild);
 gulp.task('js', ['js-build'], jsCopy);
 gulp.task('css-build', cssBuild);
 gulp.task('css', ['css-build'], cssCopy);
