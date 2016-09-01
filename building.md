@@ -31,11 +31,11 @@ sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pk
 
 ## 2 Preparing sources
 ### 2.1 Get sources
-Download latest realease ([0.2.7](https://github.com/milikhin/seabass/archive/v0.2.7.tar.gz)):
+Download latest realease ([0.2.8](https://github.com/milikhin/seabass/archive/v0.2.8.tar.gz)):
 
 ```
-wget https://github.com/milikhin/seabass/archive/v0.2.7.tar.gz
-tar -xf v0.2.7.tar.gz
+wget https://github.com/milikhin/seabass/archive/v0.2.8.tar.gz
+tar -xf v0.2.8.tar.gz
 ```
 
 ### 2.2 Install app dependencies
@@ -81,7 +81,7 @@ gulp
 
 ## 3 Create .click package
 Now we are ready to create click package.
-But, if we want to build **unconfined** version, one last patch is required (we need to set `template` to `unconfined` in apparmor.json).
+But, if we want to build **unconfined** version, one last patch is required (we need to give app read/write access to Home directory in apparmor.json).
 
 ### 3.1 Patch for an unconfined version
 Apparmor is generated automatically by Cordova, so we need to patch `platforms/ubuntu/cordova/lib/manifest.js` file and replace (1st line of `generateApparmorProfile` function)
@@ -92,7 +92,7 @@ var policy = { policy_groups: ['networking', 'audio'], policy_version: 1};
 
 with
 ```
-var policy = { policy_groups: ['networking', 'audio'], policy_version: 1,"template": "unconfined" };
+var policy = { policy_groups: ['networking', 'audio'], policy_version: 1, "write_path": ["@{HOME}/"] };
 ```
 
 ### 3.2 Building
@@ -110,5 +110,5 @@ find -name *.click
 How to create/install deb package
 
 ```
-(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.7_amd64.deb )   
+(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.8_amd64.deb )   
 ```

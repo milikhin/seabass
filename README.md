@@ -23,7 +23,9 @@ Seabass code editor for Ubuntu Touch
 * Add ability to open hidden files
 
 ### Futher improvements/ideas
-* Editor: ability to select theme
+* Editor: support for themes
+* Option to minimize the navigation-tree bar
+* Option to reload the last document loaded
 * Write docs & my vision of the project
 * Add demo project
 * Add workaround for opening hidden files
@@ -32,6 +34,7 @@ Seabass code editor for Ubuntu Touch
 * Think about amd64/x86
 * Optionalize autosave
 * Add git/node integration
+* Think about Dropbox/Google Drive integration
 * Handle FS errors such as:  
    * opened file was moved/deleted so doesn't exist anymore
 * Find/replace feature
