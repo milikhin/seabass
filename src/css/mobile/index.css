@@ -9,5 +9,11 @@
     .mobile-only {
         display: none!important;
     }
+    .aside-hidden .aside {
+        display: none !important;
+    }
+    .aside-hidden .main-window {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
 }
-

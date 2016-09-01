@@ -23,13 +23,13 @@ body.osk-mode {
 }
 
 body.osk-mode::after {
-  content: "Space reserved for OSK";
-  display: block;
-  box-sizing: border-box;
-  transform: translateY(-50%);
-  text-align: center;
-  margin: auto;
-  margin-top: 25vh;
+    content: "Space reserved for OSK";
+    display: block;
+    box-sizing: border-box;
+    transform: translateY(-50%);
+    text-align: center;
+    margin: auto;
+    margin-top: 25vh;
 }
 
 .content {
