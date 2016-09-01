@@ -27,6 +27,7 @@ define([
 	'ace/mode/jsx',
 	'ace/mode/ruby',
 
+	'ace/mode/qml',
 	'ace/mode/c_cpp',
 	'ace/mode/golang',
 	'ace/mode/python',

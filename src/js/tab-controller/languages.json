@@ -20,6 +20,8 @@
 
     "c": "c_cpp",
     "cpp": "c_cpp",
+    "qml": "qml",
+    "qmlproject": "qml",
     "go": "golang",
     "py": "python",
     "java": "java",
