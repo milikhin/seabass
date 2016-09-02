@@ -32,6 +32,7 @@ gulp.task('rm-dist', shell.task([
 gulp.task('daemon', ['js', 'css', 'assets'], daemon());
 gulp.task('default', ['daemon']);
 
+gulp.task('build', ['js', 'css', 'assets']);
 
 // gulp.task('deploy', ghDeploy(options));
 // gulp.task('install', install(options));
