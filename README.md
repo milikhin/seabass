@@ -41,4 +41,6 @@ Seabass code editor for Ubuntu Touch
 
 ## Building from sources
 
-See [Build instructions](building.md)
+Automatic build script is available since v0.2.9, see [seabass-build](https://github.com/milikhin/seabass-build) project.
+
+Manual [build instructions](building.md) are also available.
