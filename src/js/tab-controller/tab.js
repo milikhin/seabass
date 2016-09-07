@@ -117,11 +117,11 @@ define([
                 }));
             }
         });
-        
+
         this.editor.commands.addCommand({
             name: "beautify",
             bindKey: {
-                win: "Ctrl-Alt-B",
+                win: "Ctrl-Shift-B",
                 mac: "Command-Option-B"
             },
             exec: function(editor) {
@@ -129,7 +129,7 @@ define([
             }
         });
     };
-    
+
     Tab.prototype._registerEventHandlers = function() {
         var self = this;
 
