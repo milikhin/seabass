@@ -16,8 +16,8 @@ Seabass code editor for Ubuntu Touch
 - [x] Unconfined version for OpenStore  
    - [x] Build instructions
    - [x] Automatic build script
-- [ ] Find/Replace feature
-- [ ] Basic autocomplete
+- [x] Find/Replace feature
+- [x] Basic autocomplete
 
 ### v0.3. Broaden the user base
 * [ ] Add ChromeOS builds
