@@ -17,6 +17,7 @@ Seabass code editor for Ubuntu Touch
    - [x] Build instructions
    - [x] Automatic build script
 - [ ] Find/Replace feature
+- [ ] Basic autocomplete
 
 ### v0.3. Broaden the user base
 * [ ] Add ChromeOS builds
