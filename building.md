@@ -110,5 +110,5 @@ find -name *.click
 How to create/install deb package
 
 ```
-(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.8_amd64.deb )   
+(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.9_amd64.deb )   
 ```

@@ -7,38 +7,45 @@ Seabass code editor for Ubuntu Touch
 - [x] Add "About" page and move acknowledgements there
 - [x] Syntax highlighter: Add support for more languages
 
-### v0.2. It's all about Convergence
+### v0.2. It's all about Convergence & UX
 - [x] Add support for sidestage mode
-- [ ] Add more supported devices by implementing ability to change the following preferences:  
+- [x] Add more supported devices:  
    * - [x] File tree width
    * - [x] Editor font size
-   * - [ ] OSK height (OSK height is different on Tablet/Phone) 
-- [x] Write build instructions
-- [ ] Improve UX on external displays (desktop UI)
+   * - [x] Tabs layout: better UX on large displays (desktop UI)
+- [x] Unconfined version for OpenStore  
+   - [x] Build instructions
+   - [x] Automatic build script
+- [ ] Find/Replace feature
+- [ ] Basic autocomplete
 
 ### v0.3. Broaden the user base
-* i18n
-* Beautifier: support more languages
-* Think about other operating systems
-* Add ability to open hidden files
+* [ ] Add ChromeOS builds
+* [ ] Beautifier: support more languages
+* [ ] OSK height preferences (OSK height is different on Tablet/Phone)
+
+### v0.4 Redesign
+* [ ] New design by Nastya, which is required for:
+   * [ ] Optionalize autosave
+   * [ ] Optionalize Zentabs
+   * [ ] Add workaround for opening hidden files
+   * [ ] Implement create/rename/delete file operations
+* [ ] Editor: support for themes
 
 ### Futher improvements/ideas
-* Editor: support for themes
-* Option to minimize the navigation-tree bar
+* i18n
 * Option to reload the last document loaded
 * Write docs & my vision of the project
 * Add demo project
-* Add workaround for opening hidden files
-* Implement create/rename/delete file operations
 * Think about tests
 * Think about amd64/x86
-* Optionalize autosave
 * Add git/node integration
-* Think about Dropbox/Google Drive integration
+* Think about Dropbox/Google Drive integration.
 * Handle FS errors such as:  
    * opened file was moved/deleted so doesn't exist anymore
-* Find/replace feature
 
 ## Building from sources
 
-See [Build instructions](building.md)
+Automatic build script is available since v0.2.9, see [seabass-build](https://github.com/milikhin/seabass-build) project.
+
+Manual [build instructions](building.md) are also available.
