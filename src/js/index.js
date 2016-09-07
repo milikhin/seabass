@@ -31,8 +31,11 @@ define([
             self.receivedEvent('editor-state-changed', evt);
         });
 
+        document.body.addEventListener('filetree-toggle', function(evt) {
+            self.receivedEvent('filetree-toggle', evt);
+        });
+
         window.addEventListener('resize', function() {
-            console.log('handling resize event');
             TabController.converge();
         });
 
@@ -105,42 +108,13 @@ define([
             // console.log(evtobj.ctrlKey, evtobj.altKey, String.fromCharCode(event.keyCode).toLowerCase());
 
             if (evtobj.ctrlKey) {
-                // console.log(event.keyCode, event.which, event, String.fromCharCode(event.keyCode).toLowerCase())
                 switch (String.fromCharCode(event.keyCode).toLowerCase()) {
-                    case 'z':
-                    case 'я':
-                        {
-                            TabController.getCurrent().undo();
-                            break
-                        }
-                    case 'y':
-                    case 'н':
-                        {
-                            TabController.getCurrent().redo()
-                            break;
-                        }
-                    case 's':
-                    case 'ы':
-                        {
-                            TabController.getCurrent().save();
-                            break;
-                       }
                     case 't':
                     case 'е':
                         {
                             self.toggleFileTree();
                             break;
                         }
-                }
-
-                if (evtobj.altKey) {
-                    switch (String.fromCharCode(event.keyCode).toLowerCase()) {
-                        case 'b':
-                        case 'и':
-                            {
-                                TabController.getCurrent().beautify();
-                            }
-                    }
                 }
             }
         }
@@ -255,6 +229,11 @@ define([
     Application.prototype.receivedEvent = function(id, evt) {
         var self = this;
         switch (id) {
+            case 'filetree-toggle':
+                {
+                    self.toggleFileTree();
+                    break;
+                }
             case 'deviceready':
                 {
                     this.UI = new UbuntuUI();
