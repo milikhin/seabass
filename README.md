@@ -20,7 +20,6 @@ Seabass code editor for Ubuntu Touch
 - [x] Basic autocomplete
 
 ### v0.3. Broaden the user base
-* [ ] Add ChromeOS builds
 * [ ] Beautifier: support more languages
 * [ ] OSK height preferences (OSK height is different on Tablet/Phone)
 
@@ -31,6 +30,7 @@ Seabass code editor for Ubuntu Touch
    * [ ] Add workaround for opening hidden files
    * [ ] Implement create/rename/delete file operations
 * [ ] Editor: support for themes
+* [ ] Add ChromeOS builds
 
 ### Futher improvements/ideas
 * i18n
