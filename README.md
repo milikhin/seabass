@@ -10,27 +10,30 @@ Seabass code editor for Ubuntu Touch
 ### v0.2. It's all about Convergence & UX
 - [x] Add support for sidestage mode
 - [x] Add more supported devices:  
-   * - [x] File tree width
-   * - [x] Editor font size
-   * - [x] Tabs layout: better UX on large displays (desktop UI)
+   - [x] File tree width
+   - [x] Editor font size
+   - [x] Tabs layout: better UX on large displays (desktop UI)
 - [x] Unconfined version for OpenStore  
    - [x] Build instructions
    - [x] Automatic build script
 - [x] Find/Replace feature
 - [x] Basic autocomplete
 
-### v0.3. Broaden the user base
-* [ ] Beautifier: support more languages
-* [ ] OSK height preferences (OSK height is different on Tablet/Phone)
+### v0.3. Preparing for redesign
+* Optimization and refactoring
+* Beautifier: support more languages
+* OSK height preferences (OSK height is different on Tablet/Phone)
 
 ### v0.4 Redesign
-* [ ] New design by Nastya, which is required for:
-   * [ ] Optionalize autosave
-   * [ ] Optionalize Zentabs
-   * [ ] Add workaround for opening hidden files
-   * [ ] Implement create/rename/delete file operations
-* [ ] Editor: support for themes
-* [ ] Add ChromeOS builds
+* New design by Nastya, which is required for:
+   * Optionalize autosave
+   * Optionalize Zentabs
+   * Add workaround for opening hidden files
+   * Implement create/rename/delete file operations
+
+### v0.5
+* Editor: support for themes
+* Add ChromeOS builds
 
 ### Futher improvements/ideas
 * i18n
