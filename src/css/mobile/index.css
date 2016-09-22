@@ -1,4 +1,7 @@
 @media (max-width: 600px) {
+    .tablet-only {
+        display: none;
+    }
     /* will be inlined on build step */
     @import 'layout.css';
     @import 'tabs.css';

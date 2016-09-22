@@ -66,6 +66,63 @@ define(['co', 'md5'], function(co, md5) {
         });
     };
 
+    FileController.prototype.readFileByName = function(fileName) {
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+            var filePaths = fileName.split('/');
+            var dirEntry = self.rootEntry;
+
+            if (filePaths.length > 1) {
+                var dirPaths = filePaths.slice(0, -1);
+                fileName = filePaths.slice(-1)[0];
+                console.log(dirPaths, filePaths.slice(-1));
+            }
+
+            co(function*() {
+                if (dirPaths) {
+                    for (var i = 0; i < dirPaths.length; i++) {
+                        if(!dirPaths[i]) {
+                          continue;
+                        }
+                        dirEntry = yield (function() {
+                            return new Promise(function(resolve, reject) {
+                                dirEntry.getDirectory(dirPaths[i], {
+                                    "create": true
+                                }, resolve, reject);
+                            });
+                        })();
+                    }
+                }
+
+                if(!fileName) {
+                  return resolve();
+                }
+
+                dirEntry.getFile(fileName, {
+                    "create": true
+                }, function(fileEntry) {
+                    fileEntry.file(function(file) {
+                        var reader = new FileReader();
+
+                        reader.onloadend = function() {
+                            resolve({
+                                fileEntry: fileEntry,
+                                fileContent: this.result
+                            });
+                        };
+
+                        reader.readAsText(file);
+
+                    }, reject);
+                }, reject);
+            });
+        });
+
+    };
+
+
+
 
     FileController.prototype.getDirectory = function(options) {
         var self = this;

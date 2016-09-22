@@ -11,8 +11,7 @@ html {
     height: 100%;
 }
 
-body,
-[data-role="mainview"] {
+body, [data-role="mainview"] {
     height: 100%;
 }
 
@@ -58,4 +57,19 @@ body.osk-mode::after {
 
 #main .tabs__welcome-note-wrapper {
     top: -100%;
+}
+
+.tabs__welcome-note__list {
+    border: none;
+    border-top: dashed 1px #747278;
+    border-bottom: dashed 1px #747278;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.tabs__welcome-note__list td {
+    border: none;
+    padding: 5px 15px 5px 0;
+    vertical-align: top;
+    border-spacing: 0;
 }

@@ -119,7 +119,7 @@ define([
 			}
 		});
 
-		console.log('sts', similarFileNameTabs, this.tabs);
+
 		for (var fileName in similarFileNameTabs) {
 			var tabs = similarFileNameTabs[fileName];
 			var similarTill = Number.MAX_VALUE;
@@ -154,7 +154,7 @@ define([
 				}
 			}
 
-			console.log('st', similarTill);
+
 			if (tabs.length > 1) {
 				for (j = 0; j < tabs.length; j++) {
 					tab = tabs[j];

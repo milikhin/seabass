@@ -134,18 +134,57 @@
                                     Complete feature list and release notes are available on About page.
                                 </p>
                             </div>
-                            
+
                             <h3 class="tabs__welcome-note__header3">Keybindings</h3>
                             <div class="tabs__welcome-note__state">
                                 <ul>
-                                    <li>Open autocomplete menu &ndash; <code>Ctrl+Space</code></li>
                                     <li>Beautify code (if possible) &ndash; <code>Ctrl+Shift+B</code></li>
                                     <li>Find &ndash; <code>Ctrl+F</code></li>
+                                    <li>Focus to file-open field &ndash; <code>Ctrl+E</code>, <code>Ctrl+O</code></li>
+                                    <li>Open autocomplete menu &ndash; <code>Ctrl+Space</code></li>
                                     <li>Redo &ndash; <code>Ctrl+Shift+Z</code>, <code>Ctrl+Y</code></li>
                                     <li>Replace &ndash; <code>Ctrl+H</code></li>
                                     <li>Toggle file tree &ndash; <code>Ctrl+T</code></li>
                                     <li>Undo &ndash; <code>Ctrl+Z</code></li>
                                 </ul>
+                            </div>
+
+                            <h3 class="tabs__welcome-note__header3">Creating files</h3>
+                            <div class="tabs__welcome-note__state">
+                                <p>
+                                    It is now possible to create files and directories using this input field in the header:
+                                </p>
+                                <table class="tabs__welcome-note__list">
+                                    <tr>
+                                        <td>
+                                            <code>foo/bar/qwerty.txt</code>
+                                        </td>
+                                        <td>
+                                            create <i>qwerty.txt</i> file and all required parent folders (<i>foo</i> and <i>bar</i>) if they are not exist
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <code>foo/bar/</code>
+                                        </td>
+                                        <td>
+                                            create <i>foo/bar</i> directory
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <code>path/to/.gitignore</code>
+                                        </td>
+                                        <td>
+                                            it is also possible to create/open hidden files
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p>
+                                    <b>Note:</b> paths always considered as relative to project root
+                                    <br/>
+                                    <b>Note:</b> these all is just a temprorary workaround, so everything will be changed in future releases, or maybe not
+                                </p>
                             </div>
                         </section>
                     </div>
@@ -156,7 +195,7 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.2.10
+                            Seabass v0.2.11
                         </h2>
                         <p class="tabs__welcome-note__header-p">Seabass is a text (code) editor for Ubuntu Touch. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>

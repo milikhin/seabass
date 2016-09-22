@@ -48,6 +48,7 @@ define([
         }
 
         headerElem.innerHTML += `
+
 			<div class="header__tab__button-pane">
 				<!--<button
 					data-action="editor-save"
@@ -88,6 +89,21 @@ define([
 					<i class="material-icons">undo</i>
 					<span class="tooltip__text">Undo<br/><code>Ctrl + Z</code></span>
 				</button>
+        <!-- <button
+					data-action="file-open"
+					class="app-action header__tab__button-pane__button header__tab__button-pane__button-undo tooltip tooltip-bottom">
+					<i class="material-icons">plus</i>
+					<span class="tooltip__text">Open file<br/><code>Ctrl + E</code></span>
+				</button> -->
+        <div class="header__tab__action-container tablet-only">
+          <form action="#" onsubmit="return false;">
+            <input class="header__tab__action-container__input" type="text" placeholder="Open file: path/to/file"/>
+            <button class="header__tab__action-container__submit tooltip tooltip-bottom" type="submit">
+              <i class="material-icons">insert_drive_file</i>
+              <span class="tooltip__text">Open file (create if not exists)</span>
+            </button>
+          </form>
+        </div>
 			</div>`;
     };
 
@@ -102,6 +118,28 @@ define([
 
         this._addEditorButtons();
 
+        document.body.addEventListener('submit', function(evt) {
+            if (!(evt && evt.target && evt.target.closest('.header__tab__action-container') && evt.target.querySelector('input'))) {
+                return console.log('Warning input not found');
+            }
+
+            var inputElem = evt.target.querySelector('input');
+            var fileName = inputElem.value;
+            if (fileName) {
+                co(function*() {
+                    var fileDescription = yield self.fileManager.open(fileName);
+                    if(fileDescription && fileDescription.fileEntry) {
+                      var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
+                      tab.activate();
+                    }
+
+                    self.reloadTree();
+                    inputElem.value = "";
+                }).catch(function(err) {
+                    console.error(err);
+                });
+            }
+        });
 
         function KeyPress(e) {
             var evtobj = window.event ? event : e;
@@ -113,6 +151,13 @@ define([
                     case 'е':
                         {
                             self.toggleFileTree();
+                            break;
+                        }
+
+                    case 'o':
+                    case 'e':
+                        {
+                            self.focusOnInput();
                             break;
                         }
                 }
@@ -176,6 +221,16 @@ define([
                         TabController.getCurrent().undo();
                         break;
                     }
+                case 'file-open-toggle':
+                    {
+                        self.toggleFileOpener();
+                        break;
+                    }
+                case 'file-open':
+                    {
+                        self.fileManager.open();
+                        break;
+                    }
                 case 'editor-redo':
                     {
                         TabController.getCurrent().redo();
@@ -200,6 +255,17 @@ define([
             }
             // this.receivedEvent(action, target);
         });
+    };
+
+    Application.prototype.focusOnInput = function() {
+        var inputElem = document.querySelector('.header__tab__action-container input');
+        if (inputElem) {
+            inputElem.focus();
+        }
+    };
+
+    Application.prototype.toggleFileOpener = function() {
+        console.log('toggle file input');
     };
 
     Application.prototype.toggleFileTree = function() {

@@ -13,9 +13,11 @@ define(['./index', 'co'], function(FileController, co) {
         }).catch(function(err) {
             console.error(err);
         });
-
     }
 
+    FileManager.prototype.open = function(path) {
+        return this.fsController.readFileByName(path);
+    };
 
     FileManager.prototype.getFiles = function(dirEntry, navEnabled) {
         return this.fsController.getFiles(dirEntry, navEnabled);
