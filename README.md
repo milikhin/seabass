@@ -18,6 +18,7 @@ Seabass code editor for Ubuntu Touch
    - [x] Automatic build script
 - [x] Find/Replace feature
 - [x] Basic autocomplete
+- [x] Files/directories creation
 
 ### v0.3. Preparing for redesign
 * Optimization and refactoring
@@ -29,7 +30,7 @@ Seabass code editor for Ubuntu Touch
    * Optionalize autosave
    * Optionalize Zentabs
    * Add workaround for opening hidden files
-   * Implement create/rename/delete file operations
+   * Implement/refactor create/rename/delete file operations
 
 ### v0.5
 * Editor: support for themes
