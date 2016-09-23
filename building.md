@@ -24,18 +24,18 @@ sudo apt-get update
 sudo apt-get install click-dev phablet-tools ubuntu-sdk-api-15.04
 ```
 
-### 1.4 Add build dependencies for Cordova 
+### 1.4 Add build dependencies for Cordova
 ```
 sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pkg-config qtbase5-dev:armhf qtchooser qtdeclarative5-dev:armhf qtfeedback5-dev:armhf qtlocation5-dev:armhf qtmultimedia5-dev:armhf qtpim5-dev:armhf libqt5sensors5-dev:armhf qtsystems5-dev:armhf
 ```
 
 ## 2 Preparing sources
 ### 2.1 Get sources
-Download latest realease ([0.2.10](https://github.com/milikhin/seabass/archive/v0.2.10.tar.gz)):
+Download latest realease ([0.2.11](https://github.com/milikhin/seabass/archive/v0.2.11.tar.gz)):
 
 ```
-wget https://github.com/milikhin/seabass/archive/v0.2.10.tar.gz
-tar -xf v0.2.10.tar.gz
+wget https://github.com/milikhin/seabass/archive/v0.2.11.tar.gz
+tar -xf v0.2.11.tar.gz
 ```
 
 ### 2.2 Install app dependencies
@@ -60,8 +60,8 @@ mkdir www
 
 ### 2.4 Install required Cordova's platforms/plugins
 ```
-cordova platform add ubuntu@4.3.4 
-cordova plugin add cordova-plugin-file 
+cordova platform add ubuntu@4.3.4
+cordova plugin add cordova-plugin-file
 ```
 
 Note: there will be a error `Error: icon does not exist:` -- that's ok, we'll add icon later
@@ -110,5 +110,5 @@ find -name *.click
 How to create/install deb package
 
 ```
-(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.10_amd64.deb )   
+(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.2.11_amd64.deb )   
 ```
