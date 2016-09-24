@@ -75,7 +75,7 @@ define([
         this._registerEventHandlers();
         this._registerKeyBindings();
 
-        console.log('complete Tab init');
+        // console.log('complete Tab init');
     }
 
     Tab.prototype.undo = function() {
@@ -162,7 +162,7 @@ define([
 
         for (var i in languages) {
             if (ext == i) {
-                console.log('language is', languages[i]);
+                // console.log('language is', languages[i]);
                 this.editor.getSession().setMode('ace/mode/' + languages[i]);
             }
         }

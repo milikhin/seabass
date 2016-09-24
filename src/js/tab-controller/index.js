@@ -109,9 +109,7 @@ define([
 
 	TabController.prototype._updateTabNames = function () {
 		var similarFileNameTabs = {};
-		console.log(this.tabs.length);
 		this.tabs.forEach(function (tab) {
-			console.log(tab.fileName, similarFileNameTabs[tab.fileName], !similarFileNameTabs[tab.fileName]);
 			if (!similarFileNameTabs[tab.fileName]) {
 				similarFileNameTabs[tab.fileName] = [tab];
 			} else {

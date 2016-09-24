@@ -36,7 +36,7 @@ define(['co', 'md5'], function(co, md5) {
             fileEntry.createWriter(function(fileWriter) {
 
                 fileWriter.onwriteend = function() {
-                    console.log("Successful file write...");
+                    // console.log("Successful file write...");
                     return data;
                     // self.readFile(fileEntry).then(resolve, reject);
                 };
@@ -76,7 +76,7 @@ define(['co', 'md5'], function(co, md5) {
             if (filePaths.length > 1) {
                 var dirPaths = filePaths.slice(0, -1);
                 fileName = filePaths.slice(-1)[0];
-                console.log(dirPaths, filePaths.slice(-1));
+                // console.log(dirPaths, filePaths.slice(-1));
             }
 
             co(function*() {
@@ -208,7 +208,7 @@ define(['co', 'md5'], function(co, md5) {
         return co(function*() {
             try {
                 self.fs = yield self._getFs();
-                console.log('file system open: ' + self.fs.name);
+                // console.log('file system open: ' + self.fs.name);
             } catch (err) {
                 console.error(err);
             }
