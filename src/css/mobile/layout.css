@@ -1,7 +1,6 @@
 /* overwrite settings.js */
 
-.aside,
-.inspire-tree {
+.aside, .inspire-tree {
     width: 250px!important;
 }
 
@@ -41,3 +40,20 @@
     max-height: calc(100vh - 185px);
     min-height: 0;
 }*/
+
+.tabs__welcome-note-wrapper {
+    padding: 20px;
+}
+
+.tabs__welcome-note__table td {
+    text-align: right;
+    display: block;
+}
+
+.tabs__welcome-note__table td {
+    text-align: right;
+}
+
+.tabs__welcome-note__table td.tabs__welcome-note__table--support__title {
+    text-align: left;
+}

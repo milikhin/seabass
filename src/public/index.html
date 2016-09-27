@@ -51,6 +51,9 @@
                 <li data-role="tabitem" data-page="about">
                     About
                 </li>
+                <li data-role="tabitem" data-page="help">
+                    Help
+                </li>
             </ul>
         </header>
 
@@ -104,98 +107,183 @@
                                     Select file in the Files tree on the left
                                 </li>
                             </ol>
-                            <h3 class="tabs__welcome-note__header3">Notes</h3>
-                            <div class="tabs__welcome-note__state">
-                                <p>
-                                    There are two versions of the application available:
 
-                                </p>
-                                <ol>
-                                    <li>
-                                        Standard version from Ubuntu Store (File System access is limited to Seabass's own directory)
-                                    </li>
-                                    <li>
-                                        Unconfined version from OpenStore (with unrestricted access to user's Home directory)
-                                    </li>
-                                </ol>
-                                <br/>
-                                <p>
-                                    <b>Note:</b> Uninstallation of previously installed version is required when switching from standard to unconfined version and back.
-                                    <br/>
-                                    <b>Note:</b> Seabass will use the last directory you've opened using <i>Navigation mode</i> (can be activated on the Settings page) as a file tree Root directory.
-                                </p>
-                            </div>
                             <h3 class="tabs__welcome-note__header3">Supported devices</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
                                     Phone layout is WIP, so only BQ M10 is fully supported
                                 </p>
                                 <p>
-                                    Complete feature list and release notes are available on About page.
+                                    Complete feature list, keybindings and release notes are available on About and Help pages.
                                 </p>
                             </div>
 
-                            <h3 class="tabs__welcome-note__header3">Keybindings</h3>
-                            <div class="tabs__welcome-note__state">
-                                <ul>
-                                    <li>Beautify code (if possible) &ndash; <code>Ctrl+Shift+B</code></li>
-                                    <li>Find &ndash; <code>Ctrl+F</code></li>
-                                    <li>Focus to file-open field &ndash; <code>Ctrl+E</code>, <code>Ctrl+O</code></li>
-                                    <li>Open autocomplete menu &ndash; <code>Ctrl+Space</code></li>
-                                    <li>Redo &ndash; <code>Ctrl+Shift+Z</code>, <code>Ctrl+Y</code></li>
-                                    <li>Replace &ndash; <code>Ctrl+H</code></li>
-                                    <li>Toggle file tree &ndash; <code>Ctrl+T</code></li>
-                                    <li>Undo &ndash; <code>Ctrl+Z</code></li>
-                                </ul>
-                            </div>
-
-                            <h3 class="tabs__welcome-note__header3">Creating files</h3>
+                            <h3 class="tabs__welcome-note__header3">Thank you!</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                    It is now possible to create files and directories using this input field in the header:
+                                    This is our 16th release so far!
                                 </p>
-                                <table class="tabs__welcome-note__table">
+                                <p>
+                                    Started a few months ago as a proof-of-concept project, Seabass is slowly evolving into a full-featured code editor. But there are lots of time-consuming features and things to be done yet and many ideas and options waiting to be implemented.
+                                </p>
+                                <p>
+                                    So, I just wanted to say "Thank you" to everyone of you for your patience while using Seabass, for reporing bugs, sending feedback and writing reviews.
+                                </p>
+                                <p>
+                                    And in case you'd like to buy me a cup of coffee and thus become a sponsor of the next Seabass release, there is a link to paypal below :-)
+                                </p>
+                              </div>
+
+
+                              <h3 class="tabs__welcome-note__header3">Links</h3>
+                              <div class="tabs__welcome-note__state">
+                                <table class="tabs__welcome-note__table tabs__welcome-note__table--support">
                                     <tr>
-                                        <td>
-                                            <code>foo/bar/qwerty.txt</code>
+                                      <td class="tabs__welcome-note__table--support__title">
+                                          <span>
+                                            Rate Seabass with 5 stars:
+                                          </span>
+                                      </td>
+                                      <td>
+                                          <a href="scope://com.canonical.scopes.clickstore?q=Seabass">at UbuntuStore</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tabs__welcome-note__table--support__title">
+                                            <span>
+                                              Support Seabass via PayPal:
+                                            </span>
                                         </td>
                                         <td>
-                                            create <i>qwerty.txt</i> file and all required parent folders (<i>foo</i> and <i>bar</i>) if they are not exist
+                                            <span class="clipboard-link">https://paypal.me/milikhin</span>
+                                            <button class="clipboard-btn tooltip tooltip-top" data-clipboard-text="https://paypal.me/milikhin">
+                                                <i class="material-icons">content_copy</i>
+                                      					<span class="tooltip__text">Copy URL to clipboard</span>
+                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <code>foo/bar/</code>
+                                        <td class="tabs__welcome-note__table--support__title">
+                                            <span>
+                                              Email support:
+                                            </span>
                                         </td>
                                         <td>
-                                            create <i>foo/bar</i> directory
+                                            <a class="clipboard-link" href="mailto:mikhael@milikhin.name">mikhael@milikhin.name</a>
+                                            <button class="tooltip tooltip-top clipboard-btn" data-clipboard-text="mikhael@milikhin.name">
+                                                <i class="material-icons">content_copy</i>
+                                                <span class="tooltip__text">Copy address to clipboard</span>
+                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <code>path/to/.gitignore</code>
+                                        <td class="tabs__welcome-note__table--support__title">
+                                          <span>
+                                            Project page:
+                                          </span>
                                         </td>
                                         <td>
-                                            it is also possible to create/open hidden files
+                                            <span class="clipboard-link">https://github.com/milikhin/seabass</span>
+                                            <button class=" tooltip tooltip-top clipboard-btn" data-clipboard-text="https://github.com/milikhin/seabass">
+                                                <i class="material-icons">content_copy</i>
+                                                <span class="tooltip__text">Copy URL to clipboard</span>
+                                            </button>
                                         </td>
                                     </tr>
                                 </table>
-                                <p>
-                                    <b>Note:</b> paths always considered as relative to project root
-                                    <br/>
-                                    <b>Note:</b> these all is just a temprorary workaround, so everything will be changed in future releases, or maybe not
-                                </p>
                             </div>
+
+
                         </section>
                     </div>
                 </div>
 
             </div>
+
+            <div data-role="tab" id="help">
+                <div class="tabs__welcome-note-wrapper">
+                    <section class="tabs__welcome-note">
+                        <h2 class="tabs__welcome-note__header">
+                          Seabass v0.2.13
+                        </h2>
+
+                        <h3 class="tabs__welcome-note__header3">Keybindings</h3>
+                        <div class="tabs__welcome-note__state">
+                            <ul class="tabs__welcome-note__list">
+                                <li>Beautify code (if possible) &ndash; <code>Ctrl+Shift+B</code></li>
+                                <li>Find &ndash; <code>Ctrl+F</code></li>
+                                <li>Focus to file-open field &ndash; <code>Ctrl+E</code>, <code>Ctrl+O</code></li>
+                                <li>Open autocomplete menu &ndash; <code>Ctrl+Space</code></li>
+                                <li>Redo &ndash; <code>Ctrl+Shift+Z</code>, <code>Ctrl+Y</code></li>
+                                <li>Replace &ndash; <code>Ctrl+H</code></li>
+                                <li>Toggle file tree &ndash; <code>Ctrl+T</code></li>
+                                <li>Undo &ndash; <code>Ctrl+Z</code></li>
+                            </ul>
+                        </div>
+
+                        <h3 class="tabs__welcome-note__header3">Usage notes</h3>
+                        <div class="tabs__welcome-note__state">
+                            <p>
+                                There are two versions of the application available:
+                            </p>
+                            <ol class="tabs__welcome-note__olist">
+                                <li>
+                                    Standard version from Ubuntu Store (File System access is limited to Seabass's own directory)
+                                </li>
+                                <li>
+                                    Unconfined version from OpenStore (with unrestricted access to user's Home directory)
+                                </li>
+                            </ol>
+                            <br/>
+                            <p>
+                                <b>Note:</b> Uninstallation of previously installed version is required when switching from standard to unconfined version and back.
+                            </p>
+                            <p>
+                                <b>Note:</b> Seabass will use the last directory you've opened using <i>Navigation mode</i> (can be activated on the Settings page) as a file tree Root directory.
+                            </p>
+                        </div>
+
+                        <h3 class="tabs__welcome-note__header3">Creating files</h3>
+                        <div class="tabs__welcome-note__state">
+                            <p>
+                                It is now possible to create files and directories using this input field in the header (paths are always considered as relative to project root):
+                            </p>
+                            <table class="tabs__welcome-note__table">
+                                <tr>
+                                    <td>
+                                        <code>foo/bar/qwerty.txt</code>
+                                    </td>
+                                    <td>
+                                        create <i>qwerty.txt</i> file and all required parent folders (<i>foo</i> and <i>bar</i>) if they are not exist
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>foo/bar/</code>
+                                    </td>
+                                    <td>
+                                        create <i>foo/bar</i> directory
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>path/to/.gitignore</code>
+                                    </td>
+                                    <td>
+                                        It is possble to create/open hidden files
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
             <div data-role="tab" id="about">
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.2.12
+                            Seabass v0.2.13
                         </h2>
                         <p class="tabs__welcome-note__header-p">Seabass is a text (code) editor for Ubuntu Touch. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
@@ -222,22 +310,17 @@
                                 This is an early Beta-release, so expect broken features an so on...
                             </p>
                             <p>
-                                Bug reports &amp; feature requests are very appreciated. If you have any suggestions, want to have support for other languages or something doesn't work as expected, feel free to open issue on project's page on github: (https://github.com/milikhin/seabass)
-                                or send email to
-                                <a href="mailto:mikhael@milikhin.name">mikhael@milikhin.name</a>
+                                Bug reports &amp; feature requests are very appreciated. If you have any suggestions, want to have support for other languages or something doesn't work as expected, feel free to open issue on project's page on github or send me emails.
                             </p>
                         </div>
 
                         <h3 class="tabs__welcome-note__header3">Known issues</h3>
-                        <ul class="tabs__welcome-note__state">
+                        <ul class="tabs__welcome-note__list">
                             <li>
                                 Phone layout is currently WIP, so only BQ M10 is fully supported.
                             </li>
                             <li>
-                                Basic file operations (create/delete/copy/rename) are not yet implemeted.
-                            </li>
-                            <li>
-                                Hidden files are... hm, well... hidden, so there is no way to open such files in this release.
+                                Basic file operations (create/delete/copy/rename) are not yet implemeted (except file creation which is WIP for now).
                             </li>
                         </ul>
 
@@ -315,6 +398,10 @@
                                 <li>
                                     Maximilian Grundke for QML mode for Ace
                                 </li>
+                                <li>
+                                    Zeno Rocha for Clipboard.js
+                                </li>
+
                             </ul>
                         </div>
 

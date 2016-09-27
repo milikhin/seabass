@@ -61,15 +61,60 @@ body.osk-mode::after {
 
 .tabs__welcome-note__table {
     border: none;
-    border-top: dashed 1px #747278;
-    border-bottom: dashed 1px #747278;
+    /*border-top: dashed 1px #747278;
+    border-bottom: dashed 1px #747278;*/
     margin-top: 7px;
     margin-bottom: 7px;
 }
 
 .tabs__welcome-note__table td {
     border: none;
-    padding: 5px 15px 5px 0;
+    padding: 0 10px 0 0;
     vertical-align: top;
     border-spacing: 0;
+}
+
+
+.tabs__welcome-note__table--support {
+    text-align: left;
+}
+
+.tabs__welcome-note__table--support__title {
+  /*width: 100px;*/
+  white-space: nowrap;
+}
+
+.tabs__welcome-note__table--support .tabs__welcome-note__table--support__title span {
+  line-height: 1.5em;
+  padding-top: 0.125em;
+}
+
+.tabs__welcome-note__state p {
+  text-indent: 1em;
+  text-align: justify;
+}
+
+.clipboard-link {
+  display: inline-block;
+    /* height: 1.5em; */
+    line-height: 1.5em;
+    vertical-align: top;
+    padding: 0.125em 0;
+}
+
+.clipboard-btn {
+  border: none;
+  border-radius: 4px;
+  /* margin-left: 7px; */
+  height: 1.5em;
+  line-height: 1em;
+  font-size: 1em;
+  display: inline-block;
+  background: none;
+  color: #aaa;
+}
+
+.tabs__welcome-note__olist,
+.tabs__welcome-note__list {
+  margin: 0 0 0 1em;
 }

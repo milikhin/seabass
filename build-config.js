@@ -12,7 +12,8 @@
         "co": "js/co.min",
         "md5": "bower_components/js-md5/js/md5.min",
         "json": "bower_components/requirejs-plugins/src/json",
-        "text": "bower_components/requirejs-plugins/lib/text"
+        "text": "bower_components/requirejs-plugins/lib/text",
+        "clipboard": "bower_components/clipboard/dist/clipboard.min"
     },
     stubModules: ['json'],
     packages: [{

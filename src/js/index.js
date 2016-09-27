@@ -4,8 +4,9 @@ define([
     './tab-controller/index',
     './settings',
     'co',
-    'inspire'
-], function(ace, FileManager, TabController, SettingsController, co, InspireTree) {
+    'inspire',
+    'clipboard'
+], function(ace, FileManager, TabController, SettingsController, co, InspireTree, Clipboard) {
     "use strict";
 
     function Application() {}
@@ -38,6 +39,8 @@ define([
         window.addEventListener('resize', function() {
             TabController.converge();
         });
+
+        new Clipboard('.clipboard-btn');
 
     };
 
