@@ -26,6 +26,7 @@
     "js-md5": "^2.3.0",
     "js-beautify": "^1.6.3",
     "inspire-tree": "~1.9.0",
-    "requirejs-plugins": "^1.0.3"
+    "requirejs-plugins": "^1.0.3",
+    "clipboard": "^1.5.12"
   }
 }
