@@ -1,6 +1,7 @@
 define([
     'md5',
     'json!./languages.json',
+    'app/app-event',
     'ace/ace',
     'ace/theme/monokai',
     'ace/ext/language_tools',
@@ -39,7 +40,7 @@ define([
     'ace/mode/sh',
     'ace/mode/yaml',
     'ace/mode/plain_text'
-], function(md5, languages, ace, theme) {
+], function(md5, languages, AppEvent, ace, theme) {
 
     function Tab(options) {
         var self = this;
@@ -89,13 +90,11 @@ define([
     Tab.prototype.activate = function() {
         this.rootElem.querySelector('.tab-state').checked = true;
 
-        document.body.dispatchEvent(new CustomEvent('ab-activate', {
-            bubbles: true,
-            cancelable: true,
-            detail: {
+        AppEvent.dispatch({
+                type: 'tab-activate',
                 tab: this
-            }
-        }));
+            
+        });
     };
 
     Tab.prototype.onResize = function() {
@@ -111,10 +110,10 @@ define([
                 mac: "Command-T"
             },
             exec: function(editor) {
-                document.body.dispatchEvent(new CustomEvent('filetree-toggle', {
-                    bubbles: true,
-                    cancelable: true
-                }));
+                AppEvent.dispatch({
+                        type: 'filetree-toggle'
+                    
+                });
             }
         });
 
@@ -192,16 +191,12 @@ define([
 
 
     Tab.prototype.save = function() {
-        var evt = new CustomEvent('file-save', {
-            bubbles: true,
-            cancelable: true,
-            detail: {
+        AppEvent.dispatch({
+                type: 'file-save',
                 fileEntry: this.fileEntry,
                 value: this.editor.getValue()
-            }
+            
         });
-
-        document.body.dispatchEvent(evt);
     };
 
     Tab.prototype.beautify = function() {

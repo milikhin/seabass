@@ -3,45 +3,38 @@ define([
     './file-controller/manager',
     './tab-controller/index',
     './settings',
+    'app/app-event',
     'co',
     'inspire',
     'clipboard'
-], function(ace, FileManager, TabController, SettingsController, co, InspireTree, Clipboard) {
+], function(ace, FileManager, TabController, SettingsController, AppEvent, co, InspireTree, Clipboard) {
     "use strict";
 
     function Application() {}
 
     Application.prototype.initialize = function() {
         var self = this;
+        document.body.addEventListener('app-event', function(evt) {
+			console.log('app-event catched', evt.detail.type, evt);
+            self.receivedEvent(evt.detail.type, evt);
+        });
+        
+        console.log('init. 0');
         this.fileManager = new FileManager();
-
-        self.onDeviceReady();
-        document.body.addEventListener('fsready', function() {
-            self.receivedEvent('fsready');
-        });
-
-        document.body.addEventListener('tree-node-click', function(evt) {
-            self.receivedEvent('tree-node-click', evt);
-        });
-
-        document.body.addEventListener('file-save', function(evt) {
-            self.receivedEvent('file-save', evt);
-        });
-
-        document.body.addEventListener('editor-state-changed', function(evt) {
-            self.receivedEvent('editor-state-changed', evt);
-        });
-
-        document.body.addEventListener('filetree-toggle', function(evt) {
-            self.receivedEvent('filetree-toggle', evt);
-        });
-
+		
+		console.log('init. 1');
+        this.onDeviceReady();
+        console.log('init. 2');
+        
         window.addEventListener('resize', function() {
             TabController.converge();
         });
+        
+        console.log('init. 3');
 
         new Clipboard('.clipboard-btn');
-
+		
+		console.log('init. complete');
     };
 
     Application.prototype._addEditorButtons = function() {
@@ -51,7 +44,6 @@ define([
         }
 
         headerElem.innerHTML += `
-
 			<div class="header__tab__button-pane">
 				<!--<button
 					data-action="editor-save"
@@ -60,7 +52,7 @@ define([
 					<span class="tooltip__text">Save<br/><code>Ctrl + S</code></span>
 				</button>-->
 				<button
-					data-action="file-tree-toggle"
+					data-action="filetree-toggle"
 					class="app-action header__tab__button-pane__button header__tab__button-pane__button-osk tooltip tooltip-bottom">
 					<i class="material-icons">list</i>
 					<span class="tooltip__text">Toggle file tree<br/><code>Ctrl + T</code></span>
@@ -100,7 +92,7 @@ define([
 				</button> -->
         <div class="header__tab__action-container tablet-only">
           <form action="#" onsubmit="return false;">
-            <input class="header__tab__action-container__input" type="text" placeholder="Open file: path/to/file"/>
+            <input class="header__tab__action-container__input" type="text" placeholder="path/to/file"/>
             <button class="header__tab__action-container__submit tooltip tooltip-bottom" type="submit">
               <i class="material-icons">insert_drive_file</i>
               <span class="tooltip__text">Open file (create if not exists)</span>
@@ -131,9 +123,9 @@ define([
             if (fileName) {
                 co(function*() {
                     var fileDescription = yield self.fileManager.open(fileName);
-                    if(fileDescription && fileDescription.fileEntry) {
-                      var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
-                      tab.activate();
+                    if (fileDescription && fileDescription.fileEntry) {
+                        var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
+                        tab.activate();
                     }
 
                     self.reloadTree();
@@ -197,66 +189,13 @@ define([
             var action = target.dataset.action;
             // 			console.log('you clicked on ', action);
             // 			console.log('current tab is', TabController.getCurrent());
-
-            switch (action) {
-                case 'file-tree-toggle':
-                    {
-                        self.toggleFileTree();
-                        break;
+            if (action) {
+                self.receivedEvent(action, {
+                    detail: {
+                        target: target
                     }
-                case 'window-osk':
-                    {
-                        self.toggleOSK();
-                        break;
-                    }
-                case 'editor-save':
-                    {
-                        TabController.getCurrent().save();
-                        break;
-                    }
-                case 'editor-beautify':
-                    {
-                        TabController.getCurrent().beautify();
-                        break;
-                    }
-                case 'editor-undo':
-                    {
-                        TabController.getCurrent().undo();
-                        break;
-                    }
-                case 'file-open-toggle':
-                    {
-                        self.toggleFileOpener();
-                        break;
-                    }
-                case 'file-open':
-                    {
-                        self.fileManager.open();
-                        break;
-                    }
-                case 'editor-redo':
-                    {
-                        TabController.getCurrent().redo();
-                        break;
-                    }
-                case 'tab-close':
-                    {
-                        TabController.close(TabController.getByElem(target));
-                        break;
-                    }
-                case 'tree-reload':
-                    {
-                        self.reloadTree();
-                        break;
-                    }
-                case 'tree-unset-root':
-                    {
-                        self.fileManager.unsetRoot();
-                        self.reloadTree();
-                        break;
-                    }
+                });
             }
-            // this.receivedEvent(action, target);
         });
     };
 
@@ -282,7 +221,10 @@ define([
 
     Application.prototype.toggleOSK = function() {
         document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
-        document.body.dispatchEvent(new CustomEvent('body-resize'));
+        AppEvent.dispatch({
+            type: 'body-resize'
+
+        });
     };
 
     Application.prototype.reloadTree = function() {
@@ -297,12 +239,8 @@ define([
 
     Application.prototype.receivedEvent = function(id, evt) {
         var self = this;
+        console.log('received event', id, evt);
         switch (id) {
-            case 'filetree-toggle':
-                {
-                    self.toggleFileTree();
-                    break;
-                }
             case 'deviceready':
                 {
                     this.UI = new UbuntuUI();
@@ -316,9 +254,19 @@ define([
                     });
                     break;
                 }
-            case 'fsready':
+            case 'editor-beautify':
                 {
-                    this.renderTree();
+                    TabController.getCurrent().beautify();
+                    break;
+                }
+            case 'editor-save':
+                {
+                    TabController.getCurrent().save();
+                    break;
+                }
+            case 'editor-redo':
+                {
+                    TabController.getCurrent().redo();
                     break;
                 }
             case 'editor-state-changed':
@@ -337,6 +285,50 @@ define([
                         beautifyElem.disabled = !evt.detail.hasBeautify;
                     }
 
+                    break;
+                }
+            case 'editor-undo':
+                {
+                    TabController.getCurrent().undo();
+                    break;
+                }
+            case 'file-open-toggle':
+                {
+                    self.toggleFileOpener();
+                    break;
+                }
+            case 'file-open':
+                {
+                    self.fileManager.open();
+                    break;
+                }
+            case 'file-save':
+                {
+                    co(function*() {
+                        var fileContent = yield self.fileManager.writeFile(evt.detail.fileEntry, evt.detail.value);
+
+                    }).catch(function(err) {
+                        console.error(err);
+                    });
+                    break;
+
+                }
+            case 'filetree-toggle':
+                {
+                    self.toggleFileTree();
+                    break;
+                }
+            case 'fsready':
+                {	
+					console.log('rendere tree');
+                    this.renderTree();
+                    console.log('rendered tree');
+                    break;
+                }
+
+            case 'tab-close':
+                {
+                    TabController.close(TabController.getByElem(evt.detail.target));
                     break;
                 }
             case 'tree-node-click':
@@ -367,21 +359,23 @@ define([
                     });
                     break;
                 }
-
-            case 'file-save':
+            case 'tree-reload':
                 {
-                    co(function*() {
-                        var fileContent = yield self.fileManager.writeFile(evt.detail.fileEntry, evt.detail.value);
-
-                    }).catch(function(err) {
-                        console.error(err);
-                    });
-
+                    self.reloadTree();
+                    break;
                 }
-
+            case 'tree-unset-root':
+                {
+                    self.fileManager.unsetRoot();
+                    self.reloadTree();
+                    break;
+                }
+            case 'window-osk':
+                {
+                    self.toggleOSK();
+                    break;
+                }
         }
-
-
     };
 
     Application.prototype.renderTree = function() {
@@ -397,16 +391,10 @@ define([
         this._updateTreeHeader();
 
         this.tree.on('node.click', function(event, node) {
-            // node clicked!
-            var evt = new CustomEvent('tree-node-click', {
-                bubbles: true,
-                cancelable: true,
-                detail: {
-                    node: node
-                }
+            AppEvent.dispatch({
+                type: 'tree-node-click',
+                node: node
             });
-
-            document.body.dispatchEvent(evt);
         });
     };
 
