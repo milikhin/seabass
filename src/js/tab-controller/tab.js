@@ -66,6 +66,9 @@ define([
         this.editor.setOptions({
             enableBasicAutocompletion: true
         });
+        
+        // 
+        // this.editor.setBehavioursEnabled(false)
 
         // set value & theme
         this.editor.setTheme(theme);

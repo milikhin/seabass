@@ -19,22 +19,15 @@ define([
             self.receivedEvent(evt.detail.type, evt);
         });
         
-        console.log('init. 0');
         this.fileManager = new FileManager();
-		
-		console.log('init. 1');
-        this.onDeviceReady();
-        console.log('init. 2');
+		this.onDeviceReady();
         
         window.addEventListener('resize', function() {
             TabController.converge();
         });
         
-        console.log('init. 3');
-
+        
         new Clipboard('.clipboard-btn');
-		
-		console.log('init. complete');
     };
 
     Application.prototype._addEditorButtons = function() {
@@ -239,7 +232,7 @@ define([
 
     Application.prototype.receivedEvent = function(id, evt) {
         var self = this;
-        console.log('received event', id, evt);
+        // console.log('received event', id, evt);
         switch (id) {
             case 'deviceready':
                 {
@@ -292,11 +285,8 @@ define([
                     TabController.getCurrent().undo();
                     break;
                 }
-            case 'file-open-toggle':
-                {
-                    self.toggleFileOpener();
-                    break;
-                }
+            
+        
             case 'file-open':
                 {
                     self.fileManager.open();
@@ -320,9 +310,7 @@ define([
                 }
             case 'fsready':
                 {	
-					console.log('rendere tree');
                     this.renderTree();
-                    console.log('rendered tree');
                     break;
                 }
 
