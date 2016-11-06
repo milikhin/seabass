@@ -1,36 +1,85 @@
+const Rx = require('rx');
+const chok = require('chokidar');
+// const bs = require('browser-sync').create();
 var gulp = require('gulp');
-// var browserSync = require('browser-sync').create();
-
-function registerWatchTasks() {
-    gulp.task('css-watch', ['css'], function() {
-        browserSync.reload();
-    });
-    gulp.task('assets-watch', ['assets'], function() {
-        browserSync.reload();
-    });
-    gulp.task('js-watch', ['js'], function() {
-        browserSync.reload();
-    });
-    // 	gulp.task('html-watch', ['html'], function () {
-    // 		browserSync.reload();
-    // 	});
-}
+var timeout = 2500;
 
 module.exports = function() {
-    // registerWatchTasks();
+    // gulp.watch('styles/**/*.css', ['css']);
+    // gulp.watch('public/**/*', ['assets']);
+    // // gulp.watch('bower_components/**/*.css', ['css-watch']);
+    // gulp.watch('js/**/*', ['js']);
 
-    return function() {
-        // browserSync.init({
-        //     server: {
-        //         baseDir: "./dist"
-        //     }
-        // });
+    
 
-        gulp.watch('src/css/**/*.css', ['css']);
-        gulp.watch('src/public/**/*', ['assets']);
-        // gulp.watch('bower_components/**/*.css', ['css-watch']);
-        gulp.watch('src/js/**/*', ['js']);
-        // gulp.watch('tpl/**/*.ejs', ['html-watch']);
-        // gulp.watch('bower_components/r5m-cms/**/*.ejs', ['html-watch']);
-    };
+
+    Rx.Observable.create(function(observer) {
+            const watcher = chok
+                .watch(['src/js/**/*', 'src/hak/**/*'], {
+                    ignoreInitial: true
+                })
+                .on('all', function(event, file) {
+                    observer.onNext({
+                        event,
+                        file
+                    });
+                });
+            return function() {
+                watcher.close();
+            }
+        })
+        .debounce(timeout)
+        .filter(function(x) {
+            return x.event === 'add' || x.event === 'change';
+        })
+        .subscribe(function(x) {
+            gulp.run('js');
+        })
+
+    Rx.Observable.create(function(observer) {
+            const watcher = chok
+                .watch(['src/css/**/*'], {
+                    ignoreInitial: true
+                })
+                .on('all', function(event, file) {
+                    observer.onNext({
+                        event,
+                        file
+                    });
+                });
+            return function() {
+                watcher.close();
+            }
+        })
+        .debounce(timeout)
+        .filter(function(x) {
+            return x.event === 'add' || x.event === 'change';
+        })
+        .subscribe(function(x) {
+            gulp.run('css');
+        })
+        
+    
+     Rx.Observable.create(function(observer) {
+            const watcher = chok
+                .watch(['src/public/**/*'], {
+                    ignoreInitial: true
+                })
+                .on('all', function(event, file) {
+                    observer.onNext({
+                        event,
+                        file
+                    });
+                });
+            return function() {
+                watcher.close();
+            }
+        })
+        .debounce(timeout)
+        .filter(function(x) {
+            return x.event === 'add' || x.event === 'change';
+        })
+        .subscribe(function(x) {
+            gulp.run('assets');
+        });
 };
