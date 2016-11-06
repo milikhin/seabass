@@ -1,17 +1,19 @@
 {
-    "name": "seabass",
-    "version": "0.2.13",
-    "description": "",
-    "main": " ",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "milikhin",
-    "license": "MIT",
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-shell": "^0.5.2",
-        "merge-stream": "^1.0.0",
-        "requirejs": "^2.2.0"
-    }
+  "name": "seabass",
+  "version": "0.3.0",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "milikhin",
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
+    "merge-stream": "^1.0.0",
+    "requirejs": "^2.2.0",
+    "rx": "^4.1.0"
+  }
 }
