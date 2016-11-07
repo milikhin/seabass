@@ -78,9 +78,11 @@
     line-height: 45px;
 }
 
-.header__tab__action-container__input {
+input[type="text"].header__tab__action-container__input {
     /*border: solid 1px #757373;*/
     /*color: #757373;*/
+    box-sizing: border-box;
+    padding-right: 2rem;
 }
 
 .header__tab__action-container__submit {
