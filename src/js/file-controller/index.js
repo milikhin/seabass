@@ -82,10 +82,10 @@ define(['co', 'md5'], function(co, md5) {
             co(function*() {
                 if (dirPaths) {
                     for (var i = 0; i < dirPaths.length; i++) {
-                        if(!dirPaths[i]) {
-                          continue;
+                        if (!dirPaths[i]) {
+                            continue;
                         }
-                        dirEntry = yield (function() {
+                        dirEntry = yield(function() {
                             return new Promise(function(resolve, reject) {
                                 dirEntry.getDirectory(dirPaths[i], {
                                     "create": true
@@ -95,8 +95,8 @@ define(['co', 'md5'], function(co, md5) {
                     }
                 }
 
-                if(!fileName) {
-                  return resolve();
+                if (!fileName) {
+                    return resolve();
                 }
 
                 dirEntry.getFile(fileName, {

@@ -2,6 +2,9 @@
 @import 'inspire-tree.css';
 @import 'tabs.css';
 @import 'tooltip.css';
+@import 'codemirror/codemirror.css';
+@import 'codemirror/monokai.css';
+@import 'codemirror/dialog.css';
 
 /* haks for external components */
 @import 'haks/index.css';

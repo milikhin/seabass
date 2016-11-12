@@ -28,7 +28,6 @@ gulp.task('rm-dist', shell.task([
     'rm -rf ./www/*'
 ]));
 
-
 gulp.task('daemon', ['js', 'css', 'assets'], daemon);
 gulp.task('default', ['daemon']);
 

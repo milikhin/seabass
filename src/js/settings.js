@@ -117,7 +117,7 @@ define([], function () {
 		this._getSheet().addRule('.aside__header__path .tooltip__text', `width: ${fileTreeTooltipWidth}px;`);
 
 		if (isCustomFontSize) {
-			this._getSheet().addRule('.editor.ace_editor', `font-size: ${fontSize}px;`);
+			this._getSheet().addRule('.CodeMirror', `font-size: ${fontSize}px;`);
 		}
 	};
 

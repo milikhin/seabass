@@ -4,15 +4,11 @@ define(['./index', 'co', 'app/app-event'], function(FileController, co, AppEvent
 
         co(function*() {
             // initialize fs access;
-            console.log('fsready emitting 0');
             self.fsController = new FileController();
-            console.log('fsready emitting 1');
             yield self.fsController.waitForInit();
-			console.log('fsready emitting 2');
             AppEvent.dispatch({
                 type: 'fsready'
             });
-            console.log('fsready emitting 3');
         }).catch(function(err) {
             console.error(err);
         });

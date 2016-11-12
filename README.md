@@ -6,7 +6,7 @@ Seabass code editor for Ubuntu Touch
 - [x] Syntax highlighter: Refactor highlighter configuration
 - [x] Add "About" page and move acknowledgements there
 - [x] Syntax highlighter: Add support for more languages
-
+ 
 ### v0.2. It's all about Convergence & UX
 - [x] Add support for sidestage mode
 - [x] Add more supported devices:  

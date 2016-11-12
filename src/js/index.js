@@ -1,5 +1,4 @@
 define([
-    'ace/ace',
     './file-controller/manager',
     './tab-controller/index',
     './settings',
@@ -7,7 +6,7 @@ define([
     'co',
     'inspire',
     'clipboard'
-], function(ace, FileManager, TabController, SettingsController, AppEvent, co, InspireTree, Clipboard) {
+], function(FileManager, TabController, SettingsController, AppEvent, co, InspireTree, Clipboard) {
     "use strict";
 
     function Application() {}
@@ -15,18 +14,17 @@ define([
     Application.prototype.initialize = function() {
         var self = this;
         document.body.addEventListener('app-event', function(evt) {
-			console.log('app-event catched', evt.detail.type, evt);
             self.receivedEvent(evt.detail.type, evt);
         });
-        
+
         this.fileManager = new FileManager();
-		this.onDeviceReady();
-        
+        this.onDeviceReady();
+
         window.addEventListener('resize', function() {
             TabController.converge();
         });
-        
-        
+
+
         new Clipboard('.clipboard-btn');
     };
 
@@ -285,8 +283,8 @@ define([
                     TabController.getCurrent().undo();
                     break;
                 }
-            
-        
+
+
             case 'file-open':
                 {
                     self.fileManager.open();
@@ -309,7 +307,7 @@ define([
                     break;
                 }
             case 'fsready':
-                {	
+                {
                     this.renderTree();
                     break;
                 }

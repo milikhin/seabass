@@ -183,30 +183,26 @@ define([
                 }, 100);
             }
         });
+
         // save created tab
         this.tabs.push(tab);
         this._updateTabNames();
         this._activate(tab);
-        // reset undo manager & buttons
-        setTimeout(function() {
-            self._resetUndoManager(tab);
-
-        }, 100);
+        this._updateButtons(tab);
 
         return tab;
     };
 
     TabController.prototype._updateButtons = function(tab) {
-        var um = tab.editor.getSession().getUndoManager();
         var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
+
         tab.lastModified = Date.now();
         // console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
         AppEvent.dispatch({
             type: 'editor-state-changed',
-            hasUndo: um.hasUndo(),
-            hasRedo: um.hasRedo(),
+            hasUndo: tab.hasUndo(),
+            hasRedo: tab.hasRedo(),
             hasBeautify: ~['js', 'html', 'css', 'json'].indexOf(ext)
-
         });
     };
 
@@ -231,12 +227,7 @@ define([
         }
 
         return this._create(fileName, fileEntry, fileContent);
-
     };
-
-
-
-
 
     TabController.prototype.getByElem = function(elem) {
         var tab;
@@ -258,9 +249,7 @@ define([
         tabToClose.rootElem.parentElement.removeChild(tabToClose.rootElem);
 
         // destroy tab's Ace instance
-        tabToClose.editor.destroy();
-        tabToClose.editor.container.remove();
-
+        tabToClose.close();
         this.tabs.splice(this.tabs.indexOf(tabToClose), 1);
 
         var newCurrentTab = this.getLastModified();
@@ -277,10 +266,8 @@ define([
                 hasUndo: false,
                 hasRedo: false,
                 hasBeautify: false
-
             });
         }
-
     };
 
     TabController.prototype._resetUndoManager = function(tab) {

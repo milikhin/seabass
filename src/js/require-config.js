@@ -6,6 +6,9 @@ require.config({
 	}, {
 		name: "ace",
 		location: "js/ace"
-	}]
+	},{
+    name: "cm",
+    location: "../bower_components/codemirror",
+    main: "lib/codemirror"
+  }]
 });
- 

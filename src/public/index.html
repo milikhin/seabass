@@ -7,11 +7,16 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title>Seabass</title>
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!--  WeInRe debug script -->
     <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
 
+
+    <!-- App css -->
     <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="icon" type="image/png" href="/img/logo.png" />
+
     <!-- Ubuntu UI javascript imports - Ambiance theme -->
     <script src="ambiance/js/fast-buttons.js"></script>
     <script src="ambiance/js/core.js"></script>
@@ -22,10 +27,12 @@
     <script src="ambiance/js/tabs.js"></script>
     <script src="ambiance/js/tab.js"></script>
 
+    <!-- Beautifiers -->
     <script src="beautify/beautify.js"></script>
     <script src="beautify/beautify-css.js"></script>
     <script src="beautify/beautify-html.js"></script>
 
+    <!-- App scripts -->
     <script src="cordova.js"></script>
     <script src="js/require.js"></script>
     <script src="js/require-config.js"></script>
@@ -118,28 +125,39 @@
                                 </p>
                             </div>
 
-                            <h3 class="tabs__welcome-note__header3">Thank you!</h3>
+                            <h3 class="tabs__welcome-note__header3">Big update!</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                    I just wanted to say "Thank you" to everyone of you for your patience while using Seabass, for reporing bugs, sending feedback and writing reviews.
+                                    Seabass v0.3.0 introduces <b>Codemirror</b> as new main build-in code editor.
+                                    There was mainly one reason for the change: slightly better <b>touch screen</b> support out of the box.
+                                    But Codemirror also provides us more simple,
+                                    lite, and easy-to-integrate editor with rich functionality and very good language support.
                                 </p>
                                 <p>
-                                    And in case you'd like to buy me a cup of coffee and thus become a sponsor of the next Seabass release, there is a link to paypal below :-)
+                                    Of course, there were to be drawbacks, and there is the one I'd like to note: <b>lack of recently introduced QML support</b>.
+                                    So if you use Seabass for editing QML files, this version might be not for you.
+                                    The good news are that I don't want to abandon Ace-based branch, for now it is available on Github!
                                 </p>
-                              </div>
+                                <p>
+                                    This is a very experimenting release and your feedback is appreciated even more than ever.
+                                </p>
+                                <p>
+                                    And in case you'd like to buy me a cup of coffee and thus become a sponsor of Seabass's future, there is a link to paypal below!
+                                </p>
+                            </div>
 
-                              <h3 class="tabs__welcome-note__header3">Links</h3>
-                              <div class="tabs__welcome-note__state">
+                            <h3 class="tabs__welcome-note__header3">Links</h3>
+                            <div class="tabs__welcome-note__state">
                                 <table class="tabs__welcome-note__table tabs__welcome-note__table--support">
                                     <tr>
-                                      <td class="tabs__welcome-note__table--support__title">
-                                          <span>
+                                        <td class="tabs__welcome-note__table--support__title">
+                                            <span>
                                             Rate Seabass with 5 stars:
                                           </span>
-                                      </td>
-                                      <td>
-                                          <a href="scope://com.canonical.scopes.clickstore?q=Seabass">at UbuntuStore</a>
-                                      </td>
+                                        </td>
+                                        <td>
+                                            <a href="scope://com.canonical.scopes.clickstore?q=Seabass">at UbuntuStore</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="tabs__welcome-note__table--support__title">
@@ -171,7 +189,7 @@
                                     </tr>
                                     <tr>
                                         <td class="tabs__welcome-note__table--support__title">
-                                          <span>
+                                            <span>
                                             Project page:
                                           </span>
                                         </td>
@@ -201,13 +219,16 @@
                         </h2>
 
                         <h3 class="tabs__welcome-note__header3">Keybindings</h3>
+                        <p>
+                            Seabass relies on Codemirror's project "sublime" mode for default keybindings with an addition of a few own shortcuts.
+                        </p>
                         <div class="tabs__welcome-note__state">
                             <ul class="tabs__welcome-note__list">
-                                <li>Beautify code (if possible) &ndash; <code>Ctrl+Shift+B</code></li>
+                                <li>Beautify code (if possible) &ndash; <code>Ctrl+Alt+B</code>, <code>Ctrl+Shift+B</code></li>
                                 <li>Find &ndash; <code>Ctrl+F</code></li>
+                                <li>Find next &ndash; <code>Ctrl+G</code></li>
                                 <li>Focus to file-open field &ndash; <code>Ctrl+E</code>, <code>Ctrl+O</code></li>
-                                <li>Open autocomplete menu &ndash; <code>Ctrl+Space</code></li>
-                                <li>Redo &ndash; <code>Ctrl+Shift+Z</code>, <code>Ctrl+Y</code></li>
+                                <li>Redo &ndash; <code>Ctrl+Y</code></li>
                                 <li>Replace &ndash; <code>Ctrl+H</code></li>
                                 <li>Toggle file tree &ndash; <code>Ctrl+T</code></li>
                                 <li>Undo &ndash; <code>Ctrl+Z</code></li>
@@ -224,7 +245,7 @@
                                     Standard version from Ubuntu Store (File System access is limited to Seabass's own directory)
                                 </li>
                                 <li>
-                                    Unconfined version from OpenStore (with unrestricted access to user's Home directory)
+                                    Unconfined version from OpenStore/Github (with unrestricted access to user's Home directory)
                                 </li>
                             </ol>
                             <br/>
@@ -288,8 +309,8 @@
                                 Zentabs: up to five (three in sidestage mode) simultaneously opened tabs. When the limit is exceeded, the eldest is closed
                             </li>
                             <li>
-                                Syntax highlighting for the 26 following languages:
-                                <br/><code>c, c++, css, ejs, go, html, java, javascript, json, jsx, latex, less, markdown, php, python, qml, ruby, sass, scss, shell, stylus, svg, swift, typescript, xml, yaml</code>
+                                Syntax highlighting for more than 25 languages:
+                                <br/><code>c, c++, css, go, html, java, javascript, json, jsx, latex, less, markdown, pascal, php, python, ruby, sass, scss, shell, stylus, svg, swift, typescript, xml, yaml</code>
                             </li>
                             <li>
                                 Code formatter for the following file formats:
@@ -369,6 +390,9 @@
                                 </li>
                                 <li>
                                     Apache Cordova project for the awesome framework
+                                </li>
+                                <li>
+                                    Codemirror project
                                 </li>
                                 <li>
                                     Cloud9 and others for Ace editor

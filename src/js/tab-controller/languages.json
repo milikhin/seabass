@@ -1,33 +1,38 @@
 {
     "js": "javascript",
-    "ts": "typescript",
-    "json": "json",
-    "css": "css",
-    "less": "less",
+    "json": {
+        "name": "javascript",
+        "json": true
+    },
+    "ts": {
+        "name": "javascript",
+        "typescript": true
+    },
+    "java": "text/x-java",
+    "css": "text/css",
+    "less": "text/x-less",
     "sass": "sass",
-    "scss": "scss",
+    "scss": "text/x-scss",
     "styl": "stylus",
-    "md": "markdown",
+    "md": "text/x-markdown",
 
-    "tex": "latex",
     "xml": "xml",
-    "html": "html",
-    "svg": "svg",
+    "svg": "xml",
+    "html": "htmlmixed",
     "php": "php",
-    "ejs": "ejs",
     "jsx": "jsx",
     "rb": "ruby",
+    "tex": "text/x-stex",
 
-    "c": "c_cpp",
-    "cpp": "c_cpp",
-    "qml": "qml",
-    "qmlproject": "qml",
-    "go": "golang",
+    "c": "text/x-c",
+    "cpp": "text/x-c++src",
+    "h": "text/x-c++hdr",
+    "go": "go",
     "py": "python",
-    "java": "java",
+    "pas": "pascal",
     "swift": "swift",
 
-    "sh": "sh",
+    "sh": "shell",
+    "sql": "sql",
     "yaml": "yaml"
-
 }
