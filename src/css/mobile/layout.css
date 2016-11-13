@@ -45,6 +45,10 @@
     padding: 20px;
 }
 
+.tabs__welcome-note__table {
+  margin: 0 auto;
+}
+
 .tabs__welcome-note__table td {
     text-align: right;
     display: block;

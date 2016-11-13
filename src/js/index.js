@@ -59,7 +59,7 @@ define([
 					class="app-action header__tab__button-pane__button header__tab__button-pane__button-beautify tooltip tooltip-bottom"
 					disabled>
 					<i class="material-icons">spellcheck</i>
-					<span class="tooltip__text">Beautify<br/><code>Ctrl + Shift + B</code></span>
+					<span class="tooltip__text">Beautify<br/><code>Ctrl + Alt + B</code></span>
 				</button>
 				<button
 					data-action="editor-redo"
