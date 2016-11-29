@@ -20,6 +20,7 @@
         location: "js"
     }, {
         name: "cm",
-        location: "bower_components/codemirror"
+        location: "bower_components/codemirror",
+      	main: "lib/codemirror"
     }]
 });

@@ -1,6 +1,6 @@
 define([
     'json!./languages.json',
-    "cm/lib/codemirror",
+    "cm",
     "app/app-event",
     'cm/keymap/sublime',
     'cm/addon/search/search',
@@ -54,7 +54,8 @@ define([
             value: options.fileContent,
             matchTags: true,
             matchBrackets: true,
-            autoCloseBrackets: true
+            autoCloseBrackets: true,
+          	inputStyle: "contenteditable"
         });
 
         this._editor.setOption("extraKeys", {
