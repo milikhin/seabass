@@ -12,7 +12,8 @@
         "md5": "bower_components/js-md5/js/md5.min",
         "json": "bower_components/requirejs-plugins/src/json",
         "text": "bower_components/requirejs-plugins/lib/text",
-        "clipboard": "bower_components/clipboard/dist/clipboard.min"
+        "clipboard": "bower_components/clipboard/dist/clipboard.min",
+        "htmlhint": "public/js/htmlhint"
     },
     stubModules: ['json'],
     packages: [{
@@ -21,6 +22,6 @@
     }, {
         name: "cm",
         location: "bower_components/codemirror",
-      	main: "lib/codemirror"
+        main: "lib/codemirror"
     }]
 });
