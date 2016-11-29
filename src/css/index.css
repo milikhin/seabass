@@ -5,6 +5,7 @@
 @import 'codemirror/codemirror.css';
 @import 'codemirror/monokai.css';
 @import 'codemirror/dialog.css';
+@import 'codemirror/lint.css';
 
 /* haks for external components */
 @import 'haks/index.css';

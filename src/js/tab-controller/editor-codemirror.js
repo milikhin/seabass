@@ -2,8 +2,18 @@ define([
     'json!./languages.json',
     "cm",
     "app/app-event",
+
     'cm/keymap/sublime',
+    'cm/addon/lint/lint',
+    'cm/addon/lint/javascript-lint',
+    //'cm/addon/lint/coffeescript-lint',
+    'cm/addon/lint/html-lint',
+    'cm/addon/lint/json-lint',
+    'cm/addon/lint/css-lint',
+    'cm/addon/lint/yaml-lint',
+
     'cm/addon/search/search',
+
     'cm/addon/search/searchcursor',
     'cm/addon/search/jump-to-line',
     'cm/addon/search/search',
@@ -15,6 +25,7 @@ define([
     // Web
     "cm/mode/htmlmixed/htmlmixed",
     "cm/mode/javascript/javascript",
+  	"cm/mode/coffeescript/coffeescript",
     "cm/mode/css/css",
     "cm/mode/sass/sass",
     "cm/mode/stylus/stylus",
@@ -38,6 +49,7 @@ define([
     "cm/mode/swift/swift"
 ], function(languages, CodeMirror, AppEvent) {
     function Editor(options) {
+
         var self = this;
         this.fileName = options.fileName;
         if (!this.fileName) {
@@ -45,17 +57,21 @@ define([
         }
 
         var language = this._getLanguage();
+        var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
+        var hasLinter = ~['json', 'js', 'css', 'html', 'yaml'].indexOf(ext);
 
         this._editor = CodeMirror.fromTextArea(options.editorElem, {
             lineNumbers: true,
             mode: language,
+            lint: hasLinter,
             keyMap: "sublime",
             theme: "monokai",
             value: options.fileContent,
             matchTags: true,
             matchBrackets: true,
             autoCloseBrackets: true,
-          	inputStyle: "contenteditable"
+            inputStyle: "contenteditable",
+            gutters: hasLinter ? ["CodeMirror-lint-markers"] : []
         });
 
         this._editor.setOption("extraKeys", {

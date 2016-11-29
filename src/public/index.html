@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/img/logo.png" />
 
     <!--  WeInRe debug script -->
-    <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
+    <!-- <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script> -->
 
     <!-- App css -->
     <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
@@ -30,6 +30,13 @@
     <script src="beautify/beautify.js"></script>
     <script src="beautify/beautify-css.js"></script>
     <script src="beautify/beautify-html.js"></script>
+
+    <script src="js/jshint.js"></script>
+    <script src="js/csslint.js"></script>
+    <script src="js/jsonlint.js"></script>
+    <!-- <script src="js/coffeelint.js"></script> -->
+    <script src="js/js-yaml.js"></script>
+    <script src="js/htmlhint.js"></script>
 
     <!-- App scripts -->
     <script src="cordova.js"></script>
@@ -127,13 +134,12 @@
                             <h3 class="tabs__welcome-note__header3">Big update!</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                    Seabass v0.3.0 introduces <b>CodeMirror</b> as a new built-in code editor.
-                                    There was mainly one reason for the change: slightly better <b>touch screen</b> support out of the box.
-                                    But CodeMirror also provides us more simple, lite, and easy-to-integrate editor component.
+                                    Seabass v0.3.0 introduces <b>CodeMirror</b> as a new built-in code editor. There was mainly one reason for the change: slightly better <b>touch screen</b> support out of the box. But CodeMirror also provides us more
+                                    simple, lite, and easy-to-integrate editor component.
                                 </p>
                                 <p>
-                                    Of course, there were to be drawbacks, and there is the one I'd like to note: <b>lack of</b> syntax highlight support for <b>QML</b> and <b>EJS</b> files.
-                                    The good news are that the Ace-based branch of Seabass with the same functionality and support for QML and EJS is available on Github (<i>Seabass &rarr; Releases &rarr; v0.2.14</i>).
+                                    Of course, there were to be drawbacks, and there is the one I'd like to note: <b>lack of</b> syntax highlight support for <b>QML</b> and <b>EJS</b> files. The good news are that the Ace-based branch of Seabass with
+                                    the same functionality and support for QML and EJS is available on Github (<i>Seabass &rarr; Releases &rarr; v0.2.14</i>).
                                 </p>
                                 <p>
                                     This is a very experimental release and your feedback is appreciated even more than ever.
@@ -212,7 +218,7 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                          Seabass v0.3.1 (r18)
+                            Seabass v0.3.2 (r19)
                         </h2>
 
                         <h3 class="tabs__welcome-note__header3">Keybindings</h3>
@@ -294,7 +300,7 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.3.1 (r18)
+                            Seabass v0.3.2 (r19)
                         </h2>
                         <p class="tabs__welcome-note__header-p">Seabass is a text (code) editor for Ubuntu Touch. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
@@ -415,15 +421,29 @@
                                 <li>
                                     Zeno Rocha for Clipboard.js
                                 </li>
-
+                                <li>
+                                    Matthew Perpick and others for coffeelint
+                                </li>
+                                <li>
+                                    Yanis Wang and others for HTMLHint
+                                </li>
+                                <li>
+                                    Anton Kovalyov for JSHint
+                                </li>
+                                <li>
+                                    Nicole Sullivan and Nicholas C. Zakas for CSSLint
+                                </li>
+                                <li>
+                                    Zachary Carter and others for JSONLint
+                                </li>
+                                <li>
+                                    Vitaly Puzrin for js-yaml
+                                </li>
                             </ul>
                         </div>
-
-
                     </section>
                 </div>
             </div>
-
             <div data-role="tab" id="settings">
                 <div class="settings-wrapper">
                     <section class="settings__container">

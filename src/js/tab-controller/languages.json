@@ -8,6 +8,8 @@
         "name": "javascript",
         "typescript": true
     },
+  	"coffee": "coffeescript",
+  	"litcoffee": "coffeescript",
     "java": "text/x-java",
     "css": "text/css",
     "less": "text/x-less",
