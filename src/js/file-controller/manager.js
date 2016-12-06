@@ -1,18 +1,24 @@
-define(['./index', 'co', 'app/app-event'], function(FileController, co, AppEvent) {
+define(['./index', './dropbox', 'co', 'app/app-event'], function(FileController, DropboxClient, co, AppEvent) {
     function FileManager() {
         var self = this;
-
-        co(function*() {
-            // initialize fs access;
-            self.fsController = new FileController();
-            yield self.fsController.waitForInit();
-            AppEvent.dispatch({
-                type: 'fsready'
-            });
-        }).catch(function(err) {
-            console.error(err);
-        });
+        this._initFs();
     }
+
+    FileManager.prototype._initFs = function() {
+        var self = this;
+        co(function*() {
+            if (window.LocalFileSystem) {
+                self.fsController = new FileController();
+                yield self.fsController.waitForInit();
+                AppEvent.dispatch({
+                    type: 'fsready'
+                });
+            } else {
+                new DropboxClient();
+                console.log('init alternative FS');
+            }
+        });
+    };
 
     FileManager.prototype.open = function(path) {
         return this.fsController.readFileByName(path);
@@ -57,7 +63,6 @@ define(['./index', 'co', 'app/app-event'], function(FileController, co, AppEvent
         localStorage.setItem('rootURL', this.fsController.fs.root.nativeURL);
         this.fsController.rootEntry = this.fsController.fs.root;
     };
-
 
     return FileManager;
 });

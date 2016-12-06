@@ -202,7 +202,6 @@ define(['co', 'md5'], function(co, md5) {
 
 
     // Private methods
-
     FileController.prototype._init = function() {
         var self = this;
         return co(function*() {
@@ -211,6 +210,7 @@ define(['co', 'md5'], function(co, md5) {
                 // console.log('file system open: ' + self.fs.name);
             } catch (err) {
                 console.error(err);
+                throw err;
             }
         });
     };

@@ -15,5 +15,8 @@
     "merge-stream": "^1.0.0",
     "requirejs": "^2.2.0",
     "rx": "^4.1.0"
+  },
+  "dependencies": {
+    "dropbox": "^2.5.0"
   }
 }

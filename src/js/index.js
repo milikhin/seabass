@@ -24,7 +24,6 @@ define([
             TabController.converge();
         });
 
-
         new Clipboard('.clipboard-btn');
     };
 

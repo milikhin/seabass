@@ -37,13 +37,26 @@
     <!-- <script src="js/coffeelint.js"></script> -->
     <script src="js/js-yaml.js"></script>
     <script src="js/htmlhint.js"></script>
+    <script src="js/Dropbox-sdk.min.js"></script>
 
     <!-- App scripts -->
-    <script src="cordova.js"></script>
+    <script id="cordova-goes-after">
+        window.seabass = {};
+        window.seabass.hasCordova = (document.location.protocol == "file:");
+        window.seabass.initEvent = window.seabass.hasCordova ? "deviceready" : "DOMContentLoaded";
+
+        // Init Cordova
+        if (window.seabass.hasCordova) {
+            var cordovaScriptElem = document.createElement('script');
+            cordovaScriptElem.src = "cordova.js";
+            document.getElementById('cordova-goes-after').parentElement.insertBefore(cordovaScriptElem, document.getElementById('cordova-goes-after'));
+        }
+    </script>
+
     <script src="js/require.js"></script>
     <script src="js/require-config.js"></script>
     <script>
-        document.addEventListener('deviceready', function() {
+        document.addEventListener(window.seabass.initEvent, function() {
             require(['app/index'], function(App) {
                 (new App()).initialize();
             });
@@ -131,21 +144,10 @@
                                 </p>
                             </div>
 
-                            <h3 class="tabs__welcome-note__header3">Big update!</h3>
+                            <h3 class="tabs__welcome-note__header3">Dropbox test</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                    Seabass v0.3.0 introduces <b>CodeMirror</b> as a new built-in code editor. There was mainly one reason for the change: slightly better <b>touch screen</b> support out of the box. But CodeMirror also provides us more
-                                    simple, lite, and easy-to-integrate editor component.
-                                </p>
-                                <p>
-                                    Of course, there were to be drawbacks, and there is the one I'd like to note: <b>lack of</b> syntax highlight support for <b>QML</b> and <b>EJS</b> files. The good news are that the Ace-based branch of Seabass with
-                                    the same functionality and support for QML and EJS is available on Github (<i>Seabass &rarr; Releases &rarr; v0.2.14</i>).
-                                </p>
-                                <p>
-                                    This is a very experimental release and your feedback is appreciated even more than ever.
-                                </p>
-                                <p>
-                                    And in case you'd like to buy me a cup of coffee and thus become a sponsor of Seabass's future, there is a link to PayPal below!
+                                    <a href="#" class="dropbox-auth-link">Authorize dropbox!</a>
                                 </p>
                             </div>
 
