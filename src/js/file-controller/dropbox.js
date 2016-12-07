@@ -3,7 +3,9 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
     function DropboxClient() {
         var self = this;
-        this.rootPath = '';
+      	this.WRITE_TIMEOUT = 2500;
+        
+      	this.rootPath = '';
         this.fsInitPromise = co(function*() {
             yield self._init();
         });
@@ -104,7 +106,6 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                 var reader = new FileReader();
                 reader.addEventListener("loadend", function() {
                     // reader.result contains the contents of blob as a typed array
-                    console.log(reader.result);
                     resolve(reader.result);
                 });
 
@@ -122,24 +123,27 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
     DropboxClient.prototype.writeFile = function(fileEntry, data) {
         var self = this;
-        if (this._writeTimeout) {
-            clearTimeout(this._writeTimeout);
-        }
-        this._writeTimeout = setTimeout(function() {
-            return co(function*() {
-                yield self.dbx.filesUpload({
-                    path: fileEntry.path,
-                    contents: data,
-                    mode: {
-                        ".tag": "overwrite"
-                    }
+        return new Promise(function(resolve, reject) {
+            if (self._writeTimeout) {
+                clearTimeout(self._writeTimeout);
+            }
+            self._writeTimeout = setTimeout(function() {
+                return co(function*() {
+                    yield self.dbx.filesUpload({
+                        path: fileEntry.path,
+                        contents: data,
+                        mode: {
+                            ".tag": "overwrite"
+                        }
+                    });
                 });
+            }, self.WRITE_TIMEOUT);
+
+            resolve(data);
+        });
 
 
-            });
-        }, 2500);
 
-        return data;
     };
 
     // Authentication

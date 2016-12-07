@@ -1,26 +1,47 @@
 define(['./index', './dropbox', 'co', 'app/app-event'], function(FileController, DropboxClient, co, AppEvent) {
     function FileManager() {
         var self = this;
-        this._initFs();
+        this.FS_TYPES = {
+            "FS_NATIVE": 1,
+            "FS_DROPBOX": 2
+        };
+
+        // TODO: move to Settings
+        this._fsType = this.FS_TYPES.FS_DROPBOX;
+      
+      	this._initFs();        
     }
 
     FileManager.prototype._initFs = function() {
         var self = this;
         co(function*() {
-            if (window.LocalFileSystem) {
-                self.fsController = new FileController();
-                yield self.fsController.waitForInit();
-                AppEvent.dispatch({
-                    type: 'fsready'
-                });
-            } else {
-                self.fsController = new DropboxClient();
-                console.log('init alternative FS');
-                yield self.fsController.wait();
-                console.log('alt fs initialized');
-                AppEvent.dispatch({
-                    type: 'fsready'
-                });
+          	console.log('init FS type', self.fsType);                
+            switch (self._fsType) {
+                case self.FS_TYPES.FS_NATIVE:
+                    {
+                        if (window.LocalFileSystem) {
+                            self.fsController = new FileController();
+                            yield self.fsController.waitForInit();
+                            AppEvent.dispatch({
+                                type: 'fsready'
+                            });
+                        } else {
+                            throw new Error('FS is not supported, ' + self._fsType);
+                        }
+
+                        break;
+                    }
+                case self.FS_TYPES.FS_DROPBOX:
+                    {
+                        self.fsController = new DropboxClient();
+
+                        yield self.fsController.wait();
+                        AppEvent.dispatch({
+                            type: 'fsready'
+                        });
+
+                        break;
+                    }
             }
         });
     };
