@@ -196,7 +196,7 @@ define(['co', 'md5'], function(co, md5) {
     };
 
 
-    FileController.prototype.waitForInit = function() {
+    FileController.prototype.wait = FileController.prototype.waitForInit = function() {
         return this.fsInitPromise;
     };
 

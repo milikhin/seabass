@@ -24,3 +24,7 @@ input[type=range] {
 [data-role="list"] ul li p.disabled ~ .settings__container__slider-wrapper {
   color: #ccc;
 }
+
+.settings-note {
+  padding: 10px 15px;
+}

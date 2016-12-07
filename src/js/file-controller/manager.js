@@ -14,8 +14,13 @@ define(['./index', './dropbox', 'co', 'app/app-event'], function(FileController,
                     type: 'fsready'
                 });
             } else {
-                new DropboxClient();
+                self.fsController = new DropboxClient();
                 console.log('init alternative FS');
+                yield self.fsController.wait();
+                console.log('alt fs initialized');
+                AppEvent.dispatch({
+                    type: 'fsready'
+                });
             }
         });
     };
@@ -44,6 +49,9 @@ define(['./index', './dropbox', 'co', 'app/app-event'], function(FileController,
     };
 
     FileManager.prototype.getRootURL = function() {
+        if (this.fsController.getRootUrl) {
+            return this.fsController.getRootUrl();
+        }
         var url = this.getRoot().nativeURL;
         var rootUrl = 'file://localhost';
         var shortenedUrl = url.slice(url.indexOf(rootUrl) + rootUrl.length, url.length);
