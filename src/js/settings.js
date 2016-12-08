@@ -77,6 +77,10 @@ define([], function() {
                     elemToHide.style.display = "none";
                 });
             }
+        } else {
+          if(!window.LocalFileSystem) {
+            document.getElementById('file-tree-source').value = "dropbox";
+          }
         }
 
         document.getElementById('dropbox-access-token').value = this.get('dropbox-token');
