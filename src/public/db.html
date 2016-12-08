@@ -17,6 +17,8 @@
     <script src="js/require.js"></script>
     <script src="js/require-config.js"></script>
     <script>
+      	window.seabass = {}	
+      	window.seabass.hasCordova = (document.location.protocol == "file:");
         document.addEventListener("DOMContentLoaded", function() {
             require(['app/index'], function() {
                 require(['app/dropbox-auth-app'], function(App) {
@@ -45,7 +47,8 @@
         <a id="dropbox-get-token" href="" class="dropbox-auth-link">Get new Dropbox token...</a>
     </p>
     <p>
-        Copy-paste given token to the Seabass (Settings page &rarr; Dropbox Token) to complete authorization process.
+      	Once authentication is complete you need to copy generated token, 
+      	reopen Seabass and paste token into <b>"Settings &rarr; Dropbox access token"</b> field to complete authorization process.
     </p>
 </body>
 

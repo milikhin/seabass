@@ -17,7 +17,8 @@
     "rx": "^4.1.0"
   },
   "dependencies": {
-    "dropbox": "^2.5.0"
+    "dropbox": "^2.5.0",
+    "gulp-gh-pages": "^0.5.4"
   },
   "seabass": {
     "deployTo": "git@github.com:milikhin/seabass.git"

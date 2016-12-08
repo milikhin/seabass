@@ -42,11 +42,11 @@
     <!-- App scripts -->
     <script id="cordova-goes-after">
         window.seabass = {
-          DB_AUTH_URL: "http://localhost:8080/db.html"
+            DB_AUTH_URL: "https://milikhin.github.io/seabass/db.html"
         };
         window.seabass.hasCordova = (document.location.protocol == "file:");
         window.seabass.initEvent = window.seabass.hasCordova ? "deviceready" : "DOMContentLoaded";
-      	window.seabass.initEvent = "DOMContentLoaded";
+        window.seabass.initEvent = "DOMContentLoaded";
 
         // Init Cordova
         if (window.seabass.hasCordova) {
@@ -417,13 +417,29 @@
                             <ul>
                                 <li>
                                     <p>
-                                        Source
+                                        Source *
                                     </p>
                                     <label class="list__label__auto">
                                       <select id="file-tree-source">
                                           <option value="native" selected>Local file system</option>
                                           <option value="dropbox">Dropbox</option>
                                       </select>
+                                    </label>
+                                </li>
+                                <li class="ft-dropbox-only">
+                                    <p>
+                                        Connect to Dropbox **
+                                    </p>
+                                    <label class="list__label__auto">
+                                      <a class="dropbox-auth-link" href="">Connect...</a>
+                                    </label>
+                                </li>
+                                <li class="ft-dropbox-only">
+                                    <p>
+                                        Dropbox access token *
+                                    </p>
+                                    <label class="list__label__auto">
+                                      <input type="text" id="dropbox-access-token"/>
                                     </label>
                                 </li>
                                 <li>
@@ -467,30 +483,10 @@
                                     </label>
                                 </li>
                             </ul>
-                          
-                          	<header>Dropbox</header>
-                            <ul>
-                              	<li>
-                                    <p>
-                                        Get access token
-                                    </p>
-                                    <label class="list__label__auto">
-                                      <a class="dropbox-auth-link" href="">authorize...</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <p>
-                                        Access token
-                                    </p>
-                                    <label class="list__label__auto">
-                                      <input id="dropbox-access-token"/>
-                                    </label>
-                                </li>                              	
-                          </ul>
-
-
                         </div>
                         <p class="settings-note">
+                          	<b>*</b> &ndash; restart required to apply changes.<br/>                          	
+                          	<b>**</b> &ndash; you'll be redirected to Seabass Online to complete authorization<br/>
                             <b>Note:</b> accorting to CSS specifications 1px equals to 1/96in.
                         </p>
                     </section>

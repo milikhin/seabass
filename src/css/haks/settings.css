@@ -32,3 +32,8 @@ input[type=range] {
 [data-role="list"] ul li > label.list__label__auto {
   width: auto;
 }
+
+.list__label__auto .dropbox-auth-link {
+  line-height: 2.2rem;
+  color: black;
+}

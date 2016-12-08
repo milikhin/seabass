@@ -17,6 +17,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
             case 'native':
                 {
                     this._fsType = this.FS_TYPES.FS_NATIVE;
+                  	break;
                 }
             default:
                 {

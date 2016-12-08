@@ -13,6 +13,7 @@ var jsCopy = require('./dev-tools/tasks/js-copy');
 
 var copyOnly = require('./dev-tools/tasks/copy-only');
 var jsPre = require('./dev-tools/tasks/js-prebuild');
+var deploy = require('./dev-tools/tasks/deploy');
 
 /* Compile JS/CSS, copy them to /dist directory */
 gulp.task('js-prebuild', jsPre);
@@ -22,6 +23,9 @@ gulp.task('css-build', cssBuild);
 gulp.task('css', ['css-build'], cssCopy);
 
 gulp.task('assets', copyOnly());
+gulp.task('deploy', deploy({
+	packageJson: require('./package')
+}));
 
 // If some files are missing, remove this task from default task list
 gulp.task('rm-dist', shell.task([
