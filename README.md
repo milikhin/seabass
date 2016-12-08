@@ -22,7 +22,7 @@ Seabass code editor for Ubuntu Touch
 - [x] Add workaround for opening hidden files
 
 ### v0.3. Preparing for redesign
-* Dropbox integrations
+* Dropbox integration
 * Optimization and refactoring
 * Beautifier: support more languages
 * OSK height preferences (OSK height is different on Tablet/Phone)
