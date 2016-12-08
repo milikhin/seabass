@@ -72,15 +72,16 @@ define([], function() {
         document.getElementById('editor-font-size-state').innerHTML = this.get('fontSize');
         if (this.get('fileTreeSource')) {
             document.getElementById('file-tree-source').value = this.get('fileTreeSource');
-            if (this.get('fileTreeSource') !== "dropbox") {
-                [].forEach.call(document.querySelectorAll('.ft-dropbox-only'), function(elemToHide) {
-                    elemToHide.style.display = "none";
-                });
-            }
         } else {
-          if(!window.LocalFileSystem) {
-            document.getElementById('file-tree-source').value = "dropbox";
-          }
+            if (!window.LocalFileSystem) {
+                document.getElementById('file-tree-source').value = "dropbox";
+            }
+        }
+
+        if (this.get('fileTreeSource') !== "dropbox") {
+            [].forEach.call(document.querySelectorAll('.ft-dropbox-only'), function(elemToHide) {
+                elemToHide.style.display = "none";
+            });
         }
 
         document.getElementById('dropbox-access-token').value = this.get('dropbox-token');

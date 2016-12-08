@@ -46,8 +46,7 @@
         };
         window.seabass.hasCordova = (document.location.protocol == "file:");
         window.seabass.initEvent = window.seabass.hasCordova ? "deviceready" : "DOMContentLoaded";
-        window.seabass.initEvent = "DOMContentLoaded";
-
+        
         // Init Cordova
         if (window.seabass.hasCordova) {
             var cordovaScriptElem = document.createElement('script');
@@ -150,8 +149,12 @@
                             <h3 class="tabs__welcome-note__header3">Dropbox introduced</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                    You can now edit your files in Dropbox directly with Seabass. 
-                                  	Go to <b>Settings</b> page to connect your Dropbox account.
+                                  	v0.3.2 contains pre-release implementation of Dropbox integration.                                  	
+                                </p>
+                                <p>
+                                    You can now edit your files in Dropbox directly with Seabass.
+                                  	While it may works rather well, it is really WIP.
+                                  	Visit <b>Settings</b> page to connect your Dropbox account.
                                 </p>
                             </div>
 

@@ -3,9 +3,9 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
     function DropboxClient() {
         var self = this;
-      	this.WRITE_TIMEOUT = 2500;
-        
-      	this.rootPath = '';
+        this.WRITE_TIMEOUT = 2500;
+
+        this.rootPath = '';
         this.fsInitPromise = co(function*() {
             yield self._init();
         });
@@ -41,7 +41,6 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
                 var authUrl = window.seabass.hasCordova ? window.seabass.DB_AUTH_URL : dbx.getAuthenticationUrl(location.toString());
                 [].forEach.call(document.querySelectorAll('.dropbox-auth-link'), function(dplinkElem) {
-                    console.log(dplinkElem);
                     dplinkElem.href = authUrl;
                 });
 
@@ -57,7 +56,6 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
     DropboxClient.prototype.getFiles = function(dirEntry, navEnabled) {
         var dirPath = dirEntry ? dirEntry.path : this.rootPath;
-        console.log(dirPath);
         var fileStructure = [];
         var self = this;
 
@@ -67,7 +65,6 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
             });
 
             var fileEntries = fileEntriesResponse.entries;
-            console.log(fileEntries);
 
             fileEntries.forEach(function(entry) {
                 var fileDescription = {
@@ -94,20 +91,117 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
     };
 
+
+    DropboxClient.prototype._checkDirectory = function(dirName, parentPath) {
+        var self = this;
+        return co(function*() {
+            var fileEntriesResponse = yield self.dbx.filesListFolder({
+                path: parentPath || self.rootPath
+            });
+            var fileEntries = fileEntriesResponse.entries;
+            var dirFound = false;
+            fileEntries.forEach(function(entry) {
+                if (entry.name == dirName) {
+                    dirFound = true;
+                }
+            });
+
+            return dirFound;
+        });
+    };
+
+    DropboxClient.prototype._createDirectory = function(dirName, parentPath) {
+        var self = this;
+        return co(function*() {
+            var alreadyExists = yield self._checkDirectory(dirName, parentPath);
+            if (!alreadyExists) {
+                yield self.dbx.filesCreateFolder({
+                    path: parentPath + "/" + dirName
+                });
+            }
+        });
+    };
+
+    DropboxClient.prototype.readFileByName = function(filePath) {
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+            var filePaths = filePath.split('/');
+            var dirEntry = self.rootEntry;
+            var dirPath = "";
+
+            if (filePaths.length > 1) {
+                var dirPaths = filePaths.slice(0, -1);
+                var fileName = filePaths.slice(-1)[0];
+                // console.log(dirPaths, filePaths.slice(-1));
+            }
+
+            co(function*() {
+                if (dirPaths) {
+                    for (var i = 0; i < dirPaths.length; i++) {
+                        if (!dirPaths[i]) {
+                            continue;
+                        }
+                        console.log('checking ', dirPath + "/" + dirPaths[i]);
+                        yield self._createDirectory(dirPaths[i], dirPath);
+                        dirPath += "/" + dirPaths[i];
+                    }
+                }
+
+                if (!fileName) {
+                    return resolve();
+                }
+
+                // Check file existance
+                var fileEntriesResponse = yield self.dbx.filesListFolder({
+                    path: dirPath
+                });
+
+                var fileEntries = fileEntriesResponse.entries;
+                var fileFound = false;
+                fileEntries.forEach(function(entry) {
+                    if (entry.name == fileName) {
+                        fileFound = true;
+                    }
+                });
+                var fileEntry = {
+                    path: dirPath + "/" + fileName
+                }
+
+                if (!fileFound) {
+                    yield self.writeFile(fileEntry);
+                }
+
+                var fileContent = yield self.readFile(fileEntry);
+                console.log('fc', fileContent);
+                resolve({
+                    fileEntry: {
+                    	path: fileEntry.path,
+                        nativeURL: fileEntry.path,
+                        isDirectory: false
+                    },
+                    fileContent: fileContent
+                });
+            }).catch(function(err) {
+                console.error(err);
+            });
+        });
+
+    };
+
     DropboxClient.prototype.readFile = function(fileEntry) {
         var self = this;
         return co(function*() {
             var file = yield self.dbx.filesDownload({
-                path: fileEntry.path
+                path: fileEntry.path ? fileEntry.path : fileEntry
             });
-            console.log(window.w = file);
 
             var fileContent = yield new Promise(function(resolve, reject) {
                 var reader = new FileReader();
-                reader.addEventListener("loadend", function() {
+                reader.onloadend = function() {
                     // reader.result contains the contents of blob as a typed array
                     resolve(reader.result);
-                });
+                };
 
                 //reader.addEventListener("error", function() {
                 // reader.result contains the contents of blob as a typed array
@@ -136,14 +230,11 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                             ".tag": "overwrite"
                         }
                     });
+                  
+            		resolve(data);
                 });
             }, self.WRITE_TIMEOUT);
-
-            resolve(data);
         });
-
-
-
     };
 
     // Authentication

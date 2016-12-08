@@ -22,10 +22,17 @@ define([
     'cm/addon/edit/matchbrackets',
     'cm/addon/edit/matchtags',
 
+    'cm/addon/fold/foldcode',
+    'cm/addon/fold/foldgutter',
+    'cm/addon/fold/brace-fold',
+    'cm/addon/fold/xml-fold',
+    'cm/addon/fold/markdown-fold',
+    'cm/addon/fold/comment-fold',
+
     // Web
     "cm/mode/htmlmixed/htmlmixed",
     "cm/mode/javascript/javascript",
-  	"cm/mode/coffeescript/coffeescript",
+    "cm/mode/coffeescript/coffeescript",
     "cm/mode/css/css",
     "cm/mode/sass/sass",
     "cm/mode/stylus/stylus",
@@ -61,17 +68,24 @@ define([
         var hasLinter = ~['json', 'js', 'css', 'html', 'yaml'].indexOf(ext);
 
         this._editor = CodeMirror.fromTextArea(options.editorElem, {
-            lineNumbers: true,
-            mode: language,
-            lint: hasLinter,
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-Q": function(cm) {
+                    cm.foldCode(cm.getCursor());
+                }
+            },
+            inputStyle: "contenteditable",
+          	foldGutter: true,
+            gutters: hasLinter ? ["CodeMirror-lint-markers", "CodeMirror-foldgutter"] : ["CodeMirror-foldgutter"],
             keyMap: "sublime",
-            theme: "monokai",
-            value: options.fileContent,
+            lint: hasLinter,
+            lineNumbers: true,
+            // lineWrapping: true,
             matchTags: true,
             matchBrackets: true,
-            autoCloseBrackets: true,
-            inputStyle: "contenteditable",
-            gutters: hasLinter ? ["CodeMirror-lint-markers"] : []
+            mode: language,
+            theme: "monokai",
+            value: options.fileContent
         });
 
         this._editor.setOption("extraKeys", {

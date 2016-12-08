@@ -8,6 +8,10 @@ define(['app/file-controller/dropbox', 'clipboard'], function(DropboxClient, Cli
         }
         document.getElementById('dropbox-token').value = dbxClient._getAccessToken();
         document.getElementById('dropbox-token-btn').dataset.clipboardText = dbxClient._getAccessToken();
+      	document.getElementById('dropbox-token-btn').addEventListener('click', function() {
+          document.getElementById('dropbox-token-btn-text').innerHTML = 'Copied to clipboard!';
+        });
+      
       	new Clipboard('.clipboard-btn');
     }
 });

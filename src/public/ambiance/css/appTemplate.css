@@ -316,7 +316,7 @@ ul {
   display: block;
   width: 20px;
   height: 20px;
-  background: transparent url("/usr/share/icons/suru/actions/scalable/back.svg") no-repeat center center;
+  background: transparent url("../../css/back.svg") no-repeat center center;
   background-size: 100%;
   margin: 0 auto;
 }
@@ -344,7 +344,7 @@ ul {
   display: block;
   width: 20px;
   height: 20px;
-  background: transparent url("/usr/share/icons/suru/actions/scalable/navigation-menu.svg") no-repeat center center;
+  background: transparent url("../../css/navigation-menu.svg") no-repeat center center;
   background-size: 100%;
   margin: 0 auto;
 }
