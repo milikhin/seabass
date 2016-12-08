@@ -21,7 +21,7 @@ sudo apt-get install cordova-cli
 ```
 sudo apt-add-repository ppa:ubuntu-sdk-team/ppa
 sudo apt-get update
-sudo apt-get install click-dev phablet-tools ubuntu-sdk-api-15.04
+sudo apt-get install click-dev phablet-tools
 ```
 
 ### 1.4 Add build dependencies for Cordova
