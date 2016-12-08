@@ -70,6 +70,12 @@ define([], function () {
 		document.getElementById('editor-font-size-state-wrapper').classList[this.get('isCustomFontSize') ? "remove" : "add"]('disabled');
 		document.getElementById('editor-font-size').value = this.get('fontSize');
 		document.getElementById('editor-font-size-state').innerHTML = this.get('fontSize');
+      	if(this.get('fileTreeSource')) {
+          document.getElementById('file-tree-source').value = this.get('fileTreeSource');
+        }
+      
+      	document.getElementById('dropbox-access-token').value = this.get('dropbox-token');
+      	
 
 		/* File tree settngs UI events*/
 		document.getElementById('file-tree-navigation').onchange = function () {
@@ -78,6 +84,10 @@ define([], function () {
 		document.getElementById('file-tree-width').oninput = function () {
 			self.set('treeWidth', this.valueAsNumber);
 			document.getElementById('file-tree-width-state').innerHTML = self.get('treeWidth');
+		};
+      	document.getElementById('file-tree-source').onchange = function () {          
+			self.set('fileTreeSource', this.value);
+          	location.reload();
 		};
 
 		/* Editor settings UI events */
@@ -90,6 +100,11 @@ define([], function () {
 			self.set('fontSize', this.valueAsNumber);
 			document.getElementById('editor-font-size-state').innerHTML = self.get('fontSize');
 		};
+      
+      	/* Dropbox settings UI events */
+      	document.getElementById('dropbox-access-token').onchange = function () {
+          self.set('dropbox-token', this.value);
+        }
 
 	};
 

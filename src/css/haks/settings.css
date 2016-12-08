@@ -28,3 +28,7 @@ input[type=range] {
 .settings-note {
   padding: 10px 15px;
 }
+
+[data-role="list"] ul li > label.list__label__auto {
+  width: auto;
+}

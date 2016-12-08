@@ -1,4 +1,4 @@
-define(['./index', './dropbox', 'co', 'app/app-event'], function(FileController, DropboxClient, co, AppEvent) {
+define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function(FileController, DropboxClient, co, AppEvent, Settings) {
     function FileManager() {
         var self = this;
         this.FS_TYPES = {
@@ -7,15 +7,37 @@ define(['./index', './dropbox', 'co', 'app/app-event'], function(FileController,
         };
 
         // TODO: move to Settings
-        this._fsType = this.FS_TYPES.FS_DROPBOX;
-      
-      	this._initFs();        
+        var savedFsType = Settings.get('fileTreeSource');
+        switch (savedFsType) {
+            case 'dropbox':
+                {
+                    this._fsType = this.FS_TYPES.FS_DROPBOX;
+                    break;
+                }
+            case 'native':
+                {
+                    this._fsType = this.FS_TYPES.FS_NATIVE;
+                }
+            default:
+                {
+                    if (window.LocalFileSystem) {
+                        this._fsType = this.FS_TYPES.FS_NATIVE;
+                    } else {
+                        this._fsType = this.FS_TYPES.FS_DROPBOX;
+                    }
+                }
+        }
+
+
+        this._initFs().then(function() {}, function(err) {
+            console.error(err);
+        });
     }
 
     FileManager.prototype._initFs = function() {
         var self = this;
-        co(function*() {
-          	console.log('init FS type', self.fsType);                
+        return co(function*() {
+            console.log('init FS type', self.fsType);
             switch (self._fsType) {
                 case self.FS_TYPES.FS_NATIVE:
                     {

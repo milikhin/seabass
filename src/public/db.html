@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <title>Seabass Dropbox authenticator</title>
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!-- App css -->
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+	
+    <script src="js/Dropbox-sdk.min.js"></script>
+    <script src="js/require.js"></script>
+    <script src="js/require-config.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            require(['app/index'], function() {
+                require(['app/dropbox-auth-app'], function(App) {
+                    App();
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>
+        Welcome to Dropbox authenticator for Seabass.
+    </h1>
+    <p>
+        Seabass can't get access token for Dropbox directly from within the app due to Ubuntu Touch security restrictions. You need to copy the token manually.
+    </p>
+    <div id="dropbox-info">
+      <p>Your current dropbox token is:</p>
+      <textarea id="dropbox-token" class="dropbox-token-text" value="" readonly></textarea>
+      <button id="dropbox-token-btn" class="clipboard-btn dropbox-token-btn" data-clipboard-text="">
+      	<i class="material-icons">content_copy</i> Copy to clipboard
+      </button>
+  	</div>
+    <p>
+        <a id="dropbox-get-token" href="" class="dropbox-auth-link">Get new Dropbox token...</a>
+    </p>
+    <p>
+        Copy-paste given token to the Seabass (Settings page &rarr; Dropbox Token) to complete authorization process.
+    </p>
+</body>
+
+</html>

@@ -18,5 +18,8 @@
   },
   "dependencies": {
     "dropbox": "^2.5.0"
+  },
+  "seabass": {
+    "deployTo": "git@github.com:milikhin/seabass.git"
   }
 }

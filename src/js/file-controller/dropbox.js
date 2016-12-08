@@ -39,7 +39,7 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                     clientId: 'oiwrzs6wfzosfcp'
                 });
 
-                var authUrl = dbx.getAuthenticationUrl('http://localhost:8080');
+                var authUrl = window.seabass.hasCordova ? window.seabass.DB_AUTH_URL : dbx.getAuthenticationUrl(location.toString());
                 [].forEach.call(document.querySelectorAll('.dropbox-auth-link'), function(dplinkElem) {
                     console.log(dplinkElem);
                     dplinkElem.href = authUrl;

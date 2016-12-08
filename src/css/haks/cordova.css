@@ -17,3 +17,18 @@ body {
 [data-role="list"] > header + ul li {
     padding: 0;
 }
+
+.dropbox-token-text {
+  
+  width: 200px;
+  height: 50px;
+}
+
+.clipboard-btn.dropbox-token-btn {
+  color: #333;
+  cursor: pointer;
+}
+
+.clipboard-btn.dropbox-token-btn:hover {
+  color: black;
+}

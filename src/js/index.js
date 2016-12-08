@@ -5,7 +5,8 @@ define([
     'app/app-event',
     'co',
     'inspire',
-    'clipboard'
+    'clipboard',
+  	'app/dropbox-auth-app'
 ], function(FileManager, TabController, SettingsController, AppEvent, co, InspireTree, Clipboard) {
     "use strict";
 

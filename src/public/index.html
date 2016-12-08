@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <title>Seabass</title>
     <link rel="icon" type="image/png" href="/img/logo.png" />
 
@@ -41,9 +41,12 @@
 
     <!-- App scripts -->
     <script id="cordova-goes-after">
-        window.seabass = {};
+        window.seabass = {
+          DB_AUTH_URL: "http://localhost:8080/db.html"
+        };
         window.seabass.hasCordova = (document.location.protocol == "file:");
         window.seabass.initEvent = window.seabass.hasCordova ? "deviceready" : "DOMContentLoaded";
+      	window.seabass.initEvent = "DOMContentLoaded";
 
         // Init Cordova
         if (window.seabass.hasCordova) {
@@ -174,7 +177,7 @@
                                             <span class="clipboard-link">https://paypal.me/milikhin</span>
                                             <button class="clipboard-btn tooltip tooltip-top" data-clipboard-text="https://paypal.me/milikhin/100">
                                                 <i class="material-icons">content_copy</i>
-                                      					<span class="tooltip__text">Copy URL to clipboard</span>
+                                      			<span class="tooltip__text">Copy URL to clipboard</span>
                                             </button>
                                         </td>
                                     </tr>
@@ -343,47 +346,6 @@
                             </li>
                         </ul>
 
-                        <!-- <h3 class="tabs__welcome-note__header3">SeaBass:: What's to be expected</h3>
-                        <ul class="tabs__welcome-note__list">
-                            <li>
-                                Ablity to work on your projects: edit text files within specified (hardcoded for now) directory
-                            </li>
-                            <li>
-                                Slowly evolving project with more features such as Convergence coming in futher releases
-                            </li>
-                            <li>
-                                Simple, quick &amp; touch-friendly as much as possble UI
-                            </li>
-                            <li>
-                                Appretiation of your feedback &amp; ideas
-                            </li>
-                        </ul>
-                        <h3 class="tabs__welcome-note__header3">SeaBass:: What's not to be expected any time soon</h3>
-                        <ul class="tabs__welcome-note__list">
-                            <li>
-                                Features, that are beyond Ubuntu Touch HTML5/Cordova API possibilities, such as ability to open files for edit in arbitrary locations and so on
-                            </li>
-                            <li>
-                                Complete, polished, perfect &amp; ready-to-use for all possible scenarios software. For now SeaBass is more a proof-of-concept than anything else
-                            </li>
-                            <li>
-                                Production-ready IDE with all the features of modern desktop solutions
-                            </li>
-                        </ul> -->
-
-                        <!--<h3 class="tabs__welcome-note__header3">Usage notes</h3>-->
-                        <!--<div class="tabs__welcome-note__state">-->
-                        <!--    <p>-->
-                        <!--        Since v0.2.2 it is possible to change project's root directory while the File Tree is in "Navigation" mode (can be activated on the Settings page).-->
-                        <!--    </p>-->
-                        <!--    <p>-->
-                        <!--        After switching to "Navigation" mode File Tree will acts as file browser with support for navigating up and down the file tree. App will also restore last opened directory after restart.-->
-                        <!--    </p>-->
-                        <!--    <p>-->
-                        <!--        If something goes wrong - there is a "Home" button for resetting Project's root in the File Tree.-->
-                        <!--    </p>-->
-                        <!--</div>-->
-
                         <h3 class="tabs__welcome-note__header3">Acknowledgements</h3>
                         <div class="tabs__welcome-note__state">
                             <p>
@@ -449,10 +411,21 @@
             <div data-role="tab" id="settings">
                 <div class="settings-wrapper">
                     <section class="settings__container">
-                      	
+
                         <div data-role="list">
                             <header>File Tree</header>
                             <ul>
+                                <li>
+                                    <p>
+                                        Source
+                                    </p>
+                                    <label class="list__label__auto">
+                                      <select id="file-tree-source">
+                                          <option value="native" selected>Local file system</option>
+                                          <option value="dropbox">Dropbox</option>
+                                      </select>
+                                    </label>
+                                </li>
                                 <li>
                                     <p>Navigation mode</p>
                                     <label>
@@ -494,12 +467,32 @@
                                     </label>
                                 </li>
                             </ul>
+                          
+                          	<header>Dropbox</header>
+                            <ul>
+                              	<li>
+                                    <p>
+                                        Get access token
+                                    </p>
+                                    <label class="list__label__auto">
+                                      <a class="dropbox-auth-link" href="">authorize...</a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <p>
+                                        Access token
+                                    </p>
+                                    <label class="list__label__auto">
+                                      <input id="dropbox-access-token"/>
+                                    </label>
+                                </li>                              	
+                          </ul>
 
 
                         </div>
-                      	<p class="settings-note">
-                          <b>Note:</b> accorting to CSS specifications 1px equals to 1/96in.
-                      	</p>
+                        <p class="settings-note">
+                            <b>Note:</b> accorting to CSS specifications 1px equals to 1/96in.
+                        </p>
                     </section>
                 </div>
             </div>
