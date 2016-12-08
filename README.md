@@ -19,8 +19,10 @@ Seabass code editor for Ubuntu Touch
 - [x] Find/Replace feature
 - [x] Basic autocomplete
 - [x] Files/directories creation
+- [x] Add workaround for opening hidden files
 
 ### v0.3. Preparing for redesign
+* Dropbox integrations
 * Optimization and refactoring
 * Beautifier: support more languages
 * OSK height preferences (OSK height is different on Tablet/Phone)
@@ -29,7 +31,6 @@ Seabass code editor for Ubuntu Touch
 * New design by Nastya, which is required for:
    * Optionalize autosave
    * Optionalize Zentabs
-   * Add workaround for opening hidden files
    * Implement/refactor create/rename/delete file operations
 
 ### v0.5
@@ -42,9 +43,8 @@ Seabass code editor for Ubuntu Touch
 * Write docs & my vision of the project
 * Add demo project
 * Think about tests
-* Think about amd64/x86
 * Add git/node integration
-* Think about Dropbox/Google Drive integration.
+* Think about Google Drive integration.
 * Handle FS errors such as:  
    * opened file was moved/deleted so doesn't exist anymore
 
