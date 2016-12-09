@@ -21,19 +21,38 @@ input[type=range] {
 }
 
 [data-role="list"] ul li p.disabled,
-[data-role="list"] ul li p.disabled ~ .settings__container__slider-wrapper {
-  color: #ccc;
+[data-role="list"] ul li p.disabled~.settings__container__slider-wrapper {
+    color: #ccc;
 }
 
 .settings-note {
-  padding: 10px 15px;
+    padding: 10px 15px;
 }
 
-[data-role="list"] ul li > label.list__label__auto {
-  width: auto;
+[data-role="list"] ul li>label.list__label__auto {
+    width: auto;
 }
 
 .list__label__auto .dropbox-auth-link {
-  line-height: 2.2rem;
-  color: black;
+    line-height: 2.2rem;
+    color: black;
+}
+
+.tree-helper {
+    margin: 10px;
+}
+
+.tree-helper__actions,
+.tree-helper__content {
+    margin-bottom: 10px;
+}
+
+.tree-helper__actions {
+    text-align: center;
+}
+
+.ft-dropbox-only,
+.ft-localfs-only,
+.tree-helper__empty {
+  display: none;
 }

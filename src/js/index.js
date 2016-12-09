@@ -6,7 +6,7 @@ define([
     'co',
     'inspire',
     'clipboard',
-  	'app/dropbox-auth-app'
+    'app/dropbox-auth-app'
 ], function(FileManager, TabController, SettingsController, AppEvent, co, InspireTree, Clipboard) {
     "use strict";
 
@@ -365,6 +365,14 @@ define([
     };
 
     Application.prototype.renderTree = function() {
+        // Hide file tree tips if it is already set up;
+        var getTreeData = this._getTreeData();
+        getTreeData.then(function(fileInfo) {
+           	if(fileInfo.length) {
+				SettingsController.hideByQuery('.tree-helper__empty');
+			}
+        });
+
         this.tree = new InspireTree({
             'target': '.tree',
             'data': this._getTreeData.bind(this),

@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/img/logo.png" />
 
     <!--  WeInRe debug script -->
-    <!-- <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script> -->
+    <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
 
     <!-- App css -->
     <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
@@ -46,7 +46,7 @@
         };
         window.seabass.hasCordova = (document.location.protocol == "file:");
         window.seabass.initEvent = window.seabass.hasCordova ? "deviceready" : "DOMContentLoaded";
-        
+
         // Init Cordova
         if (window.seabass.hasCordova) {
             var cordovaScriptElem = document.createElement('script');
@@ -109,6 +109,40 @@
                               <span class="tooltip__text" id="aside__header__path__tooltip"></span>
                             </a>
                         </header>
+                        <div class="tree-helper">
+                            <div class="ft-dropbox-only tree-helper__dropbox tree-helper__empty">
+                                <p class="tree-helper__content">
+                                    You are using Dropbox as the file storage. Other options may be available on Settings page.
+                                </p>
+                                <p class="tree-helper__actions">
+                                    <button class="dropbox-auth-link dropbox-connect-button D" data-role="button" onclick="location.assign(this.dataset.href);">
+                                        Setup Dropbox...
+                                    </button>
+                                </p>
+                            </div>
+                          
+                          	<div class="ft-localfs-only tree-helper__localfs tree-helper__empty">
+                                <p class="tree-helper__content">
+                                    You are using Local file system as file storage. Other options may be available on Settings page.
+                                </p>
+                                <p class="tree-helper__content">
+									To start working on your projects place your files into 
+                                  	<code>~/.local/share<wbr/>/seabass.mikhael<wbr/>/persistent</code>
+                                  	directory and click "Reload tree" (<i style="vertical-align: bottom;" class="material-icons">cached</i>) button.
+                              	</p>
+                              	<p class="tree-helper__content">
+                                    You can also change project Root directory by activating Navigation mode on File tree settings.
+                                </p>
+                            </div>
+                          
+                          	<div class="ft-localfs-only tree-helper__empty">
+                                <p class="tree-helper__content">
+                                  	It seems there are no files in the project yet.
+                                  	Type filename into the input field in the Header and press "Enter" to create one.
+                                </p>
+                            </div>
+
+                        </div>
                         <div class="tree"></div>
                     </section>
                 </div>
@@ -123,19 +157,7 @@
                             <p class="tabs__welcome-note__header-p">
                                 Seabass is a text (code) editor for Ubuntu Touch.
                             </p>
-                            <h3 class="tabs__welcome-note__header3">How to start</h3>
-                            <ol class="tabs__welcome-note__olist">
-                                <li>
-                                    Put your project files into <code>~/.local/share<wbr/>/seabass.mikhael<wbr/>/persistent</code>
-                                </li>
-                                <li>
-                                    Click "Reload tree" button
-                                </li>
-                                <li>
-                                    Select file in the Files tree on the left
-                                </li>
-                            </ol>
-
+                            
                             <h3 class="tabs__welcome-note__header3">Supported devices</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
@@ -149,12 +171,10 @@
                             <h3 class="tabs__welcome-note__header3">Dropbox introduced</h3>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                  	v0.3.2 contains pre-release implementation of Dropbox integration.                                  	
+                                    v0.3.2 contains pre-release implementation of Dropbox integration.
                                 </p>
                                 <p>
-                                    You can now edit your files in Dropbox directly with Seabass.
-                                  	While it may works rather well, it is really WIP.
-                                  	Visit <b>Settings</b> page to connect your Dropbox account.
+                                    You can now edit your files in Dropbox directly with Seabass. While it may works rather well, it is really WIP. Visit <b>Settings</b> page to connect your Dropbox account.
                                 </p>
                             </div>
 
@@ -489,8 +509,8 @@
                             </ul>
                         </div>
                         <p class="settings-note">
-                          	<b>*</b> &ndash; restart required to apply changes.<br/>                          	
-                          	<b>**</b> &ndash; you'll be redirected to Seabass Online to complete authorization<br/>
+                            <b>*</b> &ndash; restart required to apply changes.<br/>
+                            <b>**</b> &ndash; you'll be redirected to Seabass Online to complete authorization<br/>
                             <b>Note:</b> accorting to CSS specifications 1px equals to 1/96in.
                         </p>
                     </section>

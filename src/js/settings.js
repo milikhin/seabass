@@ -56,6 +56,12 @@ define([], function() {
 
     };
 
+    SettingsController.prototype.hideByQuery = function(query) {
+        [].forEach.call(document.querySelectorAll(query), function(elemToHide) {
+            elemToHide.style.display = "none";
+        });
+    };
+
     SettingsController.prototype._initUI = function() {
         var self = this;
 
@@ -78,9 +84,13 @@ define([], function() {
             }
         }
 
-        if (this.get('fileTreeSource') !== "dropbox") {
+        if (this.get('fileTreeSource') == "dropbox") {
             [].forEach.call(document.querySelectorAll('.ft-dropbox-only'), function(elemToHide) {
-                elemToHide.style.display = "none";
+                elemToHide.style.display = "block";
+            });
+        } else {
+            [].forEach.call(document.querySelectorAll('.ft-localfs-only'), function(elemToHide) {
+                elemToHide.style.display = "block";
             });
         }
 

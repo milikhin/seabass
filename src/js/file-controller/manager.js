@@ -38,7 +38,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
     FileManager.prototype._initFs = function() {
         var self = this;
         return co(function*() {
-            console.log('init FS type', self.fsType);
+            console.log('init FS type', self._fsType);
             switch (self._fsType) {
                 case self.FS_TYPES.FS_NATIVE:
                     {

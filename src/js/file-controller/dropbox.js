@@ -42,12 +42,12 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                 var authUrl = window.seabass.hasCordova ? window.seabass.DB_AUTH_URL : dbx.getAuthenticationUrl(location.toString());
                 [].forEach.call(document.querySelectorAll('.dropbox-auth-link'), function(dplinkElem) {
                     dplinkElem.href = authUrl;
+                  	dplinkElem.dataset.href = authUrl;
                 });
 
                 reject(dbx);
             }
-        })
-
+        });
     };
 
     DropboxClient.prototype.getRootUrl = function() {
