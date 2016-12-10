@@ -42,7 +42,7 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                 var authUrl = window.seabass.hasCordova ? window.seabass.DB_AUTH_URL : dbx.getAuthenticationUrl(location.toString());
                 [].forEach.call(document.querySelectorAll('.dropbox-auth-link'), function(dplinkElem) {
                     dplinkElem.href = authUrl;
-                  	dplinkElem.dataset.href = authUrl;
+                    dplinkElem.dataset.href = authUrl;
                 });
 
                 reject(dbx);
@@ -176,7 +176,7 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                 console.log('fc', fileContent);
                 resolve({
                     fileEntry: {
-                    	path: fileEntry.path,
+                        path: fileEntry.path,
                         nativeURL: fileEntry.path,
                         isDirectory: false
                     },
@@ -230,8 +230,8 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
                             ".tag": "overwrite"
                         }
                     });
-                  
-            		resolve(data);
+
+                    resolve(data);
                 });
             }, self.WRITE_TIMEOUT);
         });

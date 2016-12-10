@@ -17,7 +17,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
             case 'native':
                 {
                     this._fsType = this.FS_TYPES.FS_NATIVE;
-                  	break;
+                    break;
                 }
             default:
                 {
@@ -28,7 +28,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
                     }
                 }
         }
-      	Settings.set('fileTreeSource', this._fsType);
+        Settings.set('fileTreeSource', this._fsType);
 
 
         this._initFs().then(function() {}, function(err) {
