@@ -1,8 +1,9 @@
 define([
     'md5',
     'app/app-event',
-    './editor-codemirror'
-], function(md5, AppEvent, Editor) {
+    './editor-codemirror',
+    'app/settings'
+], function(md5, AppEvent, Editor, SettingsController) {
 
     function Tab(options) {
         var self = this;
@@ -14,7 +15,8 @@ define([
         this.fileName = options.fileName;
         this.fileEntry = options.fileEntry;
         this.lastModified = null;
-        this.rootDir = 'file://localhost';
+
+        this.rootDir = this._getRootURL();
 
         this.onEditorChange = options.onEditorChange || function() {};
 
@@ -34,6 +36,25 @@ define([
         // this._registerKeyBindings();
         // console.log('complete Tab init');
     }
+
+    Tab.prototype._getRootUrl = function() {
+        var fsType = SettingsController.get('fileTreeSource');
+        var rootDir;
+        switch (fsType) {
+            case 2: // Dropbox
+                {
+                    rootDir = '';
+                    break;
+                }
+            case 1: // LocalFileSystem
+            default:
+                {
+                    rootDir = 'file://localhost';
+                    break;
+                }
+        }
+        return rootDir;
+    };
 
     Tab.prototype.close = function() {
         console.log('close stub');

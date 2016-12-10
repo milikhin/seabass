@@ -48,3 +48,6 @@ platforms
 
 # Cordova plugins
 plugins
+
+#gh-page
+.publish

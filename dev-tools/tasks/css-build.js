@@ -1,4 +1,3 @@
-var gulp = require('gulp');
 var shell = require('gulp-shell');
 
 module.exports = shell.task([
