@@ -12,4 +12,4 @@ module.exports = function() {
         .pipe(gulp.dest('./tmp/js'));
 
     return merge(haks, copy);
-}
+};

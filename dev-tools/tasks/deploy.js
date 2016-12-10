@@ -8,7 +8,7 @@ function getRemoteUrl(options) {
 
 	try {
 		remoteUrl = options.packageJson.seabass.deployTo;
-		if (remoteUrl == '') {
+		if (remoteUrl === '') {
 			throw new Error('"deployTo" git repository is not specified');
 		}
 	} catch (err) {

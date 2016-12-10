@@ -26,7 +26,7 @@ module.exports = function() {
                 });
             return function() {
                 watcher.close();
-            }
+            };
         })
         .debounce(timeout)
         .filter(function(x) {
@@ -34,7 +34,7 @@ module.exports = function() {
         })
         .subscribe(function(x) {
             gulp.run('js');
-        })
+        });
 
     Rx.Observable.create(function(observer) {
             const watcher = chok
@@ -49,7 +49,7 @@ module.exports = function() {
                 });
             return function() {
                 watcher.close();
-            }
+            };
         })
         .debounce(timeout)
         .filter(function(x) {
@@ -57,7 +57,7 @@ module.exports = function() {
         })
         .subscribe(function(x) {
             gulp.run('css');
-        })
+        });
         
     
      Rx.Observable.create(function(observer) {
@@ -73,7 +73,7 @@ module.exports = function() {
                 });
             return function() {
                 watcher.close();
-            }
+            };
         })
         .debounce(timeout)
         .filter(function(x) {
