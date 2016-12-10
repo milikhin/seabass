@@ -125,12 +125,12 @@ define([
         var similarFileNameTabs = this._getTabsGroupedByFileName();
         var groupTabs, tabFileName, tab, tabHash, tabUrl, tabLabelElem;
 
-        for (var tabFileName in similarFileNameTabs) {
+        for (tabFileName in similarFileNameTabs) {
             groupTabs = similarFileNameTabs[tabFileName];
-            var similarTill = this._getSimilarTill(groupTabs, tabFileName);
+            var similarTill = this._getSimilarTill(groupTabs);
 
             if (groupTabs.length > 1) {
-                for (i = 0; i < groupTabs.length; i++) {
+                for (var i = 0; i < groupTabs.length; i++) {
                     tab = groupTabs[i];
                     tabHash = md5(tab.fileEntry.nativeURL);
                     tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
@@ -140,7 +140,7 @@ define([
                     tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName} - <span class="tab-label__label__additional">${tabDifferentName}</span>`;
                 }
             } else {
-              	tab = groupTabs[0];                    
+                tab = groupTabs[0];
                 tabHash = md5(tab.fileEntry.nativeURL);
                 tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
                 tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName}`;
@@ -148,13 +148,12 @@ define([
         }
     };
 
-    TabController.prototype._getSimilarTill = function(groupTabs, tabFileName) {
-        var tabOne, tabOneHash, tabTwo;
+    TabController.prototype._getSimilarTill = function(groupTabs) {
+        var tabOne, tabTwo;
         var similarTill = Number.MAX_VALUE;
 
         for (var i = 0; i < groupTabs.length; i++) {
             tabOne = groupTabs[i];
-            tabOneHash = md5(tabOne.fileEntry.nativeURL);
 
             var tabOneUrl = tabOne.fileEntry.nativeURL.split('/');
             for (var j = 1; j < groupTabs.length; j++) {
