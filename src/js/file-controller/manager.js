@@ -28,8 +28,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
                     }
                 }
         }
-        Settings.set('fileTreeSource', this._fsType);
-
+        Settings.set('fileTreeSource', this._fsType == 2 ? 'dropbox' : 'native');
 
         this._initFs().then(function() {}, function(err) {
             console.error(err);

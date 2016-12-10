@@ -108,7 +108,8 @@ define([
         }
     };
 
-    TabController.prototype._updateTabNames = function() {
+    TabController.prototype._getTabsGroupedByFileName = function() {
+        // List groups of similarly named tabs
         var similarFileNameTabs = {};
         this.tabs.forEach(function(tab) {
             if (!similarFileNameTabs[tab.fileName]) {
@@ -117,56 +118,64 @@ define([
                 similarFileNameTabs[tab.fileName].push(tab);
             }
         });
+        return similarFileNameTabs;
+    };
 
+    TabController.prototype._updateTabNames = function() {
+        var similarFileNameTabs = this._getTabsGroupedByFileName();
+        var groupTabs, tabFileName, tab, tabHash, tabUrl, tabLabelElem;
 
-        for (var fileName in similarFileNameTabs) {
-            var tabs = similarFileNameTabs[fileName];
-            var similarTill = Number.MAX_VALUE;
+        for (var tabFileName in similarFileNameTabs) {
+            groupTabs = similarFileNameTabs[tabFileName];
+            var similarTill = this._getSimilarTill(groupTabs, tabFileName);
 
-            for (var j = 0; j < tabs.length; j++) {
-                var tab = tabs[j];
-                var tabHash = md5(tab.fileEntry.nativeURL);
-                var tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
-                tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${fileName}`;
-
-                var tabUrl = tab.fileEntry.nativeURL.split('/');
-
-                for (var k = 1; k < tabs.length; k++) {
-                    var tabTwo = tabs[k];
-                    var tabTwoUrl = tabTwo.fileEntry.nativeURL.split('/');
-                    if (j == k) {
-                        continue;
-                    }
-
-                    var i = 0;
-                    while ((i < tabUrl.length - 2) && (i < tabTwoUrl.length - 2) && (tabUrl[i] == tabTwoUrl[i])) {
-                        // if (((i == tabUrl.length - 2) && (tabUrl.length < tabTwoUrl.length)) || ((i == tabTwoUrl.length - 2) && (tabTwoUrl.length < tabUrl.length))) {
-                        // 	break;
-                        // }
-
-                        i++;
-                    }
-
-                    if (similarTill > i) {
-                        similarTill = i;
-                    }
-                }
-            }
-
-
-            if (tabs.length > 1) {
-                for (j = 0; j < tabs.length; j++) {
-                    tab = tabs[j];
+            if (groupTabs.length > 1) {
+                for (i = 0; i < groupTabs.length; i++) {
+                    tab = groupTabs[i];
                     tabHash = md5(tab.fileEntry.nativeURL);
                     tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
                     tabUrl = tab.fileEntry.nativeURL.split('/');
                     tabUrl.splice(0, similarTill);
-                    var tabDifferentName = tabUrl.join('/').slice(0, -fileName.length);
-                    tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${fileName} - <span class="tab-label__label__additional">${tabDifferentName}</span>`;
+                    var tabDifferentName = tabUrl.join('/').slice(0, -tabFileName.length);
+                    tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName} - <span class="tab-label__label__additional">${tabDifferentName}</span>`;
+                }
+            } else {
+              	tab = groupTabs[0];                    
+                tabHash = md5(tab.fileEntry.nativeURL);
+                tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
+                tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName}`;
+            }
+        }
+    };
+
+    TabController.prototype._getSimilarTill = function(groupTabs, tabFileName) {
+        var tabOne, tabOneHash, tabTwo;
+        var similarTill = Number.MAX_VALUE;
+
+        for (var i = 0; i < groupTabs.length; i++) {
+            tabOne = groupTabs[i];
+            tabOneHash = md5(tabOne.fileEntry.nativeURL);
+
+            var tabOneUrl = tabOne.fileEntry.nativeURL.split('/');
+            for (var j = 1; j < groupTabs.length; j++) {
+                if (i == j) {
+                    continue;
+                }
+
+                tabTwo = groupTabs[j];
+                var tabTwoUrl = tabTwo.fileEntry.nativeURL.split('/');
+                var k = 0;
+                while ((k < tabOneUrl.length - 2) && (k < tabTwoUrl.length - 2) && (tabOneUrl[k] == tabTwoUrl[k])) {
+                    k++;
+                }
+
+                if (similarTill > k) {
+                    similarTill = k;
                 }
             }
-
         }
+
+        return similarTill;
     };
 
     TabController.prototype._create = function(fileName, fileEntry, fileContent) {

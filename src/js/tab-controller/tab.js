@@ -37,7 +37,7 @@ define([
         // console.log('complete Tab init');
     }
 
-    Tab.prototype._getRootUrl = function() {
+    Tab.prototype._getRootURL = function() {
         var fsType = SettingsController.get('fileTreeSource');
         var rootDir;
         switch (fsType) {
