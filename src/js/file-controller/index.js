@@ -85,13 +85,11 @@ define(['co', 'md5'], function(co, md5) {
                         if (!dirPaths[i]) {
                             continue;
                         }
-                        dirEntry = yield(function() {
-                            return new Promise(function(resolve, reject) {
-                                dirEntry.getDirectory(dirPaths[i], {
-                                    "create": true
-                                }, resolve, reject);
-                            });
-                        })();
+                        dirEntry = yield self.getDirectory({
+                            root: dirEntry,
+                            path: dirPaths[i],
+                            create: true
+                        });
                     }
                 }
 
