@@ -123,7 +123,6 @@ define(['co', 'md5'], function(co, md5) {
 
 
     FileController.prototype.getDirectory = function(options) {
-        var self = this;
         var rootEntry = options.root || this.rootEntry;
         if (!options.path) {
             throw new Error("path attribute required");
@@ -215,7 +214,7 @@ define(['co', 'md5'], function(co, md5) {
 
     FileController.prototype._getFs = function() {
         return new Promise(function(resolve, reject) {
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, resolve, reject);
+            window.requestFileSystem(window.LocalFileSystem.PERSISTENT, 0, resolve, reject);
         });
     };
 

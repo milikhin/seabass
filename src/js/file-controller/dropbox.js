@@ -52,7 +52,7 @@ define(['co', 'md5', 'app/utils/index'], function(co, md5, utils) {
 
     DropboxClient.prototype.getRootUrl = function() {
         return this.rootPath;
-    }
+    };
 
     DropboxClient.prototype.getFiles = function(dirEntry, navEnabled) {
         var dirPath = dirEntry ? dirEntry.path : this.rootPath;

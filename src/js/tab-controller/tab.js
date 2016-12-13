@@ -6,7 +6,6 @@ define([
 ], function(md5, AppEvent, Editor, SettingsController) {
 
     function Tab(options) {
-        var self = this;
         if (!(options.fileName && options.fileEntry)) {
             throw new Error("fileName & fileEntry required");
         }
@@ -25,7 +24,6 @@ define([
         this.rootElem.innerHTML = this.tpl();
         options.parentElem.appendChild(this.rootElem);
 
-
         this.editor = new Editor({
             editorElem: this.rootElem.querySelector('.editor'),
             fileContent: options.fileContent || "",
@@ -33,7 +31,6 @@ define([
         });
 
         this._registerEventHandlers();
-        // this._registerKeyBindings();
         // console.log('complete Tab init');
     }
 
