@@ -16,6 +16,7 @@
 @import 'layout-aside.css';
 @import 'layout-tabs.css';
 @import 'editor.css';
+@import 'preloader.css';
 
 /* phone layout */
 @import 'mobile/index.css';
