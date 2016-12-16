@@ -3,11 +3,12 @@ define([
     './tab-controller/index',
     './settings',
     'app/app-event',
+    'app/utils/index',
     'co',
     'inspire',
     'clipboard',
     'app/dropbox-auth-app'
-], function(FileManager, TabController, SettingsController, AppEvent, co, InspireTree, Clipboard) {
+], function(FileManager, TabController, SettingsController, AppEvent, util, co, InspireTree, Clipboard) {
     "use strict";
 
     function Application() {}
@@ -113,7 +114,14 @@ define([
             var fileName = inputElem.value;
             if (fileName) {
                 co(function*() {
-                    var fileDescription = yield self.fileManager.open(fileName);
+                    var fileDescriptionPromise = self.fileManager.open(fileName);
+
+                    Promise.all([
+                        fileDescriptionPromise,
+                        util.showPreloader()
+                    ]).then(util.hidePreloader, util.hidePreloader);
+
+                    var fileDescription = yield fileDescriptionPromise;
                     if (fileDescription && fileDescription.fileEntry) {
                         var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
                         tab.activate();
@@ -285,11 +293,7 @@ define([
                 }
 
 
-            case 'file-open':
-                {
-                    self.fileManager.open();
-                    break;
-                }
+
             case 'file-save':
                 {
                     co(function*() {
@@ -334,7 +338,15 @@ define([
                     }
 
                     co(function*() {
-                        var content = yield self.fileManager.getFileContent(fileEntry);
+                        var fileContentPromise = self.fileManager.getFileContent(fileEntry);
+
+                        // show/hide preloader
+                        Promise.all([
+                            fileContentPromise,
+                            util.showPreloader()
+                        ]).then(util.hidePreloader, util.hidePreloader);
+
+                        var content = yield fileContentPromise;
                         var tab = TabController.get(evt.detail.node.text, fileEntry, content);
                         tab.activate();
 
@@ -368,9 +380,9 @@ define([
         // Hide file tree tips if it is already set up;
         var getTreeData = this._getTreeData();
         getTreeData.then(function(fileInfo) {
-           	if(fileInfo.length) {
-				SettingsController.hideByQuery('.tree-helper__empty');
-			}
+            if (fileInfo.length) {
+                SettingsController.hideByQuery('.tree-helper__empty');
+            }
         });
 
         this.tree = new InspireTree({

@@ -36,6 +36,33 @@ define([], function() {
             });
 
             return ret;
+        },
+
+
+        showPreloader: function() {
+            var preloaderElem = document.querySelector('.preloader');
+            if (!preloaderElem) {
+                console.log('Warning: progressbar not found');
+                return;
+            }
+
+            preloaderElem.classList.remove('preloader-disabled');
+            preloaderElem.classList.remove('preloader-hidden');
+            return new Promise(function(resolve, reject) {
+                setTimeout(resolve, 500);
+            });
+        },
+
+        hidePreloader: function() {
+            var preloaderElem = document.querySelector('.preloader');
+            if (!preloaderElem) {
+                console.log('Warning: progressbar not found');
+                return;
+            }
+            preloaderElem.classList.add('preloader-hidden');
+            setTimeout(function() {
+                preloaderElem.classList.add('preloader-disabled');
+            }, 700);
         }
     };
-})
+});

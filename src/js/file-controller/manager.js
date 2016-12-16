@@ -1,35 +1,17 @@
-define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function(FileController, DropboxClient, co, AppEvent, Settings) {
+define([
+    './index',
+    './dropbox',
+    'co',
+    'app/app-event',
+    'app/settings'    
+], function(FileController, DropboxClient, co, AppEvent, Settings) {
     function FileManager() {
         var self = this;
-        this.FS_TYPES = {
-            "FS_NATIVE": 1,
-            "FS_DROPBOX": 2
-        };
+        
 
         // TODO: move to Settings
-        var savedFsType = Settings.get('fileTreeSource');
-        switch (savedFsType) {
-            case 'dropbox':
-                {
-                    this._fsType = this.FS_TYPES.FS_DROPBOX;
-                    break;
-                }
-            case 'native':
-                {
-                    this._fsType = this.FS_TYPES.FS_NATIVE;
-                    break;
-                }
-            default:
-                {
-                    if (window.LocalFileSystem) {
-                        this._fsType = this.FS_TYPES.FS_NATIVE;
-                    } else {
-                        this._fsType = this.FS_TYPES.FS_DROPBOX;
-                    }
-                }
-        }
-        Settings.set('fileTreeSource', this._fsType == 2 ? 'dropbox' : 'native');
-
+        this._fsType = Settings.getFsType();
+      console.log(this._fsType);
         this._initFs().then(function() {}, function(err) {
             console.error(err);
         });
@@ -40,7 +22,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
         return co(function*() {
             console.log('init FS type', self._fsType);
             switch (self._fsType) {
-                case self.FS_TYPES.FS_NATIVE:
+                case Settings.FS_TYPES.FS_NATIVE:
                     {
                         if (window.LocalFileSystem) {
                             self.fsController = new FileController();
@@ -54,7 +36,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
 
                         break;
                     }
-                case self.FS_TYPES.FS_DROPBOX:
+                case Settings.FS_TYPES.FS_DROPBOX:
                     {
                         self.fsController = new DropboxClient();
 
@@ -78,7 +60,7 @@ define(['./index', './dropbox', 'co', 'app/app-event', 'app/settings'], function
     };
 
     FileManager.prototype.getFileContent = function(fileEntry) {
-        return this.fsController.readFile(fileEntry);
+        return this.fsController.readFile(fileEntry);        
     };
 
     FileManager.prototype.writeFile = function(fileEntry, data) {

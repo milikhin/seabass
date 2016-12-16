@@ -35,7 +35,7 @@ define([
     }
 
     Tab.prototype._getRootURL = function() {
-        var fsType = SettingsController.get('fileTreeSource');
+        var fsType = SettingsController.getFsType();
         var rootDir;
         switch (fsType) {
             case 2: // Dropbox
@@ -105,7 +105,9 @@ define([
         var url = this.fileEntry.nativeURL;
 
         var fnameHash = md5(url);
-        var shortenedUrl = url.slice(url.indexOf(this.rootDir) + this.rootDir.length, url.length);
+      	var fileUriIndex = this.rootDir ? url.indexOf(this.rootDir) : 0;
+      console.log(fileUriIndex, this.rootDir, url);
+        var shortenedUrl = url.slice(fileUriIndex + this.rootDir.length, url.length);
         return `
           <input class="tab-state" type="radio" title="tab-${fnameHash}" name="tabs-state" id="tab-${fnameHash}" checked />
     			<label

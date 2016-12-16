@@ -7,7 +7,39 @@ define([], function() {
 			- isCustomFontSize
 			- fontSize
 		*/
+
+        this.FS_TYPES = {
+            "FS_NATIVE": 1,
+            "FS_DROPBOX": 2
+        };
     }
+
+    SettingsController.prototype.getFsType = function() {
+        var savedFsType = this.get('fileTreeSource');
+        var fsType;
+        switch (savedFsType) {
+            case 'dropbox':
+                {
+                    fsType = this.FS_TYPES.FS_DROPBOX;
+                    break;
+                }
+            case 'native':
+                {
+                    fsType = this.FS_TYPES.FS_NATIVE;
+                    break;
+                }
+            default:
+                {
+                    if (window.LocalFileSystem) {
+                        fsType = this.FS_TYPES.FS_NATIVE;
+                    } else {
+                        fsType = this.FS_TYPES.FS_DROPBOX;
+                    }
+                }
+        }
+      
+        return fsType;
+    };
 
     SettingsController.prototype.get = function(key) {
         if (!key) {
