@@ -1,4 +1,5 @@
 "use strict";
+//node_modules/.bin/nwbuild -o release -p linux64 ./www
 
 let gulp = require('gulp');
 let shell = require('gulp-shell');

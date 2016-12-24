@@ -12,9 +12,11 @@ define([], function () {
 			if (!window.localStorage) {
 				throw new Error('no localStorage support');
 			}
+			this._mode = this.storageModes.SM_LOCAL_STORAGE;
 		} catch (err) {
 			this._mode = window.chrome ? this.storageModes.SM_CHROME : this.storageModes.SM_NONE;
 		}
+		console.log(this._mode, window.chrome);
 	}
 
 	StorageController.prototype.get = function (key) {
