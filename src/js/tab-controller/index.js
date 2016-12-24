@@ -141,6 +141,7 @@ define([
                 }
             } else {
                 tab = groupTabs[0];
+                console.log(tab.fileEntry.nativeURL);
                 tabHash = md5(tab.fileEntry.nativeURL);
                 tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
                 tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName}`;
@@ -155,14 +156,14 @@ define([
         for (var i = 0; i < groupTabs.length; i++) {
             tabOne = groupTabs[i];
 
-            var tabOneUrl = tabOne.fileEntry.nativeURL.split('/');
+            var tabOneUrl = (tabOne.fileEntry.nativeURL).split('/');
             for (var j = 1; j < groupTabs.length; j++) {
                 if (i == j) {
                     continue;
                 }
 
                 tabTwo = groupTabs[j];
-                var tabTwoUrl = tabTwo.fileEntry.nativeURL.split('/');
+                var tabTwoUrl = (tabTwo.fileEntry.nativeURL).split('/');
                 var k = 0;
                 while ((k < tabOneUrl.length - 2) && (k < tabTwoUrl.length - 2) && (tabOneUrl[k] == tabTwoUrl[k])) {
                     k++;

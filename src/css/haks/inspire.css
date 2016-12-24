@@ -3,6 +3,7 @@
   display: inline-block;
   min-width: 100%;
   box-sizing: border-box;
+  font-size: 1rem;
 }
 
 .inspire-tree li > .title-wrap {

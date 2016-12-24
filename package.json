@@ -13,6 +13,7 @@
     "gulp": "^3.9.1",
     "gulp-shell": "^0.5.2",
     "merge-stream": "^1.0.0",
+    "nw-builder": "^3.1.2",
     "requirejs": "^2.2.0",
     "rx": "^4.1.0"
   },

@@ -51,3 +51,6 @@ plugins
 
 #gh-page
 .publish
+
+#nw-builder
+release/

@@ -40,30 +40,12 @@
     <script src="js/Dropbox-sdk.min.js"></script>
 
     <!-- App scripts -->
-    <script id="cordova-goes-after">
-        window.seabass = {
-            DB_AUTH_URL: "https://milikhin.github.io/seabass/db.html"
-        };
-        window.seabass.hasCordova = (document.location.protocol == "file:");
-        window.seabass.initEvent = window.seabass.hasCordova ? "deviceready" : "DOMContentLoaded";
-
-        // Init Cordova
-        if (window.seabass.hasCordova) {
-            var cordovaScriptElem = document.createElement('script');
-            cordovaScriptElem.src = "cordova.js";
-            document.getElementById('cordova-goes-after').parentElement.insertBefore(cordovaScriptElem, document.getElementById('cordova-goes-after'));
-        }
-    </script>
+    <script src="js/cordova-config.js" id="cordova-goes-after"></script>
 
     <script src="js/require.js"></script>
     <script src="js/require-config.js"></script>
-    <script>
-        document.addEventListener(window.seabass.initEvent, function() {
-            require(['app/index'], function(App) {
-                (new App()).initialize();
-            });
-        });
-    </script>
+
+    <script src="js/startup.js"></script>
 </head>
 
 <body>
@@ -116,7 +98,7 @@
                                     You are using Dropbox as the file storage. Other options may be available on Settings page.
                                 </p>
                                 <p class="tree-helper__actions">
-                                    <button class="dropbox-auth-link dropbox-connect-button D" data-role="button" onclick="location.assign(this.dataset.href);">
+                                    <button class="dropbox-auth-link dropbox-connect-button" data-role="button">
                                         Setup Dropbox...
                                     </button>
                                 </p>
