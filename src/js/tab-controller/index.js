@@ -223,6 +223,7 @@ define([
     TabController.prototype.get = function(fileName, fileEntry, fileContent) {
         // check if file is already opened
         var tab = this.getTabByFileEntry(fileEntry);
+      	console.log('opened?', tab, fileEntry);
         if (tab) {
             return tab;
         }
