@@ -5,6 +5,7 @@ define([
 
     'cm/keymap/sublime',
     'cm/addon/lint/lint',
+  	'cm/addon/comment/comment',
     'cm/addon/lint/javascript-lint',
     //'cm/addon/lint/coffeescript-lint',
     'cm/addon/lint/html-lint',
@@ -65,7 +66,33 @@ define([
 
         var language = this._getLanguage();
         var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
-        var hasLinter = ~['json', 'js', 'css', 'html', 'yaml'].indexOf(ext);
+        var linterOptions;
+        switch (ext) {
+            case 'js':
+                {
+                    linterOptions = {
+                        esversion: 6,
+                        globals: {
+                            "require": true,
+                            "module": false
+                        }
+                    };
+                    break;
+                }
+            case 'json':
+            case 'css':
+            case 'html':
+            case 'yaml':
+                {
+                    linterOptions = true;
+                    break;
+                }
+            default:
+                {
+                    linterOptions = false;
+                }
+        }
+        // var hasLinter = ~['json', 'js', 'css', 'html', 'yaml'].indexOf(ext);
 
         this._editor = CodeMirror.fromTextArea(options.editorElem, {
             autoCloseBrackets: true,
@@ -75,10 +102,10 @@ define([
                 }
             },
             inputStyle: "contenteditable",
-          	foldGutter: true,
-            gutters: hasLinter ? ["CodeMirror-lint-markers", "CodeMirror-foldgutter"] : ["CodeMirror-foldgutter"],
+            foldGutter: true,
+            gutters: linterOptions ? ["CodeMirror-lint-markers", "CodeMirror-foldgutter"] : ["CodeMirror-foldgutter"],
             keyMap: "sublime",
-            lint: hasLinter,
+            lint: linterOptions,
             lineNumbers: true,
             // lineWrapping: true,
             matchTags: true,
