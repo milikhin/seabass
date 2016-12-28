@@ -109,6 +109,7 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
                 dirEntry.getFile(fileName, {
                     "create": true
                 }, function(fileEntry) {
+                  	fileEntry.nativeURL = fileEntry.nativeURL || fileEntry.fullPath;
                     fileEntry.file(function(file) {
                         var reader = new FileReader();
 
