@@ -115,7 +115,7 @@
     background: #2F3129;
 }
 
-.tabs .tab-state:checked+ label {
+.tabs .tab-state:checked+label {
     top: 0;
     background: #272822;
     border-left: solid 3px #069;
@@ -124,7 +124,7 @@
     height: 1.8rem;
 }
 
-.tabs .tab-state:checked~ .tab-content,
-.tabs .tab-state:checked~ .tab-footer {
+.tabs .tab-state:checked~.tab-content,
+.tabs .tab-state:checked~.tab-footer {
     display: block;
 }
