@@ -5,7 +5,7 @@ define([
 
     'cm/keymap/sublime',
     'cm/addon/lint/lint',
-  	'cm/addon/comment/comment',
+    'cm/addon/comment/comment',
     'cm/addon/lint/javascript-lint',
     //'cm/addon/lint/coffeescript-lint',
     'cm/addon/lint/html-lint',
@@ -74,6 +74,8 @@ define([
                         esversion: 6,
                         globals: {
                             "require": true,
+                            "define": true,
+                            "console": true,
                             "module": false
                         }
                     };
@@ -137,6 +139,8 @@ define([
     }
 
     Editor.prototype.beautify = function() {
+        var currentCursorPosition = this._editor.getCursor(); //save current cursor position
+
         var content = this._editor.getValue();
         var beautyContent;
         var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
@@ -164,6 +168,7 @@ define([
 
         }
         this._editor.setValue(beautyContent);
+        this._editor.setCursor(currentCursorPosition);
     };
 
     Editor.prototype.getValue = function() {
