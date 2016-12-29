@@ -10,7 +10,7 @@ define([
     'app/dropbox-auth-app'
 ], function(FileManager, TabController, SettingsController, AppEvent, util, co, InspireTree, Clipboard) {
     "use strict";
-  
+
     function Application() {}
 
     // function is called onDeviceReady
@@ -235,7 +235,6 @@ define([
         document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
         AppEvent.dispatch({
             type: 'body-resize'
-
         });
     };
 
@@ -327,7 +326,17 @@ define([
                     this.renderTree();
                     break;
                 }
-
+            case 'nav-enabled':
+                {
+                  	// console.log('nav enabled!');
+                    var getTreeData = this._getTreeData();
+                    getTreeData.then(function(fileInfo) {
+                        if (fileInfo.length) {
+                            SettingsController.hideByQuery('.tree-helper__empty');
+                        }
+                    });
+                    break;
+                }
             case 'tab-close':
                 {
                     TabController.close(TabController.getByElem(evt.detail.target));

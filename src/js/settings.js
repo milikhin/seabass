@@ -1,4 +1,4 @@
-define(['app/utils/storage', 'co'], function(storage, co) {
+define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent, co) {
     function SettingsController() {
         /*
 		  available keys:
@@ -159,6 +159,12 @@ define(['app/utils/storage', 'co'], function(storage, co) {
         /* File tree settngs UI events*/
         document.getElementById('file-tree-navigation').onchange = function() {
             self.set('navEnabled', this.checked);
+            co(function*() {
+                yield self._initFileTreeSettings();
+                AppEvent.dispatch({
+                    type: 'nav-enabled'
+                });
+            });
         };
         document.getElementById('file-tree-width').oninput = function() {
             self.set('treeWidth', this.valueAsNumber);

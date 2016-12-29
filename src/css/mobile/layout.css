@@ -1,6 +1,7 @@
 /* overwrite settings.js */
 
-.aside, .inspire-tree {
+.aside,
+.inspire-tree {
     width: 250px!important;
 }
 
@@ -46,18 +47,18 @@
 }
 
 .tabs__welcome-note__table {
-  margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .tabs__welcome-note__table td {
     text-align: right;
     display: block;
+    padding-right: 0;
 }
 
-.tabs__welcome-note__table td {
-    text-align: right;
-}
-
+.tabs__welcome-note__table--support td,
 .tabs__welcome-note__table td.tabs__welcome-note__table--support__title {
     text-align: left;
 }

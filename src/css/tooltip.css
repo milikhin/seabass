@@ -21,7 +21,6 @@
     border: solid 1px;
     /* Position the tooltip text - see examples below! */
     position: absolute;
-    z-index: 1;
     padding: 0.3em 0.5em;
     line-height: 1.3em;
     font-size: 0.9rem;
@@ -36,10 +35,11 @@
 /* Show the tooltip text when you mouse over the tooltip container */
 
 .tooltip:hover .tooltip__text {
-    transition: opacity 0.25s ease 1.5s, z-index 0.1s ease 1.75s;
+    transition: opacity 0.25s ease 1.5s, z-index 0.1s ease 1.75s, top 0.1s ease 2s;
     z-index: -1;
     visibility: visible;
     opacity: 0;
+    top: -10000px;
 }
 
 .tooltip-bottom .tooltip__text {

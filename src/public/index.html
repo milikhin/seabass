@@ -109,7 +109,7 @@
                                     You are using Local file system as file storage. Other options may be available on Settings page.
                                 </p>
                                 <p class="tree-helper__content">
-                                    To start working on your projects place your files into
+                                    To start working on your projects put your files into
                                     <code>~/.local/share<wbr/>/seabass.mikhael<wbr/>/persistent</code> directory and click "Reload tree" (<i style="vertical-align: bottom;" class="material-icons">cached</i>) button.
                                 </p>
                                 <p class="tree-helper__content">
@@ -118,7 +118,7 @@
                             </div>
 
                             <div class="ft-localfs-only tree-helper__empty">
-                                <p class="tree-helper__content">
+                                <p class="tree-helper__content tablet-only">
                                     It seems there are no files in the project yet. Type filename into the input field in the Header and press "Enter" to create one.
                                 </p>
                             </div>
@@ -161,7 +161,7 @@
 
                             <h3 class="tabs__welcome-note__header3">Links</h3>
                             <div class="tabs__welcome-note__state">
-                                <table class="tabs__welcome-note__table tabs__welcome-note__table--support">
+                                <table class="tabs__welcome-note__table">
                                     <tr>
                                         <td class="tabs__welcome-note__table--support__title">
                                             <span>
@@ -275,32 +275,20 @@
                             <p>
                                 It is now possible to create files and directories using this input field in the header (paths are always considered as relative to project root):
                             </p>
-                            <table class="tabs__welcome-note__table">
-                                <tr>
-                                    <td>
-                                        <code>foo/bar/qwerty.txt</code>
-                                    </td>
-                                    <td>
-                                        create <i>qwerty.txt</i> file and all required parent folders (<i>foo</i> and <i>bar</i>) if they are not exist
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <code>foo/bar/</code>
-                                    </td>
-                                    <td>
-                                        create <i>foo/bar</i> directory
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <code>path/to/.gitignore</code>
-                                    </td>
-                                    <td>
-                                        It is possble to create/open hidden files
-                                    </td>
-                                </tr>
-                            </table>
+                            <ul class="tabs__welcome-note__list">
+                                <li>
+                                    <code>foo/bar/qwerty.txt</code> 
+                                  	&ndash; create <i>qwerty.txt</i> file and all required parent folders (<i>foo</i> and <i>bar</i>) if they are not exist                                    
+                                </li>
+                                <li>
+                                    <code>foo/bar/</code>
+                                    &ndash; create <i>foo/bar</i> directory                                    
+                                </li>
+                                <li>
+                                    <code>path/to/.gitignore</code>
+                                    &ndash; It is possble to create/open hidden files                                    
+                                </li>
+                            </ul>
                         </div>
                     </section>
                 </div>
@@ -361,7 +349,7 @@
                                     Juliana Zakharchenko &amp; Nastya Belokon for logo
                                 </li>
                                 <li>
-                                  	Brian Douglass for maintaining OpenStore edition
+                                    Brian Douglass for maintaining OpenStore edition
                                 </li>
                                 <li>
                                     Apache Cordova project for the awesome framework
