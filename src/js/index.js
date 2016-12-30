@@ -248,6 +248,15 @@ define([
         document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl.split('/').join('<wbr/>/');
     };
 
+    Application.prototype._updateTreeHint = function() {
+        var getTreeData = this._getTreeData();
+        getTreeData.then(function(fileInfo) {
+            if (fileInfo.length) {
+                SettingsController.hideByQuery('.tree-helper__empty');
+            }
+        });
+    };
+
     Application.prototype.receivedEvent = function(id, evt) {
         var self = this;
         // console.log('received event', id, evt);
@@ -329,12 +338,7 @@ define([
             case 'nav-enabled':
                 {
                     // console.log('nav enabled!');
-                    var getTreeData = this._getTreeData();
-                    getTreeData.then(function(fileInfo) {
-                        if (fileInfo.length) {
-                            SettingsController.hideByQuery('.tree-helper__empty');
-                        }
-                    });
+                    this._updateTreeHint();
                     break;
                 }
             case 'tab-close':
@@ -349,7 +353,7 @@ define([
                     co(function*() {
                         var navEnabled = yield SettingsController.get('navEnabled');
                         if (fileEntry.isDirectory) {
-                            if (navEnabled) {
+                            if (navEnabled) {self._updateTreeHint();self._updateTreeHint();
                                 self.fileManager.setRoot(evt.detail.node.entry);
                                 self.reloadTree();
                                 return;
@@ -380,12 +384,14 @@ define([
             case 'tree-reload':
                 {
                     self.reloadTree();
+                    self._updateTreeHint();
                     break;
                 }
             case 'tree-unset-root':
                 {
                     self.fileManager.unsetRoot();
                     self.reloadTree();
+                    self._updateTreeHint();
                     break;
                 }
             case 'window-osk':
