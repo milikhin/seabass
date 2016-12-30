@@ -328,7 +328,7 @@ define([
                 }
             case 'nav-enabled':
                 {
-                  	// console.log('nav enabled!');
+                    // console.log('nav enabled!');
                     var getTreeData = this._getTreeData();
                     getTreeData.then(function(fileInfo) {
                         if (fileInfo.length) {
