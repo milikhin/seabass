@@ -1,0 +1,15 @@
+{
+  "template": "cordova",
+  "chroot": true,
+  "dependencies": [
+    "libicu-dev",
+    "qtbase5-dev",
+    "qtdeclarative5-dev",
+    "qtfeedback5-dev",
+    "qtlocation5-dev",
+    "qtmultimedia5-dev",
+    "qtpim5-dev",
+    "libqt5sensors5-dev",
+    "qtsystems5-dev"
+  ]
+}
