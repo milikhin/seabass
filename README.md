@@ -22,16 +22,16 @@ Seabass code editor for Ubuntu Touch
 - [x] Add workaround for opening hidden files
 
 ### v0.3. Preparing for redesign
-- [ ] Add support for ChromeOS/NW.js platforms
+- [x] Add support for ChromeOS/NW.js platforms
 - [ ] Dropbox integration
+- [ ] Implement/refactor create/rename/delete file operations
 * Optimization and refactoring
 * OSK height preferences (OSK height is different on Tablet/Phone)
 
 ### v0.4 Redesign
 * New design by Nastya, which is required for:
    * Optionalize autosave
-   * Optionalize Zentabs
-   * Implement/refactor create/rename/delete file operations
+   * Optionalize Zentabs 
 
 ### v0.5
 * Beautifier: support more languages
