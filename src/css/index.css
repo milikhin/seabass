@@ -2,6 +2,7 @@
 @import 'inspire-tree.css';
 @import 'tabs.css';
 @import 'tooltip.css';
+@import 'context-menu.css';
 @import 'codemirror/codemirror.css';
 @import 'codemirror/monokai.css';
 @import 'codemirror/dialog.css';

@@ -16,6 +16,11 @@ define([
     // function is called onDeviceReady
     Application.prototype.initialize = function() {
         var self = this;
+        if (navigator && navigator.notification && navigator.notification.alert && navigator.notification.confirm) {
+            window.alert = navigator.notification.alert;
+            window.confirm = navigator.notification.confirm;
+        }
+
         document.body.addEventListener('app-event', function(evt) {
             self.receivedEvent(evt.detail.type, evt);
         });
@@ -239,8 +244,31 @@ define([
     };
 
     Application.prototype.reloadTree = function() {
-        this.tree.reload();
-        this._updateTreeHeader();
+        var self = this;
+        var expandedNodes = self.tree.expanded();
+        co(function*() {
+            yield self.tree.reload();
+            expandRecursively(self.tree);
+            self._updateTreeHeader();
+        });
+
+        function expandRecursively(rootNode) {
+            expandedNodes.forEach(function(node) {
+                try {
+                    var childNodes = rootNode.getChildren ? rootNode.getChildren() : rootNode.nodes();
+                    childNodes.forEach(function(childNode) {
+                        if (childNode.id == node.id && childNode.entry.isDirectory) {
+                            childNode.expand().then(function() {
+                                expandRecursively(childNode);
+                            });
+                        }
+                    });
+
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+        }
     };
 
     Application.prototype._updateTreeHeader = function() {
@@ -346,6 +374,34 @@ define([
                     TabController.close(TabController.getByElem(evt.detail.target));
                     break;
                 }
+            case 'tree-node-delete':
+                {
+                    id = evt.detail.node.id;
+                    var fileEntry = evt.detail.node.entry;
+                    var deleteFile = function(buttonIndex) {
+                        if (!buttonIndex || buttonIndex === 1) {
+                            co(function*() {
+                                yield self.fileManager.delete(fileEntry);
+                                var tabToClose = TabController.getTabByFileEntry(fileEntry);
+                                if (tabToClose) {
+                                    TabController.close(tabToClose);
+                                }
+                                self.reloadTree();
+                                self._updateTreeHint();
+                            }).catch(function(err) {
+                                console.error(err);
+                            });
+                        }
+                    };
+
+                    if (!window.chrome) {
+                        confirm(`Delete ${fileEntry.name} ?`, deleteFile, 'Delete file', ['Yes', 'Cancel']);
+                    } else {
+                        deleteFile();
+                    }
+
+                    break;
+                }
             case 'tree-node-click':
                 {
                     id = evt.detail.node.id;
@@ -353,7 +409,9 @@ define([
                     co(function*() {
                         var navEnabled = yield SettingsController.get('navEnabled');
                         if (fileEntry.isDirectory) {
-                            if (navEnabled) {self._updateTreeHint();self._updateTreeHint();
+                            if (navEnabled) {
+                                self._updateTreeHint();
+                                self._updateTreeHint();
                                 self.fileManager.setRoot(evt.detail.node.entry);
                                 self.reloadTree();
                                 return;
@@ -397,7 +455,7 @@ define([
             case 'window-osk':
                 {
                     self.toggleOSK();
-                    break;
+                    break;node
                 }
         }
     };
@@ -418,7 +476,31 @@ define([
                 'allow': function() {
                     return false;
                 }
-            }
+            },
+            contextMenu: [
+                //               {
+                //                 text: 'Rename...',
+                //                 handler: function(event, node, closer) {
+                //                     AppEvent.dispatch({
+                //                         type: 'tree-node-rename',
+                //                         node: node
+                //                     });
+                //                     closer(node);
+                //                 }
+
+                //             }, 
+                {
+                    text: 'Delete',
+                    handler: function(event, node, closer) {
+                        AppEvent.dispatch({
+                            type: 'tree-node-delete',
+                            node: node
+                        });
+                        closer();
+                    }
+                }
+            ]
+
         });
         this._updateTreeHeader();
 

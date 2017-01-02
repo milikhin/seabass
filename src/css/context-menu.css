@@ -1,0 +1,30 @@
+.context-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.context-menu:before {
+    content: "click me!";
+}
+
+.context-menu:focus {
+    /* clicking on label should toggle the menu */
+    pointer-events: none;
+}
+
+.context-menu:focus .context-menu__content {
+    /*  opacity is 1 in opened state (see below) */
+    opacity: 1;
+    visibility: visible;
+    /* don't let pointer-events affect descendant elements */
+    pointer-events: auto;
+}
+
+.context-menu__content {
+    position: absolute;
+    z-index: 1;
+    /* use opacity to fake immediate toggle */
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0.5s;
+}

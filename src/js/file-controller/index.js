@@ -30,6 +30,15 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
      *
      */
 
+    FileController.prototype.deleteFile = function(fileEntry) {
+        return new Promise(function(resolve, reject) {
+            if (fileEntry.isDirectory) {
+                return fileEntry.removeRecursively(resolve, reject);
+            }
+            fileEntry.remove(resolve, reject);
+        });
+    };
+
     FileController.prototype.writeFile = function(fileEntry, data) {
         var self = this;
         return co(function*() {
@@ -109,7 +118,7 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
                 dirEntry.getFile(fileName, {
                     "create": true
                 }, function(fileEntry) {
-                  	fileEntry.nativeURL = fileEntry.nativeURL || fileEntry.fullPath;
+                    fileEntry.nativeURL = fileEntry.nativeURL || fileEntry.fullPath;
                     fileEntry.file(function(file) {
                         var reader = new FileReader();
 
