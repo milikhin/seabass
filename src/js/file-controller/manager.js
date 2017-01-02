@@ -13,7 +13,7 @@ define([
         // TODO: move to Settings
         co(function*() {
             self._fsType = yield Settings.getFsType();
-            console.log(self._fsType);
+            // console.log(self._fsType);
             self._initFs().then(function() {}, function(err) {
                 console.error(err);
             });
@@ -58,6 +58,10 @@ define([
     FileManager.prototype.open = function(path) {
         return this.fsController.readFileByName(path);
     };
+  
+  	FileManager.prototype.delete = function(fileEntry) {
+        return this.fsController.deleteFile(fileEntry);
+    };
 
     FileManager.prototype.getFiles = function(dirEntry, navEnabled) {
         return this.fsController.getFiles(dirEntry, navEnabled);
@@ -82,7 +86,7 @@ define([
         if (this.fsController.getRootUrl) {
             return this.fsController.getRootUrl();
         }
-        console.log(this.getRoot(), this.fsController);
+        // console.log(this.getRoot(), this.fsController);
         var url = this.getRoot().nativeURL || this.getRoot().fullPath;
         var rootUrl = 'file://localhost';
         var shortenedUrl = url.slice(url.indexOf(rootUrl) + rootUrl.length, url.length);

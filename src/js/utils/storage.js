@@ -16,7 +16,7 @@ define([], function () {
 		} catch (err) {
 			this._mode = window.chrome ? this.storageModes.SM_CHROME : this.storageModes.SM_NONE;
 		}
-		console.log(this._mode, window.chrome);
+		
 	}
 
 	StorageController.prototype.get = function (key) {

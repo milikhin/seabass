@@ -8,9 +8,7 @@ module.exports = function() {
     // gulp.watch('styles/**/*.css', ['css']);
     // gulp.watch('public/**/*', ['assets']);
     // // gulp.watch('bower_components/**/*.css', ['css-watch']);
-    // gulp.watch('js/**/*', ['js']);
-
-    
+    // gulp.watch('js/**/*', ['js']);    
 
 
     Rx.Observable.create(function(observer) {
