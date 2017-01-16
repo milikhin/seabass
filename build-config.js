@@ -13,7 +13,8 @@
         "json": "bower_components/requirejs-plugins/src/json",
         "text": "bower_components/requirejs-plugins/lib/text",
         "clipboard": "bower_components/clipboard/dist/clipboard.min",
-        "htmlhint": "public/js/htmlhint"
+        "htmlhint": "public/js/htmlhint",
+      	"Sortable": "bower_components/Sortable/Sortable.min"
     },
     stubModules: ['json'],
     packages: [{
