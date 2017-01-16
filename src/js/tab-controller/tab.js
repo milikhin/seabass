@@ -21,8 +21,17 @@ define([
 
         // Create new tab layout & append it to parentElem;
         this.rootElem = document.createElement('li');
-        this.rootElem.innerHTML = this.tpl();
+        this.labelElem = document.createElement('li');
+        this.rootElem.className = "tab-content-container";
+        this.rootElem.id = `tab-c-${this.id}`;
+        this.labelElem.className = "tab-content-label";
+        this.labelElem.id = `tab-l-${this.id}`;
+
+        let tabContent = this.tpl();
+        this.rootElem.innerHTML = tabContent.contentHtml;
+        this.labelElem.innerHTML = tabContent.labelHtml;
         options.parentElem.appendChild(this.rootElem);
+        options.parentLabelsElem.appendChild(this.labelElem);
 
         this.editor = new Editor({
             editorElem: this.rootElem.querySelector('.editor'),
@@ -79,8 +88,12 @@ define([
 
     Tab.prototype.activate = function() {
         this.rootElem.querySelector('.tab-state').checked = true;
-        this.rootElem.querySelector('.tab-label').style.width = "10px";
-        this.rootElem.querySelector('.tab-label').style.width = "auto";
+        this.labelElem.querySelector('.tab-label').style.width = "10px";
+        this.labelElem.querySelector('.tab-label').style.width = "auto";
+        [].forEach.call(this.labelElem.parentElement.querySelectorAll('.tab-label'), function(labelElem) {
+            labelElem.classList.remove("tab-label--checked");
+        });
+        this.labelElem.querySelector('.tab-label').classList.add('tab-label--checked');
 
         AppEvent.dispatch({
             type: 'tab-activate',
@@ -114,22 +127,25 @@ define([
         var fileUriIndex = this.rootDir ? url.indexOf(this.rootDir) : 0;
         // console.log(fileUriIndex, this.rootDir, url);
         var shortenedUrl = url.slice(fileUriIndex + this.rootDir.length, url.length);
-        return `
-          <input class="tab-state" type="radio" title="tab-${fnameHash}" name="tabs-state" id="tab-${fnameHash}" checked />
-    			<label
-    				class="tab-label"
-    				for="tab-${fnameHash}"
-    				id="tab-label-${fnameHash}"
-    				title="${this.fileName}">
-    				<button class="tab-label__close app-action" data-action="tab-close">x</button>
-    				<span class="tab-label__label">${this.fileName}</span>
-    			</label>
-    			<div class="tab-content" id="tab-content-${fnameHash}" >
-    					<textarea id="editor-${fnameHash}" class="editor"></textarea>
-    			</div>
-    			<div class="tab-footer" id="tab-footer-${fnameHash}" >
-    					<span class="tab-footer__file-name">${shortenedUrl}</span>
-    			</div>`;
+        return {
+            contentHtml: `
+              <input class="tab-state" type="radio" title="tab-${url}" name="tabs-state" id="tab-${fnameHash}" checked />
+              <div class="tab-content" id="tab-content-${fnameHash}" >
+                  <textarea id="editor-${fnameHash}" class="editor"></textarea>
+              </div>
+              <div class="tab-footer" id="tab-footer-${fnameHash}" >
+                  <span class="tab-footer__file-name">${shortenedUrl}</span>
+              </div>`,
+            labelHtml: `
+              <label
+                  class="tab-label"
+                  for="tab-${fnameHash}"
+                  id="tab-label-${fnameHash}"
+                  title="${this.fileName}">
+                  <button class="tab-label__close app-action" data-action="tab-close" data-tab-id="${fnameHash}">x</button>
+                  <span class="tab-label__label">${this.fileName}</span>
+              </label>`
+        };
     };
 
 
@@ -142,7 +158,7 @@ define([
     };
 
     Tab.prototype.beautify = function() {
-      	this.editor.beautify();
+        this.editor.beautify();
     };
 
     return Tab;

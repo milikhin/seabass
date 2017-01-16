@@ -1,12 +1,18 @@
 .tabs {
-    height: 100%;
-    float: none;
-    list-style: none;
+    height: calc(100% - 1.8rem);
+  	list-style: none;
     position: relative;
     margin: 0;
     text-align: left;
-    z-index: -1;
-    display: flex;
+    z-index: -1;    
+}
+
+.tabs-labels {
+    height: 1.8rem;
+    list-style: none;
+    position: relative;
+    margin: 0;
+  	display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
@@ -20,7 +26,7 @@
     flex-shrink: 1;
 }
 
-.tabs li::after {
+/* .tabs li::after {
     content: " ";
     display: block;
     position: absolute;
@@ -31,14 +37,14 @@
     background: #eee;
     z-index: 1;
 }
-
+ */
 .tabs input[type="radio"] {
     position: absolute;
     top: -9999px;
     left: -9999px;
 }
 
-.tabs label {
+.tabs-labels label {
     display: block;
     padding: 0 25px 0 10px;
     border-radius: 4px 4px 0 0;
@@ -92,7 +98,7 @@
     color: #dedede;
 }
 
-.tabs label:hover {
+.tabs-labels label:hover {
     background: #2F3129;
 }
 
@@ -108,14 +114,15 @@
     font-size: 1em;
     padding: 0;
     position: absolute;
-    top: 1.8rem;
     margin-top: 0;
+  	top: 0;
     bottom: 1.3rem;
     left: 0;
     background: #2F3129;
 }
 
-.tabs .tab-state:checked+label {
+.tabs .tab-state:checked+label,
+.tabs-labels .tab-label--checked{
     top: 0;
     background: #272822;
     border-left: solid 3px #069;

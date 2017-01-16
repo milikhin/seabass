@@ -23,13 +23,16 @@ define([
     './tab',
     'co',
     'md5',
-    'app/app-event'
-], function(Tab, co, md5, AppEvent) {
+    'app/app-event', 'Sortable'
+], function(Tab, co, md5, AppEvent, Sortable) {
     function TabController() {
         var self = this;
         this.tabs = [];
         this.rootElem = document.querySelector('.tabs');
+      	this.labelsElem = document.querySelector('.tabs-labels');
+      
         // this.tabsElem = this.rootElem.querySelector('.tabs');
+        var sortable = Sortable.create(this.labelsElem, {draggable: '.tab-content-label'});
 
         document.body.addEventListener('tab-activate', function(evt) {
             self.tabs.forEach(function(tabDescription) {
@@ -186,6 +189,7 @@ define([
             fileEntry: fileEntry,
             fileContent: fileContent,
             parentElem: this.rootElem,
+          	parentLabelsElem: this.labelsElem,
             onEditorChange: function() {
                 setTimeout(function() {
                     self._updateButtons(tab);
@@ -223,7 +227,7 @@ define([
     TabController.prototype.get = function(fileName, fileEntry, fileContent) {
         // check if file is already opened
         var tab = this.getTabByFileEntry(fileEntry);
-      	if (tab) {
+        if (tab) {
             return tab;
         }
 
@@ -245,8 +249,23 @@ define([
                 tab = tabDescription;
             }
         });
-
-        return tab;
+      	if(tab) {
+        	return tab; 
+        }
+      
+      	var tabId = elem.dataset.tabId;
+      	var tabElem = document.querySelector(`#tab-${tabId}`);
+      	if(!tabElem) {
+          return null;
+        }
+      	
+      	this.tabs.forEach(function(tabDescription) {
+          	if(tabElem.closest('.tabs li') == tabDescription.rootElem) {
+              tab = tabDescription;
+            }
+        });
+      	
+      	return tab;       
     };
 
     TabController.prototype.close = function(tabToClose) {
@@ -256,6 +275,7 @@ define([
 
         document.body.removeEventListener('body-resize', tabToClose.onResize);
         tabToClose.rootElem.parentElement.removeChild(tabToClose.rootElem);
+      	tabToClose.labelElem.parentElement.removeChild(tabToClose.labelElem);
 
         // destroy tab's Ace instance
         tabToClose.close();
