@@ -380,11 +380,10 @@ define([
                 {
                     id = evt.detail.node.id;
                     var fileEntry = evt.detail.node.entry;
-                    var moveFile = function(buttonIndex, fileName) {
-                        console.log(buttonIndex, fileName);
-                        if (!buttonIndex || buttonIndex === 1) {
+                    var moveFile = function(options) {
+                        if (!options.buttonIndex || options.buttonIndex === 1) {
                             co(function*() {
-                                yield self.fileManager.rename(fileEntry, fileName);
+                                yield self.fileManager.rename(fileEntry, options.input1);
                                 var tabToClose = TabController.getTabByFileEntry(fileEntry);
                                 if (tabToClose) {
                                     TabController.close(tabToClose);
