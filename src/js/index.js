@@ -380,7 +380,7 @@ define([
                     id = evt.detail.node.id;
                     var fileEntry = evt.detail.node.entry;
                     var moveFile = function(buttonIndex, fileName) {
-                      	console.log(buttonIndex, fileName);
+                        console.log(buttonIndex, fileName);
                         if (!buttonIndex || buttonIndex === 1) {
                             co(function*() {
                                 yield self.fileManager.rename(fileEntry, fileName);
@@ -396,15 +396,15 @@ define([
                         }
                     };
 
-                    
+
                     if (!window.chrome) {
                         prompt(`Rename ${fileEntry.fullPath}`, moveFile, 'Rename file', ['Ok', 'Cancel'], fileEntry.fullPath);
                     } else {
                         alertify.defaultValue(fileEntry.fullPath).prompt(`Rename ${fileEntry.fullPath}`, function(val, evt) {
-                          	evt.preventDefault();
+                            evt.preventDefault();
                             moveFile(1, val);
                         }, function(evt) {
-                          	evt.preventDefault();
+                            evt.preventDefault();
                             moveFile(0);
                         });
                     }
@@ -434,7 +434,12 @@ define([
                     if (!window.chrome) {
                         confirm(`Delete ${fileEntry.name} ?`, deleteFile, 'Delete file', ['Yes', 'Cancel']);
                     } else {
-                        deleteFile();
+                        alertify.confirm(`Delete ${fileEntry.name} ?`, function(evt) {
+                            evt.preventDefault();
+                            deleteFile(1);
+                        }, function(evt) {
+                            evt.preventDefault();
+                        });
                     }
 
                     break;
