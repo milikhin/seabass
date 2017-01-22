@@ -2,13 +2,14 @@ define([
     './file-controller/manager',
     './tab-controller/index',
     './settings',
+    'alertify',
     'app/app-event',
     'app/utils/index',
     'co',
     'inspire',
     'clipboard',
     'app/dropbox-auth-app'
-], function(FileManager, TabController, SettingsController, AppEvent, util, co, InspireTree, Clipboard) {
+], function(FileManager, TabController, SettingsController, alertify, AppEvent, util, co, InspireTree, Clipboard) {
     "use strict";
 
     function Application() {}
@@ -374,6 +375,42 @@ define([
                     TabController.close(TabController.getByElem(evt.detail.target));
                     break;
                 }
+            case 'tree-node-rename':
+                {
+                    id = evt.detail.node.id;
+                    var fileEntry = evt.detail.node.entry;
+                    var moveFile = function(buttonIndex, fileName) {
+                      	console.log(buttonIndex, fileName);
+                        if (!buttonIndex || buttonIndex === 1) {
+                            co(function*() {
+                                yield self.fileManager.rename(fileEntry, fileName);
+                                var tabToClose = TabController.getTabByFileEntry(fileEntry);
+                                if (tabToClose) {
+                                    TabController.close(tabToClose);
+                                }
+                                self.reloadTree();
+                                self._updateTreeHint();
+                            }).catch(function(err) {
+                                console.error(err);
+                            });
+                        }
+                    };
+
+                    
+                    if (!window.chrome) {
+                        prompt(`Rename ${fileEntry.fullPath}`, moveFile, 'Rename file', ['Ok', 'Cancel'], fileEntry.fullPath);
+                    } else {
+                        alertify.defaultValue(fileEntry.fullPath).prompt(`Rename ${fileEntry.fullPath}`, function(val, evt) {
+                          	evt.preventDefault();
+                            moveFile(1, val);
+                        }, function(evt) {
+                          	evt.preventDefault();
+                            moveFile(0);
+                        });
+                    }
+
+                    break;
+                }
             case 'tree-node-delete':
                 {
                     id = evt.detail.node.id;
@@ -477,29 +514,26 @@ define([
                     return false;
                 }
             },
-            contextMenu: [
-                //               {
-                //                 text: 'Rename...',
-                //                 handler: function(event, node, closer) {
-                //                     AppEvent.dispatch({
-                //                         type: 'tree-node-rename',
-                //                         node: node
-                //                     });
-                //                     closer(node);
-                //                 }
-
-                //             }, 
-                {
-                    text: 'Delete',
-                    handler: function(event, node, closer) {
-                        AppEvent.dispatch({
-                            type: 'tree-node-delete',
-                            node: node
-                        });
-                        closer();
-                    }
+            contextMenu: [{
+                text: 'Rename...',
+                handler: function(event, node, closer) {
+                    AppEvent.dispatch({
+                        type: 'tree-node-rename',
+                        node: node
+                    });
+                    closer(node);
                 }
-            ]
+
+            }, {
+                text: 'Delete',
+                handler: function(event, node, closer) {
+                    AppEvent.dispatch({
+                        type: 'tree-node-delete',
+                        node: node
+                    });
+                    closer();
+                }
+            }]
 
         });
         this._updateTreeHeader();

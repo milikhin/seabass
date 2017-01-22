@@ -29,6 +29,47 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
      *   getFiles(@dirEntry: DirEntry)
      *
      */
+    FileController.prototype.renameFile = function(fileEntry, newName) {
+        var self = this;
+        var rootPath = self.rootEntry.name;
+        return co(function*() {
+            // if (fileEntry.isDirectory) {
+            //     return fileEntry.removeRecursively(resolve, reject);
+            // }
+            // fileEntry.remove(resolve, reject);
+            var currentName = fileEntry.fullPath;
+            var filePaths = newName.split('/');
+          	var fileName = newName;
+            var dirPaths;
+          	var dirEntry = self.rootEntry;
+            if (filePaths.length > 1) {
+                dirPaths = filePaths.slice(0, -1);
+              	fileName = filePaths.slice(-1)[0];            
+            }
+            if (dirPaths) {
+                for (var i = 0; i < dirPaths.length; i++) {
+                    if ((i == 1) && (dirPaths[i] == rootPath)) {
+                      	// Chrome hak!
+                        continue;
+                    }
+                    if (!dirPaths[i]) {
+                        continue;
+                    }
+                    dirEntry = yield self.getDirectory({
+                        root: dirEntry,
+                        path: dirPaths[i],
+                        create: true
+                    });
+                }
+            }
+            console.log(fileEntry, newName);
+            yield new Promise(function(resolve, reject) {
+                fileEntry.moveTo(dirEntry, fileName, resolve, reject);
+            });
+
+            return fileEntry;
+        });
+    };
 
     FileController.prototype.deleteFile = function(fileEntry) {
         return new Promise(function(resolve, reject) {

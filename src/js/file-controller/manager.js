@@ -58,9 +58,16 @@ define([
     FileManager.prototype.open = function(path) {
         return this.fsController.readFileByName(path);
     };
-  
-  	FileManager.prototype.delete = function(fileEntry) {
+
+    FileManager.prototype.delete = function(fileEntry) {
         return this.fsController.deleteFile(fileEntry);
+    };
+
+    FileManager.prototype.rename = function(fileEntry, newName) {
+        if (!newName) {
+            throw new Error('FileName is required');
+        }
+        return this.fsController.renameFile(fileEntry, newName);
     };
 
     FileManager.prototype.getFiles = function(dirEntry, navEnabled) {
