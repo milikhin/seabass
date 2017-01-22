@@ -8,7 +8,8 @@
     out: "tmp/js/index.js",
     paths: {
         "inspire": "bower_components/inspire-tree/dist/inspire-tree-bundled.min",
-        "co": "js/co.min",
+      	"alertify": "bower_components/alertifyjs/dist/js/alertify",
+      	"co": "js/co.min",
         "md5": "bower_components/js-md5/js/md5.min",
         "json": "bower_components/requirejs-plugins/src/json",
         "text": "bower_components/requirejs-plugins/lib/text",

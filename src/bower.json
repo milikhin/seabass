@@ -33,6 +33,7 @@
     "jshint": "^2.9.4"
   },
   "dependencies": {
-    "Sortable": "sortablejs#^1.4.2"
+    "Sortable": "sortablejs#^1.4.2",
+    "alertifyjs": "^1.0.11"
   }
 }
