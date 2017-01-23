@@ -39,17 +39,17 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
             // fileEntry.remove(resolve, reject);
             var currentName = fileEntry.fullPath;
             var filePaths = newName.split('/');
-          	var fileName = newName;
+            var fileName = newName;
             var dirPaths;
-          	var dirEntry = self.rootEntry;
+            var dirEntry = self.rootEntry;
             if (filePaths.length > 1) {
                 dirPaths = filePaths.slice(0, -1);
-              	fileName = filePaths.slice(-1)[0];            
+                fileName = filePaths.slice(-1)[0];
             }
             if (dirPaths) {
                 for (var i = 0; i < dirPaths.length; i++) {
-                    if ((i == 1) && (dirPaths[i] == rootPath)) {
-                      	// Chrome hak!
+                    if ((i == 1 || i == 0) && (dirPaths[i] == rootPath)) {
+                        // Chrome hak!
                         continue;
                     }
                     if (!dirPaths[i]) {
@@ -62,7 +62,6 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
                     });
                 }
             }
-            console.log(fileEntry, newName);
             yield new Promise(function(resolve, reject) {
                 fileEntry.moveTo(dirEntry, fileName, resolve, reject);
             });
@@ -127,7 +126,7 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
 
     FileController.prototype.readFileByName = function(fileName) {
         var self = this;
-
+        var rootPath = self.rootEntry.name;
         return new Promise(function(resolve, reject) {
             var filePaths = fileName.split('/');
             var dirEntry = self.rootEntry;
@@ -141,6 +140,10 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
             co(function*() {
                 if (dirPaths) {
                     for (var i = 0; i < dirPaths.length; i++) {
+                        if ((i == 1 || i == 0) && (dirPaths[i] == rootPath)) {
+                            // Chrome hak!
+                            continue;
+                        }
                         if (!dirPaths[i]) {
                             continue;
                         }

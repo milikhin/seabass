@@ -20,7 +20,7 @@ define([
         if (navigator && navigator.notification && navigator.notification.alert && navigator.notification.confirm) {
             window.alert = navigator.notification.alert;
             window.confirm = navigator.notification.confirm;
-          	window.prompt = navigator.notification.prompt;
+            window.prompt = navigator.notification.prompt;
         }
 
         document.body.addEventListener('app-event', function(evt) {
@@ -117,6 +117,30 @@ define([
         // this._addEditorButtons();
     };
 
+    Application.prototype._openFileByName = function(fileName) {
+        var self = this;
+        return co(function*() {
+            if (fileName) {
+                var fileDescriptionPromise = self.fileManager.open(fileName);
+                Promise.all([
+                    fileDescriptionPromise,
+                    util.showPreloader()
+                ]).then(util.hidePreloader, util.hidePreloader);
+
+                var fileDescription = yield fileDescriptionPromise;
+                if (fileDescription && fileDescription.fileEntry) {
+                    var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
+                    tab.activate();
+                }
+
+                self.reloadTree();
+            }
+        }).catch(function(err) {
+            console.error(err);
+        });
+
+    };
+
     Application.prototype.onDeviceReady = function() {
         var self = this;
         this._hakEditorHeaderUI();
@@ -131,27 +155,9 @@ define([
 
             var inputElem = evt.target.querySelector('input');
             var fileName = inputElem.value;
-            if (fileName) {
-                co(function*() {
-                    var fileDescriptionPromise = self.fileManager.open(fileName);
-
-                    Promise.all([
-                        fileDescriptionPromise,
-                        util.showPreloader()
-                    ]).then(util.hidePreloader, util.hidePreloader);
-
-                    var fileDescription = yield fileDescriptionPromise;
-                    if (fileDescription && fileDescription.fileEntry) {
-                        var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
-                        tab.activate();
-                    }
-
-                    self.reloadTree();
-                    inputElem.value = "";
-                }).catch(function(err) {
-                    console.error(err);
-                });
-            }
+            self._openFileByName(fileName).then(function() {
+                inputElem.value = "";
+            });
 
             return false;
         });
@@ -387,6 +393,7 @@ define([
                                 var tabToClose = TabController.getTabByFileEntry(fileEntry);
                                 if (tabToClose) {
                                     TabController.close(tabToClose);
+                                    self._openFileByName(options.input1);
                                 }
                                 self.reloadTree();
                                 self._updateTreeHint();
@@ -402,10 +409,15 @@ define([
                     } else {
                         alertify.defaultValue(fileEntry.fullPath).prompt(`Rename ${fileEntry.fullPath}`, function(val, evt) {
                             evt.preventDefault();
-                            moveFile(1, val);
+                            moveFile({
+                                buttonIndex: 1,
+                                input1: val
+                            });
                         }, function(evt) {
                             evt.preventDefault();
-                            moveFile(0);
+                            moveFile({
+                                buttonImdex: 0
+                            });
                         });
                     }
 
@@ -520,7 +532,7 @@ define([
                 }
             },
             contextMenu: [{
-                text: 'Rename...',
+                text: 'Rename/move...',
                 handler: function(event, node, closer) {
                     AppEvent.dispatch({
                         type: 'tree-node-rename',
