@@ -24,6 +24,7 @@
     overflow: hidden;
     flex-grow: 0;
     flex-shrink: 1;
+  	min-width: 70px;
 }
 
 /* .tabs li::after {

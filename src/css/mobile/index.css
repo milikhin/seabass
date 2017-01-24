@@ -1,4 +1,4 @@
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     .tablet-only {
         display: none;
     }
@@ -8,7 +8,7 @@
     @import 'settings.css';
 }
 
-@media (min-width: 600px) {
+@media (min-width: 750px) {
     .mobile-only {
         display: none!important;
     }
