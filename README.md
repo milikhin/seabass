@@ -23,30 +23,39 @@ Seabass code editor for Ubuntu Touch
 
 ### v0.3. Preparing for redesign
 - [x] Add support for ChromeOS/NW.js platforms
-- [ ] Dropbox integration
-- [ ] Implement/refactor create/rename/delete file operations
-* Optimization and refactoring
+- [ ] **WIP** Add create/rename/delete file operations within file tree:  
+   * - [ ] Create file
+   * - [x] Rename file
+   * - [x] Delete file
+   * - [ ] Close appropriate tabs, when changing directories structure
+* Restore support for Ace editor (ability to switch between editor's engines)
+* Implement better architecture and code structure
 * OSK height preferences (OSK height is different on Tablet/Phone)
 
-### v0.4 Redesign
+### v0.4 Dropbox integration
+- [ ] **WIP** Dropbox file controller
+- [x] Add propgressbar for file operations
+- [ ] **WIP** Implement OAuth support in some way
+- [ ] Implement Error Handlers for such errors as:  
+   * opened file was moved/deleted so doesn't exist anymore
+   * network errors
+
+### v0.5 Redesign
 * New design by Nastya, which is required for:
    * Optionalize autosave
    * Optionalize Zentabs 
 
-### v0.5
+### v0.6
 * Beautifier: support more languages
 * Editor: support for themes
+* i18n
 
 ### Futher improvements/ideas
-* i18n
 * Option to reload the last document loaded
-* Write docs & my vision of the project
-* Add demo project
 * Think about tests
 * Add git/node integration
-* Think about Google Drive integration.
-* Handle FS errors such as:  
-   * opened file was moved/deleted so doesn't exist anymore
+* Think about Google Drive integration
+   
 
 ## Building from sources
 
