@@ -23,8 +23,8 @@ Seabass code editor for Ubuntu Touch
 
 ### v0.3. Preparing for redesign
 - [x] Add support for ChromeOS/NW.js platforms
-- [ ] **WIP** Add create/rename/delete file operations within file tree:  
-   * - [ ] Create file
+- [x] **WIP** Add create/rename/delete file operations within file tree:  
+   * - [x] Create file
    * - [x] Rename file
    * - [x] Delete file
    * - [ ] Close appropriate tabs, when changing directories structure
