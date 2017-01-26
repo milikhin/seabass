@@ -113,8 +113,6 @@ define([
         editorPageUI.onactivated(function(evt) {
             self._addEditorButtons();
         });
-
-        // this._addEditorButtons();
     };
 
     Application.prototype._openFileByName = function(fileName) {

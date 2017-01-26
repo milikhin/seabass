@@ -140,7 +140,7 @@ define([
 
     Editor.prototype.beautify = function() {
         var currentCursorPosition = this._editor.getCursor(); //save current cursor position
-
+        var currentScrollInfo = this._editor.getScrollInfo();
         var content = this._editor.getValue();
         var beautyContent;
         var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
@@ -169,6 +169,7 @@ define([
         }
         this._editor.setValue(beautyContent);
         this._editor.setCursor(currentCursorPosition);
+        this._editor.scrollTo(currentScrollInfo.left, currentScrollInfo.top);
     };
 
     Editor.prototype.getValue = function() {
