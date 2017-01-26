@@ -380,6 +380,37 @@ define([
                     TabController.close(TabController.getByElem(evt.detail.target));
                     break;
                 }
+            case 'tree-node-create':
+                {
+                    id = evt.detail.node.id;
+                    var fileEntry = evt.detail.node.entry;
+                  	var defaultName = fileEntry.isDirectory ? (fileEntry.fullPath + "/") : fileEntry.fullPath;
+                    var createFile = function(options) {
+                        if (!options.buttonIndex || options.buttonIndex === 1) {
+                            self._openFileByName(options.input1);                            
+                        }
+                    };
+
+
+                    if (!window.chrome) {
+                        prompt(`Creating new file or directory`, createFile, 'Create file', ['Ok', 'Cancel'], defaultName);
+                    } else {
+                        alertify.defaultValue(defaultName).prompt(`Creating new file or directory`, function(val, evt) {
+                            evt.preventDefault();
+                            createFile({
+                                buttonIndex: 1,
+                                input1: val
+                            });
+                        }, function(evt) {
+                            evt.preventDefault();
+                            createFile({
+                                buttonImdex: 0
+                            });
+                        });
+                    }
+
+                    break;
+                }
             case 'tree-node-rename':
                 {
                     id = evt.detail.node.id;
@@ -507,7 +538,7 @@ define([
             case 'window-osk':
                 {
                     self.toggleOSK();
-                    break;node
+                    break;
                 }
         }
     };
@@ -530,6 +561,16 @@ define([
                 }
             },
             contextMenu: [{
+                text: 'Create file...',
+                handler: function(event, node, closer) {
+                  	AppEvent.dispatch({
+                        type: 'tree-node-create',
+                        node: node
+                    });
+                    closer(node);
+                }
+
+            }, {
                 text: 'Rename/move...',
                 handler: function(event, node, closer) {
                     AppEvent.dispatch({
@@ -546,7 +587,7 @@ define([
                         type: 'tree-node-delete',
                         node: node
                     });
-                    closer();
+                    closer(node);
                 }
             }]
 

@@ -70,6 +70,13 @@ define([
         return this.fsController.renameFile(fileEntry, newName);
     };
 
+  	FileManager.prototype.create = function(path) {
+        if (!path) {
+            throw new Error('FileName is required');
+        }
+        return this.fsController.readFileByName(path);
+    };
+
     FileManager.prototype.getFiles = function(dirEntry, navEnabled) {
         return this.fsController.getFiles(dirEntry, navEnabled);
     };
