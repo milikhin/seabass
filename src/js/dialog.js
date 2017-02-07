@@ -1,7 +1,7 @@
 define([], function() {
-    class Dialog() {
+    class Dialog {
         constructor() {
-			this._polyfillSystemDlgs();
+            this._polyfillSystemDlgs();
         }
 
         _polyfillSystemDlgs() {

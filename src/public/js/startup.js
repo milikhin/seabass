@@ -3,7 +3,7 @@
 
   document.addEventListener(global.seabass.initEvent, function() {
       require(['app/index'], function(App) {
-          (new App()).initialize();
+          (new App());
       });
   });
 })(window);

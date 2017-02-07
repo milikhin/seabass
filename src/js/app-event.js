@@ -9,7 +9,7 @@ define([], function() {
         }
 
         evtDetail = evtDetail || {};
-        evtDetail.name = evtName;
+        evtDetail._evtName = evtName;
         document.body.dispatchEvent(new CustomEvent('app-event', {
             bubbles: true,
             cancelable: true,
@@ -19,18 +19,17 @@ define([], function() {
 
     AppEventController.prototype.on = function(evtName, callback) {
         let callbackFunction = function(evt) {
-            if (!evt.detail.type) {
-                throw new Error("AppEvent detail is missing", evt);
+            if (evt.detail._evtName == evtName) {
+                callback(evt);
             }
-            callback(evt.detail.type, evt);
         };
 
         document.body.addEventListener("app-event", callbackFunction);
         return callbackFunction;
     };
-  
-  	AppEventController.prototype.removeEventListener = function(callbackOnFunction) {
-        document.body.removeEventListener("app-event", callbackOnFunction);        
+
+    AppEventController.prototype.removeEventListener = function(callbackOnFunction) {
+        document.body.removeEventListener("app-event", callbackOnFunction);
     };
 
     return new AppEventController();
