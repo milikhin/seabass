@@ -8,7 +8,7 @@
 
 .inspire-tree li>.title-wrap {
     display: inline-block;
-    overflow: auto;
+    overflow: hidden;
     min-width: 100%;
 }
 
@@ -52,11 +52,11 @@
 }
 
 .itree-menu a:hover {
-  background-color: #efefef;
-  color: inherit;
+    background-color: #efefef;
+    color: inherit;
 }
 
 .itree-menu a {
-  padding-top: 8px;  
-  padding-bottom: 8px;  
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
