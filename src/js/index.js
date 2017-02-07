@@ -17,12 +17,6 @@ define([
     // function is called onDeviceReady
     Application.prototype.initialize = function() {
         var self = this;
-        if (navigator && navigator.notification && navigator.notification.alert && navigator.notification.confirm) {
-            window.alert = navigator.notification.alert;
-            window.confirm = navigator.notification.confirm;
-            window.prompt = navigator.notification.prompt;
-        }
-
         document.body.addEventListener('app-event', function(evt) {
             self.receivedEvent(evt.detail.type, evt);
         });

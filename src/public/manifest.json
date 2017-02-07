@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Seabass",
+    "name": "Seabass stable",
     "version": "1",
     "icons": {
         "256": "img/logo.png"
