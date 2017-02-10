@@ -6,8 +6,10 @@ define([
     'app/app-event',
     'app/settings'
 ], function(FileController, DropboxClient, storage, co, AppEvent, Settings) {
+    "use strict";
+
     function FileManager() {
-        var self = this;
+        let self = this;
 
 
         // TODO: move to Settings
@@ -17,6 +19,14 @@ define([
             self._initFs().then(function() {}, function(err) {
                 console.error(err);
             });
+        });
+
+        AppEvent.on('file-save', function(evt) {
+            self.writeFile(evt.detail.fileEntry, evt.detail.value);
+        });
+
+        AppEvent.on('tree__node-create', function(evt) {
+
         });
     }
 

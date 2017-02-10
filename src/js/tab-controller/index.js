@@ -211,8 +211,7 @@ define([
 
         tab.lastModified = Date.now();
         // console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
-        AppEvent.dispatch({
-            type: 'editor-state-changed',
+        AppEvent.dispatch('editor-state-changed', {
             hasUndo: tab.hasUndo(),
             hasRedo: tab.hasRedo(),
             hasBeautify: ~['js', 'html', 'css', 'json'].indexOf(ext)
@@ -290,8 +289,7 @@ define([
         } else {
             document.getElementById('editor-tabs').style.zIndex = -1;
             document.getElementById('welcome-note').style.visibility = "visible";
-            AppEvent.dispatch({
-                type: 'editor-state-changed',
+            AppEvent.dispatch('editor-state-changed', {
                 hasUndo: false,
                 hasRedo: false,
                 hasBeautify: false

@@ -7,8 +7,9 @@ define([
     'app/utils/index',
     'app/tab-controller/index',
     'app/settings',
-    'app/ui/tabs'
-], function(AppEvent, Clipboard, co, FileTree, getEditorButtons, utils, TabController, settings, TabsUi) {
+    'app/ui/tabs',
+    'app/dialog'
+], function(AppEvent, Clipboard, co, FileTree, getEditorButtons, utils, TabController, settings, TabsUi, dialog) {
     "use strict";
 
     class AppUi {
@@ -122,6 +123,77 @@ define([
         _registerAppEventHandlers() {
             let self = this;
             AppEvent.on('tree__node-click', this._handleTreeNodeClick.bind(this));
+            AppEvent.on('tree__node-create', function(evt) {
+                let nodeId = evt.detail.node.id;
+                let fileEntry = evt.detail.node.entry;
+                let defaultName = fileEntry.isDirectory ? (fileEntry.fullPath + "/") : fileEntry.fullPath;
+                let createFile = function(options) {
+                    if (options.buttonIndex === 1) {
+                        self.tabsUi.openFileByName(options.input1);
+                    }
+                };
+
+                dialog.prompt({
+                    title: "Create file",
+                    description: "Create new file or directory",
+                    default: defaultName,
+                    callback: createFile,
+                    buttons: ['Ok', 'Cancel']
+                });
+            });
+
+            AppEvent.on('tree__node-rename', function(evt) {
+                let nodeId = evt.detail.node.id;
+                let fileEntry = evt.detail.node.entry;
+                let defaultName = fileEntry.fullPath;
+                let moveFile = function(options) {
+                    if (options.buttonIndex === 1) {
+                        co(function*() {
+                            yield self.fileManager.rename(fileEntry, options.input1);
+                            AppEvent.dispatch('tree-reload');
+                            AppEvent.dispatch('tab-close', {
+                                fileEntry: fileEntry
+                            });
+                            self.tabsUi.openFileByName(options.input1);
+                        }).catch(function(err) {
+                            console.error(err);
+                        });
+                    }
+                };
+
+                dialog.prompt({
+                    title: "Rename file",
+                    description: `Rename ${fileEntry.fullPath}`,
+                    default: defaultName,
+                    callback: moveFile,
+                    buttons: ['Ok', 'Cancel']
+                });
+            });
+
+            AppEvent.on('tree__node-delete', function(evt) {
+                let nodeId = evt.detail.node.id;
+                let fileEntry = evt.detail.node.entry;
+
+                let deleteFile = function(buttonIndex) {
+                    if (buttonIndex === 1) {
+                        co(function*() {
+                            yield self.fileManager.delete(fileEntry);
+                            AppEvent.dispatch('tree-reload');
+                            AppEvent.dispatch('tab-close', {
+                                fileEntry: fileEntry
+                            });
+                        }).catch(function(err) {
+                            console.error(err);
+                        });
+                    }
+                };
+
+                dialog.confirm({
+                    title: "Delete file",
+                    description: `Delete ${fileEntry.fullPath}?`,
+                    callback: deleteFile
+                });
+            });
         }
 
         _registerUiEventHandlers() {

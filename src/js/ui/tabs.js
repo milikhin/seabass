@@ -13,7 +13,14 @@ define([
         }
 
         _closeTabByEvent(evt) {
-            TabController.close(TabController.getByElem(evt.detail.target));
+            if (evt.detail.fileEntry) {
+                let tabToClose = TabController.getTabByFileEntry(evt.detail.fileEntry);
+                if (tabToClose) {
+                    TabController.close(tabToClose);
+                }
+            } else if (evt.detail.target) {
+                TabController.close(TabController.getByElem(evt.detail.target));
+            }
         }
 
         _registerTabEventHandlers() {
@@ -27,13 +34,13 @@ define([
 
                 let inputElem = targetElem.querySelector('input');
                 let fileName = inputElem.value;
-                self._openFileByName(fileName).then(function() {
+                self.openFileByName(fileName).then(function() {
                     inputElem.value = "";
                 });
             });
         }
 
-        _openFileByName(fileName) {
+        openFileByName(fileName) {
             let self = this;
             return co(function*() {
                 if (fileName) {

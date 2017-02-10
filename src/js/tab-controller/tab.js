@@ -95,8 +95,7 @@ define([
         });
         this.labelElem.querySelector('.tab-label').classList.add('tab-label--checked');
 
-        AppEvent.dispatch({
-            type: 'tab-activate',
+        AppEvent.dispatch('tab-activate', {
             tab: this
         });
     };
@@ -150,8 +149,7 @@ define([
 
 
     Tab.prototype.save = function() {
-        AppEvent.dispatch({
-            type: 'file-save',
+        AppEvent.dispatch('file-save', {
             fileEntry: this.fileEntry,
             value: this.editor.getValue()
         });
