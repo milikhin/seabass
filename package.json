@@ -1,28 +1,28 @@
 {
-  "name": "seabass",
-  "main": "chrome/background.js",
-  "version": "0.4.0",
-  "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "milikhin",
-  "license": "MIT",
-  "devDependencies": {
-    "chokidar": "^1.6.1",
-    "gulp": "^3.9.1",
-    "gulp-shell": "^0.5.2",
-    "merge-stream": "^1.0.0",
-    "nw-builder": "^3.1.2",
-    "nwbuild": "0.0.5",
-    "requirejs": "^2.2.0",
-    "rx": "^4.1.0"
-  },
-  "dependencies": {
-    "dropbox": "^2.5.0",
-    "gulp-gh-pages": "^0.5.4"
-  },
-  "seabass": {
-    "deployTo": "git@github.com:milikhin/seabass.git"
-  }
+    "name": "seabass",
+    "main": "chrome/background.js",
+    "version": "0.4.0",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "milikhin",
+    "license": "MIT",
+    "devDependencies": {
+        "chokidar": "^1.6.1",
+        "gulp": "^3.9.1",
+        "gulp-shell": "^0.5.2",
+        "merge-stream": "^1.0.0",
+        "nw-builder": "^3.1.2",
+        "nwbuild": "0.0.5",
+        "requirejs": "^2.2.0",
+        "rx": "^4.1.0"
+    },
+    "dependencies": {
+        "dropbox": "^2.5.0",
+        "gulp-gh-pages": "^0.5.4"
+    },
+    "seabass": {
+        "deployTo": "git@github.com:milikhin/seabass.git"
+    }
 }
