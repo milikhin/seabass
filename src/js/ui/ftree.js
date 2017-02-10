@@ -25,10 +25,42 @@ define([
                     self._init();
                 });
             }
+
+            AppEvent.on('tree-reload', function(evt) {
+                self._reloadTree();
+            });
         }
 
         closeMobile() {
             location.hash = "";
+        }
+
+        _reloadTree() {
+            let self = this;
+            let expandedNodes = this.tree.expanded();
+            
+          	co(function*() {
+                yield self.tree.reload();
+                expandRecursively(self.tree);
+                // self._updateTreeHeader();
+            });
+
+            function expandRecursively(rootNode) {
+                expandedNodes.forEach(function(node) {
+                    try {
+                        let childNodes = rootNode.getChildren ? rootNode.getChildren() : rootNode.nodes();
+                        childNodes.forEach(function(childNode) {
+                            if (childNode.id == node.id && childNode.entry.isDirectory) {
+                                childNode.expand().then(function() {
+                                    expandRecursively(childNode);
+                                });
+                            }
+                        });
+                    } catch (err) {
+                        console.error(err);
+                    }
+                });
+            }
         }
 
         _init() {
