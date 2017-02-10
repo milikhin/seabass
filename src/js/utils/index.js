@@ -60,9 +60,19 @@ define([], function() {
                 return;
             }
             preloaderElem.classList.add('preloader-hidden');
-            setTimeout(function() {
-                preloaderElem.classList.add('preloader-disabled');
-            }, 700);
+            return new Promise(function(resolve) {
+                setTimeout(function() {
+                    preloaderElem.classList.add('preloader-disabled');
+                    resolve();
+                }, 700);
+            });
+        },
+
+        withPreloader: function(promise) {
+            return Promise.all([
+                promise,
+                this.showPreloader()
+            ]).then(this.hidePreloader.bind(this), this.hidePreloader.bind(this));
         }
     };
 });

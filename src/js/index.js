@@ -1,18 +1,20 @@
 define([
     'app/app-event',
     'app/dialog',
-    'app/ui/index'
-], function(AppEvent, Dialog, AppUi) {
+    'app/ui/index',
+    'app/file-controller/manager'
+], function(AppEvent, Dialog, AppUi, FileManager) {
     "use strict";
 
     class Application {
         constructor() {
-            window.addEventListener('resize', function() {
-                AppEvent.dispatch("window-resize");
+            this.fileManager = new FileManager();
+            this.ui = new AppUi({
+                fileManager: this.fileManager
             });
 
-            new AppUi();
             console.log('App UI initialized');
+            console.log(performance.now() / 1000);
         }
     }
 

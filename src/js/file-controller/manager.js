@@ -20,6 +20,10 @@ define([
         });
     }
 
+    FileManager.prototype.isLoaded = function() {
+        return this._isLoaded;
+    };
+
     FileManager.prototype._initFs = function() {
         var self = this;
         return co(function*() {
@@ -31,9 +35,8 @@ define([
                         try {
                             self.fsController = new FileController();
                             yield self.fsController.waitForInit();
-                            AppEvent.dispatch({
-                                type: 'fsready'
-                            });
+                            self._isLoaded = true;
+                            AppEvent.dispatch('fsready');
                         } catch (err) {
                             throw new Error('FS is not supported, ' + self._fsType);
                         }
@@ -45,9 +48,8 @@ define([
                         self.fsController = new DropboxClient();
 
                         yield self.fsController.wait();
-                        AppEvent.dispatch({
-                            type: 'fsready'
-                        });
+                        self._isLoaded = true;
+                        AppEvent.dispatch('fsready');
 
                         break;
                     }
@@ -70,7 +72,7 @@ define([
         return this.fsController.renameFile(fileEntry, newName);
     };
 
-  	FileManager.prototype.create = function(path) {
+    FileManager.prototype.create = function(path) {
         if (!path) {
             throw new Error('FileName is required');
         }

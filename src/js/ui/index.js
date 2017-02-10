@@ -1,10 +1,25 @@
-define(['app/app-event', 'clipboard', 'app/ui/buttons'], function(AppEvent, Clipboard, getEditorButtons) {
+define([
+    'app/app-event',
+    'clipboard',
+    'co',
+    'app/ui/ftree',
+    'app/ui/buttons',
+    'app/utils/index',
+    'app/tab-controller/index',
+    'app/settings',
+    'app/ui/tabs'
+], function(AppEvent, Clipboard, co, FileTree, getEditorButtons, utils, TabController, settings, TabsUi) {
+    "use strict";
+
     class AppUi {
-        constructor() {
-            let self = this;
+        constructor(options) {
+            this.fileManager = options.fileManager;
             this._initUbuntuUi();
             this._addHeaderButtonsHak();
-
+            this._registerUiEventHandlers();
+            this._registerAppEventHandlers();
+            this.fileTree = new FileTree('.tree', this.fileManager);
+            this.tabsUi = new TabsUi(this.fileManager);
             new Clipboard('.clipboard-btn');
         }
 
@@ -52,7 +67,13 @@ define(['app/app-event', 'clipboard', 'app/ui/buttons'], function(AppEvent, Clip
             headerButtonPaneElem.className = "header__tab__button-pane";
 
             this._getEditorButtons().forEach(function(buttonDescription) {
+                if (buttonDescription.doNotShow) {
+                    return;
+                }
+                buttonDescription.addons = buttonDescription.addons || "";
+
                 buttonPaneHTML += `<button
+					${buttonDescription.addons}
 					data-action="editor-${buttonDescription.action}"
 					class="app-action header__tab__button-pane__button tooltip tooltip-bottom ${buttonDescription.className}">
 					<i class="material-icons">${buttonDescription.iconClass}</i>
@@ -77,7 +98,37 @@ define(['app/app-event', 'clipboard', 'app/ui/buttons'], function(AppEvent, Clip
             };
         }
 
+        _handleTreeNodeClick(evt) {
+            let self = this;
+            let nodeId = evt.detail.node.id;
+            let treeNode = evt.detail.node;
+            let fileEntry = treeNode.entry;
+
+            return co(function*() {
+                let navEnabled = yield settings.get('navEnabled');
+                if (fileEntry.isDirectory) {
+                    treeNode.toggleCollapse();
+                    return;
+                }
+
+                self.tabsUi._openFileByTreeNode(treeNode);
+                // close tree
+                self.fileTree.closeMobile();
+            }).catch(function(err) {
+                console.error(err);
+            });
+        }
+
+        _registerAppEventHandlers() {
+            let self = this;
+            AppEvent.on('tree__node-click', this._handleTreeNodeClick.bind(this));
+        }
+
         _registerUiEventHandlers() {
+            window.addEventListener('resize', function() {
+                AppEvent.dispatch("window-resize");
+            });
+
             document.body.addEventListener('submit', function(evt) {
                 AppEvent.dispatch("form-submit", {
                     formElem: evt.target
@@ -99,9 +150,7 @@ define(['app/app-event', 'clipboard', 'app/ui/buttons'], function(AppEvent, Clip
 
                     if (action) {
                         AppEvent.dispatch(action, {
-                            detail: {
-                                target: target
-                            }
+                            target: target
                         });
                     }
                 } catch (err) {
