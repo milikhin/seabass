@@ -42,18 +42,19 @@
     top: -10000px;
 }
 
-.tooltip-bottom .tooltip__text {
+.tooltip:hover.tooltip-bottom .tooltip__text {
     top: 100%;
     right: 0;
 }
 
-.tooltip-bottom-right .tooltip__text {
+.tooltip:hover.tooltip-bottom-right .tooltip__text {
     top: 100%;
     left: 0;
     text-align: left;
 }
 
-.tooltip-top .tooltip__text {
+.tooltip:hover.tooltip-top .tooltip__text {
     bottom: 100%;
     right: 0;
+    top: auto;
 }

@@ -234,7 +234,7 @@ define([
     };
 
     Application.prototype.toggleFileTree = function() {
-        if (document.body.clientWidth < 600) {
+        if (document.body.clientWidth < 750) {
             location.hash = !~location.hash.indexOf('file-tree') ? 'file-tree' : '';
         } else {
             var isHidden = document.getElementById('main').classList.contains('aside-hidden');
@@ -384,10 +384,10 @@ define([
                 {
                     id = evt.detail.node.id;
                     var fileEntry = evt.detail.node.entry;
-                  	var defaultName = fileEntry.isDirectory ? (fileEntry.fullPath + "/") : fileEntry.fullPath;
+                    var defaultName = fileEntry.isDirectory ? (fileEntry.fullPath + "/") : fileEntry.fullPath;
                     var createFile = function(options) {
                         if (!options.buttonIndex || options.buttonIndex === 1) {
-                            self._openFileByName(options.input1);                            
+                            self._openFileByName(options.input1);
                         }
                     };
 
@@ -563,7 +563,7 @@ define([
             contextMenu: [{
                 text: 'Create file...',
                 handler: function(event, node, closer) {
-                  	AppEvent.dispatch({
+                    AppEvent.dispatch({
                         type: 'tree-node-create',
                         node: node
                     });
