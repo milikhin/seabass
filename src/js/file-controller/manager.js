@@ -70,7 +70,7 @@ define([
         return this.fsController.renameFile(fileEntry, newName);
     };
 
-  	FileManager.prototype.create = function(path) {
+    FileManager.prototype.create = function(path) {
         if (!path) {
             throw new Error('FileName is required');
         }
