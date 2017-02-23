@@ -54,6 +54,7 @@
 }
 
 .tooltip-top .tooltip__text {
-    bottom: 100%;
+    top: 0;
+    transform: translateY(-100%);
     right: 0;
 }

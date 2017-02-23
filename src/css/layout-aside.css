@@ -29,7 +29,3 @@
   color: inherit;
   border-bottom: dotted 0.5px;
 }
-
-.aside__header__path.tooltip:hover .tooltip__text {
-    transition: opacity 0.25s ease 2.5s, z-index 0.1s ease 2.75s;
-}
