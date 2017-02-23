@@ -157,11 +157,12 @@ define([
             AppEvent.on('tree__toggle', this.toggleFileTree.bind(this));
             AppEvent.on('window-osk__toggle', this.toggleOSK.bind(this));
             AppEvent.on('keydown', this._handleShortcuts.bind(this));
+            AppEvent.on('body-resize', function() {
+                TabController.converge();
+            });
             AppEvent.on('editor-beautify', function(evt) {
                 TabController.getCurrent().beautify();
             });
-
-
             AppEvent.on('editor-save', function(evt) {
                 TabController.getCurrent().save();
             });
@@ -263,7 +264,7 @@ define([
 
         _registerUiEventHandlers() {
             window.addEventListener('resize', function() {
-                AppEvent.dispatch("window-resize");
+                AppEvent.dispatch("body-resize");
             });
 
             document.body.addEventListener('submit', function(evt) {
