@@ -99,6 +99,12 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
         });
     };
 
+    SettingsController.prototype.unhideByQuery = function(query) {
+        [].forEach.call(document.querySelectorAll(query), function(elemToHide) {
+            elemToHide.style.display = "";
+        });
+    };
+
     SettingsController.prototype._initFileTreeSettings = function() {
         var self = this;
         return co(function*() {
