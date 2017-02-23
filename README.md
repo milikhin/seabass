@@ -1,6 +1,8 @@
 # Seabass code editor
 Seabass code editor for Ubuntu Touch
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8bd815408704c07a8484b460384919e)](https://www.codacy.com/app/mikhael/seabass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=milikhin/seabass&amp;utm_campaign=Badge_Grade)
+
 ## TODO
 ### v0.1. Initial minimal working release
 - [x] Syntax highlighter: Refactor highlighter configuration
