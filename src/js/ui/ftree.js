@@ -48,6 +48,7 @@ define([
             // console.log(rootUrl);
             document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl.split('/').join('<wbr/>/');
         }
+      
         _updateTreeHint() {
             var getTreeData = this._getData();
             getTreeData.then(function(fileInfo) {

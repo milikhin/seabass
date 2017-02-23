@@ -135,6 +135,10 @@ define([
             return co(function*() {
                 let navEnabled = yield settings.get('navEnabled');
                 if (fileEntry.isDirectory) {
+                    if (navEnabled) {
+                        self.fileManager.setRoot(evt.detail.node.entry);
+                        AppEvent.dispatch('tree-reload');
+                    }
                     treeNode.toggleCollapse();
                     return;
                 }

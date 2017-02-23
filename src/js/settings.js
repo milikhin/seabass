@@ -157,9 +157,7 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
             self.set('navEnabled', this.checked);
             co(function*() {
                 yield self._initFileTreeSettings();
-                AppEvent.dispatch({
-                    type: 'nav-enabled'
-                });
+                AppEvent.dispatch('tree-reload');
             });
         };
         document.getElementById('file-tree-width').oninput = function() {
