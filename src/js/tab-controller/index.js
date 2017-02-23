@@ -29,10 +29,12 @@ define([
         var self = this;
         this.tabs = [];
         this.rootElem = document.querySelector('.tabs');
-      	this.labelsElem = document.querySelector('.tabs-labels');
-      
+        this.labelsElem = document.querySelector('.tabs-labels');
+
         // this.tabsElem = this.rootElem.querySelector('.tabs');
-        var sortable = Sortable.create(this.labelsElem, {draggable: '.tab-content-label'});
+        var sortable = Sortable.create(this.labelsElem, {
+            draggable: '.tab-content-label'
+        });
 
         document.body.addEventListener('tab-activate', function(evt) {
             self.tabs.forEach(function(tabDescription) {
@@ -189,7 +191,7 @@ define([
             fileEntry: fileEntry,
             fileContent: fileContent,
             parentElem: this.rootElem,
-          	parentLabelsElem: this.labelsElem,
+            parentLabelsElem: this.labelsElem,
             onEditorChange: function() {
                 setTimeout(function() {
                     self._updateButtons(tab);
@@ -248,23 +250,23 @@ define([
                 tab = tabDescription;
             }
         });
-      	if(tab) {
-        	return tab; 
+        if (tab) {
+            return tab;
         }
-      
-      	var tabId = elem.dataset.tabId;
-      	var tabElem = document.querySelector(`#tab-${tabId}`);
-      	if(!tabElem) {
-          return null;
+
+        var tabId = elem.dataset.tabId;
+        var tabElem = document.querySelector(`#tab-${tabId}`);
+        if (!tabElem) {
+            return null;
         }
-      	
-      	this.tabs.forEach(function(tabDescription) {
-          	if(tabElem.closest('.tabs li') == tabDescription.rootElem) {
-              tab = tabDescription;
+
+        this.tabs.forEach(function(tabDescription) {
+            if (tabElem.closest('.tabs li') == tabDescription.rootElem) {
+                tab = tabDescription;
             }
         });
-      	
-      	return tab;       
+
+        return tab;
     };
 
     TabController.prototype.close = function(tabToClose) {
@@ -274,7 +276,7 @@ define([
 
         document.body.removeEventListener('body-resize', tabToClose.onResize);
         tabToClose.rootElem.parentElement.removeChild(tabToClose.rootElem);
-      	tabToClose.labelElem.parentElement.removeChild(tabToClose.labelElem);
+        tabToClose.labelElem.parentElement.removeChild(tabToClose.labelElem);
 
         // destroy tab's Ace instance
         tabToClose.close();
