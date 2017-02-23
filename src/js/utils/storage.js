@@ -58,7 +58,7 @@ define([], function () {
 					var keyValue = {};
 					keyValue[key] = value;
 					chrome.storage.local.set(keyValue, function () {
-						console.log(key, value)
+						// console.log(key, value)
 						resolve();
 					});
 					break;

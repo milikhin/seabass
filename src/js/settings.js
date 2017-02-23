@@ -26,10 +26,6 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
                         break;
                     }
                 case 'native':
-                    {
-                        fsType = self.FS_TYPES.FS_NATIVE;
-                        break;
-                    }
                 default:
                     {
                         if (window.LocalFileSystem || window.chrome) {
@@ -229,10 +225,6 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
     SettingsController.prototype._createSheet = function() {
         // Create the <style> tag
         var style = document.createElement("style");
-
-        // Add a media (and/or media query) here if you'd like!
-        // style.setAttribute("media", "screen")
-        // style.setAttribute("media", "only screen and (max-width : 1024px)")
 
         // WebKit hack :(
         style.appendChild(document.createTextNode(""));

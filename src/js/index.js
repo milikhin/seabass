@@ -2,8 +2,9 @@ define([
     'app/app-event',
     'app/dialog',
     'app/ui/index',
-    'app/file-controller/manager'
-], function(AppEvent, Dialog, AppUi, FileManager) {
+    'app/file-controller/manager',
+    './settings'
+], function(AppEvent, Dialog, AppUi, FileManager, SettingsController) {
     "use strict";
 
     class Application {
@@ -12,12 +13,9 @@ define([
             this.ui = new AppUi({
                 fileManager: this.fileManager
             });
-
-            console.log('App UI initialized');
-            console.log(performance.now() / 1000);
+            SettingsController.init();
         }
     }
-
 
     return Application;
 });

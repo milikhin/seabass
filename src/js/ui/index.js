@@ -75,7 +75,7 @@ define([
 
                 buttonPaneHTML += `<button
 					${buttonDescription.addons}
-					data-action="editor-${buttonDescription.action}"
+					data-action="${buttonDescription.action}"
 					class="app-action header__tab__button-pane__button tooltip tooltip-bottom ${buttonDescription.className}">
 					<i class="material-icons">${buttonDescription.iconClass}</i>
 					<span class="tooltip__text">${buttonDescription.text}</span>
@@ -97,6 +97,33 @@ define([
             headerButtonPaneElem.querySelector("form").onsubmit = function() {
                 return false;
             };
+        }
+
+        _focusOnInput() {
+            let inputElem = document.querySelector('.header__tab__action-container input');
+            if (inputElem) {
+                inputElem.focus();
+            }
+        }
+
+        _handleShortcuts(evt) {
+            let evtObject = evt.detail;
+            if (evtObject.ctrlKey) {
+                switch (String.fromCharCode(evtObject.keyCode).toLowerCase()) {
+                    case 't':
+                        {
+                            this.toggleFileTree();
+                            break;
+                        }
+
+                    case 'o':
+                    case 'e':
+                        {
+                            this._focusOnInput();
+                            break;
+                        }
+                }
+            }
         }
 
         _handleTreeNodeClick(evt) {
@@ -123,6 +150,40 @@ define([
         _registerAppEventHandlers() {
             let self = this;
             AppEvent.on('tree__node-click', this._handleTreeNodeClick.bind(this));
+            AppEvent.on('tree__toggle', this.toggleFileTree.bind(this));
+            AppEvent.on('window-osk__toggle', this.toggleOSK.bind(this));
+            AppEvent.on('keydown', this._handleShortcuts.bind(this));
+            AppEvent.on('editor-beautify', function(evt) {
+                TabController.getCurrent().beautify();
+            });
+
+
+            AppEvent.on('editor-save', function(evt) {
+                TabController.getCurrent().save();
+            });
+            AppEvent.on('editor-redo', function(evt) {
+                TabController.getCurrent().redo();
+            });
+            AppEvent.on('editor-state-changed', function(evt) {
+                var undoElem = document.querySelector('.header__tab__button-pane__button-undo');
+                var redoElem = document.querySelector('.header__tab__button-pane__button-redo');
+                var beautifyElem = document.querySelector('.header__tab__button-pane__button-beautify');
+
+                if (undoElem) {
+                    undoElem.disabled = !evt.detail.hasUndo;
+                }
+                if (redoElem) {
+                    redoElem.disabled = !evt.detail.hasRedo;
+                }
+                if (beautifyElem) {
+                    beautifyElem.disabled = !evt.detail.hasBeautify;
+                }
+            });
+            AppEvent.on('editor-undo', function(evt) {
+                TabController.getCurrent().undo();
+            });
+
+
             AppEvent.on('tree__node-create', function(evt) {
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
@@ -220,7 +281,7 @@ define([
                         return false;
                     }
                     let action = target.dataset.action;
-
+                    console.log('Action:', action);
                     if (action) {
                         AppEvent.dispatch(action, {
                             target: target
@@ -232,6 +293,20 @@ define([
 
             });
         }
+
+        toggleFileTree() {
+            if (document.body.clientWidth < 750) {
+                location.hash = !~location.hash.indexOf('file-tree') ? 'file-tree' : '';
+            } else {
+                var isHidden = document.getElementById('main').classList.contains('aside-hidden');
+                document.getElementById('main').classList[isHidden ? "remove" : "add"]('aside-hidden');
+            }
+        }
+
+        toggleOSK() {
+            document.body.classList[document.body.classList.contains('osk-mode') ? "remove" : "add"]('osk-mode');
+            AppEvent.dispatch('body-resize');
+        };
     }
 
     return AppUi;

@@ -144,7 +144,7 @@ define([
                 }
             } else {
                 tab = groupTabs[0];
-                console.log(tab.fileEntry.nativeURL);
+                // console.log(tab.fileEntry.nativeURL);
                 tabHash = md5(tab.fileEntry.nativeURL);
                 tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
                 tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName}`;

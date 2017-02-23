@@ -9,13 +9,13 @@ define([], function() {
             className: 'header__tab__button-pane__button-save',
             priority: 0
         }, {
-            action: "filetree-toggle",
+            action: "tree__toggle",
             iconClass: "list",
             text: "Toggle file tree<br/><code>Ctrl + T</code>",
             className: 'header__tab__button-pane__button-ftree',
             priority: 0
         }, {
-            action: "window-osk",
+            action: "window-osk__toggle",
             iconClass: "keyboard",
             text: "Toggle OSK mode",
             className: 'header__tab__button-pane__button-osk',

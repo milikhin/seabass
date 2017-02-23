@@ -2,8 +2,9 @@ define([
     "inspire",
     "app/settings",
     "app/app-event",
-    "co"
-], function(InspireTree, settings, AppEvent, co) {
+    "co",
+    '../settings'
+], function(InspireTree, settings, AppEvent, co, SettingsController) {
     "use strict";
 
     class FileTree {
@@ -28,6 +29,13 @@ define([
 
             AppEvent.on('tree-reload', function(evt) {
                 self._reloadTree();
+                self._updateTreeHint();
+            });
+
+            AppEvent.on('tree-unset-root', function(evt) {
+                self.fileManager.unsetRoot();
+                self._reloadTree();
+                self._updateTreeHint();
             });
         }
 
@@ -35,14 +43,29 @@ define([
             location.hash = "";
         }
 
+        _updateTreeHeader() {
+            let rootUrl = this.fileManager.getRootURL();
+            // console.log(rootUrl);
+            document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl.split('/').join('<wbr/>/');
+        }
+        _updateTreeHint() {
+            var getTreeData = this._getData();
+            getTreeData.then(function(fileInfo) {
+                if (fileInfo.length) {
+                    SettingsController.hideByQuery('.tree-helper__empty');
+                }
+            });
+        }
+
         _reloadTree() {
             let self = this;
             let expandedNodes = this.tree.expanded();
-            
-          	co(function*() {
+
+            co(function*() {
                 yield self.tree.reload();
                 expandRecursively(self.tree);
-                // self._updateTreeHeader();
+                self._updateTreeHeader();
+                self._updateTreeHint();
             });
 
             function expandRecursively(rootNode) {
@@ -65,6 +88,8 @@ define([
 
         _init() {
             this.tree = this._render();
+            this._updateTreeHeader();
+            this._updateTreeHint();
             this.tree.on('node.click', function(event, node) {
                 AppEvent.dispatch('tree__node-click', {
                     node: node

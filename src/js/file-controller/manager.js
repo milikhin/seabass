@@ -115,7 +115,11 @@ define([
         // console.log(this.getRoot(), this.fsController);
         var url = this.getRoot().nativeURL || this.getRoot().fullPath;
         var rootUrl = 'file://localhost';
-        var shortenedUrl = url.slice(url.indexOf(rootUrl) + rootUrl.length, url.length);
+        let shortenedUrl = url;
+        let rootUrlIndex = url.indexOf(rootUrl);
+        if (~rootUrlIndex) {
+            shortenedUrl = url.slice(url.indexOf(rootUrl) + rootUrl.length, url.length);
+        }
 
         return shortenedUrl;
     };
