@@ -32,11 +32,11 @@ sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pk
 
 ## 2 Preparing sources
 ### 2.1 Get sources
-Download latest realease ([0.3.6](https://github.com/milikhin/seabass/archive/v0.3.6.tar.gz)):
+Download latest realease ([0.4.0](https://github.com/milikhin/seabass/archive/v0.4.0.tar.gz)):
 
 ```
-wget https://github.com/milikhin/seabass/archive/v0.3.6.tar.gz
-tar -xf v0.3.6.tar.gz
+wget https://github.com/milikhin/seabass/archive/v0.4.0.tar.gz
+tar -xf v0.4.0.tar.gz
 ```
 
 ### 2.2 Install app dependencies
@@ -104,11 +104,4 @@ cordova build --device
 Built package is available here:
 ```
 find -name *.click
-```
-
-## Bonus.
-How to create/install deb package
-
-```
-(cordova build ubuntu; cd platforms/ubuntu/native/seabass.mikhael; debuild -uc -us; sudo dpkg -i ../seabass.mikhael_0.3.6_amd64.deb )   
 ```
