@@ -268,7 +268,7 @@ define([
             });
 
             document.body.addEventListener('submit', function(evt) {
-                console.log('FORM SUBMIT');
+                // console.log('FORM SUBMIT');
                 AppEvent.dispatch("form-submit", {
                     formElem: evt.target
                 });
