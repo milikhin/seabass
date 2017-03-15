@@ -25,5 +25,9 @@
         name: "cm",
         location: "bower_components/codemirror",
         main: "lib/codemirror"
+    }, {
+        name: "prettydiff",
+        location: "../node_modules/prettydiff",
+        main: "prettydiff"
     }]
 });
