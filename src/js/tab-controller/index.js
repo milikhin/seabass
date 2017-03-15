@@ -216,7 +216,7 @@ define([
         AppEvent.dispatch('editor-state-changed', {
             hasUndo: tab.hasUndo(),
             hasRedo: tab.hasRedo(),
-            hasBeautify: ~['js', 'jsx', 'html', 'less', 'scss', 'css', 'json'].indexOf(ext)
+            hasBeautify: ~['ejs', 'js', 'jsx', 'html', 'less', 'scss', 'css', 'json', 'qml'].indexOf(ext)
         });
     };
 

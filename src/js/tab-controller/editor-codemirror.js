@@ -145,6 +145,13 @@ define([
         var content = this._editor.getValue();
         var beautyContent = content;
         var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
+        let options = {
+            source: content,
+            mode: "beautify", //  beautify, diff, minify, parse
+            wrap: 100,
+            methodchain: "none",
+        };
+
         switch (ext) {
             case 'json':
             case 'js':
@@ -156,21 +163,32 @@ define([
                 }
             case 'jsx':
                 {
-                    var options = {
-                        source: content,
-                        mode: "beautify", //  beautify, diff, minify, parse
-                        lang: "javascript",
-                        wrap: 100,
-
-                        methodchain: "none",
-                        //inchar: "\t", // indent character
-                        //insize: 1 // number of indent characters per indent
-                    };
-
-                    var pd = window.prettydiff(options); // returns and array: [beautified, report]
-                    var pretty = pd[0];
+                    options.lang = "javascript";
+                    let pd = window.prettydiff(options); // returns and array: [beautified, report]
+                    let pretty = pd[0];
                     // var report = pd[1];
                     // console.log(pretty, report);
+
+                    beautyContent = pretty;
+                    break;
+                }
+            case 'qml':
+                {
+                    options.lang = "qml";
+                    options.qml = true;
+
+                    let pd = window.prettydiff(options);
+                    let pretty = pd[0];
+
+                    beautyContent = pretty;
+                    break;
+                }
+            case 'ejs':
+                {
+                    options.lang = "markup";
+
+                    let pd = window.prettydiff(options);
+                    let pretty = pd[0];
 
                     beautyContent = pretty;
                     break;
@@ -179,17 +197,10 @@ define([
             case 'scss':
             case 'css':
                 {
-                    var options = {
-                        source: content,
-                        mode: "beautify", //  beautify, diff, minify, parse
-                        lang: "css",
-                        wrap: 100,
-                        //inchar: "\t", // indent character
-                        //insize: 1 // number of indent characters per indent
-                    };
+                    options.lang = "css";
 
-                    var pd = window.prettydiff(options); // returns and array: [beautified, report]
-                    var pretty = pd[0];
+                    let pd = window.prettydiff(options); // returns and array: [beautified, report]
+                    let pretty = pd[0];
 
                     beautyContent = pretty;
                     break;
