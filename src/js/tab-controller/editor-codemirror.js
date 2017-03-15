@@ -55,6 +55,7 @@ define([
     "cm/mode/yaml/yaml",
     "cm/mode/pascal/pascal",
     "cm/mode/swift/swift"
+
 ], function(languages, CodeMirror, AppEvent) {
     function Editor(options) {
 
@@ -142,18 +143,55 @@ define([
         var currentCursorPosition = this._editor.getCursor(); //save current cursor position
         var currentScrollInfo = this._editor.getScrollInfo();
         var content = this._editor.getValue();
-        var beautyContent;
+        var beautyContent = content;
         var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
         switch (ext) {
             case 'json':
             case 'js':
                 {
-                    beautyContent = window.js_beautify(content);
+                    beautyContent = window.js_beautify(content, {
+                        e4x: true
+                    });
                     break;
                 }
+            case 'jsx':
+                {
+                    var options = {
+                        source: content,
+                        mode: "beautify", //  beautify, diff, minify, parse
+                        lang: "javascript",
+                        wrap: 100,
+
+                        methodchain: "none",
+                        //inchar: "\t", // indent character
+                        //insize: 1 // number of indent characters per indent
+                    };
+
+                    var pd = window.prettydiff(options); // returns and array: [beautified, report]
+                    var pretty = pd[0];
+                    // var report = pd[1];
+                    // console.log(pretty, report);
+
+                    beautyContent = pretty;
+                    break;
+                }
+            case 'less':
+            case 'scss':
             case 'css':
                 {
-                    beautyContent = window.css_beautify(content);
+                    var options = {
+                        source: content,
+                        mode: "beautify", //  beautify, diff, minify, parse
+                        lang: "css",
+                        wrap: 100,
+                        //inchar: "\t", // indent character
+                        //insize: 1 // number of indent characters per indent
+                    };
+
+                    var pd = window.prettydiff(options); // returns and array: [beautified, report]
+                    var pretty = pd[0];
+
+                    beautyContent = pretty;
                     break;
                 }
             case 'html':

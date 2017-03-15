@@ -6,7 +6,7 @@ define([
     './settings'
 ], function(AppEvent, Dialog, AppUi, FileManager, SettingsController) {
     "use strict";
-
+	
     class Application {
         constructor() {
             this.fileManager = new FileManager();

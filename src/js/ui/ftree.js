@@ -52,7 +52,6 @@ define([
         _updateTreeHint() {
             var getTreeData = this._getData();
             getTreeData.then(function(fileInfo) {
-                console.log(fileInfo);
                 if (fileInfo.length) {
                     SettingsController.hideByQuery('.tree-helper__empty');
                 } else {

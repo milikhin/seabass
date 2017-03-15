@@ -31,6 +31,15 @@
     <script src="beautify/beautify-css.js"></script>
     <script src="beautify/beautify-html.js"></script>
 
+    <script src="prettydiff/dom.js"></script>
+    <script src="prettydiff/safeSort.js"></script>
+    <script src="prettydiff/csspretty.js"></script>
+    <script src="prettydiff/csvpretty.js"></script>
+    <script src="prettydiff/diffview.js"></script>
+    <script src="prettydiff/jspretty.js"></script>
+    <script src="prettydiff/markuppretty.js"></script>
+    <script src="prettydiff/prettydiff.js"></script>
+
     <script src="js/jshint.js"></script>
     <script src="js/csslint.js"></script>
     <script src="js/jsonlint.js"></script>
@@ -130,8 +139,8 @@
                 </div>
                 <div class="main-window">
                     <ul class="tabs-labels" id="editor-labels"></ul>
-					<ul class="tabs" id="editor-tabs"></ul>
-                  	
+                    <ul class="tabs" id="editor-tabs"></ul>
+
                     <div class="tabs__welcome-note-wrapper" id="welcome-note">
                         <section class="tabs__welcome-note">
                             <h2 class="tabs__welcome-note__header">
@@ -140,16 +149,21 @@
                             <p class="tabs__welcome-note__header-p">
                                 Seabass is a text (code) editor for Ubuntu Touch.
                             </p>
-
-                            <h3 class="tabs__welcome-note__header3">Supported devices</h3>
                             <div class="tabs__welcome-note__state">
-                                <p>
-                                    Phone layout is WIP, so only BQ M10 is fully supported
-                                </p>
                                 <p>
                                     Complete feature list, keybindings and release notes are available on About and Help pages.
                                 </p>
                             </div>
+                            <h3 class="tabs__welcome-note__header3">Known issues</h3>
+                            <ul class="tabs__welcome-note__list">
+                                <li>
+                                    Phone layout is WIP, so only BQ M10 is fully supported.
+                                </li>
+                                <li>
+                                    Text selection and copy/cut/paste operations via touchscreen don't work on Ubuntu Touch. This is, i believe, due to the outdated Ubuntu's platform components in Cordova. Since the click-based Ubuntu Touch is not actively developed now, i don't think the
+                                    issues will be fixed for 15.04 (unless if someone updates Cordova to use latest platform components, and that would be very welcomed :-).
+                                </li>
+                            </ul>
 
                             <!--                             <h3 class="tabs__welcome-note__header3">Dropbox introduced</h3>
                             <div class="tabs__welcome-note__state">
@@ -230,13 +244,15 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.4.0
+                            Seabass v0.4.1
                         </h2>
 
                         <h3 class="tabs__welcome-note__header3">Keybindings</h3>
-                        <p>
-                            Seabass relies on Codemirror's project "sublime" mode for default keybindings with an addition of a few own shortcuts.
-                        </p>
+                        <div class="tabs__welcome-note__state">
+                            <p>
+                                Seabass relies on Codemirror's project "sublime" mode for default keybindings with an addition of a few own shortcuts.
+                            </p>
+                        </div>
                         <div class="tabs__welcome-note__state">
                             <ul class="tabs__welcome-note__list">
                                 <li>Beautify code (if possible) &ndash; <code>Ctrl+Alt+B</code></li>
@@ -297,7 +313,7 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.4.0
+                            Seabass v0.4.1
                         </h2>
                         <p class="tabs__welcome-note__header-p">Seabass is a text (code) editor for Ubuntu Touch. </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
@@ -314,7 +330,7 @@
                             </li>
                             <li>
                                 Code formatter for the following file formats:
-                                <br/><code>.html, .js, .json, .css</code>
+                                <br/><code>.html, .js, .jsx, .json, .less, .scss, .css</code>
                             </li>
                         </ul>
 
@@ -327,16 +343,6 @@
                                 Bug reports &amp; feature requests are very appreciated. If you have any suggestions, want to have support for other languages or something doesn't work as expected, feel free to open issue on project's page on github or send me emails.
                             </p>
                         </div>
-
-                        <h3 class="tabs__welcome-note__header3">Known issues</h3>
-                        <ul class="tabs__welcome-note__list">
-                            <li>
-                                Phone layout is currently WIP, so only BQ M10 is fully supported.
-                            </li>
-                            <li>
-                                Basic file operations (create/delete/copy/rename) are not yet implemeted (except file creation which is WIP for now).
-                            </li>
-                        </ul>
 
                         <h3 class="tabs__welcome-note__header3">Acknowledgements</h3>
                         <div class="tabs__welcome-note__state">
@@ -399,7 +405,7 @@
                                     Vitaly Puzrin for js-yaml
                                 </li>
                                 <li>
-                                  	Lebedev Konstantin and others for Sortable
+                                    Lebedev Konstantin and others for Sortable
                                 </li>
                             </ul>
                         </div>
@@ -484,8 +490,8 @@
                         </div>
                         <p class="settings-note">
                             <b>*</b> &ndash; restart required to apply changes.<br/>
-                          	<b>**</b> &ndash; navigation mode is intended only for changing file tree's root directory.<br/>
-<!--                             <b>**</b> &ndash; you'll be redirected to Seabass Online to complete authorization<br/> -->
+                            <b>**</b> &ndash; navigation mode is intended only for changing file tree's root directory.<br/>
+                            <!--                             <b>**</b> &ndash; you'll be redirected to Seabass Online to complete authorization<br/> -->
                             <b>Note:</b> accorting to CSS specifications 1px equals to 1/96in.
                         </p>
                     </section>
