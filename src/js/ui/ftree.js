@@ -4,8 +4,9 @@ define([
     "app/settings",
     "app/app-event",
     "co",
-    '../settings'
-], function(InspireTree, InspireTreeDom, settings, AppEvent, co, SettingsController) {
+    '../settings',
+    './context-menu'
+], function(InspireTree, InspireTreeDom, settings, AppEvent, co, SettingsController, Menu) {
     "use strict";
 
     class FileTree {
@@ -116,13 +117,19 @@ define([
                     'allow': function() {
                         return false;
                     }
-                },
-                'contextMenu': this._getContextMenu()
+                }
             });
 
             let treeRenderer = new InspireTreeDom(tree, {
-                'target': this._rootSelector,
-                'contextMenu': this._getContextMenu()
+                'target': this._rootSelector
+            });
+
+            let menu = new Menu('.tree-context-menu');
+            let self = this;
+            tree.on('node.contextmenu', function(event, node) {
+                event.preventDefault();
+                event.preventTreeDefault(); // Cancels default listener
+                menu.show(event, self._getContextMenuHandler.bind(self, node));
             });
 
             return {
@@ -151,33 +158,31 @@ define([
             });
         }
 
-        _getContextMenu() {
-            return [{
-                text: 'Create file...',
-                handler: function(event, node, closer) {
-                    AppEvent.dispatch('tree__node-create', {
-                        node: node
-                    });
-                    closer(node);
-                }
-            }, {
-                text: 'Rename/move...',
-                handler: function(event, node, closer) {
-                    AppEvent.dispatch('tree__node-rename', {
-                        node: node
-                    });
-                    closer(node);
-                }
+        _getContextMenuHandler(node, target) {
+            switch (target.dataset.menuAction) {
+                case "create":
+                    {
+                        AppEvent.dispatch('tree__node-create', {
+                            node: node
+                        });
+                        break;
+                    }
+                case "rename":
+                    {
+                        AppEvent.dispatch('tree__node-rename', {
+                            node: node
+                        });
+                        break;
+                    }
+                case "delete":
+                    {
+                        AppEvent.dispatch('tree__node-delete', {
+                            node: node
+                        });
+                        break;
+                    }
+            }
 
-            }, {
-                text: 'Delete',
-                handler: function(event, node, closer) {
-                    AppEvent.dispatch('tree__node-delete', {
-                        node: node
-                    });
-                    closer(node);
-                }
-            }];
         }
     }
 

@@ -402,6 +402,7 @@
                     </section>
                 </div>
             </div>
+
             <div data-role="tab" id="settings">
                 <div class="settings-wrapper">
                     <section class="settings__container">
@@ -489,7 +490,27 @@
             </div>
         </div>
     </div>
-    <!-- mainview -->
+
+    <!-- context menu for tree -->
+    <nav data-role="list" class="context-menu tree-context-menu">
+        <ul class="context-menu__items">
+            <li class="context-menu__item">
+                <a href="#" class="context-menu__link app-action" data-action="menu-click" data-menu-action="create" data-prevent-default="1">
+                    Create file...
+                </a>
+            </li>
+            <li class="context-menu__item">
+                <a href="#" class="context-menu__link app-action" data-action="menu-click" data-menu-action="rename" data-prevent-default="1">
+                    Rename/move...
+                </a>
+            </li>
+            <li class="context-menu__item">
+                <a href="#" class="context-menu__link app-action" data-action="menu-click" data-menu-action="delete" data-prevent-default="1">
+                    Delete
+                </a>
+            </li>
+        </ul>
+    </nav>
 </body>
 
 </html>

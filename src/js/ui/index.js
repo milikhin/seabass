@@ -282,7 +282,7 @@ define([
             document.body.addEventListener('click', function(evt) {
                 try {
                     let target = evt.target.closest('.app-action');
-                    if (!target || target.disabled) {
+                    if (!target || target.disabled) {                      	
                         return false;
                     }
                     let action = target.dataset.action;
@@ -291,6 +291,10 @@ define([
                         AppEvent.dispatch(action, {
                             target: target
                         });
+                    }
+
+                    if (target.dataset.preventDefault) {
+                        evt.preventDefault();
                     }
                 } catch (err) {
                     console.error(err);

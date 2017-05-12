@@ -44,40 +44,33 @@ import "tweetsearch.js" as Helper
 Item {
     id: wrapper
 
-    // Insert valid consumer key and secret tokens below
-    // See https://dev.twitter.com/apps
-    property string consumerKey : "";
-    property string consumerSecret : "";
-    property string bearerToken : "";
+    // Insert valid consumer key and secret tokens below See https://dev.twitter.com/apps
+    property string consumerKey: "";
+    property string consumerSecret: "";
+    property string bearerToken: "";
 
-    property variant model: tweets
-    property string from : ""
-    property string phrase : ""
+    property variant model: tweets property string from: "" property string phrase: "" property int status: XMLHttpRequest.UNSENT property bool isLoading: status === XMLHttpRequest.LOADING property bool wasLoading: false signal isLoaded ListModel {
+        id : tweets
+    }
 
-    property int status: XMLHttpRequest.UNSENT
-    property bool isLoading: status === XMLHttpRequest.LOADING
-    property bool wasLoading: false
-    signal isLoaded
-
-    ListModel { id: tweets }
-
-    function encodePhrase(x) { return encodeURIComponent(x); }
+    function encodePhrase(x) {
+        return encodeURIComponent(x);
+    }
 
     function reload() {
         tweets.clear()
 
-        if (from == "" && phrase == "")
+        if (from == "" && phrase == "") 
             return;
-
+        
         var req = new XMLHttpRequest;
-        req.open("GET", "https://api.twitter.com/1.1/search/tweets.json?from=" + from +
-                        "&count=10&q=" + encodePhrase(phrase));
+        req.open("GET", "https://api.twitter.com/1.1/search/tweets.json?from=" + from + "&count=10&q=" + encodePhrase(phrase));
         req.setRequestHeader("Authorization", "Bearer " + bearerToken);
-        req.onreadystatechange = function() {
+        req.onreadystatechange = function () {
             status = req.readyState;
             if (status === XMLHttpRequest.DONE) {
                 var objectArray = JSON.parse(req.responseText);
-                if (objectArray.errors !== undefined)
+                if (objectArray.errors !== undefined) 
                     console.log("Error fetching tweets: " + objectArray.errors[0].message)
                 else {
                     for (var key in objectArray.statuses) {
@@ -85,7 +78,7 @@ Item {
                         tweets.append(jsonObject);
                     }
                 }
-                if (wasLoading == true)
+                if (wasLoading == true) 
                     wrapper.isLoaded()
             }
             wasLoading = (status === XMLHttpRequest.LOADING);
@@ -97,7 +90,7 @@ Item {
     onFromChanged: reload();
 
     Component.onCompleted: {
-        if (consumerKey === "" || consumerSecret == "") {
+        if(consumerKey === "" || consumerSecret == "") {
             bearerToken = encodeURIComponent(Helper.demoToken())
             return;
         }
@@ -106,15 +99,15 @@ Item {
         authReq.open("POST", "https://api.twitter.com/oauth2/token");
         authReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
         authReq.setRequestHeader("Authorization", "Basic " + Qt.btoa(consumerKey + ":" + consumerSecret));
-        authReq.onreadystatechange = function() {
+        authReq.onreadystatechange = function () {
             if (authReq.readyState === XMLHttpRequest.DONE) {
                 var jsonResponse = JSON.parse(authReq.responseText);
-                if (jsonResponse.errors !== undefined)
+                if (jsonResponse.errors !== undefined) 
                     console.log("Authentication error: " + jsonResponse.errors[0].message)
-                else
+                else 
                     bearerToken = jsonResponse.access_token;
+                }
             }
-        }
         authReq.send("grant_type=client_credentials");
     }
 
