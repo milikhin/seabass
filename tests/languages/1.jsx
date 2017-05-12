@@ -1,12 +1,13 @@
-<div className="red">Children Text</div>;
-<MyCounter count={3 + 5} />;
+import React from 'react';
+import {PhotoStory, VideoStory} from './stories';
 
-// Here, we set the "scores" attribute below to a JavaScript object.
-var gameScores = {
-  player1: 2,
-  player2: 5
+const components = {
+    photo: PhotoStory,
+    video: VideoStory
 };
-<DashboardUnit data-index="2">
-  <h1>Scores</h1>
-  <Scoreboard className="results" scores={gameScores} />
-</DashboardUnit>;
+
+function Story(props) {
+    // Correct! JSX type can be a capitalized variable.
+    const SpecificStory = components[props.storyType];
+    return <SpecificStory story={props.story}/>;
+}

@@ -1,10 +1,11 @@
 define([
-    "inspire",
+    "inspire-tree",
+    "inspire-dom",
     "app/settings",
     "app/app-event",
     "co",
     '../settings'
-], function(InspireTree, settings, AppEvent, co, SettingsController) {
+], function(InspireTree, InspireTreeDom, settings, AppEvent, co, SettingsController) {
     "use strict";
 
     class FileTree {
@@ -90,7 +91,9 @@ define([
         }
 
         _init() {
-            this.tree = this._render();
+            let treeInfo = this._render();
+            this.tree = treeInfo.tree;
+            this.treeRenderer = treeInfo.renderer;
             this._updateTreeHeader();
             this._updateTreeHint();
             this.tree.on('node.click', function(event, node) {
@@ -107,16 +110,25 @@ define([
                 }
             });
 
-            return new InspireTree({
-                'target': this._rootSelector,
+            let tree = new InspireTree({
                 'data': this._getData.bind(this),
                 'selection': {
                     'allow': function() {
                         return false;
                     }
                 },
-                contextMenu: this._getContextMenu()
+                'contextMenu': this._getContextMenu()
             });
+
+            let treeRenderer = new InspireTreeDom(tree, {
+                'target': this._rootSelector,
+                'contextMenu': this._getContextMenu()
+            });
+
+            return {
+                tree: tree,
+                renderer: treeRenderer
+            };
         }
 
         _getData(node) {

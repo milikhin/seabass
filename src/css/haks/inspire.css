@@ -16,7 +16,7 @@
     overflow: auto;
     display: inline-block;
     position: absolute;
-    top: 30px;
+    top: 32px;
     bottom: 0;
     width: 250px;
     left: 0;
@@ -31,7 +31,9 @@
 }
 
 .inspire-tree .wholerow {
-    transform: translateY(-115%);
+    transform: translateY(-110%);
+    height: 1.6rem;
+    margin: 0;
 }
 
 .inspire-tree .title-wrap:hover+.wholerow {
