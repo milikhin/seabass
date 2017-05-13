@@ -151,19 +151,18 @@
                             </p>
                             <div class="tabs__welcome-note__state">
                                 <p>
-                                    Complete feature list, keybindings and release notes are available on About and Help pages.
+                                    Complete feature list, keybindings and release notes are available on Help page.
                                 </p>
                             </div>
-                            <h3 class="tabs__welcome-note__header3">Known issues</h3>
-                            <ul class="tabs__welcome-note__list">
-                                <li>
-                                    Phone layout is still WIP
-                                </li>
-                                <li>
-                                    Text selection and copy/cut/paste operations via touchscreen don't work on Ubuntu Touch. This is, i believe, due to the outdated Ubuntu's platform components in Cordova. Since the click-based Ubuntu Touch is not actively developed now, i don't think the
-                                    issues will be fixed for 15.04 (unless if someone updates Cordova to use latest platform components, and that would be very welcomed :-).
-                                </li>
-                            </ul>
+                            <h3 class="tabs__welcome-note__header3">Release notes</h3>
+                            <div class="tabs__welcome-note__state">
+                                <p>
+                                    This is kind of a Beta-release, so expect broken features an so on...
+                                </p>
+                                <p>
+                                    Bug reports &amp; feature requests are very appreciated. If you have any suggestions, want to have support for other languages or something doesn't work as expected, feel free to open issues on project's page on github or send me emails.
+                                </p>
+                            </div>
 
                             <!-- <h3 class="tabs__welcome-note__header3">Dropbox introduced</h3>
                             <div class="tabs__welcome-note__state">
@@ -236,7 +235,23 @@
                         <h2 class="tabs__welcome-note__header">
                             Seabass v0.4.2
                         </h2>
-
+                        <h3 class="tabs__welcome-note__header3">Feataures</h3>
+                        <ul class="tabs__welcome-note__list">
+                            <li>
+                                Autosave on typing
+                            </li>
+                            <li>
+                                Zentabs: up to five (three in sidestage mode) simultaneously opened tabs. When the limit is exceeded, the eldest is closed
+                            </li>
+                            <li>
+                                Syntax highlighting for more than 25 languages:
+                                <br/><code>c, c++, css, go, html, java, javascript, json, jsx, latex, less, markdown, pascal, php, python, ruby, sass, scss, shell, stylus, svg, swift, typescript, xml, yaml</code>
+                            </li>
+                            <li>
+                                Code formatter for the following file formats:
+                                <br/><code>.html, .js, .jsx, .json, .less, .scss, .css</code>
+                            </li>
+                        </ul>
                         <h3 class="tabs__welcome-note__header3">Keybindings</h3>
                         <div class="tabs__welcome-note__state">
                             <p>
@@ -278,6 +293,18 @@
                             </p>
                         </div>
 
+                        <h3 class="tabs__welcome-note__header3">Known issues</h3>
+                        <ul class="tabs__welcome-note__list">
+                            <li>
+                                Phone layout is still WIP
+                            </li>
+                            <li>
+                                Text selection and copy/cut/paste operations via touchscreen don't work on Ubuntu Touch. This is, i believe, due to the outdated Ubuntu's platform components in Cordova. Since the click-based Ubuntu Touch is not actively developed now, i don't think the
+                                issues will be fixed for 15.04 (unless if someone updates Cordova to use latest platform components, and that would be very welcomed :-).
+                            </li>
+                        </ul>
+
+
                         <h3 class="tabs__welcome-note__header3">Creating files</h3>
                         <div class="tabs__welcome-note__state">
                             <p>
@@ -306,98 +333,141 @@
                             Seabass v0.4.2
                         </h2>
                         <p class="tabs__welcome-note__header-p">Seabass is a text (code) editor for Ubuntu Touch. </p>
-                        <h3 class="tabs__welcome-note__header3">Feataures</h3>
-                        <ul class="tabs__welcome-note__list">
-                            <li>
-                                Autosave on typing
-                            </li>
-                            <li>
-                                Zentabs: up to five (three in sidestage mode) simultaneously opened tabs. When the limit is exceeded, the eldest is closed
-                            </li>
-                            <li>
-                                Syntax highlighting for more than 25 languages:
-                                <br/><code>c, c++, css, go, html, java, javascript, json, jsx, latex, less, markdown, pascal, php, python, ruby, sass, scss, shell, stylus, svg, swift, typescript, xml, yaml</code>
-                            </li>
-                            <li>
-                                Code formatter for the following file formats:
-                                <br/><code>.html, .js, .jsx, .json, .less, .scss, .css</code>
-                            </li>
-                        </ul>
 
-                        <h3 class="tabs__welcome-note__header3">Release notes</h3>
+                        <h3 class="tabs__welcome-note__header3">About the project</h3>
                         <div class="tabs__welcome-note__state">
                             <p>
-                                This is an early Beta-release, so expect broken features an so on...
-                            </p>
-                            <p>
-                                Bug reports &amp; feature requests are very appreciated. If you have any suggestions, want to have support for other languages or something doesn't work as expected, feel free to open issue on project's page on github or send me emails.
-                            </p>
-                        </div>
-
-                        <h3 class="tabs__welcome-note__header3">Acknowledgements</h3>
-                        <div class="tabs__welcome-note__state">
-                            <p>
-                                Seabass is built using many excellent Open Source projects. I'd like to express my grattitude to:
-                            </p>
-                            <ul class="tabs__welcome-note__list tabs__welcome-note__list-acknowledge">
+                                Seabass is developed by <b>Mikhael Milikhin</b>. I'd like to express my grattitude to the following awesome people.</p>
+                            <ul class="acknowledgements-list">
                                 <li>
-                                    Juliana Zakharchenko &amp; Nastya Belokon for logo
+                                    <b>Juliana Zakharchenko</b> &amp; <b>Nastya Belokon</b> for Seabass logo
                                 </li>
                                 <li>
-                                    Brian Douglass for maintaining OpenStore edition
-                                </li>
-                                <li>
-                                    Apache Cordova project for the awesome framework
-                                </li>
-                                <li>
-                                    Marijn Haverbeke and others for the CodeMirror project
-                                </li>
-                                <li>
-                                    Cloud9 and others for Ace editor
-                                </li>
-                                <li>
-                                    Helion3 for inspire-tree project
-                                </li>
-                                <li>
-                                    Google for material icons set
-                                </li>
-                                <li>
-                                    Einar Lielmanis, Liam Newman and others for js-beautify
-                                </li>
-                                <li>
-                                    highlight.js project for code samples
-                                </li>
-                                <li>
-                                    Erick Wallace for CSS Tabs
-                                </li>
-                                <li>
-                                    Maximilian Grundke for QML mode for Ace
-                                </li>
-                                <li>
-                                    Zeno Rocha for Clipboard.js
-                                </li>
-                                <li>
-                                    Matthew Perpick and others for coffeelint
-                                </li>
-                                <li>
-                                    Yanis Wang and others for HTMLHint
-                                </li>
-                                <li>
-                                    Anton Kovalyov for JSHint
-                                </li>
-                                <li>
-                                    Nicole Sullivan and Nicholas C. Zakas for CSSLint
-                                </li>
-                                <li>
-                                    Zachary Carter and others for JSONLint
-                                </li>
-                                <li>
-                                    Vitaly Puzrin for js-yaml
-                                </li>
-                                <li>
-                                    Lebedev Konstantin and others for Sortable
+                                    <b>Brian Douglass</b> for maintaining OpenStore edition
                                 </li>
                             </ul>
+                            <p style="margin: 10px 0;">
+                                Seabass is free software under MIT license with sources available on project's Github page. It is built using many excellent Open Source projects.
+                            </p>
+                            <table class="acknowledgements">
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Developer and license</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Ace editor
+                                    </td>
+                                    <td>
+                                        Ajax.org B.V., BSD-3 license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Apache Cordova
+                                    </td>
+                                    <td>
+                                        The Apache Software Foundation, Apache license 2.0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Clipboard.js
+                                    </td>
+                                    <td>
+                                        Zeno Rocha, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        CodeMirror
+                                    </td>
+                                    <td>
+                                        Marijn Haverbeke and others, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Coffeelint
+                                    </td>
+                                    <td>
+                                        Matthew Perpick and others, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        CSSLint
+                                    </td>
+                                    <td>
+                                        Nicole Sullivan and Nicholas C. Zakas, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        HTMLHint
+                                    </td>
+                                    <td>
+                                        Yanis Wang and others, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        js-beautify
+                                    </td>
+                                    <td>
+                                        Einar Lielmanis, Liam Newman and contributors, MIT lisence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        js-yaml
+                                    </td>
+                                    <td>
+                                        Vitaly Puzrin, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        JSHint
+                                    </td>
+                                    <td>
+                                        Anton Kovalyov, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        JSONLint
+                                    </td>
+                                    <td>
+                                        Zachary Carter, MIT license
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Inspire-tree
+                                    </td>
+                                    <td>
+                                        Helion3 LLC, MIT lisence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Material icons
+                                    </td>
+                                    <td>
+                                        Google, Apache 2.0 lisence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Sortable
+                                    </td>
+                                    <td>
+                                        Lebedev Konstantin and others, MIT license
+                                    </td>
+                                </tr>
+
+                            </table>
                         </div>
                     </section>
                 </div>
