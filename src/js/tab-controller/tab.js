@@ -67,7 +67,7 @@ define([
     };
 
     Tab.prototype.close = function() {
-        console.log('close stub');
+        // console.log('close stub');
     };
 
     Tab.prototype.undo = function() {
