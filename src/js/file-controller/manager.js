@@ -24,10 +24,6 @@ define([
         AppEvent.on('file-save', function(evt) {
             self.writeFile(evt.detail.fileEntry, evt.detail.value);
         });
-
-        AppEvent.on('tree__node-create', function(evt) {
-
-        });
     }
 
     FileManager.prototype.isLoaded = function() {

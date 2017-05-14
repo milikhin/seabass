@@ -192,7 +192,9 @@ define([
             AppEvent.on('tree__node-create', function(evt) {
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
-                let defaultName = fileEntry.isDirectory ? (fileEntry.fullPath + "/") : fileEntry.fullPath;
+                let fullPathFromRoot = self.getPathFromRoot(fileEntry);
+                
+                let defaultName = fileEntry.isDirectory ? (fullPathFromRoot + "/") : fullPathFromRoot;
                 let createFile = function(options) {
                     if (options.buttonIndex === 1) {
                         self.tabsUi.openFileByName(options.input1);
@@ -211,7 +213,9 @@ define([
             AppEvent.on('tree__node-rename', function(evt) {
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
-                let defaultName = fileEntry.fullPath;
+              	let fullPathFromRoot = self.getPathFromRoot(fileEntry);
+                
+                let defaultName = fullPathFromRoot;
                 let moveFile = function(options) {
                     if (options.buttonIndex === 1) {
                         co(function*() {
@@ -239,7 +243,8 @@ define([
             AppEvent.on('tree__node-delete', function(evt) {
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
-
+				let fullPathFromRoot = self.getPathFromRoot(fileEntry);
+                
                 let deleteFile = function(buttonIndex) {
                     if (buttonIndex === 1) {
                         co(function*() {
@@ -256,10 +261,25 @@ define([
 
                 dialog.confirm({
                     title: "Delete file",
-                    description: `Delete ${fileEntry.fullPath}?`,
+                    description: `Delete ${fullPathFromRoot}?`,
                     callback: deleteFile
                 });
             });
+        }
+
+        getPathFromRoot(fileEntry) {
+            let rootPath = this.fileManager.getRoot().fullPath;
+
+            let similarTill = 0;
+            for (let i = 0; i < rootPath.length; i++) {
+                if (rootPath.charAt(i) == fileEntry.fullPath.charAt(i)) {
+                    similarTill++;
+                } else {
+                    break;
+                }
+            }
+
+            return fileEntry.fullPath.slice(similarTill, fileEntry.fullPath.length);
         }
 
         _registerUiEventHandlers() {
@@ -282,11 +302,11 @@ define([
             document.body.addEventListener('click', function(evt) {
                 try {
                     let target = evt.target.closest('.app-action');
-                    if (!target || target.disabled) {                      	
+                    if (!target || target.disabled) {
                         return false;
                     }
                     let action = target.dataset.action;
-                    console.log('Action:', action);
+                    // console.log('Action:', action);
                     if (action) {
                         AppEvent.dispatch(action, {
                             target: target

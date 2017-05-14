@@ -24,7 +24,7 @@ define(['app/app-event'], function(AppEvent) {
             });
 
             AppEvent.on('menu-click', function(evt) {
-                console.log('Menu click', evt);
+                // console.log('Menu click', evt);
                 self._onClick(evt.detail.target);
             });
         }

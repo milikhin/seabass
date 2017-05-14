@@ -6,6 +6,7 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
             self.rootEntry = self.fs.root;
 
             var savedRootUrl = yield storage.get('rootURL');
+            console.log(savedRootUrl, self.fs.root);
             if (savedRootUrl && window.resolveLocalFileSystemURL) {
                 self.rootEntry = yield new Promise(function(resolve, reject) {
                     window.resolveLocalFileSystemURL(savedRootUrl, function(dirEntry) {
@@ -238,8 +239,8 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
 
                         promises.push(co(function*() {
                             var entry = entries[i];
-
-                            entry.nativeURL = entry.nativeURL || entry.fullPath;
+							
+                          	entry.nativeURL = entry.nativeURL || entry.fullPath;                            
                             var fileDescription = {
                                 'text': entry.name,
                                 'id': md5(entry.nativeURL),
