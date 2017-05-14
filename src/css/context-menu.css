@@ -1,7 +1,7 @@
 .context-menu {
     display: none;
     position: absolute;
-    z-index: 10;
+    z-index: 100;
     background: #efefef;
     border: solid 1px #787878;
     border-radius: 4px;

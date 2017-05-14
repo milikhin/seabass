@@ -19,13 +19,12 @@
     text-align: center;
     height: 100%;
 }
-
 .aside__header__reload:active {
     background: #ccc;
 }
 
 .aside__header__path {
-  text-decoration: none;
-  color: inherit;
-  border-bottom: dotted 0.5px;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: dotted 0.5px;
 }
