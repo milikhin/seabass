@@ -7,7 +7,7 @@ Information about planed features and progress is available at [TODO.md](TODO.md
 
 ## Building from sources
 
-**It seems that latest Ubuntu Desktop versions are not supported by Cordova-cli and so original 16.04 Ubuntu is required to build seabass (at least 16.04.2 is not supported due to problems with schroot)**
+**It seems that latest Ubuntu Xenial Desktop versions are not supported by Cordova-cli and so original 16.04 image is required to build Seabass (at least 16.04.2 is not supported due to problems with schroot)**
 
 Automatic build script is available since v0.2.9, see [seabass-build](https://github.com/milikhin/seabass-build) project.
 Manual [build instructions](building.md) are also available.
