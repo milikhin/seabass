@@ -1,5 +1,5 @@
 ## Requirements
-* Ubuntu 16.04
+* Original Ubuntu 16.04 (16.04.2 is not supported)
 * Git (```sudo apt install git```)
 
 ## 1 Setup Cordova
