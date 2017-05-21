@@ -101,7 +101,7 @@ define([
 
     // Get Zentabs limit
     TabController.prototype._getMaxTabsNumber = function() {
-        return document.body.clientWidth > 600 ? 5 : 3;
+        return document.body.clientWidth > 750 ? 5 : 3;
     };
 
     TabController.prototype.converge = function() {

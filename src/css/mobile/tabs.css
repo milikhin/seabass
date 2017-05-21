@@ -1,9 +1,4 @@
-.tabs li {
-  min-width: 0;
-  flex-grow: 1;
+.tabs-labels li {
+    min-width: 25%;
+    flex-grow: 1;
 }
-
-.tabs li.tab-active {
-  /*width: 33.3%;*/
-}
-
