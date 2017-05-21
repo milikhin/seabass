@@ -8,7 +8,7 @@
     out: "tmp/js/index.js",
     paths: {
         "inspire-tree": "bower_components/inspire-tree/dist/inspire-tree.min",
-      	"inspire-dom": "public/js/inspire-tree-dom.min",
+        "inspire-dom": "public/js/inspire-tree-dom.min",
         "lodash": "bower_components/lodash/dist/lodash.min",
         "alertify": "bower_components/alertifyjs/dist/js/alertify",
         "co": "js/co.min",
