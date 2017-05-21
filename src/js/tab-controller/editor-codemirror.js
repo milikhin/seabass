@@ -3,6 +3,14 @@ define([
     "cm",
     "app/app-event",
 
+    'cm/addon/hint/show-hint',
+    'cm/addon/hint/javascript-hint',
+    'cm/addon/hint/html-hint',
+    'cm/addon/hint/xml-hint',
+    'cm/addon/hint/css-hint',
+    'cm/addon/hint/sql-hint',
+    'cm/addon/hint/anyword-hint',
+
     'cm/keymap/sublime',
     'cm/addon/lint/lint',
     'cm/addon/comment/comment',
@@ -56,7 +64,7 @@ define([
     "cm/mode/pascal/pascal",
     "cm/mode/swift/swift"
 
-], function(languages, CodeMirror, AppEvent) {
+], function(languages, CodeMirror, AppEvent, anyHint, jsHint) {
     function Editor(options) {
 
         var self = this;
@@ -68,6 +76,7 @@ define([
         var language = this._getLanguage();
         var ext = this.fileName.slice(this.fileName.lastIndexOf('.') + 1, this.fileName.length);
         var linterOptions;
+
         switch (ext) {
             case 'js':
                 {
@@ -95,15 +104,10 @@ define([
                     linterOptions = false;
                 }
         }
-        // var hasLinter = ~['json', 'js', 'css', 'html', 'yaml'].indexOf(ext);
 
         this._editor = CodeMirror.fromTextArea(options.editorElem, {
             autoCloseBrackets: true,
-            extraKeys: {
-                "Ctrl-Q": function(cm) {
-                    cm.foldCode(cm.getCursor());
-                }
-            },
+
             inputStyle: "contenteditable",
             foldGutter: true,
             gutters: linterOptions ? ["CodeMirror-lint-markers", "CodeMirror-foldgutter"] : ["CodeMirror-foldgutter"],
@@ -132,7 +136,8 @@ define([
             },
             "Ctrl-Y": function() {
                 self.redo();
-            }
+            },
+            "Ctrl-Space": "autocomplete"
         });
 
         this._editor.setValue(options.fileContent);

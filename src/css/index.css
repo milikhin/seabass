@@ -9,6 +9,7 @@
 @import 'codemirror/dialog.css';
 @import 'codemirror/lint.css';
 @import 'codemirror/foldgutter.css';
+@import 'codemirror/show-hint.css';
 
 /* haks for external components */
 @import 'haks/index.css';
