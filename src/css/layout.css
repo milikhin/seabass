@@ -11,8 +11,8 @@ html {
     height: 100%;
 }
 
-body,
-[data-role="mainview"] {
+[data-role="mainview"],
+body {
     height: 100%;
 }
 
@@ -28,15 +28,14 @@ body.osk-mode::after {
     box-sizing: border-box;
     transform: translateY(-50%);
     text-align: center;
-    margin: auto;
-    margin-top: 25vh;
+    margin: 25vh auto auto;
 }
 
 .content {
     min-height: calc(100% - 52px);
     height: calc(100% - 52px);
     width: 100%;
-    padding-top: 51px!important;
+    padding-top: 51px !important;
     clear: none;
 }
 
@@ -114,11 +113,10 @@ body.osk-mode::after {
     color: #aaa;
 }
 
-.tabs__welcome-note__olist,
-.tabs__welcome-note__list {
+.tabs__welcome-note__list,
+.tabs__welcome-note__olist {
     margin: 0 0 0 1em;
 }
-
 .acknowledgements td:first-child {
     padding-right: 10px;
 }
