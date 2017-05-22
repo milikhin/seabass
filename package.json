@@ -1,12 +1,12 @@
 {
   "name": "seabass",
   "main": "chrome/background.js",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "milikhin",
+  "author": "Mikhael Milikhin",
   "license": "MIT",
   "devDependencies": {
     "chokidar": "^1.6.1",
