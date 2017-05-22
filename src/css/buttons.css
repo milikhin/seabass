@@ -32,7 +32,7 @@
 }
 
 .icon-button--beautify::before {
-    background-image: url('icons/keyboard-spacebar.svg');
+    background-image: url('icons/keyboard-tab.svg');
 }
 
 .icon-button--close::before {
@@ -52,7 +52,7 @@
 }
 
 .icon-button--toggle-osk::before {
-    background-image: url('icons/view-fullscreen.svg');
+    background-image: url('icons/input-keyboard-symbolic.svg');
 }
 
 .icon-button--redo::before {
