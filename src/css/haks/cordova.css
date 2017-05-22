@@ -10,12 +10,12 @@ body {
     /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;
     /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;
+    -webkit-user-select: text;
     /* prevent copy paste, to allow, change 'none' to 'text' */
     position: absolute;
 }
 
-[data-role="list"]>header+ul li {
+[data-role="list"] > header+ul li {
     padding: 0;
 }
 
@@ -28,7 +28,6 @@ body {
     color: #333;
     cursor: pointer;
 }
-
 .clipboard-btn.dropbox-token-btn:hover {
     color: black;
 }
@@ -39,4 +38,11 @@ body {
 
 .alertify {
     z-index: 1000;
+}
+
+input[type="text"].suru-input {
+    box-shadow: none;
+    border-radius: 6px;
+    background: white;
+    border: solid 1px #ccc;
 }

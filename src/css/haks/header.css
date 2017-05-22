@@ -2,18 +2,22 @@
     z-index: 100;
 }
 
-[data-role="tabtitle"], [data-role="back-btn"], [data-role="tabs-btn"], .header {
+.header,
+[data-role="back-btn"],
+[data-role="tabs-btn"],
+[data-role="tabtitle"] {
     height: 50px;
 }
 
-[data-role="tabtitle"], [data-role="back-btn"], [data-role="tabs-btn"] {
+[data-role="back-btn"],
+[data-role="tabs-btn"],
+[data-role="tabtitle"] {
     line-height: 50px;
 }
 
 [data-role="content"] {
     border-top-width: 0;
 }
-
 [data-role="header"]:after {
     content: "";
     border-top: 0.25px solid #afafaf;
@@ -28,7 +32,7 @@
 .header__tab__button-pane {
     position: absolute;
     right: 10px;
-    top: 0px;
+    top: 0;
 }
 
 .header__tab__button-pane__button {
@@ -37,28 +41,27 @@
     line-height: 50px;
     height: 50px;
     border: none;
-    background: none;
     font-size: large;
+
+    background: transparent;
     padding: 0;
 }
 
 .header__tab__button-pane__button .material-icons {
     line-height: inherit;
 }
-
 .header__tab__button-pane__button:active {
     background: #ccc;
 }
-
 .header__tab__button-pane__button:disabled {
     color: #ccc;
-    background: none;
 }
 
-
 /* full with for tab header */
-
-[data-role="back-btn"]:disabled+[data-role="tabtitle"], [data-role="back-btn"]+[data-role="tabtitle"], [data-role="tabs-btn"]+[data-role="tabtitle"], [data-role="tabs"]+[data-role="tabtitle"] {
+[data-role="back-btn"]+[data-role="tabtitle"],
+[data-role="back-btn"]:disabled+[data-role="tabtitle"],
+[data-role="tabs"]+[data-role="tabtitle"],
+[data-role="tabs-btn"]+[data-role="tabtitle"] {
     width: auto;
     float: none;
 }
@@ -75,7 +78,7 @@
     float: right;
     position: relative;
     margin-right: 10px;
-    line-height: 45px;
+    line-height: 40px;
 }
 
 input[type="text"].header__tab__action-container__input {
@@ -83,18 +86,23 @@ input[type="text"].header__tab__action-container__input {
     /*color: #757373;*/
     box-sizing: border-box;
     padding-right: 2rem;
+    box-shadow: none;
+    border-radius: 6px;
+    background: white;
+    border: solid 1px #ccc;
 }
 
 .header__tab__action-container__submit {
     position: absolute;
     right: 0;
     text-align: center;
-    bottom: 5px;
+    bottom: 1px;
     border: none;
     background: none;
     color: #757373;
+    height: 31px;
+    width: 35px;
 }
-
 .header__tab__action-container__input:focus~.header__tab__action-container__submit {
     color: black;
 }

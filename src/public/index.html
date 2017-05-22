@@ -81,26 +81,23 @@
         <div data-role="content" class="content">
             <div data-role="tab" id="main">
                 <div class="aside" id="file-tree">
-                    <section data-role="list">
+                    <section>
                         <header class="aside__header">
                             <div class="aside__header__buttons">
-                                <button class="app-action aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-unset-root">
-                                    <i class="material-icons">home</i>
-                                    <span class="tooltip__text">Load default project's root</span>
-                                </button>
-                                <button class="app-action aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-reload">
-                                    <i class="material-icons">cached</i>
+                                <button class="app-action icon-button icon-button--reload aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-reload">
                                     <span class="tooltip__text">Reload tree</span>
                                 </button>
-                                <button class="app-action aside__header__buttons__button tooltip tooltip-bottom mobile-only" data-action="tree__toggle">
-                                    <i class="material-icons">close</i>
+                                <button class="app-action icon-button icon-button--reset aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-unset-root">
+                                    <span class="tooltip__text">Load default project's root</span>
+                                </button>
+                                <button class="app-action icon-button icon-button--close aside__header__buttons__button tooltip tooltip-bottom mobile-only" data-action="tree__toggle">
                                     <span class="tooltip__text">Hide tree</span>
                                 </button>
                             </div>
-                            <a class="tooltip tooltip-bottom-right aside__header__path" href="#" onclick="return false">
-                              Files
-                              <span class="tooltip__text" id="aside__header__path__tooltip"></span>
-                            </a>
+                            <div class="aside__header__path tooltip tooltip-bottom-right" href="#">
+                                <input readonly class="suru-input aside__header__path__input" id="aside__header__path__input" type="text">
+                                <span class="tooltip__text" id="aside__header__path__tooltip">...</span>
+                            </div>
                         </header>
                         <div class="tree-helper">
                             <div class="ft-dropbox-only tree-helper__dropbox tree-helper__empty">
@@ -250,7 +247,7 @@
                             <li>
                                 Code formatter for the following file formats:
                                 <br/><code>.html, .js, .jsx, .json, .less, .scss, .css</code>
-                            </li>                            
+                            </li>
                         </ul>
                         <h3 class="tabs__welcome-note__header3">Keybindings</h3>
                         <div class="tabs__welcome-note__state">

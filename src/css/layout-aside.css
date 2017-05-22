@@ -1,13 +1,19 @@
 .aside__header {
     position: relative;
     color: #747278;
+    height: 40px;
+    border-bottom: solid 1px #ccc;
+}
+
+.aside__header__path {
+    padding: 5px;
 }
 
 .aside__header__buttons {
     position: absolute;
     height: 100%;
     top: 0;
-    right: 0;
+    right: 10px;
     padding: 0;
     margin: 0;
 }
@@ -26,5 +32,10 @@
 .aside__header__path {
     text-decoration: none;
     color: inherit;
-    border-bottom: dotted 0.5px;
+    margin-right: 100px;
+}
+
+input[type="text"].aside__header__path__input {
+    width: 100%;
+    background: rgba(0,0,0,0.05);
 }

@@ -23,7 +23,7 @@
     packages: [{
         name: "app",
         location: "js"
-    }, {
+    }, { 
         name: "cm",
         location: "bower_components/codemirror",
         main: "lib/codemirror"

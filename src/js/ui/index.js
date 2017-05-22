@@ -76,16 +76,14 @@ define([
                 buttonPaneHTML += `<button
 					${buttonDescription.addons}
 					data-action="${buttonDescription.action}"
-					class="app-action header__tab__button-pane__button tooltip tooltip-bottom ${buttonDescription.className}">
-					<i class="material-icons">${buttonDescription.iconClass}</i>
+					class="icon-button icon-button--${buttonDescription.iconClass} app-action header__tab__button-pane__button tooltip tooltip-bottom ${buttonDescription.className}">					
 					<span class="tooltip__text">${buttonDescription.text}</span>
 				</button>`;
             });
             buttonPaneHTML += `<div class="header__tab__action-container tablet-only">
                 <form action="#">
                     <input class="header__tab__action-container__input" type="text" placeholder="path/to/file"/>
-                    <button class="header__tab__action-container__submit tooltip tooltip-bottom" type="submit">
-                        <i class="material-icons">insert_drive_file</i>
+                    <button class="icon-button icon-button--open header__tab__action-container__submit tooltip tooltip-bottom" type="submit">
                         <span class="tooltip__text">Open file (create if not exists)</span>
                     </button>
                 </form>
@@ -193,7 +191,7 @@ define([
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
                 let fullPathFromRoot = self.getPathFromRoot(fileEntry);
-                
+
                 let defaultName = fileEntry.isDirectory ? (fullPathFromRoot + "/") : fullPathFromRoot;
                 let createFile = function(options) {
                     if (options.buttonIndex === 1) {
@@ -213,8 +211,8 @@ define([
             AppEvent.on('tree__node-rename', function(evt) {
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
-              	let fullPathFromRoot = self.getPathFromRoot(fileEntry);
-                
+                let fullPathFromRoot = self.getPathFromRoot(fileEntry);
+
                 let defaultName = fullPathFromRoot;
                 let moveFile = function(options) {
                     if (options.buttonIndex === 1) {
@@ -243,8 +241,8 @@ define([
             AppEvent.on('tree__node-delete', function(evt) {
                 let nodeId = evt.detail.node.id;
                 let fileEntry = evt.detail.node.entry;
-				let fullPathFromRoot = self.getPathFromRoot(fileEntry);
-                
+                let fullPathFromRoot = self.getPathFromRoot(fileEntry);
+
                 let deleteFile = function(buttonIndex) {
                     if (buttonIndex === 1) {
                         co(function*() {

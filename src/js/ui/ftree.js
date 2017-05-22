@@ -48,6 +48,7 @@ define([
         _updateTreeHeader() {
             let rootUrl = this.fileManager.getRootURL();
             // console.log(rootUrl);
+            document.getElementById('aside__header__path__input').value = rootUrl;
             document.getElementById('aside__header__path__tooltip').innerHTML = rootUrl.split('/').join('<wbr/>/');
         }
 

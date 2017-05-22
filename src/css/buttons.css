@@ -1,0 +1,60 @@
+.icon-button {
+    padding: 1px 5px;
+}
+.icon-button::before {
+    display: block;
+    content: "";
+    width: 100%;
+    /*     max-width: 35px; */
+    height: 100%;
+    background: transparent no-repeat;
+    background-position: left center;
+    background-size: 23px auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+.icon-button:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+.icon-button:disabled::before {
+    opacity: 0.5;
+}
+.icon-button:disabled {
+    background-color: transparent;
+}
+
+.icon-button--undo::before {
+    background-image: url('icons/undo.svg');
+}
+
+.icon-button--tree::before {
+    background-image: url('icons/document-open.svg');
+}
+
+.icon-button--beautify::before {
+    background-image: url('icons/keyboard-spacebar.svg');
+}
+
+.icon-button--close::before {
+    background-image: url('icons/close.svg');
+}
+
+.icon-button--reload::before {
+    background-image: url('icons/reload.svg');
+}
+
+.icon-button--open::before {
+    background-image: url('icons/edit.svg');
+}
+
+.icon-button--reset::before {
+    background-image: url('icons/reset.svg');
+}
+
+.icon-button--toggle-osk::before {
+    background-image: url('icons/view-fullscreen.svg');
+}
+
+.icon-button--redo::before {
+    background-image: url('icons/redo.svg');
+}

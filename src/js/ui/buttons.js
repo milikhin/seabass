@@ -10,19 +10,19 @@ define([], function() {
             priority: 0
         }, {
             action: "tree__toggle",
-            iconClass: "list",
+            iconClass: "tree",
             text: "Toggle file tree<br/><code>Ctrl + T</code>",
             className: 'header__tab__button-pane__button-ftree',
             priority: 0
         }, {
             action: "window-osk__toggle",
-            iconClass: "keyboard",
+            iconClass: "toggle-osk",
             text: "Toggle OSK mode",
             className: 'header__tab__button-pane__button-osk',
             priority: 10
         }, {
             action: "editor-beautify",
-            iconClass: "spellcheck",
+            iconClass: "beautify",
             text: "Beautify<br/><code>Ctrl + Alt + B</code>",
             addons: "disabled",
             className: 'header__tab__button-pane__button-beautify',
@@ -32,6 +32,7 @@ define([], function() {
             iconClass: "redo",
             text: "Redo<br/><code>Ctrl + Y</code>",
             addons: "disabled",
+            // doNotShow: true,
             className: 'header__tab__button-pane__button-redo',
             priority: 30
         }, {
