@@ -10,7 +10,7 @@
 
 .tabs-labels {
     height: 35px;
-    border-bottom: solid 1px #ccc;
+    border-bottom: solid 1px #afafaf;
     list-style: none;
     position: relative;
     margin: 0;
@@ -75,7 +75,7 @@
     white-space: nowrap;
     z-index: 2;
 
-    border-bottom: solid 1px #ccc;
+    border-bottom: solid 2px #ccc;
 }
 
 .tab-label__label {
@@ -133,6 +133,7 @@
     /*     color: #dedede; */
     height: 32px;
     padding-bottom: 0;
+    color: #069;
 
 }
 .tabs .tab-state:checked~.tab-content,

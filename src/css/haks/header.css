@@ -20,7 +20,8 @@
 }
 [data-role="header"]:after {
     content: "";
-    border-top: 0.25px solid #afafaf;
+    border-top: 0.25px solid #dedede;
+    /*     border-top: none; */
     height: 0;
     top: 40px;
 }
