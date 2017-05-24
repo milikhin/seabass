@@ -6,13 +6,13 @@
 [data-role="back-btn"],
 [data-role="tabs-btn"],
 [data-role="tabtitle"] {
-    height: 50px;
+    height: 40px;
 }
 
 [data-role="back-btn"],
 [data-role="tabs-btn"],
 [data-role="tabtitle"] {
-    line-height: 50px;
+    line-height: 40px;
 }
 
 [data-role="content"] {
@@ -22,11 +22,11 @@
     content: "";
     border-top: 0.25px solid #afafaf;
     height: 0;
-    top: 50px;
+    top: 40px;
 }
 
 [data-role="tabs"] {
-    top: 51px;
+    top: 41px;
 }
 
 .header__tab__button-pane {
@@ -38,17 +38,13 @@
 .header__tab__button-pane__button {
     float: right;
     width: 35px;
-    line-height: 50px;
-    height: 50px;
+    line-height: 40px;
+    height: 40px;
     border: none;
     font-size: large;
 
     background: transparent;
     padding: 0;
-}
-
-.header__tab__button-pane__button .material-icons {
-    line-height: inherit;
 }
 .header__tab__button-pane__button:active {
     background: #ccc;
@@ -78,7 +74,7 @@
     float: right;
     position: relative;
     margin-right: 10px;
-    line-height: 40px;
+    line-height: 33px;
 }
 
 input[type="text"].header__tab__action-container__input {
@@ -87,7 +83,7 @@ input[type="text"].header__tab__action-container__input {
     box-sizing: border-box;
     padding-right: 2rem;
     box-shadow: none;
-    border-radius: 6px;
+    border-radius: 2px;
     background: white;
     border: solid 1px #ccc;
 }
@@ -100,7 +96,7 @@ input[type="text"].header__tab__action-container__input {
     border: none;
     background: none;
     color: #757373;
-    height: 31px;
+    height: 24px;
     width: 35px;
 }
 .header__tab__action-container__input:focus~.header__tab__action-container__submit {

@@ -1,5 +1,5 @@
 .icon-button {
-    padding: 1px 5px;
+    padding: 1px 8px;
 }
 .icon-button::before {
     display: block;
@@ -9,7 +9,7 @@
     height: 100%;
     background: transparent no-repeat;
     background-position: left center;
-    background-size: 23px auto;
+    background-size: 100% auto;
     padding: 0;
     box-sizing: border-box;
 }
@@ -25,6 +25,10 @@
 
 .icon-button--undo::before {
     background-image: url('icons/undo.svg');
+}
+
+.icon-button--more::before {
+    background-image: url('icons/go-down.svg');
 }
 
 .icon-button--tree::before {

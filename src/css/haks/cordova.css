@@ -42,7 +42,12 @@ body {
 
 input[type="text"].suru-input {
     box-shadow: none;
-    border-radius: 6px;
+    border-radius: 2px;
     background: white;
     border: solid 1px #ccc;
+    padding: 4px;
+}
+
+[data-role="tabtitle"] {
+    font-size: large;
 }
