@@ -16,7 +16,8 @@ define(['app/app-event'], function(AppEvent) {
             });
 
             document.body.addEventListener('click', function(evt) {
-                if (self.menuRootElem.contains(evt.target)) {
+                // console.log(self.menuIsActive, self.menuRootElem);
+                if (self.menuRootElem.contains(evt.target) || !self.menuIsActive) {
                     return;
                 }
 
@@ -38,21 +39,28 @@ define(['app/app-event'], function(AppEvent) {
         }
 
         toggle() {
-            this.menuIsActive = !this.menuIsActive;
-            this._updateState();
+            let self = this;
+            setTimeout(function() {
+                self.menuIsActive = !self.menuIsActive;
+                self._updateState();
+            });
         }
 
         show(evt, clickHandler) {
-            this.menuIsActive = true;
-            if (evt) {
-                this.positionMenu(evt);
-            }
+            let self = this;
+            setTimeout(function() {
+                self.menuIsActive = true;
+                if (evt) {
+                    self.positionMenu(evt);
+                }
 
-            this._onClick = clickHandler || function() {};
-            this._updateState();
+                self._onClick = clickHandler || function() {};
+                self._updateState();
+            });
         }
 
         hide() {
+            console.log('HIDE!', this.menuRootElem);
             this.menuIsActive = false;
             this._updateState();
         }
@@ -89,7 +97,7 @@ define(['app/app-event'], function(AppEvent) {
             let menuWidth = this.menuRootElem.offsetWidth + 4;
             let menuHeight = this.menuRootElem.offsetHeight + 4;
             this.menuRootElem.style.display = styleDisplay;
-          
+
             let windowWidth = window.innerWidth;
             let windowHeight = window.innerHeight;
 

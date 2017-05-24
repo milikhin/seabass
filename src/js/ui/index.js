@@ -82,7 +82,7 @@ define([
             });
             buttonPaneHTML += `<div class="header__tab__action-container tablet-only">
                 <form action="#">
-                    <input class="header__tab__action-container__input" type="text" placeholder="path/to/file"/>
+                    <input class="header__tab__action-container__input suru-input" type="text" placeholder="path/to/file"/>
                     <button class="icon-button icon-button--open header__tab__action-container__submit tooltip tooltip-bottom" type="submit">
                         <span class="tooltip__text">Open file (create if not exists)</span>
                     </button>

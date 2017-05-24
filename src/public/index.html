@@ -135,9 +135,17 @@
                     </section>
                 </div>
                 <div class="main-window">
-                    <ul class="tabs-labels" id="editor-labels"></ul>
+                    <ul class="tabs-labels" id="editor-labels">
+                        <li class="tabs-labels__list">
+                            <button id="tabs-labels__list__button" class="tabs-labels__list__button icon-button icon-button--more"></button>
+                        </li>
+                    </ul>
                     <ul class="tabs" id="editor-tabs"></ul>
-
+                    <nav data-role="list" class="context-menu tabs-labels__list__menu">
+                        <ul class="context-menu__items">
+                            
+                        </ul>
+                    </nav>
                     <div class="tabs__welcome-note-wrapper" id="welcome-note">
                         <section class="tabs__welcome-note">
                             <h2 class="tabs__welcome-note__header">
@@ -486,7 +494,7 @@
                         <div data-role="list">
                             <header>File Tree</header>
                             <ul>
-                                <li>
+                                <li style="display: none">
                                     <p>
                                         Source *
                                     </p>

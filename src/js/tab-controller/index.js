@@ -23,8 +23,8 @@ define([
     './tab',
     'co',
     'md5',
-    'app/app-event', 'Sortable'
-], function(Tab, co, md5, AppEvent, Sortable) {
+    'app/app-event', 'Sortable', 'app/ui/context-menu'
+], function(Tab, co, md5, AppEvent, Sortable, Menu) {
     function TabController() {
         var self = this;
         this.tabs = [];
@@ -42,6 +42,13 @@ define([
             });
 
             evt.detail.tab.rootElem.closest('li').classList.add('tab-active');
+        });
+
+        let menu = new Menu('.tabs-labels__list__menu');
+        document.getElementById('tabs-labels__list__button').addEventListener('click', function(evt) {
+            menu.show(null, function(evt) {
+                console.log(evt);
+            });
         });
     }
 
@@ -129,6 +136,8 @@ define([
     TabController.prototype._updateTabNames = function() {
         var similarFileNameTabs = this._getTabsGroupedByFileName();
         var groupTabs, tabFileName, tab, tabHash, tabUrl, tabLabelElem;
+        let tabMenuElem = document.querySelector('.tabs-labels__list__menu .context-menu__items');
+        tabMenuElem.innerHTML = '';
 
         for (tabFileName in similarFileNameTabs) {
             groupTabs = similarFileNameTabs[tabFileName];
@@ -152,6 +161,15 @@ define([
                 tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName}`;
             }
         }
+
+        this.tabs.forEach(function(tab) {
+            tabMenuElem.innerHTML += `<li class="context-menu__item">
+                <a href="#" class="context-menu__link app-action" data-action="menu-click" data-menu-action="create" data-prevent-default="1">
+                    ${tab.fileName}
+                </a>
+            </li>`;
+        });
+
     };
 
     TabController.prototype._getSimilarTill = function(groupTabs) {
