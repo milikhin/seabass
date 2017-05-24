@@ -47,7 +47,7 @@ define([
         let menu = new Menu('.tabs-labels__list__menu');
         document.getElementById('tabs-labels__list__button').addEventListener('click', function(evt) {
             menu.show(null, function(evt) {
-                console.log(evt);
+                // console.log(evt);
             });
         });
     }

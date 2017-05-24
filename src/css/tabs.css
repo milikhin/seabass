@@ -129,11 +129,11 @@
 .tabs-labels .tab-label--checked {
     top: 0;
     /*     background: #272822; */
-    border-bottom: solid 2px #069;
+    border-bottom: solid 2px #2980b9;
     /*     color: #dedede; */
     height: 32px;
     padding-bottom: 0;
-    color: #069;
+    color: #2980b9;
 
 }
 .tabs .tab-state:checked~.tab-content,

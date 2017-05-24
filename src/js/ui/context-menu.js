@@ -60,7 +60,7 @@ define(['app/app-event'], function(AppEvent) {
         }
 
         hide() {
-            console.log('HIDE!', this.menuRootElem);
+            // console.log('HIDE!', this.menuRootElem);
             this.menuIsActive = false;
             this._updateState();
         }
