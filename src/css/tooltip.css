@@ -2,13 +2,11 @@
     overflow: visible;
 }
 
-
 /* Tooltip container */
 
 .tooltip {
     position: relative;
 }
-
 
 /* Tooltip text */
 
@@ -31,9 +29,7 @@
     /*transition-duration: 0.25s;*/
 }
 
-
 /* Show the tooltip text when you mouse over the tooltip container */
-
 .tooltip:hover .tooltip__text {
     transition: opacity 0.25s ease 1.5s, z-index 0.1s ease 1.75s, top 0.1s ease 2s;
     z-index: -1;
@@ -42,15 +38,21 @@
     top: -10000px;
 }
 
-.tooltip:hover.tooltip-bottom .tooltip__text {
+.tooltip.tooltip-bottom .tooltip__text {
     top: 100%;
     right: 0;
+    text-align: left;
 }
 
-.tooltip:hover.tooltip-bottom-right .tooltip__text {
+.tooltip.tooltip-bottom-right .tooltip__text {
     top: 100%;
     left: 0;
     text-align: left;
+}
+.tooltip:hover.tooltip-bottom .tooltip__text,
+.tooltip:hover.tooltip-bottom-right .tooltip__text {
+    transition: opacity 0.25s ease 1.5s, z-index 0.1s ease 1.75s, top 0.1s ease 2s;
+    top: -10000px;
 }
 
 .tooltip-top .tooltip__text {
