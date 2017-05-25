@@ -6,13 +6,13 @@
 [data-role="back-btn"],
 [data-role="tabs-btn"],
 [data-role="tabtitle"] {
-    height: 40px;
+    height: 50px;
 }
 
 [data-role="back-btn"],
 [data-role="tabs-btn"],
 [data-role="tabtitle"] {
-    line-height: 40px;
+    line-height: 50px;
 }
 
 [data-role="content"] {
@@ -23,11 +23,11 @@
     border-top: 0.25px solid #dedede;
     /*     border-top: none; */
     height: 0;
-    top: 40px;
+    top: 50px;
 }
 
 [data-role="tabs"] {
-    top: 41px;
+    top: 51px;
 }
 
 .header__tab__button-pane {
@@ -39,10 +39,9 @@
 .header__tab__button-pane__button {
     float: right;
     width: 35px;
-    line-height: 40px;
-    height: 40px;
+    line-height: 50px;
+    height: 50px;
     border: none;
-    font-size: large;
 
     background: transparent;
     padding: 0;
@@ -75,7 +74,7 @@
     float: right;
     position: relative;
     margin-right: 10px;
-    line-height: 33px;
+    line-height: 43px;
 }
 
 input[type="text"].header__tab__action-container__input {
@@ -93,11 +92,11 @@ input[type="text"].header__tab__action-container__input {
     position: absolute;
     right: 0;
     text-align: center;
-    bottom: 1px;
+    bottom: 5px;
     border: none;
     background: none;
     color: #757373;
-    height: 24px;
+    height: 28px;
     width: 35px;
 }
 .header__tab__action-container__input:focus~.header__tab__action-container__submit {
