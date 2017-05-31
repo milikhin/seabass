@@ -29,3 +29,8 @@ Features planned for 0.4.x releases in alphabetical order with no ETAs for now:
 
 Automatic build script is available since v0.2.9, see [seabass-build](https://github.com/milikhin/seabass-build) project.
 Manual [build instructions](building.md) are also available.
+
+
+## Contributors
+
+Seabass is developed by [Mikhael Milikhin](https://milikhin.name), Open Store version is maintained by Brian Douglass. 
