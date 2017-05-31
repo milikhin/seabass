@@ -26,14 +26,12 @@
    * - [x] Delete file
 - [x] Add propgressbar for file operations
 
-## v0.4 Refactoring
+## Futher improvements/ideas
 - [ ] **WIP** Better event-driven architecture, simplified code structure
 - [ ] Optionalize autosave
 - [ ] Optionalize zentabs  
    * - [ ] Add support for keeping unlimited number of tabs opened simultaneously
 - [ ] Implement complete ChromeOS support
-
-## Futher improvements/ideas
 - [ ] **WIP** Dropbox file controller
 - [ ] **WIP** Implement OAuth support in some way
 - [ ] Implement Error Handlers for such errors as:  
