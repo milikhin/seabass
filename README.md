@@ -27,6 +27,8 @@ Features planned for 0.4.x releases in alphabetical order with no ETAs for now:
 
 **It seems that latest Ubuntu Xenial Desktop versions are not supported by Cordova-cli and so original 16.04 image is required to build Seabass (at least 16.04.2 is not supported due to problems with schroot)**
 
+**Since v0.4.7 I recommend to build Seabass for Ubuntu Touch with patched Cordova from [this repo](https://github.com/milikhin/cordova-ubuntu)**
+
 Automatic build script is available since v0.2.9, see [seabass-build](https://github.com/milikhin/seabass-build) project.
 Manual [build instructions](building.md) are also available.
 
