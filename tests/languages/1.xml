@@ -6,7 +6,7 @@
     </description>
     <author email="mikhael@milikhin.name" href="https://github.com/milikhin">
         Mikhael Milikhin
-    </author>
+  	</author>
     <content src="index.html" />
 	<access origin="*" />
 </widget>

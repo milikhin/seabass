@@ -221,7 +221,7 @@ define([
 
     TabController.prototype._updateButtons = function(tab) {
         var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
-        console.log(tab.hasUndo(), tab.hasRedo(), !!~['ejs', 'js', 'jsx', 'html', 'less', 'scss', 'css', 'json', 'qml'].indexOf(ext));
+        // console.log(tab.hasUndo(), tab.hasRedo(), !!~['ejs', 'js', 'jsx', 'html', 'less', 'scss', 'css', 'json', 'qml'].indexOf(ext));
         tab.lastModified = Date.now();
         // console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
         AppEvent.dispatch('editor-state-changed', {
