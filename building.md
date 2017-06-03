@@ -32,11 +32,11 @@ sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pk
 
 ## 2 Preparing sources
 ### 2.1 Get sources
-Download latest realease ([0.4.6](https://github.com/milikhin/seabass/archive/v0.4.6.tar.gz)):
+Download latest realease ([0.4.7](https://github.com/milikhin/seabass/archive/v0.4.7.tar.gz)):
 
 ```
-wget https://github.com/milikhin/seabass/archive/v0.4.6.tar.gz
-tar -xf v0.4.6.tar.gz
+wget https://github.com/milikhin/seabass/archive/v0.4.7.tar.gz
+tar -xf v0.4.7.tar.gz
 ```
 
 ### 2.2 Install app dependencies
@@ -60,8 +60,11 @@ mkdir www
 ```
 
 ### 2.4 Install required Cordova's platforms/plugins
+
+Also we are going to update Cordova to the patched version that integrates with on-screen keyboard better than latest official version
 ```
-cordova platform add ubuntu@4.3.5 --usegit
+cordova platform add ubuntu
+cordova platform update ubuntu https://github.com/milikhin/cordova-ubuntu.git
 cordova plugin add cordova-plugin-file
 cordova plugin add cordova-plugin-dialogs
 ```
