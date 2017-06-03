@@ -1,10 +1,15 @@
 ({
-    generateSourceMaps: true,
+    generateSourceMaps: false,
     preserveLicenseComments: false,
     optimize: "none",
     baseUrl: "src/",
     name: "app/index",
-    out: "tmp/js/index.js",
+    throwWhen: {
+        //If there is an error calling the minifier for some JavaScript,
+        //instead of just skipping that file throw an error.
+        optimize: true
+    },
+    out: "tmp/js/index.src.js",
     paths: {
         "inspire-tree": "bower_components/inspire-tree/dist/inspire-tree.min",
         "inspire-dom": "thirdparty/amd/inspire-tree-dom.min",

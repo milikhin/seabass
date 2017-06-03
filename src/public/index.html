@@ -3,56 +3,20 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <title>Seabass</title>
     <link rel="icon" type="image/png" href="/img/logo.png" />
-
-    <!--  WeInRe debug script -->
-    <!-- <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script> -->
 
     <!-- App css -->
     <link href="ambiance/css/appTemplate.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" id="alertifyCSS" type="text/css" href="css/index.css" />
 
-    <!-- Ubuntu UI javascript imports - Ambiance theme -->
-    <script src="ambiance/js/fast-buttons.js"></script>
-    <script src="ambiance/js/core.js"></script>
-    <script src="ambiance/js/buttons.js"></script>
-    <script src="ambiance/js/dialogs.js"></script>
-    <script src="ambiance/js/page.js"></script>
-    <script src="ambiance/js/pagestacks.js"></script>
-    <script src="ambiance/js/tabs.js"></script>
-    <script src="ambiance/js/tab.js"></script>
-
-    <!-- Beautifiers -->
-    <script src="beautify/beautify.js"></script>
-    <script src="beautify/beautify-css.js"></script>
-    <script src="beautify/beautify-html.js"></script>
-
-    <script src="prettydiff/dom.js"></script>
-    <script src="prettydiff/safeSort.js"></script>
-    <script src="prettydiff/csspretty.js"></script>
-    <script src="prettydiff/csvpretty.js"></script>
-    <script src="prettydiff/diffview.js"></script>
-    <script src="prettydiff/jspretty.js"></script>
-    <script src="prettydiff/markuppretty.js"></script>
-    <script src="prettydiff/prettydiff.js"></script>
-
-    <script src="js/jshint.js"></script>
-    <script src="js/csslint.js"></script>
-    <script src="js/jsonlint.js"></script>
-    <!-- <script src="js/coffeelint.js"></script> -->
-    <script src="js/js-yaml.js"></script>
-    <script src="js/htmlhint.js"></script>
-    <script src="js/Dropbox-sdk.min.js"></script>
+    <!-- Thirdparty non-AMD script compiled into single file -->
+    <script src="js/non-amd.js"></script>
 
     <!-- App scripts -->
     <script src="js/cordova-config.js" id="cordova-goes-after"></script>
-
     <script src="js/require.js"></script>
-
     <script src="js/require-config.js"></script>
     <script src="js/startup.js"></script>
 </head>
@@ -143,7 +107,7 @@
                     <ul class="tabs" id="editor-tabs"></ul>
                     <nav data-role="list" class="context-menu tabs-labels__list__menu">
                         <ul class="context-menu__items">
-                            
+
                         </ul>
                     </nav>
                     <div class="tabs__welcome-note-wrapper" id="welcome-note">
@@ -158,14 +122,8 @@
                                 <p>
                                     Complete feature list, keybindings and release notes are available on Help page.
                                 </p>
-                            </div>
-                            <h3 class="tabs__welcome-note__header3">Release notes</h3>
-                            <div class="tabs__welcome-note__state">
                                 <p>
-                                    This is kind of a Beta-release, so expect broken features an so on...
-                                </p>
-                                <p>
-                                    Bug reports &amp; feature requests are very appreciated. If you have any suggestions, want to have support for other languages or something doesn't work as expected, feel free to open issues on project's page on github or send me emails.
+                                    Your bug reports and feature requests are very appreciated. If you have any suggestions or something doesn't work as expected, feel free to open issues on project's page on github or contact me any other ways (see https://milikhin.name).
                                 </p>
                             </div>
 
@@ -240,10 +198,16 @@
                         <h2 class="tabs__welcome-note__header">
                             Seabass v0.4.6
                         </h2>
+                        <p class="tabs__welcome-note__header-p">
+                            Text (code) editor for Ubuntu Touch.
+                        </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
                         <ul class="tabs__welcome-note__list">
                             <li>
                                 Autosave on typing
+                            </li>
+                            <li>
+                                Autocompletion support with hardware keyboard (for html, js, css and sql files)
                             </li>
                             <li>
                                 Zentabs: up to five (three in sidestage mode) simultaneously opened tabs. When the limit is exceeded, the eldest is closed
@@ -307,6 +271,9 @@
                             <li>
                                 Text selection and copy/cut/paste operations via touchscreen don't work on Ubuntu Touch. This is, i believe, due to the outdated Ubuntu's platform components in Cordova. Since the click-based Ubuntu Touch is not actively developed now, i don't think the
                                 issues will be fixed for 15.04 (unless if someone updates Cordova to use latest platform components, and that would be very welcomed :-).
+                            </li>
+                            <li>
+                                App is not resized properly when on-screen keyboard is show due to Cordova for Ubuntu issues
                             </li>
                         </ul>
 
