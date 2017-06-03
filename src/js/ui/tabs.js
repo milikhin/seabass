@@ -50,7 +50,7 @@ define([
 
                     if (fileDescription && fileDescription.fileEntry) {
                         var tab = TabController.get(fileName.split('/')[fileName.split('/').length - 1], fileDescription.fileEntry, fileDescription.fileContent);
-                        tab.activate();
+                        TabController._activate(tab);
                     }
 
                     AppEvent.dispatch('tree-reload');
@@ -70,7 +70,7 @@ define([
                 utils.withPreloader(fileContentPromise);
                 let fileContent = yield fileContentPromise;
                 let tab = TabController.get(treeNode.text, fileEntry, fileContent);
-                tab.activate();
+                TabController._activate(tab);
                 return tab;
             });
         }

@@ -36,20 +36,12 @@ define([
             draggable: '.tab-content-label'
         });
 
-        document.body.addEventListener('tab-activate', function(evt) {
-            self.tabs.forEach(function(tabDescription) {
-                tabDescription.rootElem.closest('li').classList.remove('tab-active');
-            });
-
-            evt.detail.tab.rootElem.closest('li').classList.add('tab-active');
-        });
-
-        let menu = new Menu('.tabs-labels__list__menu');
-        document.getElementById('tabs-labels__list__button').addEventListener('click', function(evt) {
-            menu.show(null, function(evt) {
-                // console.log(evt);
-            });
-        });
+        // let menu = new Menu('.tabs-labels__list__menu');
+        // document.getElementById('tabs-labels__list__button').addEventListener('click', function(evt) {
+        //     menu.show(null, function(evt) {
+        //         // console.log(evt);
+        //     });
+        // });
     }
 
     // Get active tab
@@ -220,15 +212,16 @@ define([
         // save created tab
         this.tabs.push(tab);
         this._updateTabNames();
-        this._activate(tab);
-        this._updateButtons(tab);
+        setTimeout(function() {
+            self._updateButtons(tab);
+        }, 100);
 
         return tab;
     };
 
     TabController.prototype._updateButtons = function(tab) {
         var ext = tab.fileName.slice(tab.fileName.lastIndexOf('.') + 1, tab.fileName.length);
-
+        console.log(tab.hasUndo(), tab.hasRedo(), !!~['ejs', 'js', 'jsx', 'html', 'less', 'scss', 'css', 'json', 'qml'].indexOf(ext));
         tab.lastModified = Date.now();
         // console.log('call onEditorChange', tab, um.hasUndo().toString(), um.hasRedo().toString());
         AppEvent.dispatch('editor-state-changed', {
@@ -239,7 +232,11 @@ define([
     };
 
     TabController.prototype._activate = function(tab) {
+        var self = this;
         tab.activate();
+        setTimeout(function() {
+            self._updateButtons(tab);
+        }, 100);
     };
 
     // Get tab (or create new if it doesn't exist)

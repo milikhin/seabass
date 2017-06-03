@@ -24,7 +24,9 @@ define([
         this.labelElem = document.createElement('li');
         this.rootElem.className = "tab-content-container";
         this.rootElem.id = `tab-c-${this.id}`;
-        this.labelElem.className = "tab-content-label";
+        this.rootElem.dataset.id = this.id;
+        this.rootElem.dataset.action = "tab-activate";
+        this.labelElem.className = "tab-content-label app-action";
         this.labelElem.id = `tab-l-${this.id}`;
 
         let tabContent = this.tpl();
@@ -94,7 +96,6 @@ define([
             labelElem.classList.remove("tab-label--checked");
         });
         this.labelElem.querySelector('.tab-label').classList.add('tab-label--checked');
-
         AppEvent.dispatch('tab-activate', {
             tab: this
         });
