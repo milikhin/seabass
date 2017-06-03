@@ -95,9 +95,13 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
                 fileWriter.onwriteend = function() {
                     // console.log("Successful file write...", data);
                     fileWriter.onwriteend = function() {};
-                    fileWriter.write(new Blob([data], {
-                        type: 'text/plain'
-                    }));
+                    if (window.chrome) {
+                        fileWriter.write(new Blob([data], {
+                            type: 'text/plain'
+                        }));
+                    } else {
+                        fileWriter.write(data);
+                    }
                 };
 
                 fileWriter.onerror = function(e) {
@@ -239,8 +243,8 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
 
                         promises.push(co(function*() {
                             var entry = entries[i];
-							
-                          	entry.nativeURL = entry.nativeURL || entry.fullPath;                            
+
+                            entry.nativeURL = entry.nativeURL || entry.fullPath;
                             var fileDescription = {
                                 'text': entry.name,
                                 'id': md5(entry.nativeURL),
