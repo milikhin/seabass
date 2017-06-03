@@ -22,6 +22,7 @@
     "dropbox": "^2.5.0",
     "gulp-gh-pages": "^0.5.4",
     "prettydiff": "^99.0.1",
+    "uglify-es": "^3.0.15",
     "uglifyjs": "^2.4.11"
   },
   "seabass": {
