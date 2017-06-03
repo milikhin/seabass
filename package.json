@@ -1,7 +1,7 @@
 {
   "name": "seabass",
   "main": "chrome/background.js",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
