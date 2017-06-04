@@ -1,7 +1,7 @@
 # Seabass code editor
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8bd815408704c07a8484b460384919e)](https://www.codacy.com/app/mikhael/seabass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=milikhin/seabass&amp;utm_campaign=Badge_Grade)
 
-**NOTE: v0.4.7 and later builds rely on forked version of Cordova framework. See [Building from sources](#building-from-sources) for more info**
+**NOTE: v0.4.7 and later builds rely on forked version of Cordova framework. See [Building from sources](#building-from-sources) for more info, information is updated with each release**
 
 SeaBass is a touchscreen-friendly text/code editor for Ubuntu Touch with the following features:
 * Syntax highlighting for 25+ programming/markup languages: c, c++, css, go, html, java, javascript, json, jsx, latex, less, markdown, pascal, php, python, ruby, sass, scss, shell, stylus, svg, swift, typescript, xml, yaml
