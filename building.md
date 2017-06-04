@@ -32,11 +32,11 @@ sudo click chroot -a armhf -f ubuntu-sdk-15.04 install cmake libicu-dev:armhf pk
 
 ## 2 Preparing sources
 ### 2.1 Get sources
-Download latest realease ([0.4.7](https://github.com/milikhin/seabass/archive/v0.4.7.tar.gz)):
+Download latest realease ([0.4.8](https://github.com/milikhin/seabass/archive/v0.4.8.tar.gz)):
 
 ```
-wget https://github.com/milikhin/seabass/archive/v0.4.7.tar.gz
-tar -xf v0.4.7.tar.gz
+wget https://github.com/milikhin/seabass/archive/v0.4.8.tar.gz
+tar -xf v0.4.8.tar.gz
 ```
 
 ### 2.2 Install app dependencies
@@ -63,8 +63,8 @@ mkdir www
 
 ```
 cordova platform add ubuntu
-cordova plugin add cordova-plugin-file
-cordova plugin add cordova-plugin-dialogs
+cordova plugin add https://github.com/milikhin/cordova-plugin-file.git # for v0.4.7 and before: cordova plugin add cordova-plugin-file
+cordova plugin add https://github.com/milikhin/cordova-plugin-dialogs.git # for v0.4.7 and before: cordova plugin add cordova-plugin-dialogs
 ```
 
 Note: there will be a error `Error: icon does not exist:` -- that's ok, we'll add icon later
