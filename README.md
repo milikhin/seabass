@@ -22,7 +22,8 @@ Features planned for 0.4.x releases in alphabetical order with no ETAs for now:
 - [ ] **[WIP]** Make possible to have an unlimited number of opened tabs
 - [ ] Optionalize autosave
 - [ ] Optionalize zentabs
-- [ ] **[WIP]** Show hidden files in file tree
+- [x] Add support for copy/cut/paste operations with touchscreen
+- [x] Show hidden files in file tree
 - [x] Update styling for better corresponding to native UITK
 
 
