@@ -231,7 +231,7 @@ define([
 
                 dialog.prompt({
                     title: "Rename file",
-                    description: `Rename ${fileEntry.fullPath}`,
+                    description: `Rename ${defaultName}`,
                     default: defaultName,
                     callback: moveFile,
                     buttons: ['Ok', 'Cancel']
