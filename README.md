@@ -1,7 +1,7 @@
 # Seabass code editor
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8bd815408704c07a8484b460384919e)](https://www.codacy.com/app/mikhael/seabass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=milikhin/seabass&amp;utm_campaign=Badge_Grade)
 
-**NOTE: v0.4.7 and later builds rely on forked version of Cordova framework. See [Building from sources](#building-from-sources) for more info**
+**NOTE: v0.4.7 and later builds rely on forked version of Cordova framework. See [Building from sources](#building-from-sources) for more info, information is updated with each release**
 
 SeaBass is a touchscreen-friendly text/code editor for Ubuntu Touch with the following features:
 * Syntax highlighting for 25+ programming/markup languages: c, c++, css, go, html, java, javascript, json, jsx, latex, less, markdown, pascal, php, python, ruby, sass, scss, shell, stylus, svg, swift, typescript, xml, yaml
@@ -22,13 +22,17 @@ Features planned for 0.4.x releases in alphabetical order with no ETAs for now:
 - [ ] **[WIP]** Make possible to have an unlimited number of opened tabs
 - [ ] Optionalize autosave
 - [ ] Optionalize zentabs
+- [ ] **[WIP]** Show hidden files in file tree
 - [x] Update styling for better corresponding to native UITK
 
 
 ## Building from sources
 
 **Building notes**
-* Since v0.4.7 I recommend to build Seabass for Ubuntu Touch with patched Cordova from [this repo](https://github.com/milikhin/cordova-ubuntu)
+* Since v0.4.7 Seabass for Ubuntu Touch is built with patched Cordova from [this repo](https://github.com/milikhin/cordova-ubuntu)
+* Since v0.4.8 Seabass for Ubuntu Touch is built with patched Cordova plugins:  
+   * [cordova-plugin-file](https://github.com/milikhin/cordova-plugin-file)
+   * [cordova-plugin-dialogs](https://github.com/milikhin/cordova-plugin-dialogs)
 * It seems that latest Ubuntu Xenial Desktop versions are not supported by Cordova-cli and so original 16.04 image is required to build Seabass (at least 16.04.2 is not supported due to problems with schroot)
 
 Updated automatic build script is available at [seabass-build](https://github.com/milikhin/seabass-build) repo.
