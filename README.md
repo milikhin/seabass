@@ -15,14 +15,14 @@ SeaBass is a touchscreen-friendly text/code editor for Ubuntu Touch with the fol
 
 ## Plans for 0.4.x series
 
-Features planned for 0.4.x releases in alphabetical order with no ETAs for now:
+Features planned for 0.4.x releases with no ETAs for now:
 
-- [ ] **[WIP]** Add support for QML in syntax highlighter
+- [x] Copy/cut/paste operations with touchscreen
+- [ ] **[WIP]** QML support in syntax highlighter
 - [ ] **[WIP]** Implement complete ChromeOS support
 - [ ] **[WIP]** Make possible to have an unlimited number of opened tabs
 - [ ] Optionalize autosave
 - [ ] Optionalize zentabs
-- [x] Add support for copy/cut/paste operations with touchscreen
 - [x] Show hidden files in file tree
 - [x] Update styling for better corresponding to native UITK
 
