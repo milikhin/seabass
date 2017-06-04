@@ -61,10 +61,8 @@ mkdir www
 
 ### 2.4 Install required Cordova's platforms/plugins
 
-Also we are going to update Cordova to the patched version that integrates with on-screen keyboard better than latest official version
 ```
 cordova platform add ubuntu
-cordova platform update ubuntu https://github.com/milikhin/cordova-ubuntu.git
 cordova plugin add cordova-plugin-file
 cordova plugin add cordova-plugin-dialogs
 ```
@@ -80,6 +78,13 @@ Note: there will be a error `Error: icon does not exist:` -- that's ok, we'll ad
 ### 2.6 Build sources
 ```
 gulp build
+```
+
+### 2.7 Update Cordova
+We are going to update Cordova to the patched version that integrates with on-screen keyboard better than latest official version
+
+```
+cordova platform update ubuntu https://github.com/milikhin/cordova-ubuntu.git --usegit
 ```
 
 ## 3 Create .click package
