@@ -34,7 +34,7 @@ Features planned for 0.4.x releases with no ETAs for now:
 * Since v0.4.8 Seabass for Ubuntu Touch is built with patched Cordova plugins:  
    * [cordova-plugin-file](https://github.com/milikhin/cordova-plugin-file)
    * [cordova-plugin-dialogs](https://github.com/milikhin/cordova-plugin-dialogs)
-* It seems that latest Ubuntu Xenial Desktop versions are not supported by Cordova-cli and so original 16.04 image is required to build Seabass (at least 16.04.2 is not supported due to problems with schroot)
+* It seems that latest Ubuntu Xenial Desktop versions are not supported by Cordova-cli and so original 16.04 image is required to build Seabass (at least 16.04.2 is not supported due to problems with *click* package)
 
 Updated automatic build script is available at [seabass-build](https://github.com/milikhin/seabass-build) repo.
 Manual [build instructions](building.md) are also available.
