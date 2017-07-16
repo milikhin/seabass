@@ -12,7 +12,7 @@ SeaBass is a touchscreen-friendly text/code editor for Ubuntu Touch with the fol
 ![Seabass screenshot](https://milikhin.github.io/seabass_0.png)
 
 ## Releases
-* ChromeOS: v0.4.10 is now available in [Chrome Webstore](https://chrome.google.com/webstore/detail/seabass-code-editor/nlcckpfoidnmoippfjhfhbdibilkfagm)
+* Chrome OS: v0.4.10 is now available in [Chrome Webstore](https://chrome.google.com/webstore/detail/seabass-code-editor/nlcckpfoidnmoippfjhfhbdibilkfagm)
 * Ubuntu Touch: v0.4.8 is available in [OpenStore](https://uappexplorer.com/app/seabass.mikhael)
 
 ## Plans for 0.4.x series
