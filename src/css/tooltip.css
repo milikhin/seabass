@@ -12,7 +12,8 @@
 
 .tooltip__text {
     visibility: hidden;
-    background-color: #202020;
+    background-color: #333;
+    /*rgba(0,0,0,0.75);*/
     color: #dedede;
     text-align: center;
     border-radius: 3px;
@@ -48,6 +49,10 @@
     top: 100%;
     left: 0;
     text-align: left;
+}
+
+.icon-button--active.tooltip.tooltip-bottom .tooltip__text {
+    top: calc(100% + 3px);
 }
 .tooltip:hover.tooltip-bottom .tooltip__text,
 .tooltip:hover.tooltip-bottom-right .tooltip__text {

@@ -11,18 +11,27 @@ define([
     function FileManager() {
         let self = this;
 
-
         // TODO: move to Settings
         co(function*() {
             self._fsType = yield Settings.getFsType();
             // console.log(self._fsType);
-            self._initFs().then(function() {}, function(err) {
-                console.error(err);
-            });
+            self._initFs();
         });
 
         AppEvent.on('file-save', function(evt) {
             self.writeFile(evt.detail.fileEntry, evt.detail.value);
+        });
+
+        AppEvent.on('file-selectroot', function(evt) {
+            co(function*() {
+                self._fsType = yield Settings.getFsType();
+                self._initFs(true);
+            });
+        });
+        AppEvent.on('file-revokeaccess', function(evt) {
+            console.log('!');
+            
+            Settings.set('rootId', '');
         });
     }
 
@@ -30,21 +39,27 @@ define([
         return this._isLoaded;
     };
 
-    FileManager.prototype._initFs = function() {
+    FileManager.prototype.forceStartup = function() {
+        return this._initFs(true);
+    };
+
+    FileManager.prototype._initFs = function(forceSetup) {
         var self = this;
         return co(function*() {
             console.log('init FS type', self._fsType);
             switch (self._fsType) {
                 case Settings.FS_TYPES.FS_NATIVE:
                     {
-                        // if (window.LocalFileSystem) {
                         try {
-                            self.fsController = new FileController();
+                            self.fsController = new FileController({
+                                forceSetup: forceSetup
+                            });
                             yield self.fsController.waitForInit();
                             self._isLoaded = true;
                             AppEvent.dispatch('fsready');
                         } catch (err) {
-                            throw new Error('FS is not supported, ' + self._fsType);
+                            console.error(err);
+                            throw new Error('FS is not loaded, ' + self._fsType);
                         }
 
                         break;

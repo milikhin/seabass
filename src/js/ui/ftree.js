@@ -26,18 +26,38 @@ define([
             } else {
                 AppEvent.on('fsready', function() {
                     self._init();
+                    self._updateButtonStates();
                 });
             }
 
             AppEvent.on('tree-reload', function(evt) {
                 self._reloadTree();
                 self._updateTreeHint();
+
+                self._updateButtonStates();
             });
 
             AppEvent.on('tree-unset-root', function(evt) {
                 self.fileManager.unsetRoot();
                 self._reloadTree();
                 self._updateTreeHint();
+            });
+
+            AppEvent.on('tree-navmode', function(evt) {
+                co(function*() {
+                    var navEnabled = yield settings.get('navEnabled');
+                    yield settings.set('navEnabled', !navEnabled);
+                    AppEvent.dispatch('tree-reload');
+                });
+            });
+        }
+
+        _updateButtonStates() {
+            co(function*() {
+                var navEnabled = yield settings.get('navEnabled');
+                [].forEach.call(document.querySelectorAll('.icon-button--navmode'), function(navModeElem) {
+                    navModeElem.classList[navEnabled ? "add" : "remove"]('icon-button--active');
+                });
             });
         }
 

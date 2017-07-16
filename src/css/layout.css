@@ -131,3 +131,8 @@ body.osk-mode::after {
     margin-top: 10px;
     list-style-type: circle;
 }
+
+.settings__link {
+    line-height: 2.2rem;
+    color: black;
+}

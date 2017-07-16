@@ -1,5 +1,7 @@
 .icon-button {
-    padding: 1px 8px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    vertical-align: top;
 }
 .icon-button::before {
     display: block;
@@ -13,6 +15,15 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.icon-button--active {
+    border-bottom: solid 3px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.05);
+    border-radius: 0;
+}
+.icon-button--active::before {
+    height: calc(100% + 3px);
+}
 .icon-button:hover {
     background-color: rgba(0,0,0,0.05);
 }
@@ -25,6 +36,14 @@
 
 .icon-button--undo::before {
     background-image: url('icons/undo.svg');
+}
+
+.icon-button--opendir::before {
+    background-image: url('icons/import.svg');
+}
+
+.icon-button--navmode::before {
+    background-image: url('icons/user-switch.svg');
 }
 
 .icon-button--more::before {
@@ -44,7 +63,7 @@
 }
 
 .icon-button--reload::before {
-    background-image: url('icons/reload.svg');
+    background-image: url('icons/sync.svg');
 }
 
 .icon-button--open::before {

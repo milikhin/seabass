@@ -91,6 +91,7 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
     SettingsController.prototype.init = function() {
         this._initRules();
         this._initUI();
+
     };
 
     SettingsController.prototype.hideByQuery = function(query) {
@@ -109,7 +110,6 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
         var self = this;
         return co(function*() {
             /* File tree settings */
-            document.getElementById('file-tree-navigation').checked = yield self.get('navEnabled');
             document.getElementById('file-tree-width').value = yield self.get('treeWidth');
             document.getElementById('file-tree-width-state').innerHTML = yield self.get('treeWidth');
 
@@ -159,13 +159,6 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
 
 
         /* File tree settngs UI events*/
-        document.getElementById('file-tree-navigation').onchange = function() {
-            self.set('navEnabled', this.checked);
-            co(function*() {
-                yield self._initFileTreeSettings();
-                AppEvent.dispatch('tree-reload');
-            });
-        };
         document.getElementById('file-tree-width').oninput = function() {
             self.set('treeWidth', this.valueAsNumber);
             document.getElementById('file-tree-width-state').innerHTML = this.valueAsNumber;
@@ -209,11 +202,17 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
             var width = yield self.get('treeWidth') || 251;
             var fileTreeTooltipWidth = width - 40;
             var fontSize = yield self.get('fontSize') || 12;
+            var isChrome = !!window.chrome;
 
             while (self._getSheet().rules.length) {
                 self._getSheet().deleteRule(0);
             }
 
+            if (isChrome) {
+                self._getSheet().addRule('.cordova-only', `display:none!important`);
+            } else {
+                self._getSheet().addRule('.chrome-only', `display:none!important`);
+            }
             self._getSheet().addRule('.main-window', `margin-left: ${width}px;width: calc(100% - ${width}px);`);
             self._getSheet().addRule('.aside', `width: ${width}px;`);
             self._getSheet().addRule('.inspire-tree', `width: ${width}px;`);
