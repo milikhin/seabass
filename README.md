@@ -21,7 +21,7 @@ Features planned for 0.4.x releases with no ETAs for now:
 
 - [x] Copy/cut/paste operations with touchscreen
 - [ ] **[WIP]** QML support in syntax highlighter
-- [ ] **[WIP]** Implement complete ChromeOS support
+- [x] Implement complete ChromeOS support
 - [ ] **[WIP]** Make possible to have an unlimited number of opened tabs
 - [ ] Optionalize autosave
 - [ ] Optionalize zentabs
