@@ -100,6 +100,17 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
         });
     };
 
+    SettingsController.prototype.disableByQuery = function(query) {
+      	[].forEach.call(document.querySelectorAll(query), function(elemToHide) {
+            elemToHide.disabled = true;
+        });
+    };
+    SettingsController.prototype.undisableByQuery = function(query) {
+        [].forEach.call(document.querySelectorAll(query), function(elemToHide) {
+            elemToHide.disabled = false;
+        });
+    };
+
     SettingsController.prototype.unhideByQuery = function(query) {
         [].forEach.call(document.querySelectorAll(query), function(elemToHide) {
             elemToHide.style.display = "";

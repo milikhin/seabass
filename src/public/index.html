@@ -48,16 +48,16 @@
                     <section>
                         <header class="aside__header">
                             <div class="aside__header__buttons">
-                                <button class="app-action icon-button icon-button--reload aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-reload">
+                                <button class="app-action icon-button icon-button--reload aside__header__buttons__button tree-disabled-onempty tooltip tooltip-bottom" data-action="tree-reload">
                                     <span class="tooltip__text">Reload tree</span>
                                 </button>
-                                <button class="app-action icon-button icon-button--navmode aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-navmode">
+                                <button class="app-action icon-button icon-button--navmode aside__header__buttons__button tooltip tree-disabled-onempty tooltip-bottom" data-action="tree-navmode">
                                     <span class="tooltip__text">Enable navigation using file tree</span>
                                 </button>
                                 <button class="app-action icon-button icon-button--opendir aside__header__buttons__button tooltip tooltip-bottom chrome-only" data-action="file-selectroot">
                                     <span class="tooltip__text">Open directory...</span>
                                 </button>
-                                <button class="app-action icon-button icon-button--reset aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-unset-root">
+                                <button class="app-action icon-button icon-button--reset aside__header__buttons__button tooltip tree-disabled-onempty tooltip-bottom" data-action="tree-unset-root">
                                     <span class="tooltip__text">Load default project's root</span>
                                 </button>
                                 <button class="app-action icon-button icon-button--close aside__header__buttons__button tooltip tooltip-bottom mobile-only" data-action="tree__toggle">
@@ -470,8 +470,8 @@
                                 <li>
                                     <p>Width [<span id="file-tree-width-state"></span>px]</p>
                                     <label class="settings__container__slider-wrapper">
-                                        <span class="settings__container__slider-wrapper__from">150</span>
-                                        <input id="file-tree-width" type="range" value="251" max="400" min="150">
+                                        <span class="settings__container__slider-wrapper__from">280</span>
+                                        <input id="file-tree-width" type="range" value="280" max="400" min="280">
                                         <span class="settings__container__slider-wrapper__to">400</span>
                                     </label>
                                 </li>
@@ -503,10 +503,10 @@
                             <ul>
                                 <li>
                                     <p>
-                                        Revoke FS access
+                                        Revoke FS access *
                                     </p>
                                     <label class="list__label__auto">
-                                      <a class="settings__link app-action" data-action="file-revokeaccess" href="#">Revoke...</a>
+                                      <a class="settings__link app-action" data-action="file-revokeaccess" href="#">Revoke</a>
                                     </label>
                                 </li>
                             </ul>

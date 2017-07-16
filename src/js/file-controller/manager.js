@@ -29,8 +29,6 @@ define([
             });
         });
         AppEvent.on('file-revokeaccess', function(evt) {
-            console.log('!');
-            
             Settings.set('rootId', '');
         });
     }
