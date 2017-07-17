@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Seabass code editor",
-    "version": "0.4.10",
+    "version": "0.4.11",
     "icons": {
         "128": "img/logo-chrome.png"
     },
@@ -13,6 +13,7 @@
             "scripts": ["chrome/background.js"]
         }
     },
-  	"short_name": "Seabass",
-    "minimum_chrome_version": "56"
+    "short_name": "Seabass",
+    "minimum_chrome_version": "56",
+    "offline_enabled": true
 }

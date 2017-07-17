@@ -1,0 +1,12 @@
+.msg {
+    font-size: 0.9rem;
+}
+
+.alertify .dialog input[type="text"] {
+    font-size: 1rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: 2px;
+    color: black;
+    border: solid 1px #aaa;
+    box-shadow: none;
+}
