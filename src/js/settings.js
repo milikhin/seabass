@@ -101,7 +101,7 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
     };
 
     SettingsController.prototype.disableByQuery = function(query) {
-      	[].forEach.call(document.querySelectorAll(query), function(elemToHide) {
+        [].forEach.call(document.querySelectorAll(query), function(elemToHide) {
             elemToHide.disabled = true;
         });
     };
@@ -220,8 +220,10 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
             }
 
             if (isChrome) {
+                document.body.classList.add('is-chrome');
                 self._getSheet().addRule('.cordova-only', `display:none!important`);
             } else {
+                document.body.classList.add('is-cordova');
                 self._getSheet().addRule('.chrome-only', `display:none!important`);
             }
             self._getSheet().addRule('.main-window', `margin-left: ${width}px;width: calc(100% - ${width}px);`);
