@@ -303,7 +303,7 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
         var self = this;
         return co(function*() {
             if (window.LocalFileSystem) {
-                yield new Promise(function(resolve, reject) {
+                return yield new Promise(function(resolve, reject) {
                     window.requestFileSystem(window.LocalFileSystem.PERSISTENT, 0, resolve, reject);
                 });
             } else if (window.chrome) {
