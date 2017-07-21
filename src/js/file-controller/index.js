@@ -268,7 +268,7 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
         return co(function*() {
             try {
                 if (window.chrome && forceSetup) {
-                    var rootEntry = yield self._chromeChooseRootDir();                    
+                    var rootEntry = yield self._chromeChooseRootDir();
                     self.fs = {
                         root: rootEntry
                     };
@@ -303,7 +303,9 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
         var self = this;
         return co(function*() {
             if (window.LocalFileSystem) {
-                window.requestFileSystem(window.LocalFileSystem.PERSISTENT, 0, resolve, reject);
+                yield new Promise(function(resolve, reject) {
+                    window.requestFileSystem(window.LocalFileSystem.PERSISTENT, 0, resolve, reject);
+                });
             } else if (window.chrome) {
                 var isRestorable = yield self._chromeIsRestorable();
                 if (isRestorable) {
