@@ -63,3 +63,7 @@
 .aside__header__path {
     margin-right: 200px;
 }
+
+.is-cordova .aside__header__path {
+    margin-right: 165px;
+}
