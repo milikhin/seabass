@@ -51,14 +51,22 @@ define([
                     AppEvent.dispatch('tree-reload');
                 });
             });
+            this._updateButtonStates();
         }
 
         _updateButtonStates() {
+            var self = this;
             co(function*() {
                 var navEnabled = yield settings.get('navEnabled');
                 [].forEach.call(document.querySelectorAll('.icon-button--navmode'), function(navModeElem) {
                     navModeElem.classList[navEnabled ? "add" : "remove"]('icon-button--active');
                 });
+
+                if (self.fileManager.isLoaded()) {
+                    SettingsController.undisableByQuery('.tree-disabled-onuninit');
+                } else {
+                    SettingsController.disableByQuery('.tree-disabled-onuninit');
+                }
             });
         }
 
@@ -84,12 +92,6 @@ define([
                     SettingsController._initFileTreeSettings();
                 }
             });
-
-            if (this.fileManager.isLoaded()) {
-				SettingsController.undisableByQuery('.tree-disabled-onuninit');
-            } else {
-              	SettingsController.disableByQuery('.tree-disabled-onuninit');
-            }
         }
 
         _reloadTree() {
