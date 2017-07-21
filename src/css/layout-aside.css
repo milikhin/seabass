@@ -3,6 +3,7 @@
     color: #747278;
     height: 40px;
     border-bottom: solid 1px #ccc;
+    box-sizing: border-box;
 }
 
 .aside__header__path {
@@ -32,7 +33,7 @@
 .aside__header__path {
     text-decoration: none;
     color: inherit;
-    margin-right: 100px;
+    margin-right: 165px;
 }
 
 input[type="text"].aside__header__path__input {

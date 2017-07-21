@@ -13,7 +13,7 @@
 
     <!-- Thirdparty non-AMD script compiled into single file -->
     <script src="js/non-amd.js"></script>
-
+	
     <!-- App scripts -->
     <script src="js/cordova-config.js" id="cordova-goes-after"></script>
     <script src="js/require.js"></script>
@@ -48,10 +48,16 @@
                     <section>
                         <header class="aside__header">
                             <div class="aside__header__buttons">
-                                <button class="app-action icon-button icon-button--reload aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-reload">
+                                <button class="app-action icon-button icon-button--reload aside__header__buttons__button tree-disabled-onempty tooltip tooltip-bottom" data-action="tree-reload">
                                     <span class="tooltip__text">Reload tree</span>
                                 </button>
-                                <button class="app-action icon-button icon-button--reset aside__header__buttons__button tooltip tooltip-bottom" data-action="tree-unset-root">
+                                <button class="app-action icon-button icon-button--navmode aside__header__buttons__button tooltip tree-disabled-onempty tooltip-bottom" data-action="tree-navmode">
+                                    <span class="tooltip__text">Enable navigation using file tree</span>
+                                </button>
+                                <button class="app-action icon-button icon-button--opendir aside__header__buttons__button tooltip tooltip-bottom chrome-only" data-action="file-selectroot">
+                                    <span class="tooltip__text">Open directory...</span>
+                                </button>
+                                <button class="app-action icon-button icon-button--reset aside__header__buttons__button tooltip tree-disabled-onempty tooltip-bottom" data-action="tree-unset-root">
                                     <span class="tooltip__text">Load default project's root</span>
                                 </button>
                                 <button class="app-action icon-button icon-button--close aside__header__buttons__button tooltip tooltip-bottom mobile-only" data-action="tree__toggle">
@@ -77,20 +83,25 @@
 
                             <div class="ft-localfs-only tree-helper__localfs tree-helper__empty">
                                 <p class="tree-helper__content">
-                                    You are using Local file system as file storage. Other options may be available on Settings page.
+                                    You are using Local file system as file storage. Other options might be available on Settings page.
                                 </p>
-                                <p class="tree-helper__content">
+                                <p class="tree-helper__content cordova-only">
                                     To start working on your projects put your files into
-                                    <code>~/.local/share<wbr/>/seabass.mikhael<wbr/>/persistent</code> directory and click "Reload tree" (<i style="vertical-align: bottom;" class="material-icons">cached</i>) button.
+                                    <code>~/.local/share<wbr/>/seabass.mikhael<wbr/>/persistent</code> directory and click "Reload tree" button.
                                 </p>
-                                <p class="tree-helper__content">
-                                    You can also change project Root directory by activating Navigation mode on File tree settings.
+                                <p class="tree-helper__content chrome-only">
+                                    To start working on your projects click "Open directory..." button.
                                 </p>
                             </div>
 
-                            <div class="ft-localfs-only tree-helper__empty">
+                            <div class="ft-localfs-only tree-helper__empty cordova-only">
                                 <p class="tree-helper__content tablet-only">
                                     It seems there are no files in the project yet. Type filename into the input field in the Header and press "Enter" to create one.
+                                </p>
+                            </div>
+                          	<div class="ft-localfs-only tree-helper__empty chrome-only">
+                                <p class="tree-helper__content">
+                                    Once you've opened your project's directory you can create files using the input field in the Header.
                                 </p>
                             </div>
 
@@ -115,15 +126,15 @@
                             <h2 class="tabs__welcome-note__header">
                                 Seabass greets you!
                             </h2>
-                            <p class="tabs__welcome-note__header-p">
-                                Seabass is a text (code) editor for Ubuntu Touch.
+                            <p class="tabs__welcome-note__header-p" style="margin-bottom: 10px;">
+                                Seabass is a lightweight touchscreen-friendly text (code) editor.
                             </p>
                             <div class="tabs__welcome-note__state">
                                 <p>
                                     Complete feature list, keybindings and release notes are available on Help page.
                                 </p>
                                 <p>
-                                    Your bug reports and feature requests are very appreciated. If you have any suggestions or something doesn't work as expected, feel free to open issues on project's page on github or contact me any other ways (see https://milikhin.name).
+                                    Your bug reports and feature requests are very appreciated. If you have any suggestions or something doesn't work as expected, feel free to open issues on project's page on github or contact me any other ways.
                                 </p>
                             </div>
 
@@ -147,11 +158,7 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <span class="clipboard-link">https://paypal.me/milikhin</span>
-                                            <button class="clipboard-btn tooltip tooltip-top" data-clipboard-text="https://paypal.me/milikhin/100">
-                                                <i class="material-icons">content_copy</i>
-                                      			<span class="tooltip__text">Copy URL to clipboard</span>
-                                            </button>
+                                            <a href="https://paypal.me/milikhin" target="_blank">https://paypal.me/milikhin</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -161,31 +168,21 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a class="clipboard-link" href="mailto:mikhael@milikhin.name">mikhael@milikhin.name</a>
-                                            <button class="tooltip tooltip-top clipboard-btn" data-clipboard-text="mikhael@milikhin.name">
-                                                <i class="material-icons">content_copy</i>
-                                                <span class="tooltip__text">Copy address to clipboard</span>
-                                            </button>
+                                            <a href="mailto:mikhael@milikhin.name" target="_blank">mikhael@milikhin.name</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tabs__welcome-note__table--support__title">
                                             <span>
-                                            Project page:
+                                            Project's page:
                                           </span>
                                         </td>
                                         <td>
-                                            <span class="clipboard-link">https://github.com/milikhin/seabass</span>
-                                            <button class=" tooltip tooltip-top clipboard-btn" data-clipboard-text="https://github.com/milikhin/seabass">
-                                                <i class="material-icons">content_copy</i>
-                                                <span class="tooltip__text">Copy URL to clipboard</span>
-                                            </button>
+                                            <a href="https://github.com/milikhin/seabass" target="_blank">https://github.com/milikhin/seabass</a>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-
-
                         </section>
                     </div>
                 </div>
@@ -196,10 +193,10 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.4.8
+                            Seabass v0.4.11
                         </h2>
                         <p class="tabs__welcome-note__header-p">
-                            Text (code) editor for Ubuntu Touch.
+                            Lightweight touchscreen-friendly text (code) editor.
                         </p>
                         <h3 class="tabs__welcome-note__header3">Feataures</h3>
                         <ul class="tabs__welcome-note__list">
@@ -241,10 +238,10 @@
                             </ul>
                         </div>
 
-                        <h3 class="tabs__welcome-note__header3">Usage notes</h3>
+                        <h3 class="tabs__welcome-note__header3">Notes for Ubuntu Touch edition</h3>
                         <div class="tabs__welcome-note__state">
                             <p>
-                                There are two versions of the application available:
+                                There are two versions of the application available for Ubuntu Touch:
                             </p>
                             <ol class="tabs__welcome-note__olist">
                                 <li>
@@ -257,9 +254,6 @@
                             <br/>
                             <p>
                                 <b>Note:</b> Uninstallation of previously installed version is required when switching from standard to unconfined version and back.
-                            </p>
-                            <p>
-                                <b>Note:</b> Seabass will use the last directory you've opened using <i>Navigation mode</i> (can be activated on the Settings page) as a file tree Root directory.
                             </p>
                         </div>
 
@@ -288,9 +282,9 @@
                 <div class="tabs__welcome-note-wrapper">
                     <section class="tabs__welcome-note">
                         <h2 class="tabs__welcome-note__header">
-                            Seabass v0.4.8
+                            Seabass v0.4.11
                         </h2>
-                        <p class="tabs__welcome-note__header-p">Text (code) editor for Ubuntu Touch. </p>
+                        <p class="tabs__welcome-note__header-p">Lightweight touchscreen-friendly text (code) editor.</p>
 
                         <h3 class="tabs__welcome-note__header3">About the project</h3>
                         <div class="tabs__welcome-note__state">
@@ -311,14 +305,6 @@
                                 <tr>
                                     <th>Project</th>
                                     <th>Developer and license</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Ace editor
-                                    </td>
-                                    <td>
-                                        Ajax.org B.V., BSD-3 license
-                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -474,20 +460,10 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <p>Navigation mode **</p>
-                                    <label>
-                                        <input type="checkbox" id="file-tree-navigation" data-type="switch">
-                                        <span class="toggle">
-                                          <span class="toggle-handle"></span>
-                                        <span class="toggle-bg"></span>
-                                        </span>
-                                    </label>
-                                </li>
-                                <li>
                                     <p>Width [<span id="file-tree-width-state"></span>px]</p>
                                     <label class="settings__container__slider-wrapper">
-                                        <span class="settings__container__slider-wrapper__from">150</span>
-                                        <input id="file-tree-width" type="range" value="251" max="400" min="150">
+                                        <span class="settings__container__slider-wrapper__from">280</span>
+                                        <input id="file-tree-width" type="range" value="280" max="400" min="280">
                                         <span class="settings__container__slider-wrapper__to">400</span>
                                     </label>
                                 </li>
@@ -514,10 +490,21 @@
                                     </label>
                                 </li>
                             </ul>
+
+                            <header>Chrome OS</header>
+                            <ul>
+                                <li>
+                                    <p>
+                                        Revoke FS access *
+                                    </p>
+                                    <label class="list__label__auto">
+                                      <a class="settings__link app-action" data-action="file-revokeaccess" href="#">Revoke</a>
+                                    </label>
+                                </li>
+                            </ul>
                         </div>
                         <p class="settings-note">
                             <b>*</b> &ndash; restart required to apply changes.<br/>
-                            <b>**</b> &ndash; navigation mode is intended only for changing file tree's root directory.<br/>
                             <!--                             <b>**</b> &ndash; you'll be redirected to Seabass Online to complete authorization<br/> -->
                             <b>Note:</b> accorting to CSS specifications 1px equals to 1/96in.
                         </p>

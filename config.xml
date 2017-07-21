@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="seabass.mikhael" version="0.4.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="seabass.mikhael" version="0.4.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Seabass</name>
     <description>
-        Simple touch-friendly code editor for Ubuntu Touch
+        Touchscreen-friendly text/code editor
     </description>
     <author email="mikhael@milikhin.name" href="https://github.com/milikhin">
         Mikhael Milikhin

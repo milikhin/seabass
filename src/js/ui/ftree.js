@@ -18,26 +18,46 @@ define([
                 throw new Error("FileManager instance for the tree is missing");
             }
             let self = this;
-
+			SettingsController.disableByQuery('.tree-disabled-onempty');
             this._rootSelector = rootElemSelector;
             this.fileManager = fileManager;
             if (this.fileManager.isLoaded()) {
                 this._init();
-            } else {
+            } else {              	
                 AppEvent.on('fsready', function() {
                     self._init();
+                    self._updateButtonStates();
                 });
             }
 
             AppEvent.on('tree-reload', function(evt) {
                 self._reloadTree();
                 self._updateTreeHint();
+
+                self._updateButtonStates();
             });
 
             AppEvent.on('tree-unset-root', function(evt) {
                 self.fileManager.unsetRoot();
                 self._reloadTree();
                 self._updateTreeHint();
+            });
+
+            AppEvent.on('tree-navmode', function(evt) {
+                co(function*() {
+                    var navEnabled = yield settings.get('navEnabled');
+                    yield settings.set('navEnabled', !navEnabled);
+                    AppEvent.dispatch('tree-reload');
+                });
+            });
+        }
+
+        _updateButtonStates() {
+            co(function*() {
+                var navEnabled = yield settings.get('navEnabled');
+                [].forEach.call(document.querySelectorAll('.icon-button--navmode'), function(navModeElem) {
+                    navModeElem.classList[navEnabled ? "add" : "remove"]('icon-button--active');
+                });
             });
         }
 
@@ -54,11 +74,13 @@ define([
 
         _updateTreeHint() {
             var getTreeData = this._getData();
-            getTreeData.then(function(fileInfo) {
+            getTreeData.then(function(fileInfo) {              
                 if (fileInfo.length) {
                     SettingsController.hideByQuery('.tree-helper__empty');
+                  	SettingsController.undisableByQuery('.tree-disabled-onempty');
                 } else {
-                    SettingsController._initFileTreeSettings();
+                  	SettingsController.disableByQuery('.tree-disabled-onempty');
+                   	SettingsController._initFileTreeSettings();
                 }
             });
         }

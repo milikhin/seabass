@@ -1,31 +1,31 @@
 {
-  "name": "seabass",
-  "main": "chrome/background.js",
-  "version": "0.4.8",
-  "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Mikhael Milikhin",
-  "license": "MIT",
-  "devDependencies": {
-    "chokidar": "^1.6.1",
-    "gulp": "^3.9.1",
-    "gulp-shell": "^0.5.2",
-    "merge-stream": "^1.0.0",
-    "nw-builder": "^3.1.2",
-    "nwbuild": "0.0.5",
-    "requirejs": "^2.2.0",
-    "rx": "^4.1.0"
-  },
-  "dependencies": {
-    "dropbox": "^2.5.0",
-    "gulp-gh-pages": "^0.5.4",
-    "prettydiff": "^99.0.1",
-    "uglify-es": "^3.0.15",
-    "uglifyjs": "^2.4.11"
-  },
-  "seabass": {
-    "deployTo": "git@github.com:milikhin/seabass.git"
-  }
+    "name": "seabass",
+    "main": "chrome/background.js",
+    "version": "0.4.11",
+    "description": "Simple touch-friendly HTML5-based code editor",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Mikhael Milikhin",
+    "license": "MIT",
+    "devDependencies": {
+        "chokidar": "^1.6.1",
+        "gulp": "^3.9.1",
+        "gulp-shell": "^0.5.2",
+        "merge-stream": "^1.0.0",
+        "nw-builder": "^3.1.2",
+        "nwbuild": "0.0.5",
+        "requirejs": "^2.2.0",
+        "rx": "^4.1.0"
+    },
+    "dependencies": {
+        "dropbox": "^2.5.0",
+        "gulp-gh-pages": "^0.5.4",
+        "prettydiff": "^99.0.1",
+        "uglify-es": "^3.0.15",
+        "uglifyjs": "^2.4.11"
+    },
+    "seabass": {
+        "deployTo": "git@github.com:milikhin/seabass.git"
+    }
 }

@@ -1,26 +1,13 @@
 define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
     function FileController(options) {
         var self = this;
-        this.fsInitPromise = co(function*() {
-            yield self._init();
-            self.rootEntry = self.fs.root;
+        this._flags = {
+            forceSetup: options.forceSetup
+        };
 
-            var savedRootUrl = yield storage.get('rootURL');
-            console.log(savedRootUrl, self.fs.root);
-            if (savedRootUrl && window.resolveLocalFileSystemURL) {
-                self.rootEntry = yield new Promise(function(resolve, reject) {
-                    window.resolveLocalFileSystemURL(savedRootUrl, function(dirEntry) {
-                        resolve(dirEntry);
-                    }, function(err) {
-                        console.error(err);
-                        storage.set('rootURL', self.fs.root.nativeURL || self.fs.root.fullPath);
-                        resolve(self.fs.root);
-                    });
-                });
-            }
-        }).catch(function(err) {
-            console.error(err);
-        });
+        //   .catch(function(err) {
+        //     console.error(err);
+        // });
     }
 
 
@@ -34,10 +21,6 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
         var self = this;
         var rootPath = self.rootEntry.name;
         return co(function*() {
-            // if (fileEntry.isDirectory) {
-            //     return fileEntry.removeRecursively(resolve, reject);
-            // }
-            // fileEntry.remove(resolve, reject);
             var currentName = fileEntry.fullPath;
             var filePaths = newName.split('/');
             var fileName = newName;
@@ -274,38 +257,110 @@ define(['co', 'md5', 'app/utils/storage'], function(co, md5, storage) {
 
 
     FileController.prototype.wait = FileController.prototype.waitForInit = function() {
-        return this.fsInitPromise;
+        return this._init();
     };
 
 
     // Private methods
     FileController.prototype._init = function() {
         var self = this;
+        var forceSetup = this._flags.forceSetup;
         return co(function*() {
             try {
-                self.fs = yield self._getFs();
-                // console.log('file system open: ' + self.fs.name);
+                if (window.chrome && forceSetup) {
+                    var rootEntry = yield self._chromeChooseRootDir();                    
+                    self.fs = {
+                        root: rootEntry
+                    };
+                } else {
+                    self.fs = yield self._getFs();
+                }
             } catch (err) {
-                console.error(err);
                 throw err;
+            }
+
+            self.rootEntry = self.fs.root;
+            var savedRootUrl = yield storage.get('rootURL');
+            if (savedRootUrl && window.resolveLocalFileSystemURL) {
+                self.rootEntry = yield new Promise(function(resolve, reject) {
+                    window.resolveLocalFileSystemURL(savedRootUrl, function(dirEntry) {
+                        resolve(dirEntry);
+                    }, function(err) {
+                        console.error(err);
+                        storage.set('rootURL', self.fs.root.nativeURL || self.fs.root.fullPath);
+                        resolve(self.fs.root);
+                    });
+                });
+            }
+
+            if (window.chrome) {
+                storage.set('rootId', window.chrome.fileSystem.retainEntry(self.fs.root));
             }
         });
     };
 
     FileController.prototype._getFs = function() {
-        return new Promise(function(resolve, reject) {
-            // console.log(window.LocalFileSystem, chrome);
+        var self = this;
+        return co(function*() {
             if (window.LocalFileSystem) {
                 window.requestFileSystem(window.LocalFileSystem.PERSISTENT, 0, resolve, reject);
-            } else if (chrome) {
+            } else if (window.chrome) {
+                var isRestorable = yield self._chromeIsRestorable();
+                if (isRestorable) {
+                    var rootEntry = yield self._chromeGetRestoredRootEntry();
+                    return {
+                        root: rootEntry
+                    };
+                } else {
+                    throw new Error('Root can\'t be restored');
+
+                }
+            }
+        });
+    };
+
+    FileController.prototype._chromeChooseRootDir = function() {
+        return co(function*() {
+            var newRootEntry = yield new Promise(function(resolve, reject) {
                 chrome.fileSystem.chooseEntry({
                     type: "openDirectory"
                 }, function(rootEntry) {
-                    resolve({
-                        root: rootEntry
-                    });
+                    resolve(rootEntry);
                 });
+            });
+            return newRootEntry;
+        });
+    };
+
+    FileController.prototype._chromeIsRestorable = function() {
+        return co(function*() {
+            var rootId = yield storage.get('rootId');
+            var isRestorable = false;
+            if (rootId) {
+                try {
+                    isRestorable = yield new Promise(function(resolve, reject) {
+                        chrome.fileSystem.isRestorable(rootId, function(isRestorable) {
+                            resolve(isRestorable);
+                        });
+                    });
+                } catch (err) {
+                    console.error('Root can\'t be restored, but that\'s OK', err);
+                }
             }
+
+            return isRestorable;
+        });
+    };
+
+    FileController.prototype._chromeGetRestoredRootEntry = function() {
+        return co(function*() {
+            var rootId = yield storage.get('rootId');
+            var rootEntry = yield new Promise(function(resolve, reject) {
+                chrome.fileSystem.restoreEntry(rootId, function(entry) {
+                    resolve(entry);
+                });
+            });
+            return rootEntry;
         });
     };
 
