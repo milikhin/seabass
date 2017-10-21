@@ -28,6 +28,7 @@ define([
         this.rootElem.dataset.action = "tab-activate";
         this.labelElem.className = "tab-content-label app-action";
         this.labelElem.id = `tab-l-${this.id}`;
+      	this.labelElem.dataset.id = this.id;
 
         let tabContent = this.tpl();
         this.rootElem.innerHTML = tabContent.contentHtml;

@@ -1,7 +1,7 @@
 {
     "name": "seabass",
     "main": "chrome/background.js",
-    "version": "0.5.1",
+    "version": "0.6.0-alpha-1",
     "description": "Simple touch-friendly HTML5-based code editor",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

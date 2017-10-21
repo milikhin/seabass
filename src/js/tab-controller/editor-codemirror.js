@@ -108,7 +108,7 @@ define([
         this._editor = CodeMirror.fromTextArea(options.editorElem, {
             autoCloseBrackets: true,
 
-            inputStyle: "contenteditable",
+            // inputStyle: "contenteditable",
             foldGutter: true,
             gutters: linterOptions ? ["CodeMirror-lint-markers", "CodeMirror-foldgutter"] : ["CodeMirror-foldgutter"],
             keyMap: "sublime",

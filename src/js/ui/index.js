@@ -328,6 +328,7 @@ define([
                 var isHidden = document.getElementById('main').classList.contains('aside-hidden');
                 document.getElementById('main').classList[isHidden ? "remove" : "add"]('aside-hidden');
             }
+          	AppEvent.dispatch('body-resize');
         }
 
         toggleOSK() {

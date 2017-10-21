@@ -30,7 +30,7 @@ define(['app/app-event'], function(AppEvent) {
             });
         }
 
-        _onClick() {
+        _onClick(evt) {
             console.log('click');
         }
 

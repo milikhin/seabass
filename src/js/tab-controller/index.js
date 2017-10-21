@@ -36,13 +36,23 @@ define([
             draggable: '.tab-content-label'
         });
 
-        // let menu = new Menu('.tabs-labels__list__menu');
-        // document.getElementById('tabs-labels__list__button').addEventListener('click', function(evt) {
-        //     menu.show(null, function(evt) {
-        //         // console.log(evt);
-        //     });
-        // });
+        let menu = new Menu('.tabs-labels__list__menu');
+        document.getElementById('tabs-labels__list__button').addEventListener('click', function(evt) {
+            menu.show(null, function(target) {
+                var id = target.dataset.id;
+                var tab = self.getById(id);
+                if (!id) {
+                    return console.error('ID is incorrect');
+                }
+
+                self._activate(tab);
+            });
+        });
     }
+
+    TabController.prototype._isHidden = function(tab) {
+        return tab.labelElem.className.indexOf('tab-content-label--hidden') >= 0;
+    };
 
     // Get active tab
     TabController.prototype.getCurrent = function() {
@@ -55,6 +65,17 @@ define([
         }, this);
 
         return currentTab;
+    };
+
+    TabController.prototype.getById = function(id) {
+        var resTab = null;
+        this.tabs.forEach(function(tab) {
+            if (tab.id == id) {
+                resTab = tab;
+            }
+        }, this);
+
+        return resTab;
     };
 
     // Get the eldest tab (to close it, for example)
@@ -110,6 +131,11 @@ define([
                 this.close(tabToClose);
             }
         }
+
+        var currentTab = this.getCurrent();
+        if (currentTab) {
+            this._activate(currentTab);
+        }
     };
 
     TabController.prototype._getTabsGroupedByFileName = function() {
@@ -130,6 +156,7 @@ define([
         var groupTabs, tabFileName, tab, tabHash, tabUrl, tabLabelElem;
         let tabMenuElem = document.querySelector('.tabs-labels__list__menu .context-menu__items');
         tabMenuElem.innerHTML = '';
+        let tabNames = [];
 
         for (tabFileName in similarFileNameTabs) {
             groupTabs = similarFileNameTabs[tabFileName];
@@ -143,7 +170,12 @@ define([
                     tabUrl = tab.fileEntry.nativeURL.split('/');
                     tabUrl.splice(0, similarTill);
                     var tabDifferentName = tabUrl.join('/').slice(0, -tabFileName.length);
-                    tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName} - <span class="tab-label__label__additional">${tabDifferentName}</span>`;
+                    var _name = `${tabFileName} - <span class="tab-label__label__additional">${tabDifferentName}</span>`;
+                    tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = _name;
+                    tabNames.push({
+                        id: tab.id,
+                        name: _name
+                    });
                 }
             } else {
                 tab = groupTabs[0];
@@ -151,17 +183,34 @@ define([
                 tabHash = md5(tab.fileEntry.nativeURL);
                 tabLabelElem = document.getElementById(`tab-label-${tabHash}`);
                 tabLabelElem.getElementsByClassName('tab-label__label')[0].innerHTML = `${tabFileName}`;
+                tabNames.push({
+                    id: tab.id,
+                    name: tabFileName
+                });
             }
         }
 
-        this.tabs.forEach(function(tab) {
+        tabNames.sort(function(a, b) {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
+
+        let currentTab = this.getCurrent();
+        let currentTabId = null;
+        if (currentTab) {
+            currentTabId = currentTab.id;
+        }
+        tabNames.forEach(function(tab) {
+            let tabId = tab.id;
+            let isCurrent = tabId == currentTabId;
+            let tabName = tab.name;
             tabMenuElem.innerHTML += `<li class="context-menu__item">
-                <a href="#" class="context-menu__link app-action" data-action="menu-click" data-menu-action="create" data-prevent-default="1">
-                    ${tab.fileName}
+                <a href="#" class="context-menu__link app-action" data-action="menu-click" data-menu-action="open" data-prevent-default="1" data-id="${tabId}">
+                    ` + (isCurrent ? `<b>` : ``) + `${tabName}` + (isCurrent ? `</b>` : ``) + `
                 </a>
             </li>`;
         });
-
     };
 
     TabController.prototype._getSimilarTill = function(groupTabs) {
@@ -211,7 +260,7 @@ define([
 
         // save created tab
         this.tabs.push(tab);
-        this._updateTabNames();
+        // this._updateTabNames();
         setTimeout(function() {
             self._updateButtons(tab);
         }, 100);
@@ -233,7 +282,37 @@ define([
 
     TabController.prototype._activate = function(tab) {
         var self = this;
+        var labelsCount = self.labelsElem.children.length;
+        if (this._isHidden(tab)) {
+            if (labelsCount > 1) {
+                this.labelsElem.insertBefore(tab.labelElem, this.labelsElem.children[0]);
+            }
+        }
+
         tab.activate();
+        var sumWidth = 40;
+        var fullWidth = this.labelsElem.clientWidth;
+
+        [].forEach.call(this.labelsElem.children, function(labelElem) {
+            labelElem.classList.remove('tab-content-label--hidden');
+        });
+
+        if (labelsCount > 1) {
+            [].forEach.call(this.labelsElem.children, function(labelElem) {
+                sumWidth += labelElem.offsetWidth;
+                if (sumWidth > fullWidth) {
+                    labelElem.classList.add('tab-content-label--hidden');
+                }
+            });
+        }
+
+        // if tab was just added into the end of labels' list, move it forward!
+        if (this._isHidden(tab)) {
+            this._activate(tab);
+        }
+        this._updateTabNames();
+
+        // update editor buttons to corespond current tab
         setTimeout(function() {
             self._updateButtons(tab);
         }, 100);
@@ -302,7 +381,7 @@ define([
             newCurrentTab.rootElem.querySelector('.tab-state').checked = true;
             newCurrentTab.onEditorChange();
             this._activate(newCurrentTab);
-            this._updateTabNames();
+            // this._updateTabNames();
         } else {
             document.getElementById('editor-tabs').style.zIndex = -1;
             document.getElementById('welcome-note').style.visibility = "visible";

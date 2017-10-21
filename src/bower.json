@@ -21,7 +21,6 @@
         "tests"
     ],
     "devDependencies": {
-        "ace": "^1.2.3",
         "requirejs": "^2.2.0",
         "js-md5": "^2.3.0",
         "js-beautify": "^1.6.3",

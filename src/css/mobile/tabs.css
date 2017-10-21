@@ -2,3 +2,9 @@
     min-width: 25%;
     flex-grow: 1;
 }
+
+.tabs-labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
