@@ -61,6 +61,10 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
                     {
                         return (yield storage.get(key)) || 12;
                     }
+                case 'maxTabs':
+                    {
+                        return (yield storage.get(key)) || 5;
+                    }
                 default:
                     {
                         return yield storage.get(key);
@@ -156,6 +160,9 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
             document.getElementById('editor-font-size-state-wrapper').classList[(yield self.get('isCustomFontSize')) ? "remove" : "add"]('disabled');
             document.getElementById('editor-font-size').value = yield self.get('fontSize');
             document.getElementById('editor-font-size-state').innerHTML = yield self.get('fontSize');
+          	
+          	document.getElementById('editor-max-tabs').value = yield self.get('maxTabs');
+            document.getElementById('editor-max-tabs-state').innerHTML = yield self.get('maxTabs');
         });
     };
 
@@ -189,6 +196,10 @@ define(['app/utils/storage', 'app/app-event', 'co'], function(storage, AppEvent,
         document.getElementById('editor-font-size').oninput = function() {
             self.set('fontSize', this.valueAsNumber);
             document.getElementById('editor-font-size-state').innerHTML = this.valueAsNumber;
+        };
+      	document.getElementById('editor-max-tabs').oninput = function() {
+            self.set('maxTabs', this.valueAsNumber);
+            document.getElementById('editor-max-tabs-state').innerHTML = this.valueAsNumber;
         };
 
         /* Dropbox settings UI events */

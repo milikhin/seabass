@@ -23,8 +23,8 @@ define([
     './tab',
     'co',
     'md5',
-    'app/app-event', 'Sortable', 'app/ui/context-menu'
-], function(Tab, co, md5, AppEvent, Sortable, Menu) {
+    'app/app-event', 'app/settings', 'Sortable', 'app/ui/context-menu'
+], function(Tab, co, md5, AppEvent, settings, Sortable, Menu) {
     function TabController() {
         var self = this;
         this.tabs = [];
@@ -121,21 +121,28 @@ define([
 
     // Get Zentabs limit
     TabController.prototype._getMaxTabsNumber = function() {
-        return document.body.clientWidth > 750 ? 5 : 3;
+        return settings.get('maxTabs');
+
+        // return document.body.clientWidth > 750 ? 5 : 3;
     };
 
     TabController.prototype.converge = function() {
-        while (this.tabs.length > this._getMaxTabsNumber()) {
-            var tabToClose = this.getEarliestModified();
-            if (tabToClose) {
-                this.close(tabToClose);
+        let self = this;
+        co(function*() {
+            let maxTabs = yield self._getMaxTabsNumber();
+            while (this.tabs.length > maxTabs) {
+                var tabToClose = this.getEarliestModified();
+                if (tabToClose) {
+                    this.close(tabToClose);
+                }
             }
-        }
 
-        var currentTab = this.getCurrent();
-        if (currentTab) {
-            this._activate(currentTab);
-        }
+            var currentTab = this.getCurrent();
+            if (currentTab) {
+                this._activate(currentTab);
+            }
+        });
+
     };
 
     TabController.prototype._getTabsGroupedByFileName = function() {
@@ -322,6 +329,7 @@ define([
     TabController.prototype.get = function(fileName, fileEntry, fileContent) {
         // check if file is already opened
         var tab = this.getTabByFileEntry(fileEntry);
+        let self = this;
         if (tab) {
             return tab;
         }
@@ -330,9 +338,13 @@ define([
         document.getElementById('welcome-note').style.visibility = "hidden";
         // if maximum amount of tabs is exceeded, close the earliest one
         var eldestTab = this.getEarliestModified();
-        if (this.tabs.length >= this._getMaxTabsNumber()) {
-            this.close(eldestTab);
-        }
+        var curTabs = this.tabs.length;
+        co(function*() {
+            let maxTabs = yield self._getMaxTabsNumber();
+            if (curTabs >= maxTabs) {
+                self.close(eldestTab);
+            }
+        });
 
         return this._create(fileName, fileEntry, fileContent);
     };
