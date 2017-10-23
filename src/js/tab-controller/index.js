@@ -130,16 +130,16 @@ define([
         let self = this;
         co(function*() {
             let maxTabs = yield self._getMaxTabsNumber();
-            while (this.tabs.length > maxTabs) {
-                var tabToClose = this.getEarliestModified();
+            while (self.tabs.length > maxTabs) {
+                var tabToClose = self.getEarliestModified();
                 if (tabToClose) {
-                    this.close(tabToClose);
+                    self.close(tabToClose);
                 }
             }
 
-            var currentTab = this.getCurrent();
+            var currentTab = self.getCurrent();
             if (currentTab) {
-                this._activate(currentTab);
+                self._activate(currentTab);
             }
         });
 
@@ -297,15 +297,18 @@ define([
         }
 
         tab.activate();
-        var sumWidth = 40;
+        var sumWidth = 75;
         var fullWidth = this.labelsElem.clientWidth;
-
+      	
         [].forEach.call(this.labelsElem.children, function(labelElem) {
             labelElem.classList.remove('tab-content-label--hidden');
         });
 
         if (labelsCount > 1) {
             [].forEach.call(this.labelsElem.children, function(labelElem) {
+                if (labelElem.className.indexOf('tabs-labels__list') === 0) {
+                    return;
+                }
                 sumWidth += labelElem.offsetWidth;
                 if (sumWidth > fullWidth) {
                     labelElem.classList.add('tab-content-label--hidden');
