@@ -233,13 +233,7 @@ ul {
   font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 300;
-  src: local("Ubuntu Light"), local("Ubuntu-Light"), url(ubuntu-light.woff) format("woff");
-}
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 300;
-  src: local("Ubuntu Light"), local("Ubuntu-Light"), url(ubuntu-light.woff) format("woff");
+  src: url(ubuntu-light.woff) format("woff");
 }
 [data-role="header"] {
   background: #ededed;
