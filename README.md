@@ -1,3 +1,10 @@
+# The repo is archived
+
+The repo contains first version of Seabass project for Ubuntu Touch.
+It was a HTML5 application for the Cordova runtime.
+
+Please look at [seabass2](https://github.com/milikhin/seabass2) for currently supported version.
+
 # Seabass code editor
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8bd815408704c07a8484b460384919e)](https://www.codacy.com/app/mikhael/seabass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=milikhin/seabass&amp;utm_campaign=Badge_Grade)
 
